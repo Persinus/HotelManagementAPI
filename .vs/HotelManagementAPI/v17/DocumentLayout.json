@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{3442737D-C627-B7C8-706D-0CBB731A2A87}|HotelManagementAPI.csproj|c:\\users\\admin\\documents\\back_end-hotel\\hotelmanagementapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3442737D-C627-B7C8-706D-0CBB731A2A87}|HotelManagementAPI.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{3442737D-C627-B7C8-706D-0CBB731A2A87}|HotelManagementAPI.csproj|c:\\users\\admin\\documents\\back_end-hotel\\hotelmanagementapi\\controllers\\datphongcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3442737D-C627-B7C8-706D-0CBB731A2A87}|HotelManagementAPI.csproj|solutionrelative:controllers\\datphongcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3442737D-C627-B7C8-706D-0CBB731A2A87}|HotelManagementAPI.csproj|c:\\users\\admin\\documents\\back_end-hotel\\hotelmanagementapi\\hotelmanagementapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
       "RelativeMoniker": "D:0:0:{3442737D-C627-B7C8-706D-0CBB731A2A87}|HotelManagementAPI.csproj|solutionrelative:hotelmanagementapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3442737D-C627-B7C8-706D-0CBB731A2A87}|HotelManagementAPI.csproj|c:\\users\\admin\\documents\\back_end-hotel\\hotelmanagementapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3442737D-C627-B7C8-706D-0CBB731A2A87}|HotelManagementAPI.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3442737D-C627-B7C8-706D-0CBB731A2A87}|HotelManagementAPI.csproj|c:\\users\\admin\\documents\\back_end-hotel\\hotelmanagementapi\\hotelmanagementapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
@@ -34,32 +34,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "DatPhongController.cs",
               "DocumentMoniker": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\Controllers\\DatPhongController.cs",
               "RelativeDocumentMoniker": "Controllers\\DatPhongController.cs",
               "ToolTip": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\Controllers\\DatPhongController.cs",
               "RelativeToolTip": "Controllers\\DatPhongController.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABsAAAAAAAAAAAAywAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-17T15:24:37.855Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "HotelManagementAPI.http",
-              "DocumentMoniker": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\HotelManagementAPI.http",
-              "RelativeDocumentMoniker": "HotelManagementAPI.http",
-              "ToolTip": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\HotelManagementAPI.http",
-              "RelativeToolTip": "HotelManagementAPI.http",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2025-04-16T21:25:51.785Z",
               "EditorCaption": ""
             },
             {
@@ -76,7 +63,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -86,6 +73,22 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-16T21:25:38.517Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "HotelManagementAPI.http",
+              "DocumentMoniker": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\HotelManagementAPI.http",
+              "RelativeDocumentMoniker": "HotelManagementAPI.http",
+              "ToolTip": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\HotelManagementAPI.http",
+              "RelativeToolTip": "HotelManagementAPI.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-04-16T21:25:51.785Z"
             },
             {
               "$type": "Document",
@@ -98,10 +101,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
               "WhenOpened": "2025-04-16T21:18:47.857Z"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             },
             {
               "$type": "Document",
