@@ -1,0 +1,5 @@
+- Tìm hiểu controllers dapper dto
+- Program 
+- TÌm hiểu Packages
+- TÌm hiểu Models
+- ghi chú Sql 
