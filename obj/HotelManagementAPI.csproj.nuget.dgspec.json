@@ -1,31 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\HotelManagementAPI.csproj": {}
+    "D:\\React Native\\HotelManagementAPI\\HotelManagementAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\HotelManagementAPI.csproj": {
+    "D:\\React Native\\HotelManagementAPI\\HotelManagementAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\HotelManagementAPI.csproj",
+        "projectUniqueName": "D:\\React Native\\HotelManagementAPI\\HotelManagementAPI.csproj",
         "projectName": "HotelManagementAPI",
-        "projectPath": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\HotelManagementAPI.csproj",
-        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\obj\\",
+        "projectPath": "D:\\React Native\\HotelManagementAPI\\HotelManagementAPI.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "D:\\React Native\\HotelManagementAPI\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -128,7 +122,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
