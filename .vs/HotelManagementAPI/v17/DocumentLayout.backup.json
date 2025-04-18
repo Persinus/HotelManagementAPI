@@ -34,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
@@ -46,20 +46,7 @@
               "RelativeToolTip": "Controllers\\DatPhongController.cs",
               "ViewState": "AgIAABsAAAAAAAAAAAAywAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-17T15:24:37.855Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "HotelManagementAPI.http",
-              "DocumentMoniker": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\HotelManagementAPI.http",
-              "RelativeDocumentMoniker": "HotelManagementAPI.http",
-              "ToolTip": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\HotelManagementAPI.http",
-              "RelativeToolTip": "HotelManagementAPI.http",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2025-04-16T21:25:51.785Z"
+              "WhenOpened": "2025-04-17T15:24:37.855Z"
             },
             {
               "$type": "Document",
@@ -85,6 +72,18 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-16T21:25:38.517Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "HotelManagementAPI.http",
+              "DocumentMoniker": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\HotelManagementAPI.http",
+              "RelativeDocumentMoniker": "HotelManagementAPI.http",
+              "ToolTip": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\HotelManagementAPI.http",
+              "RelativeToolTip": "HotelManagementAPI.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-04-16T21:25:51.785Z"
             },
             {
               "$type": "Document",
