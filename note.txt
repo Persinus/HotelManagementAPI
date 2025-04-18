@@ -2,6 +2,7 @@
 - Program 
 - TÌm hiểu Packages
 - TÌm hiểu Models
+<<<<<<< HEAD
 - ghi chú Sql 
 -huy
 cài các gói thư viện 
@@ -129,3 +130,6 @@ Task 4: Thêm Sumany của từng controller (test Oke thì làm )
 Task 5: add thêm dữ liệu Khách hàng (Post API swagger)
 
 
+=======
+- ghi chú Sql 
+>>>>>>> baf6ee7 (them_note.txt)
