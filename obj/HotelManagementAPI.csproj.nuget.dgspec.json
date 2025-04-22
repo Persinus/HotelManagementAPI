@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\React Native\\HotelManagementAPI\\HotelManagementAPI.csproj": {}
+    "D:\\Desktop\\baitaphomnahy\\HotelManagementAPI\\HotelManagementAPI.csproj": {}
   },
   "projects": {
-    "D:\\React Native\\HotelManagementAPI\\HotelManagementAPI.csproj": {
+    "D:\\Desktop\\baitaphomnahy\\HotelManagementAPI\\HotelManagementAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\React Native\\HotelManagementAPI\\HotelManagementAPI.csproj",
+        "projectUniqueName": "D:\\Desktop\\baitaphomnahy\\HotelManagementAPI\\HotelManagementAPI.csproj",
         "projectName": "HotelManagementAPI",
-        "projectPath": "D:\\React Native\\HotelManagementAPI\\HotelManagementAPI.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\React Native\\HotelManagementAPI\\obj\\",
+        "projectPath": "D:\\Desktop\\baitaphomnahy\\HotelManagementAPI\\HotelManagementAPI.csproj",
+        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
+        "outputPath": "D:\\Desktop\\baitaphomnahy\\HotelManagementAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
