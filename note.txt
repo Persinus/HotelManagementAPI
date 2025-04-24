@@ -15,5 +15,18 @@ Người dùng khi đăng nhập vào thì auto làm khách hàng
 
 
 
+
 Huy làm Phòng và ng dùng , khách hàng 
 Khiêm làm QTV và dịch vụ ,  nhân viên
+
+ng dung them dc 
+k dang nhap dang ky dc 
+chua phan quyen dc
+////////////////  bao cao tuan 2   ////////////////////////////////
+
+làm phan quyen + JWT 
+phong
+dich vu 
+hoa don
+
+
