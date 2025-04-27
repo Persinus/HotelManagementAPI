@@ -1,0 +1,32 @@
+- Tìm hiểu controllers dapper dto
+- Program 
+- TÌm hiểu Packages
+- TÌm hiểu Models
+- ghi chú Sql 
+-huy
+cài các gói thư viện 
+sửa file đặt phòng 
+sửa hóa đơn Phòng 
+sửa hóa đơn khách hàng DV ()
+Xóa Quản trị viên QTV ko cần thêm sửa xóa :v
+Người dùng khi đăng nhập vào thì auto làm khách hàng 
+
+
+
+
+
+
+Huy làm Phòng và ng dùng , khách hàng 
+Khiêm làm QTV và dịch vụ ,  nhân viên
+
+ng dung them dc 
+k dang nhap dang ky dc 
+chua phan quyen dc
+////////////////  bao cao tuan 2   ////////////////////////////////
+
+làm phan quyen + JWT 
+phong
+dich vu 
+hoa don
+
+
