@@ -85,4 +85,5 @@ C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Release\net9.0\Pu
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Release\net9.0\PubTmp\Out\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Release\net9.0\PubTmp\Out\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Release\net9.0\PubTmp\Out\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Release\net9.0\PubTmp\Out\HotelManagementAPI.xml
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Release\net9.0\PubTmp\Out\HotelManagementAPI.deps.json
