@@ -34,20 +34,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "DatPhongController.cs",
-              "DocumentMoniker": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\Controllers\\DatPhongController.cs",
-              "RelativeDocumentMoniker": "Controllers\\DatPhongController.cs",
-              "ToolTip": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\Controllers\\DatPhongController.cs",
-              "RelativeToolTip": "Controllers\\DatPhongController.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAAywAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-17T15:24:37.855Z"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 4,
@@ -68,7 +56,7 @@
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAACoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAB0AAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-16T21:25:38.517Z",
               "EditorCaption": ""
@@ -84,6 +72,18 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
               "WhenOpened": "2025-04-16T21:25:51.785Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DatPhongController.cs",
+              "DocumentMoniker": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\Controllers\\DatPhongController.cs",
+              "RelativeDocumentMoniker": "Controllers\\DatPhongController.cs",
+              "ToolTip": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\Controllers\\DatPhongController.cs",
+              "RelativeToolTip": "Controllers\\DatPhongController.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAywAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-17T15:24:37.855Z"
             },
             {
               "$type": "Document",

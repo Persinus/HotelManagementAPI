@@ -193,3 +193,8 @@ C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Release\net9.0\re
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Release\net9.0\HotelManagementAPI.pdb
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Release\net9.0\HotelManagementAPI.genruntimeconfig.cache
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Release\net9.0\ref\HotelManagementAPI.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Release\net9.0\HotelManagementAPI.staticwebassets.runtime.json
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Release\net9.0\HotelManagementAPI.xml
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Release\net9.0\compressed\66v20z1wre-ej1hozjj51.gz
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Release\net9.0\compressed\kd2flfky80-hmnfu3cwam.gz
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Release\net9.0\HotelManagementAPI.xml

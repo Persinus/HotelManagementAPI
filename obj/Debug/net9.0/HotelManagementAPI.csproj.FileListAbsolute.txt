@@ -194,12 +194,14 @@ C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\ne
 C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\appsettings.Development.json
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\appsettings.json
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.staticwebassets.runtime.json
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.staticwebassets.endpoints.json
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.exe
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.deps.json
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.runtimeconfig.json
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.dll
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.pdb
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.xml
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\AutoMapper.dll
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Azure.Core.dll
@@ -371,6 +373,7 @@ C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\Hote
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.sourcelink.json
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\scopedcss\bundle\HotelManagementAPI.styles.css
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\compressed\kd2flfky80-hmnfu3cwam.gz
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\staticwebassets.build.json
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\staticwebassets.development.json
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\staticwebassets.build.endpoints.json
@@ -383,6 +386,8 @@ C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\stat
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\HotelMan.5926837C.Up2Date
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.dll
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\refint\HotelManagementAPI.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.xml
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.pdb
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.genruntimeconfig.cache
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\ref\HotelManagementAPI.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\compressed\66v20z1wre-ej1hozjj51.gz

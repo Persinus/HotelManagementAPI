@@ -6,6 +6,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <PublishTrimmed>False</PublishTrimmed>
     <PublishAot>False</PublishAot>
+
+
+      <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+
+
+  <AssemblyName>HotelManagementAPI</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
