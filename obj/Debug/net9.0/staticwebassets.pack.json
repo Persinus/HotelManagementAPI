@@ -1,10 +1,6 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\wwwroot\\Untitled-1.html",
-      "PackagePath": "staticwebassets\\Untitled-1.html"
-    },
-    {
       "Id": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\wwwroot\\swagger-custom.css",
       "PackagePath": "staticwebassets\\swagger-custom.css"
     },

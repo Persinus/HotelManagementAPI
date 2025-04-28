@@ -373,7 +373,6 @@ C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\Hote
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.sourcelink.json
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\scopedcss\bundle\HotelManagementAPI.styles.css
-C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\compressed\kd2flfky80-hmnfu3cwam.gz
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\staticwebassets.build.json
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\staticwebassets.development.json
 C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\staticwebassets.build.endpoints.json
