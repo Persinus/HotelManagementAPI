@@ -19,7 +19,7 @@ public partial class DatPhong
 
     public DateTime NgayTraPhong { get; set; }
 
-    public string TrangThai { get; set; } = null!;
+     public int? TrangThai { get; set; } 
 
     public virtual ICollection<HoaDonThanhToanPhong> HoaDonThanhToanPhongs { get; set; } = new List<HoaDonThanhToanPhong>();
 

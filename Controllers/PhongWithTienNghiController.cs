@@ -14,6 +14,7 @@ public class PhongWithTienNghiDTO
     public string TinhTrang { get; set; }
     public int SoLuongPhong { get; set; }
     public int Tang { get; set; }
+    public float? SoSaoTrungBinh { get; set; } // Trường số sao trung bình
     public string KieuGiuong { get; set; }
     public string MoTa { get; set; }
     public string UrlAnhChinh { get; set; }
@@ -49,7 +50,12 @@ namespace HotelManagementAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PhongWithTienNghiDTO>>> GetAll()
         {
-            const string query = "SELECT * FROM PhongWithTienNghi";
+            const string query = @"
+                SELECT p.*, 
+                       (SELECT AVG(CAST(SoSao AS FLOAT)) 
+                        FROM User_Feedback 
+                        WHERE User_Feedback.MaPhong = p.MaPhong) AS SoSaoTrungBinh
+                FROM PhongWithTienNghi p";
             var result = await _db.QueryAsync<PhongWithTienNghiDTO>(query);
             return Ok(result);
         }
@@ -70,10 +76,20 @@ namespace HotelManagementAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<PhongWithTienNghiDTO>> GetById(string id)
         {
-            const string query = "SELECT * FROM PhongWithTienNghi WHERE MaPhong = @Id";
-            var result = await _db.QueryFirstOrDefaultAsync<PhongWithTienNghiDTO>(query, new { Id = id });
+            // Lấy thông tin phòng
+            const string roomQuery = "SELECT * FROM PhongWithTienNghi WHERE MaPhong = @Id";
+            var room = await _db.QueryFirstOrDefaultAsync<PhongWithTienNghiDTO>(roomQuery, new { Id = id });
 
-            return result == null ? NotFound() : Ok(result);
+            if (room == null) return NotFound(new { Message = "Không tìm thấy phòng." });
+
+            // Tính số sao trung bình từ bảng Feedback
+            const string ratingQuery = "SELECT AVG(CAST(SoSao AS FLOAT)) FROM User_Feedback WHERE MaPhong = @MaPhong";
+            var averageRating = await _db.ExecuteScalarAsync<float?>(ratingQuery, new { MaPhong = id });
+
+            // Gán số sao trung bình vào DTO
+            room.SoSaoTrungBinh = averageRating ?? 0; // Nếu không có đánh giá, mặc định là 0
+
+            return Ok(room);
         }
 
         /// <summary>
@@ -211,6 +227,35 @@ namespace HotelManagementAPI.Controllers
             var affected = await _db.ExecuteAsync(query, new { MaPhong = id, TinhTrang = tinhTrang });
 
             return affected > 0 ? NoContent() : NotFound();
+        }
+
+        /// <summary>
+        /// Tính số sao trung bình của tất cả các phòng dựa trên đánh giá từ bảng User_Feedback.
+        /// </summary>
+        /// <remarks>
+        /// **Mô tả**: API này trả về danh sách tất cả các phòng cùng với số sao trung bình.
+        /// Nếu một phòng không có đánh giá, số sao trung bình sẽ là `0`.
+        ///
+        /// **Mã trạng thái**:
+        /// - 200: Thành công, trả về danh sách phòng với số sao trung bình.
+        /// - 500: Lỗi máy chủ.
+        /// </remarks>
+        /// <returns>Danh sách phòng với số sao trung bình.</returns>
+        [HttpGet("average-ratings")]
+        public async Task<ActionResult<IEnumerable<PhongWithTienNghiDTO>>> CalculateAverageRatings()
+        {
+            const string query = @"
+                SELECT p.MaPhong, p.LoaiPhong, p.GiaPhong, p.TinhTrang, p.SoLuongPhong, p.Tang, 
+                       p.KieuGiuong, p.MoTa, p.UrlAnhChinh, p.UrlAnhPhu1, p.UrlAnhPhu2, p.TienNghi,
+                       ISNULL((
+                           SELECT AVG(CAST(SoSao AS FLOAT)) 
+                           FROM User_Feedback 
+                           WHERE User_Feedback.MaPhong = p.MaPhong
+                       ), 0) AS SoSaoTrungBinh
+                FROM PhongWithTienNghi p";
+            
+            var result = await _db.QueryAsync<PhongWithTienNghiDTO>(query);
+            return Ok(result);
         }
     }
 }

@@ -1,6 +1,9 @@
 using System.Data;
 using System.Reflection;
 using Microsoft.Data.SqlClient;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +35,23 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddControllers();
 
+// Cấu hình Authentication
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("your_secret_key_here")),
+        ValidateIssuer = false,
+        ValidateAudience = false
+    };
+});
+
 var app = builder.Build();
 app.UseStaticFiles();
 
@@ -47,21 +67,16 @@ if (enableSwagger)
         c.DocumentTitle = "Hotel Management API Documentation";
         c.InjectStylesheet("/swagger-custom.css");
     });
-   
-   
-
-
 }
 
 // Sử dụng CORS
 app.UseCors("AllowAllOrigins"); // Áp dụng chính sách CORS đã cấu hình
 
 // Sử dụng Authentication và Authorization nếu cần
-// app.UseAuthentication();
-// app.UseAuthorization(); // Nếu bạn có sử dụng Authorization
+app.UseAuthentication();
+app.UseAuthorization(); // Nếu bạn có sử dụng Authorization
 // Nếu không sử dụng Authentication và Authorization, bạn có thể bỏ qua hai dòng trên
 // Cấu hình các middleware khác nếu cần
-
 
 // Định tuyến các controller
 app.MapControllers();
