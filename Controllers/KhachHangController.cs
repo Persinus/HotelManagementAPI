@@ -12,8 +12,9 @@ public class KhachHangDTO
 {
     /// <summary>
     /// Mã khách hàng (duy nhất). Ví dụ: `KH001`.
+    /// Trường này sẽ được tự động sinh, không cần nhập.
     /// </summary>
-    public string MaKhachHang { get; set; } = null!;
+    public string? MaKhachHang { get; set; }
 
     /// <summary>
     /// Họ và tên khách hàng. Ví dụ: `Nguyen Van A`.
@@ -144,12 +145,12 @@ namespace HotelManagementAPI.Controllers
         /// </summary>
         /// <remarks>
         /// **Mô tả**: API này tạo mới một khách hàng trong hệ thống với thông tin được cung cấp.
+        /// Mã khách hàng (`MaKhachHang`) sẽ được tự động sinh theo định dạng `KHXXX`.
+        /// JWT sẽ được tự động tạo và lưu vào trường `Jwk`.
         ///
         /// **Ví dụ Request Body**:
         /// <code>
         /// {
-        ///   "MaKhachHang": "KH002",
-        /// 
         ///   "HoTen": "Tran Thi B",
         ///   "CanCuocCongDan": "987654321",
         ///   "SoDienThoai": "0912345678",
@@ -163,8 +164,7 @@ namespace HotelManagementAPI.Controllers
         ///   "HinhAnh": null,
         ///   "Email": "tranthib@gmail.com",
         ///   "TenTaiKhoan": "tranthib",
-        ///   "MatKhau": "abcdef",
-        ///   "Jwk": null
+        ///   "MatKhau": "abcdef"
         /// }
         /// </code>
         ///
@@ -173,12 +173,49 @@ namespace HotelManagementAPI.Controllers
         /// - 400: Dữ liệu không hợp lệ.
         /// - 500: Lỗi máy chủ.
         /// </remarks>
-        /// <param name="khachHangDto">Thông tin khách hàng cần tạo.</param>
+        /// <param name="khachHangDto">Thông tin khách hàng cần tạo (không bao gồm `MaKhachHang` và `Jwk`).</param>
         /// <returns>Thông tin khách hàng vừa được tạo.</returns>
         [HttpPost]
         public async Task<ActionResult<KhachHangDTO>> Create([FromBody] KhachHangDTO khachHangDto)
         {
-            const string query = @"
+            // Kiểm tra trùng lặp số điện thoại
+            const string checkDuplicateQuery = "SELECT COUNT(1) FROM KhachHang WHERE SoDienThoai = @SoDienThoai";
+            var isDuplicate = await _dbConnection.ExecuteScalarAsync<bool>(checkDuplicateQuery, new { khachHangDto.SoDienThoai });
+
+            if (isDuplicate)
+            {
+                return Conflict(new
+                {
+                    Message = "Số điện thoại đã tồn tại. Vui lòng sử dụng số điện thoại khác.",
+                    Field = "SoDienThoai"
+                });
+            }
+
+            // Tự động sinh mã khách hàng
+            const string getMaxIdQuery = "SELECT ISNULL(MAX(CAST(SUBSTRING(MaKhachHang, 3, LEN(MaKhachHang) - 2) AS INT)), 0) FROM KhachHang";
+            var maxId = await _dbConnection.ExecuteScalarAsync<int>(getMaxIdQuery);
+            khachHangDto.MaKhachHang = $"KH{(maxId + 1):D3}";
+
+            // Tạo JWT
+            var tokenHandler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
+            var key = System.Text.Encoding.ASCII.GetBytes("your_super_secret_key_1234567890"); // Khóa bí mật đủ dài
+            var tokenDescriptor = new Microsoft.IdentityModel.Tokens.SecurityTokenDescriptor
+            {
+                Subject = new System.Security.Claims.ClaimsIdentity(new[]
+                {
+                    new System.Security.Claims.Claim("MaKhachHang", khachHangDto.MaKhachHang),
+                    new System.Security.Claims.Claim("Email", khachHangDto.Email)
+                }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new Microsoft.IdentityModel.Tokens.SigningCredentials(
+                    new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(key),
+                    Microsoft.IdentityModel.Tokens.SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            khachHangDto.Jwk = tokenHandler.WriteToken(token);
+
+            // Thực hiện chèn dữ liệu
+            const string insertQuery = @"
                 INSERT INTO KhachHang 
                 (MaKhachHang, HoTen, CanCuocCongDan, SoDienThoai, DiaChi, NgaySinh, GioiTinh, NgheNghiep, TrangThai, 
                 NgayTao, NgayCapNhat, HinhAnh, Email, TenTaiKhoan, MatKhau, Jwk)
@@ -186,7 +223,7 @@ namespace HotelManagementAPI.Controllers
                 (@MaKhachHang, @HoTen, @CanCuocCongDan, @SoDienThoai, @DiaChi, @NgaySinh, @GioiTinh, @NgheNghiep, @TrangThai, 
                 @NgayTao, @NgayCapNhat, @HinhAnh, @Email, @TenTaiKhoan, @MatKhau, @Jwk)";
 
-            await _dbConnection.ExecuteAsync(query, khachHangDto);
+            await _dbConnection.ExecuteAsync(insertQuery, khachHangDto);
             return CreatedAtAction(nameof(GetById), new { id = khachHangDto.MaKhachHang }, khachHangDto);
         }
 

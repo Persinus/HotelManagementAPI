@@ -72,9 +72,15 @@ namespace HotelManagementAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] QuanTriVien model)
         {
+            // Tự động sinh mã quản trị viên
+            const string getMaxIdQuery = "SELECT ISNULL(MAX(CAST(SUBSTRING(MaQuanTri, 3, LEN(MaQuanTri) - 2) AS INT)), 0) FROM QuanTriVien";
+            var maxId = await _db.ExecuteScalarAsync<int>(getMaxIdQuery);
+            model.MaQuanTri = $"QT{(maxId + 1):D3}";
+
+            // Thực hiện chèn dữ liệu
             const string sql = @"
-                INSERT INTO QuanTriVien (MaQuanTri, TenAdmin, SoDienThoai, NgayTao) 
-                VALUES (@MaQuanTri, @TenAdmin, @SoDienThoai, GETDATE())";
+                INSERT INTO QuanTriVien (MaQuanTri, Email, TenTaiKhoan, MatKhau, TenAdmin, SoDienThoai, Jwk, NgayTao, NgayCapNhat) 
+                VALUES (@MaQuanTri, @Email, @TenTaiKhoan, @MatKhau, @TenAdmin, @SoDienThoai, @Jwk, GETDATE(), NULL)";
 
             await _db.ExecuteAsync(sql, model);
             return CreatedAtAction(nameof(GetById), new { id = model.MaQuanTri }, model);
@@ -102,7 +108,10 @@ namespace HotelManagementAPI.Controllers
 
             const string sql = @"
                 UPDATE QuanTriVien
-                SET TenAdmin = @TenAdmin,
+                SET Email = @Email,
+                    TenTaiKhoan = @TenTaiKhoan,
+                    MatKhau = @MatKhau,
+                    TenAdmin = @TenAdmin,
                     SoDienThoai = @SoDienThoai,
                     NgayCapNhat = GETDATE()
                 WHERE MaQuanTri = @MaQuanTri";
