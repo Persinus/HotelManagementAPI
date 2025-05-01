@@ -3,28 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{3442737D-C627-B7C8-706D-0CBB731A2A87}|HotelManagementAPI.csproj|c:\\users\\admin\\documents\\back_end-hotel\\hotelmanagementapi\\hubs\\chathub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3442737D-C627-B7C8-706D-0CBB731A2A87}|HotelManagementAPI.csproj|solutionrelative:hubs\\chathub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{3442737D-C627-B7C8-706D-0CBB731A2A87}|HotelManagementAPI.csproj|c:\\users\\admin\\documents\\back_end-hotel\\hotelmanagementapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3442737D-C627-B7C8-706D-0CBB731A2A87}|HotelManagementAPI.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3442737D-C627-B7C8-706D-0CBB731A2A87}|HotelManagementAPI.csproj|c:\\users\\admin\\documents\\back_end-hotel\\hotelmanagementapi\\controllers\\datphongcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3442737D-C627-B7C8-706D-0CBB731A2A87}|HotelManagementAPI.csproj|solutionrelative:controllers\\datphongcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3442737D-C627-B7C8-706D-0CBB731A2A87}|HotelManagementAPI.csproj|c:\\users\\admin\\documents\\back_end-hotel\\hotelmanagementapi\\hotelmanagementapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
-      "RelativeMoniker": "D:0:0:{3442737D-C627-B7C8-706D-0CBB731A2A87}|HotelManagementAPI.csproj|solutionrelative:hotelmanagementapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3442737D-C627-B7C8-706D-0CBB731A2A87}|HotelManagementAPI.csproj|c:\\users\\admin\\documents\\back_end-hotel\\hotelmanagementapi\\hotelmanagementapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{3442737D-C627-B7C8-706D-0CBB731A2A87}|HotelManagementAPI.csproj|solutionrelative:hotelmanagementapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{3442737D-C627-B7C8-706D-0CBB731A2A87}|HotelManagementAPI.csproj|c:\\users\\admin\\documents\\back_end-hotel\\hotelmanagementapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{3442737D-C627-B7C8-706D-0CBB731A2A87}|HotelManagementAPI.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3442737D-C627-B7C8-706D-0CBB731A2A87}|HotelManagementAPI.csproj|c:\\users\\admin\\documents\\back_end-hotel\\hotelmanagementapi\\hotelmanagementapi.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
-      "RelativeMoniker": "D:0:0:{3442737D-C627-B7C8-706D-0CBB731A2A87}|HotelManagementAPI.csproj|solutionrelative:hotelmanagementapi.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,75 +26,46 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-04-16T21:25:49.405Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAAB0AAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAAAGUAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-16T21:25:38.517Z",
+              "WhenOpened": "2025-05-01T12:35:08.781Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "HotelManagementAPI.http",
-              "DocumentMoniker": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\HotelManagementAPI.http",
-              "RelativeDocumentMoniker": "HotelManagementAPI.http",
-              "ToolTip": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\HotelManagementAPI.http",
-              "RelativeToolTip": "HotelManagementAPI.http",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2025-04-16T21:25:51.785Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "DatPhongController.cs",
-              "DocumentMoniker": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\Controllers\\DatPhongController.cs",
-              "RelativeDocumentMoniker": "Controllers\\DatPhongController.cs",
-              "ToolTip": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\Controllers\\DatPhongController.cs",
-              "RelativeToolTip": "Controllers\\DatPhongController.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAAywAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "ChatHub.cs",
+              "DocumentMoniker": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\Hubs\\ChatHub.cs",
+              "RelativeDocumentMoniker": "Hubs\\ChatHub.cs",
+              "ToolTip": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\Hubs\\ChatHub.cs",
+              "RelativeToolTip": "Hubs\\ChatHub.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwA0AAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-17T15:24:37.855Z"
+              "WhenOpened": "2025-05-01T12:32:52.837Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "HotelManagementAPI.csproj",
-              "DocumentMoniker": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\HotelManagementAPI.csproj",
-              "RelativeDocumentMoniker": "HotelManagementAPI.csproj",
-              "ToolTip": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\HotelManagementAPI.csproj",
-              "RelativeToolTip": "HotelManagementAPI.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-04-16T21:18:47.857Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "HotelManagementAPI",
-              "DocumentMoniker": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\HotelManagementAPI.csproj",
-              "RelativeDocumentMoniker": "HotelManagementAPI.csproj",
-              "ToolTip": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\HotelManagementAPI.csproj",
-              "RelativeToolTip": "HotelManagementAPI.csproj",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-04-16T21:18:48.279Z"
+              "DocumentIndex": 2,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-29T15:11:04.867Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
