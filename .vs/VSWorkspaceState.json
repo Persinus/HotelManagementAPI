@@ -1,8 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\Controllers"
+    ""
   ],
-  "SelectedNode": "\\Controllers\\HoaDonDichVuController.cs",
-  "PreviewInSolutionExplorer": true
+  "SelectedNode": "\\HotelManagementAPI.sln",
+  "PreviewInSolutionExplorer": false
 }

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "XPjeh1053UjTjoFReU8dIei1exVBczUd5PB7UUkC6ww=",
+  "Hash": "2NRIgw2GrOmGLrEDAzLmwficESaRn+Z/1CD1bMA6CfM=",
   "Source": "HotelManagementAPI",
   "BasePath": "_content/HotelManagementAPI",
   "Mode": "Default",
@@ -36,6 +36,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\wwwroot\\swagger-custom.css"
+    },
+    {
+      "Identity": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\obj\\Release\\net9.0\\compressed\\kd2flfky80-hmnfu3cwam.gz",
+      "SourceId": "HotelManagementAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\obj\\Release\\net9.0\\compressed\\",
+      "BasePath": "_content/HotelManagementAPI",
+      "RelativePath": "Untitled-1#[.{fingerprint=hmnfu3cwam}]?.html.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\wwwroot\\Untitled-1.html",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "1mbhx80mqh",
+      "Integrity": "90l5x0vKbCO5vxdt1ufWTlhLn/Dc6hNdVq/FDx8udP8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\wwwroot\\Untitled-1.html"
     },
     {
       "Identity": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\wwwroot\\swagger-custom.css",
@@ -78,6 +99,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\test.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\wwwroot\\Untitled-1.html",
+      "SourceId": "HotelManagementAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\wwwroot\\",
+      "BasePath": "_content/HotelManagementAPI",
+      "RelativePath": "Untitled-1#[.{fingerprint}]?.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "hmnfu3cwam",
+      "Integrity": "Wa8ayyaPUa9TR+szkO3eyOfyUp31ANYHWDMJeIOL12I=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Untitled-1.html"
     }
   ],
   "Endpoints": [
@@ -106,7 +148,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 28 Apr 2025 18:29:45 GMT"
+          "Value": "Sun, 27 Apr 2025 11:59:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -159,7 +201,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 28 Apr 2025 18:29:45 GMT"
+          "Value": "Sun, 27 Apr 2025 11:59:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -196,7 +238,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 28 Apr 2025 18:29:45 GMT"
+          "Value": "Sun, 27 Apr 2025 11:59:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -243,7 +285,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 28 Apr 2025 18:29:45 GMT"
+          "Value": "Sun, 27 Apr 2025 11:59:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -304,7 +346,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 28 Apr 2025 18:29:45 GMT"
+          "Value": "Sun, 27 Apr 2025 11:59:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -349,7 +391,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 28 Apr 2025 18:29:45 GMT"
+          "Value": "Sun, 27 Apr 2025 11:59:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -402,7 +444,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 27 Apr 2025 13:55:45 GMT"
+          "Value": "Sat, 26 Apr 2025 16:48:37 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -447,7 +489,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 27 Apr 2025 13:55:45 GMT"
+          "Value": "Sat, 26 Apr 2025 16:48:37 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -458,6 +500,304 @@
         {
           "Name": "integrity",
           "Value": "sha256-mIF6UD2ISMNG3vr5U4ZymrXqrAAWlkwpR7ZmBAba/CU="
+        }
+      ]
+    },
+    {
+      "Route": "Untitled-1.hmnfu3cwam.html",
+      "AssetFile": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\obj\\Release\\net9.0\\compressed\\kd2flfky80-hmnfu3cwam.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000813008130"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1229"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"90l5x0vKbCO5vxdt1ufWTlhLn/Dc6hNdVq/FDx8udP8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 26 Apr 2025 17:04:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/html"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"Wa8ayyaPUa9TR+szkO3eyOfyUp31ANYHWDMJeIOL12I=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "hmnfu3cwam"
+        },
+        {
+          "Name": "label",
+          "Value": "Untitled-1.html"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Wa8ayyaPUa9TR+szkO3eyOfyUp31ANYHWDMJeIOL12I="
+        }
+      ]
+    },
+    {
+      "Route": "Untitled-1.hmnfu3cwam.html",
+      "AssetFile": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\wwwroot\\Untitled-1.html",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2865"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/html"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Wa8ayyaPUa9TR+szkO3eyOfyUp31ANYHWDMJeIOL12I=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 26 Apr 2025 17:04:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "hmnfu3cwam"
+        },
+        {
+          "Name": "label",
+          "Value": "Untitled-1.html"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Wa8ayyaPUa9TR+szkO3eyOfyUp31ANYHWDMJeIOL12I="
+        }
+      ]
+    },
+    {
+      "Route": "Untitled-1.hmnfu3cwam.html.gz",
+      "AssetFile": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\obj\\Release\\net9.0\\compressed\\kd2flfky80-hmnfu3cwam.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1229"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/html"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"90l5x0vKbCO5vxdt1ufWTlhLn/Dc6hNdVq/FDx8udP8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 26 Apr 2025 17:04:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "hmnfu3cwam"
+        },
+        {
+          "Name": "label",
+          "Value": "Untitled-1.html.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-90l5x0vKbCO5vxdt1ufWTlhLn/Dc6hNdVq/FDx8udP8="
+        }
+      ]
+    },
+    {
+      "Route": "Untitled-1.html",
+      "AssetFile": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\obj\\Release\\net9.0\\compressed\\kd2flfky80-hmnfu3cwam.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000813008130"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1229"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"90l5x0vKbCO5vxdt1ufWTlhLn/Dc6hNdVq/FDx8udP8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 26 Apr 2025 17:04:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/html"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"Wa8ayyaPUa9TR+szkO3eyOfyUp31ANYHWDMJeIOL12I=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Wa8ayyaPUa9TR+szkO3eyOfyUp31ANYHWDMJeIOL12I="
+        }
+      ]
+    },
+    {
+      "Route": "Untitled-1.html",
+      "AssetFile": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\wwwroot\\Untitled-1.html",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2865"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/html"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Wa8ayyaPUa9TR+szkO3eyOfyUp31ANYHWDMJeIOL12I=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 26 Apr 2025 17:04:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Wa8ayyaPUa9TR+szkO3eyOfyUp31ANYHWDMJeIOL12I="
+        }
+      ]
+    },
+    {
+      "Route": "Untitled-1.html.gz",
+      "AssetFile": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\obj\\Release\\net9.0\\compressed\\kd2flfky80-hmnfu3cwam.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1229"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/html"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"90l5x0vKbCO5vxdt1ufWTlhLn/Dc6hNdVq/FDx8udP8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 26 Apr 2025 17:04:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-90l5x0vKbCO5vxdt1ufWTlhLn/Dc6hNdVq/FDx8udP8="
         }
       ]
     }

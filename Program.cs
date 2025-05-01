@@ -4,7 +4,6 @@ using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using HotelManagementAPI.Hus;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,12 +16,11 @@ builder.Services.AddScoped<IDbConnection>(sp => new SqlConnection(connectionStri
 // Cấu hình CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowSpecificOrigins", policy =>
+    options.AddPolicy("AllowAllOrigins", policy =>
     {
-        policy.WithOrigins("http://localhost:3000") // Thay bằng URL frontend của bạn
-              .AllowAnyHeader()
-              .AllowAnyMethod()
-              .AllowCredentials(); // Cho phép credentials
+        policy.AllowAnyOrigin() // Cho phép mọi domain
+              .AllowAnyHeader()  // Cho phép mọi header
+              .AllowAnyMethod(); // Cho phép mọi HTTP method (GET, POST, PUT, DELETE...)
     });
 });
 
@@ -54,23 +52,8 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-// Thêm SignalR vào DI container
-builder.Services.AddSignalR();
-
 var app = builder.Build();
-
-// Sử dụng Static Files
 app.UseStaticFiles();
-
-// Sử dụng Routing
-app.UseRouting();
-
-// Sử dụng CORS
-app.UseCors("AllowAllOrigins");
-
-// Sử dụng Authentication và Authorization
-app.UseAuthentication();
-app.UseAuthorization();
 
 // Cấu hình Swagger
 var enableSwagger = builder.Configuration.GetValue<bool>("Swagger:Enable");
@@ -86,21 +69,19 @@ if (enableSwagger)
     });
 }
 
-// Cấu hình chuyển hướng HTTPS
-app.UseHttpsRedirection();
-
-// Định nghĩa SignalR Hub route
-// Thêm Middleware
-app.UseAuthentication();
-app.UseAuthorization();
-
 // Sử dụng CORS
-app.UseCors("AllowSpecificOrigins");
+app.UseCors("AllowAllOrigins"); // Áp dụng chính sách CORS đã cấu hình
 
-// Định nghĩa endpoint SignalR
-app.MapHub<ChatHub>("/chathub").RequireCors("AllowSpecificOrigins");
+// Sử dụng Authentication và Authorization nếu cần
+app.UseAuthentication();
+app.UseAuthorization(); // Nếu bạn có sử dụng Authorization
+// Nếu không sử dụng Authentication và Authorization, bạn có thể bỏ qua hai dòng trên
+// Cấu hình các middleware khác nếu cần
 
 // Định tuyến các controller
 app.MapControllers();
+
+// Cấu hình chuyển hướng HTTPS
+app.UseHttpsRedirection();
 
 app.Run();
