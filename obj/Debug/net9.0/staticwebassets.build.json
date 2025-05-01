@@ -1,0 +1,465 @@
+{
+  "Version": 1,
+  "Hash": "l6E4AYIHSc1EqiFUdF7iqVqbsKle1CHeGEnWyFzUi14=",
+  "Source": "HotelManagementAPI",
+  "BasePath": "_content/HotelManagementAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "HotelManagementAPI\\wwwroot",
+      "Source": "HotelManagementAPI",
+      "ContentRoot": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\wwwroot\\",
+      "BasePath": "_content/HotelManagementAPI",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\obj\\Debug\\net9.0\\compressed\\66v20z1wre-ej1hozjj51.gz",
+      "SourceId": "HotelManagementAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/HotelManagementAPI",
+      "RelativePath": "swagger-custom#[.{fingerprint=ej1hozjj51}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\wwwroot\\swagger-custom.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "hus4lh2nxg",
+      "Integrity": "95t2X6oQq9H51LtZknSXzpR8QnmDHwhxOZgu1uttV/Q=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\wwwroot\\swagger-custom.css"
+    },
+    {
+      "Identity": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\wwwroot\\swagger-custom.css",
+      "SourceId": "HotelManagementAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\wwwroot\\",
+      "BasePath": "_content/HotelManagementAPI",
+      "RelativePath": "swagger-custom#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ej1hozjj51",
+      "Integrity": "9mkClxIAnRqGjLLG4RJ4fPVCX632i4fTFW5X5GQgxd0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\swagger-custom.css"
+    },
+    {
+      "Identity": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\wwwroot\\test.jpg",
+      "SourceId": "HotelManagementAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\wwwroot\\",
+      "BasePath": "_content/HotelManagementAPI",
+      "RelativePath": "test#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "02lscf0k21",
+      "Integrity": "mIF6UD2ISMNG3vr5U4ZymrXqrAAWlkwpR7ZmBAba/CU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\test.jpg"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "swagger-custom.css",
+      "AssetFile": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\obj\\Debug\\net9.0\\compressed\\66v20z1wre-ej1hozjj51.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000180440274"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5541"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"95t2X6oQq9H51LtZknSXzpR8QnmDHwhxOZgu1uttV/Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 28 Apr 2025 18:29:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"9mkClxIAnRqGjLLG4RJ4fPVCX632i4fTFW5X5GQgxd0=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-9mkClxIAnRqGjLLG4RJ4fPVCX632i4fTFW5X5GQgxd0="
+        }
+      ]
+    },
+    {
+      "Route": "swagger-custom.css",
+      "AssetFile": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\wwwroot\\swagger-custom.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "35162"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9mkClxIAnRqGjLLG4RJ4fPVCX632i4fTFW5X5GQgxd0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 28 Apr 2025 18:29:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-9mkClxIAnRqGjLLG4RJ4fPVCX632i4fTFW5X5GQgxd0="
+        }
+      ]
+    },
+    {
+      "Route": "swagger-custom.css.gz",
+      "AssetFile": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\obj\\Debug\\net9.0\\compressed\\66v20z1wre-ej1hozjj51.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5541"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"95t2X6oQq9H51LtZknSXzpR8QnmDHwhxOZgu1uttV/Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 28 Apr 2025 18:29:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-95t2X6oQq9H51LtZknSXzpR8QnmDHwhxOZgu1uttV/Q="
+        }
+      ]
+    },
+    {
+      "Route": "swagger-custom.ej1hozjj51.css",
+      "AssetFile": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\obj\\Debug\\net9.0\\compressed\\66v20z1wre-ej1hozjj51.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000180440274"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5541"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"95t2X6oQq9H51LtZknSXzpR8QnmDHwhxOZgu1uttV/Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 28 Apr 2025 18:29:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"9mkClxIAnRqGjLLG4RJ4fPVCX632i4fTFW5X5GQgxd0=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ej1hozjj51"
+        },
+        {
+          "Name": "label",
+          "Value": "swagger-custom.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9mkClxIAnRqGjLLG4RJ4fPVCX632i4fTFW5X5GQgxd0="
+        }
+      ]
+    },
+    {
+      "Route": "swagger-custom.ej1hozjj51.css",
+      "AssetFile": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\wwwroot\\swagger-custom.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "35162"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9mkClxIAnRqGjLLG4RJ4fPVCX632i4fTFW5X5GQgxd0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 28 Apr 2025 18:29:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ej1hozjj51"
+        },
+        {
+          "Name": "label",
+          "Value": "swagger-custom.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9mkClxIAnRqGjLLG4RJ4fPVCX632i4fTFW5X5GQgxd0="
+        }
+      ]
+    },
+    {
+      "Route": "swagger-custom.ej1hozjj51.css.gz",
+      "AssetFile": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\obj\\Debug\\net9.0\\compressed\\66v20z1wre-ej1hozjj51.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5541"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"95t2X6oQq9H51LtZknSXzpR8QnmDHwhxOZgu1uttV/Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 28 Apr 2025 18:29:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ej1hozjj51"
+        },
+        {
+          "Name": "label",
+          "Value": "swagger-custom.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-95t2X6oQq9H51LtZknSXzpR8QnmDHwhxOZgu1uttV/Q="
+        }
+      ]
+    },
+    {
+      "Route": "test.02lscf0k21.jpg",
+      "AssetFile": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\wwwroot\\test.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "53524"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"mIF6UD2ISMNG3vr5U4ZymrXqrAAWlkwpR7ZmBAba/CU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 27 Apr 2025 13:55:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "02lscf0k21"
+        },
+        {
+          "Name": "label",
+          "Value": "test.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-mIF6UD2ISMNG3vr5U4ZymrXqrAAWlkwpR7ZmBAba/CU="
+        }
+      ]
+    },
+    {
+      "Route": "test.jpg",
+      "AssetFile": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\wwwroot\\test.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "53524"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"mIF6UD2ISMNG3vr5U4ZymrXqrAAWlkwpR7ZmBAba/CU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 27 Apr 2025 13:55:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-mIF6UD2ISMNG3vr5U4ZymrXqrAAWlkwpR7ZmBAba/CU="
+        }
+      ]
+    }
+  ]
+}

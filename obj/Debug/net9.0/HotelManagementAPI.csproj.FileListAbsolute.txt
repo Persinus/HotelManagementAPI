@@ -1,0 +1,779 @@
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\appsettings.Development.json
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\appsettings.json
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.staticwebassets.endpoints.json
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.exe
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.deps.json
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.runtimeconfig.json
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.pdb
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Azure.Core.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Azure.Identity.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Humanizer.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Bcl.Cryptography.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Data.SqlClient.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Identity.Client.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.OpenApi.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.SqlServer.Server.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Mono.TextTemplating.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\System.ClientModel.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\System.CodeDom.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\System.Configuration.ConfigurationManager.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\System.Memory.Data.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\cs\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\de\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\es\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\fr\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\it\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\ja\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\ko\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\pl\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\pt-BR\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\ru\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\tr\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\zh-Hans\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\zh-Hant\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\runtimes\unix\lib\net9.0\Microsoft.Data.SqlClient.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\runtimes\win\lib\net9.0\Microsoft.Data.SqlClient.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.csproj.AssemblyReference.cache
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.AssemblyInfoInputs.cache
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.AssemblyInfo.cs
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.csproj.CoreCompileInputs.cache
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.sourcelink.json
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\obj\Debug\net9.0\scopedcss\bundle\HotelManagementAPI.styles.css
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\obj\Debug\net9.0\staticwebassets.build.json
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\obj\Debug\net9.0\staticwebassets.development.json
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\obj\Debug\net9.0\staticwebassets\msbuild.HotelManagementAPI.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\obj\Debug\net9.0\staticwebassets\msbuild.HotelManagementAPI.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\obj\Debug\net9.0\staticwebassets\msbuild.build.HotelManagementAPI.props
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\obj\Debug\net9.0\staticwebassets\msbuild.buildMultiTargeting.HotelManagementAPI.props
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\obj\Debug\net9.0\staticwebassets\msbuild.buildTransitive.HotelManagementAPI.props
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\obj\Debug\net9.0\staticwebassets.pack.json
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\obj\Debug\net9.0\HotelMan.5926837C.Up2Date
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\obj\Debug\net9.0\refint\HotelManagementAPI.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.pdb
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.genruntimeconfig.cache
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\obj\Debug\net9.0\ref\HotelManagementAPI.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Dapper.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Build.Locator.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.CodeAnalysis.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Logging.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Serilog.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Serilog.AspNetCore.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Serilog.Extensions.Hosting.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Serilog.Extensions.Logging.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Serilog.Formatting.Compact.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Serilog.Settings.Configuration.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Serilog.Sinks.Console.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Serilog.Sinks.Debug.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Serilog.Sinks.File.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\System.Composition.AttributedModel.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\System.Composition.Convention.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\System.Composition.Hosting.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\System.Composition.Runtime.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\System.Composition.TypedParts.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\System.Formats.Asn1.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\System.Net.WebSockets.WebSocketProtocol.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\System.Text.Json.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Newtonsoft.Json.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\Newtonsoft.Json.Bson.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\AutoMapper.dll
+C:\Users\admin\Documents\FE_Web_Thu_Vien_22CT115\HotelManagementAPI\bin\Debug\net9.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\appsettings.Development.json
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\appsettings.json
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.staticwebassets.runtime.json
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.staticwebassets.endpoints.json
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.exe
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.deps.json
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.runtimeconfig.json
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.pdb
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.xml
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\AutoMapper.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Azure.Core.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Azure.Identity.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Dapper.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Humanizer.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Bcl.Cryptography.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Build.Locator.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.CodeAnalysis.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Data.SqlClient.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Logging.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Identity.Client.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.OpenApi.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Microsoft.SqlServer.Server.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Mono.TextTemplating.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Newtonsoft.Json.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Newtonsoft.Json.Bson.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Serilog.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Serilog.AspNetCore.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Serilog.Extensions.Hosting.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Serilog.Extensions.Logging.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Serilog.Formatting.Compact.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Serilog.Settings.Configuration.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Serilog.Sinks.Console.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Serilog.Sinks.Debug.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Serilog.Sinks.File.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\System.ClientModel.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\System.CodeDom.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\System.Composition.AttributedModel.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\System.Composition.Convention.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\System.Composition.Hosting.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\System.Composition.Runtime.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\System.Composition.TypedParts.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\System.Configuration.ConfigurationManager.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\System.Formats.Asn1.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\System.Memory.Data.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\System.Net.WebSockets.WebSocketProtocol.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\System.Text.Json.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\cs\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\de\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\es\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\fr\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\it\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\ja\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\ko\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\pl\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\pt-BR\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\ru\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\tr\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\zh-Hans\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\zh-Hant\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\runtimes\unix\lib\net9.0\Microsoft.Data.SqlClient.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\runtimes\win\lib\net9.0\Microsoft.Data.SqlClient.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\bin\Debug\net9.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.csproj.AssemblyReference.cache
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.AssemblyInfoInputs.cache
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.AssemblyInfo.cs
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.csproj.CoreCompileInputs.cache
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.sourcelink.json
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\scopedcss\bundle\HotelManagementAPI.styles.css
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\staticwebassets.build.json
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\staticwebassets.development.json
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\staticwebassets\msbuild.HotelManagementAPI.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\staticwebassets\msbuild.HotelManagementAPI.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\staticwebassets\msbuild.build.HotelManagementAPI.props
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\staticwebassets\msbuild.buildMultiTargeting.HotelManagementAPI.props
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\staticwebassets\msbuild.buildTransitive.HotelManagementAPI.props
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\staticwebassets.pack.json
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\HotelMan.5926837C.Up2Date
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\refint\HotelManagementAPI.dll
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.xml
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.pdb
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.genruntimeconfig.cache
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\ref\HotelManagementAPI.dll
+<<<<<<< HEAD
+C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\obj\Debug\net9.0\compressed\66v20z1wre-ej1hozjj51.gz
+=======
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\appsettings.Development.json
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\appsettings.json
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.staticwebassets.endpoints.json
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.exe
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.deps.json
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.runtimeconfig.json
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.pdb
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\AutoMapper.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Azure.Core.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Azure.Identity.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Dapper.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Humanizer.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.AspNetCore.JsonPatch.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Bcl.AsyncInterfaces.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Bcl.Cryptography.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Build.Locator.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.CodeAnalysis.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.CodeAnalysis.CSharp.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Data.SqlClient.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Caching.Abstractions.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Caching.Memory.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.DependencyModel.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Identity.Core.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Identity.Stores.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Logging.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Identity.Client.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Identity.Client.Extensions.Msal.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.IdentityModel.Logging.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.OpenApi.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Microsoft.SqlServer.Server.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Mono.TextTemplating.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Newtonsoft.Json.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Newtonsoft.Json.Bson.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Serilog.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Serilog.AspNetCore.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Serilog.Extensions.Hosting.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Serilog.Extensions.Logging.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Serilog.Formatting.Compact.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Serilog.Settings.Configuration.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Serilog.Sinks.Console.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Serilog.Sinks.Debug.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Serilog.Sinks.File.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\System.ClientModel.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\System.CodeDom.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\System.Composition.AttributedModel.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\System.Composition.Convention.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\System.Composition.Hosting.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\System.Composition.Runtime.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\System.Composition.TypedParts.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\System.Configuration.ConfigurationManager.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\System.Memory.Data.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\System.Net.WebSockets.WebSocketProtocol.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\System.Security.Cryptography.ProtectedData.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\cs\Microsoft.Data.SqlClient.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\de\Microsoft.Data.SqlClient.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\es\Microsoft.Data.SqlClient.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\fr\Microsoft.Data.SqlClient.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\it\Microsoft.Data.SqlClient.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\ja\Microsoft.Data.SqlClient.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\ko\Microsoft.Data.SqlClient.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\pl\Microsoft.Data.SqlClient.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\pt-BR\Microsoft.Data.SqlClient.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\ru\Microsoft.Data.SqlClient.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\tr\Microsoft.Data.SqlClient.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\zh-Hans\Microsoft.Data.SqlClient.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\zh-Hant\Microsoft.Data.SqlClient.resources.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\runtimes\unix\lib\net9.0\Microsoft.Data.SqlClient.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\runtimes\win\lib\net9.0\Microsoft.Data.SqlClient.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\React Native\HotelManagementAPI\bin\Debug\net9.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+D:\React Native\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.csproj.AssemblyReference.cache
+D:\React Native\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.GeneratedMSBuildEditorConfig.editorconfig
+D:\React Native\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.AssemblyInfoInputs.cache
+D:\React Native\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.AssemblyInfo.cs
+D:\React Native\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.csproj.CoreCompileInputs.cache
+D:\React Native\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.MvcApplicationPartsAssemblyInfo.cs
+D:\React Native\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.MvcApplicationPartsAssemblyInfo.cache
+D:\React Native\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.sourcelink.json
+D:\React Native\HotelManagementAPI\obj\Debug\net9.0\scopedcss\bundle\HotelManagementAPI.styles.css
+D:\React Native\HotelManagementAPI\obj\Debug\net9.0\staticwebassets.build.json
+D:\React Native\HotelManagementAPI\obj\Debug\net9.0\staticwebassets.development.json
+D:\React Native\HotelManagementAPI\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+D:\React Native\HotelManagementAPI\obj\Debug\net9.0\staticwebassets\msbuild.HotelManagementAPI.Microsoft.AspNetCore.StaticWebAssets.props
+D:\React Native\HotelManagementAPI\obj\Debug\net9.0\staticwebassets\msbuild.HotelManagementAPI.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+D:\React Native\HotelManagementAPI\obj\Debug\net9.0\staticwebassets\msbuild.build.HotelManagementAPI.props
+D:\React Native\HotelManagementAPI\obj\Debug\net9.0\staticwebassets\msbuild.buildMultiTargeting.HotelManagementAPI.props
+D:\React Native\HotelManagementAPI\obj\Debug\net9.0\staticwebassets\msbuild.buildTransitive.HotelManagementAPI.props
+D:\React Native\HotelManagementAPI\obj\Debug\net9.0\staticwebassets.pack.json
+D:\React Native\HotelManagementAPI\obj\Debug\net9.0\HotelMan.5926837C.Up2Date
+D:\React Native\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.dll
+D:\React Native\HotelManagementAPI\obj\Debug\net9.0\refint\HotelManagementAPI.dll
+D:\React Native\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.pdb
+D:\React Native\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.genruntimeconfig.cache
+D:\React Native\HotelManagementAPI\obj\Debug\net9.0\ref\HotelManagementAPI.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\appsettings.Development.json
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\appsettings.json
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.staticwebassets.endpoints.json
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.exe
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.deps.json
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.runtimeconfig.json
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\HotelManagementAPI.pdb
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\AutoMapper.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Azure.Core.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Azure.Identity.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Dapper.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Humanizer.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.AspNetCore.JsonPatch.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Bcl.Cryptography.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Build.Locator.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.CodeAnalysis.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.CodeAnalysis.CSharp.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Data.SqlClient.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Caching.Abstractions.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Caching.Memory.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.DependencyModel.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Identity.Core.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Identity.Stores.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Logging.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Identity.Client.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.Identity.Client.Extensions.Msal.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.IdentityModel.Logging.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.OpenApi.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Microsoft.SqlServer.Server.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Mono.TextTemplating.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Newtonsoft.Json.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Newtonsoft.Json.Bson.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Serilog.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Serilog.AspNetCore.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Serilog.Extensions.Hosting.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Serilog.Extensions.Logging.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Serilog.Formatting.Compact.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Serilog.Settings.Configuration.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Serilog.Sinks.Console.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Serilog.Sinks.Debug.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Serilog.Sinks.File.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\System.ClientModel.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\System.CodeDom.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\System.Composition.AttributedModel.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\System.Composition.Convention.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\System.Composition.Hosting.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\System.Composition.Runtime.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\System.Composition.TypedParts.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\System.Configuration.ConfigurationManager.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\System.Memory.Data.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\System.Net.WebSockets.WebSocketProtocol.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\System.Security.Cryptography.ProtectedData.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\cs\Microsoft.Data.SqlClient.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\de\Microsoft.Data.SqlClient.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\es\Microsoft.Data.SqlClient.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\fr\Microsoft.Data.SqlClient.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\it\Microsoft.Data.SqlClient.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\ja\Microsoft.Data.SqlClient.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\ko\Microsoft.Data.SqlClient.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\pl\Microsoft.Data.SqlClient.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\pt-BR\Microsoft.Data.SqlClient.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\ru\Microsoft.Data.SqlClient.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\tr\Microsoft.Data.SqlClient.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\zh-Hans\Microsoft.Data.SqlClient.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\zh-Hant\Microsoft.Data.SqlClient.resources.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\runtimes\unix\lib\net9.0\Microsoft.Data.SqlClient.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\runtimes\win\lib\net9.0\Microsoft.Data.SqlClient.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\bin\Debug\net9.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.csproj.AssemblyReference.cache
+D:\Desktop\baitaphomnahy\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.GeneratedMSBuildEditorConfig.editorconfig
+D:\Desktop\baitaphomnahy\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.AssemblyInfoInputs.cache
+D:\Desktop\baitaphomnahy\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.AssemblyInfo.cs
+D:\Desktop\baitaphomnahy\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.csproj.CoreCompileInputs.cache
+D:\Desktop\baitaphomnahy\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.MvcApplicationPartsAssemblyInfo.cs
+D:\Desktop\baitaphomnahy\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.MvcApplicationPartsAssemblyInfo.cache
+D:\Desktop\baitaphomnahy\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.sourcelink.json
+D:\Desktop\baitaphomnahy\HotelManagementAPI\obj\Debug\net9.0\scopedcss\bundle\HotelManagementAPI.styles.css
+D:\Desktop\baitaphomnahy\HotelManagementAPI\obj\Debug\net9.0\staticwebassets.build.json
+D:\Desktop\baitaphomnahy\HotelManagementAPI\obj\Debug\net9.0\staticwebassets.development.json
+D:\Desktop\baitaphomnahy\HotelManagementAPI\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+D:\Desktop\baitaphomnahy\HotelManagementAPI\obj\Debug\net9.0\staticwebassets\msbuild.HotelManagementAPI.Microsoft.AspNetCore.StaticWebAssets.props
+D:\Desktop\baitaphomnahy\HotelManagementAPI\obj\Debug\net9.0\staticwebassets\msbuild.HotelManagementAPI.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+D:\Desktop\baitaphomnahy\HotelManagementAPI\obj\Debug\net9.0\staticwebassets\msbuild.build.HotelManagementAPI.props
+D:\Desktop\baitaphomnahy\HotelManagementAPI\obj\Debug\net9.0\staticwebassets\msbuild.buildMultiTargeting.HotelManagementAPI.props
+D:\Desktop\baitaphomnahy\HotelManagementAPI\obj\Debug\net9.0\staticwebassets\msbuild.buildTransitive.HotelManagementAPI.props
+D:\Desktop\baitaphomnahy\HotelManagementAPI\obj\Debug\net9.0\staticwebassets.pack.json
+D:\Desktop\baitaphomnahy\HotelManagementAPI\obj\Debug\net9.0\HotelMan.5926837C.Up2Date
+D:\Desktop\baitaphomnahy\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\obj\Debug\net9.0\refint\HotelManagementAPI.dll
+D:\Desktop\baitaphomnahy\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.pdb
+D:\Desktop\baitaphomnahy\HotelManagementAPI\obj\Debug\net9.0\HotelManagementAPI.genruntimeconfig.cache
+D:\Desktop\baitaphomnahy\HotelManagementAPI\obj\Debug\net9.0\ref\HotelManagementAPI.dll
+>>>>>>> a26e08d51e06492f62799808e04a834e3b5ccd6a
