@@ -1,0 +1,13 @@
+version: 2 # Phiên bản cấu hình Dependabot
+updates:
+  - package-ecosystem: "nuget" # Hệ sinh thái package dành cho ASP.NET Core
+    directory: "/" # Thư mục chứa tệp quản lý dependencies, thường là tại gốc dự án
+    schedule:
+      interval: "daily" # Lịch trình kiểm tra: hằng ngày
+    commit-message:
+      prefix: "chore" # Thêm tiền tố cho commit do Dependabot tạo ra
+    open-pull-requests-limit: 5 # Giới hạn số lượng pull request đồng thời
+    ignore:
+      - dependency-name: "SomePackage" # Tên thư viện muốn bỏ qua
+        versions:
+          - "<2.0.0" # Phiên bản cụ thể muốn bỏ qua
