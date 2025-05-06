@@ -9,7 +9,7 @@ public partial class UserFeedback
 
     public string MaPhong { get; set; } = null!;
 
-    public float SoSao { get; set; }
+    public double SoSao { get; set; }
 
     public string? NoiDung { get; set; }
 

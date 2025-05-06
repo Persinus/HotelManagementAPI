@@ -9,7 +9,7 @@ namespace HotelManagementAPI.Controllers
 {
     public class DichVuDTO
     {
-        public string MaChiTietDichVu { get; set; }
+        public string MaDichVu { get; set; }
         public string TenDichVu { get; set; }
         public decimal DonGia { get; set; }
         public string? MoTaDichVu { get; set; }
@@ -89,7 +89,7 @@ namespace HotelManagementAPI.Controllers
                 VALUES (@MaChiTietDichVu, @TenDichVu, @DonGia, @MoTaDichVu, @UrlAnh)";
 
             await _db.ExecuteAsync(query, dichVuDto);
-            return CreatedAtAction(nameof(GetById), new { id = dichVuDto.MaChiTietDichVu }, dichVuDto);
+            return CreatedAtAction(nameof(GetById), new { id = dichVuDto.MaDichVu }, dichVuDto);
         }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace HotelManagementAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(string id, [FromBody] DichVuDTO dichVuDto)
         {
-            if (id != dichVuDto.MaChiTietDichVu) return BadRequest();
+            if (id != dichVuDto.MaDichVu) return BadRequest();
 
             const string query = @"
                 UPDATE DichVu
@@ -118,7 +118,7 @@ namespace HotelManagementAPI.Controllers
                     DonGia = @DonGia,
                     MoTaDichVu = @MoTaDichVu,
                     UrlAnh = @UrlAnh
-                WHERE MaChiTietDichVu = @MaChiTietDichVu";
+                WHERE MaDichVu = @MatDichVu";
 
             var rows = await _db.ExecuteAsync(query, dichVuDto);
             return rows == 0 ? NotFound() : NoContent();
@@ -140,7 +140,7 @@ namespace HotelManagementAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
-            const string query = "DELETE FROM DichVu WHERE MaChiTietDichVu = @Id";
+            const string query = "DELETE FROM DichVu WHERE MaDichVu = @Id";
             var rows = await _db.ExecuteAsync(query, new { Id = id });
             return rows == 0 ? NotFound() : NoContent();
         }

@@ -62,7 +62,6 @@ public partial class DataQlks115Nhom2Context : DbContext
                 .HasColumnType("datetime");
             entity.Property(e => e.NgayNhanPhong).HasColumnType("datetime");
             entity.Property(e => e.NgayTraPhong).HasColumnType("datetime");
-            entity.Property(e => e.TrangThai).HasMaxLength(1);
 
             entity.HasOne(d => d.MaKhachHangNavigation).WithMany(p => p.DatPhongs)
                 .HasForeignKey(d => d.MaKhachHang)
@@ -82,14 +81,17 @@ public partial class DataQlks115Nhom2Context : DbContext
 
         modelBuilder.Entity<DichVu>(entity =>
         {
-            entity.HasKey(e => e.MaChiTietDichVu).HasName("PK__DichVu__11EFCA674FE70F8A");
+            entity.HasKey(e => e.MaDichVu).HasName("PK__DichVu__11EFCA674FE70F8A");
 
             entity.ToTable("DichVu");
 
-            entity.Property(e => e.MaChiTietDichVu).HasMaxLength(10);
+            entity.Property(e => e.MaDichVu)
+                .HasMaxLength(10)
+                .HasColumnName("maDichVu");
             entity.Property(e => e.DonGia).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.MoTaDichVu).HasMaxLength(300);
             entity.Property(e => e.TenDichVu).HasMaxLength(100);
+            entity.Property(e => e.TrangThai).HasDefaultValue(1);
             entity.Property(e => e.UrlAnh).HasMaxLength(255);
         });
 
