@@ -57,6 +57,7 @@ builder.Services.AddSwaggerGen(options =>
             new string[] {}
         }
     });
+
 });
 
 builder.Services.AddControllers();
