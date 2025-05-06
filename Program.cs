@@ -4,7 +4,6 @@ using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using HotelManagementAPI.Hus;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,13 +18,12 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigins", policy =>
     {
-        policy.WithOrigins("http://localhost:3000") // Thay bằng URL frontend của bạn
-              .AllowAnyHeader()
-              .AllowAnyMethod()
-              .AllowCredentials(); // Cho phép credentials
+        policy.AllowAnyOrigin()
+      .AllowAnyHeader()
+      .AllowAnyMethod();
     });
 });
-
+builder.Services.AddHttpClient();
 // Thêm Swagger và các dịch vụ khác
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -33,7 +31,32 @@ builder.Services.AddSwaggerGen(options =>
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     options.IncludeXmlComments(xmlPath);
-   
+
+    // Cấu hình JWT Auth cho Swagger
+    options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+    {
+        Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+        Name = "Authorization",
+        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+        Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
+        Scheme = "Bearer",
+        BearerFormat = "JWT"
+    });
+
+    options.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
+    {
+        {
+            new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+            {
+                Reference = new Microsoft.OpenApi.Models.OpenApiReference
+                {
+                    Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
 });
 
 builder.Services.AddControllers();
@@ -67,7 +90,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 // Sử dụng CORS
-app.UseCors("AllowAllOrigins");
+app.UseCors("AllowSpecificOrigins");
 
 // Sử dụng Authentication và Authorization
 app.UseAuthentication();
@@ -90,16 +113,6 @@ if (enableSwagger)
 // Cấu hình chuyển hướng HTTPS
 app.UseHttpsRedirection();
 
-// Định nghĩa SignalR Hub route
-// Thêm Middleware
-app.UseAuthentication();
-app.UseAuthorization();
-
-// Sử dụng CORS
-app.UseCors("AllowSpecificOrigins");
-
-// Định nghĩa endpoint SignalR
-app.MapHub<ChatHub>("/chathub").RequireCors("AllowSpecificOrigins");
 
 // Định tuyến các controller
 app.MapControllers();
