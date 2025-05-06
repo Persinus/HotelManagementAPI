@@ -79,8 +79,6 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-// Thêm SignalR vào DI container
-builder.Services.AddSignalR();
 
 var app = builder.Build();
 
