@@ -4,6 +4,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 // Đăng ký IDbConnection với DI
 builder.Services.AddScoped<IDbConnection>(sp => new SqlConnection(connectionString));
+
 
 // Cấu hình CORS
 builder.Services.AddCors(options =>
@@ -37,6 +39,25 @@ builder.Services.AddSwaggerGen(options =>
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     options.IncludeXmlComments(xmlPath);
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Enter 'Bearer' [space] and then your token",
+    });
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+{
+    {
+        new OpenApiSecurityScheme
+        {
+            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
+        },
+        new string[] {}
+    }
+});
 });
 
 builder.Services.AddControllers();
@@ -46,6 +67,7 @@ builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
 })
 .AddJwtBearer(options =>
 {
@@ -75,12 +97,16 @@ if (enableSwagger)
     });
 }
 
-// Sử dụng CORS
 app.UseCors("AllowAllOrigins"); // Áp dụng chính sách CORS đã cấu hình
 
 // Sử dụng Authentication và Authorization nếu cần
-app.UseAuthentication();
-app.UseAuthorization();
+var useAuth = builder.Configuration.GetValue<bool>("UseAuthentication");
+if (useAuth)
+{
+    app.UseAuthentication();
+    app.UseAuthorization();
+}
+
 
 // Định tuyến các controller
 app.MapControllers();
