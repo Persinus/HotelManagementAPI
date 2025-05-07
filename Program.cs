@@ -4,6 +4,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 // Đăng ký IDbConnection với DI
 builder.Services.AddScoped<IDbConnection>(sp => new SqlConnection(connectionString));
+
 
 // Cấu hình CORS
 builder.Services.AddCors(options =>
@@ -23,9 +25,16 @@ builder.Services.AddCors(options =>
               .AllowAnyHeader()  // Cho phép mọi header
               .AllowAnyMethod(); // Cho phép mọi HTTP method (GET, POST, PUT, DELETE...)
 
+    
     });
 });
+
 builder.Services.AddHttpClient();
+
+// Đọc cấu hình SentimentModelPath từ appsettings.json
+var sentimentModelPath = builder.Configuration["SentimentModelPath"];
+builder.Services.AddSingleton(new SentimentModelConfig { ModelPath = sentimentModelPath });
+
 // Thêm Swagger và các dịch vụ khác
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -33,33 +42,25 @@ builder.Services.AddSwaggerGen(options =>
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     options.IncludeXmlComments(xmlPath);
-
-    // Cấu hình JWT Auth cho Swagger
-    options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
         Name = "Authorization",
-        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
-        Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
+        Type = SecuritySchemeType.ApiKey,
         Scheme = "Bearer",
-        BearerFormat = "JWT"
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Enter 'Bearer' [space] and then your token",
     });
-
-    options.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+{
     {
+        new OpenApiSecurityScheme
         {
-            new Microsoft.OpenApi.Models.OpenApiSecurityScheme
-            {
-                Reference = new Microsoft.OpenApi.Models.OpenApiReference
-                {
-                    Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
-            },
-            new string[] {}
-        }
-    });
-
+            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
+        },
+        new string[] {}
+    }
+});
 });
 
 builder.Services.AddControllers();
@@ -69,6 +70,7 @@ builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
 })
 .AddJwtBearer(options =>
 {
@@ -85,16 +87,6 @@ builder.Services.AddAuthentication(options =>
 var app = builder.Build();
 app.UseStaticFiles();
 
-// Sử dụng Routing
-app.UseRouting();
-
-// Sử dụng CORS
-app.UseCors("AllowSpecificOrigins");
-
-// Sử dụng Authentication và Authorization
-app.UseAuthentication();
-app.UseAuthorization();
-
 // Cấu hình Swagger
 var enableSwagger = builder.Configuration.GetValue<bool>("Swagger:Enable");
 if (enableSwagger)
@@ -110,17 +102,15 @@ if (enableSwagger)
 }
 
 
-// Cấu hình chuyển hướng HTTPS
-app.UseHttpsRedirection();
-
-// Sử dụng CORS
 app.UseCors("AllowAllOrigins"); // Áp dụng chính sách CORS đã cấu hình
 
 // Sử dụng Authentication và Authorization nếu cần
-app.UseAuthentication();
-app.UseAuthorization(); // Nếu bạn có sử dụng Authorization
-// Nếu không sử dụng Authentication và Authorization, bạn có thể bỏ qua hai dòng trên
-// Cấu hình các middleware khác nếu cần
+var useAuth = builder.Configuration.GetValue<bool>("UseAuthentication");
+if (useAuth)
+{
+    app.UseAuthentication();
+    app.UseAuthorization();
+}
 
 // Định tuyến các controller
 app.MapControllers();
@@ -129,3 +119,9 @@ app.MapControllers();
 app.UseHttpsRedirection();
 
 app.Run();
+
+// Lớp cấu hình cho SentimentModelPath
+public class SentimentModelConfig
+{
+    public string ModelPath { get; set; }
+}
