@@ -18,18 +18,18 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAllOrigins", policy =>
     {
-<<<<<<< HEAD
-        policy.AllowAnyOrigin()
-      .AllowAnyHeader()
-      .AllowAnyMethod();
-=======
         policy.AllowAnyOrigin() // Cho phép mọi domain
               .AllowAnyHeader()  // Cho phép mọi header
               .AllowAnyMethod(); // Cho phép mọi HTTP method (GET, POST, PUT, DELETE...)
->>>>>>> 4496f0f9cd728b917af7fd664c9d18027ffc42fa
     });
 });
+
 builder.Services.AddHttpClient();
+
+// Đọc cấu hình SentimentModelPath từ appsettings.json
+var sentimentModelPath = builder.Configuration["SentimentModelPath"];
+builder.Services.AddSingleton(new SentimentModelConfig { ModelPath = sentimentModelPath });
+
 // Thêm Swagger và các dịch vụ khác
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -37,33 +37,6 @@ builder.Services.AddSwaggerGen(options =>
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     options.IncludeXmlComments(xmlPath);
-
-    // Cấu hình JWT Auth cho Swagger
-    options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
-    {
-        Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-        Name = "Authorization",
-        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
-        Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
-        Scheme = "Bearer",
-        BearerFormat = "JWT"
-    });
-
-    options.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
-    {
-        {
-            new Microsoft.OpenApi.Models.OpenApiSecurityScheme
-            {
-                Reference = new Microsoft.OpenApi.Models.OpenApiReference
-                {
-                    Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
-            },
-            new string[] {}
-        }
-    });
-
 });
 
 builder.Services.AddControllers();
@@ -85,26 +58,9 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 4496f0f9cd728b917af7fd664c9d18027ffc42fa
 var app = builder.Build();
 app.UseStaticFiles();
 
-<<<<<<< HEAD
-// Sử dụng Routing
-app.UseRouting();
-
-// Sử dụng CORS
-app.UseCors("AllowSpecificOrigins");
-
-// Sử dụng Authentication và Authorization
-app.UseAuthentication();
-app.UseAuthorization();
-
-=======
->>>>>>> 4496f0f9cd728b917af7fd664c9d18027ffc42fa
 // Cấu hình Swagger
 var enableSwagger = builder.Configuration.GetValue<bool>("Swagger:Enable");
 if (enableSwagger)
@@ -119,20 +75,12 @@ if (enableSwagger)
     });
 }
 
-<<<<<<< HEAD
-// Cấu hình chuyển hướng HTTPS
-app.UseHttpsRedirection();
-
-=======
 // Sử dụng CORS
 app.UseCors("AllowAllOrigins"); // Áp dụng chính sách CORS đã cấu hình
 
 // Sử dụng Authentication và Authorization nếu cần
 app.UseAuthentication();
-app.UseAuthorization(); // Nếu bạn có sử dụng Authorization
-// Nếu không sử dụng Authentication và Authorization, bạn có thể bỏ qua hai dòng trên
-// Cấu hình các middleware khác nếu cần
->>>>>>> 4496f0f9cd728b917af7fd664c9d18027ffc42fa
+app.UseAuthorization();
 
 // Định tuyến các controller
 app.MapControllers();
@@ -141,3 +89,9 @@ app.MapControllers();
 app.UseHttpsRedirection();
 
 app.Run();
+
+// Lớp cấu hình cho SentimentModelPath
+public class SentimentModelConfig
+{
+    public string ModelPath { get; set; }
+}
