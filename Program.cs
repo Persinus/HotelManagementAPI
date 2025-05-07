@@ -18,15 +18,11 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAllOrigins", policy =>
     {
-<<<<<<< HEAD
-        policy.AllowAnyOrigin()
-      .AllowAnyHeader()
-      .AllowAnyMethod();
-=======
+
         policy.AllowAnyOrigin() // Cho phép mọi domain
               .AllowAnyHeader()  // Cho phép mọi header
               .AllowAnyMethod(); // Cho phép mọi HTTP method (GET, POST, PUT, DELETE...)
->>>>>>> 4496f0f9cd728b917af7fd664c9d18027ffc42fa
+
     });
 });
 builder.Services.AddHttpClient();
@@ -85,14 +81,10 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 4496f0f9cd728b917af7fd664c9d18027ffc42fa
 var app = builder.Build();
 app.UseStaticFiles();
 
-<<<<<<< HEAD
 // Sử dụng Routing
 app.UseRouting();
 
@@ -103,8 +95,6 @@ app.UseCors("AllowSpecificOrigins");
 app.UseAuthentication();
 app.UseAuthorization();
 
-=======
->>>>>>> 4496f0f9cd728b917af7fd664c9d18027ffc42fa
 // Cấu hình Swagger
 var enableSwagger = builder.Configuration.GetValue<bool>("Swagger:Enable");
 if (enableSwagger)
@@ -119,11 +109,10 @@ if (enableSwagger)
     });
 }
 
-<<<<<<< HEAD
+
 // Cấu hình chuyển hướng HTTPS
 app.UseHttpsRedirection();
 
-=======
 // Sử dụng CORS
 app.UseCors("AllowAllOrigins"); // Áp dụng chính sách CORS đã cấu hình
 
@@ -132,7 +121,6 @@ app.UseAuthentication();
 app.UseAuthorization(); // Nếu bạn có sử dụng Authorization
 // Nếu không sử dụng Authentication và Authorization, bạn có thể bỏ qua hai dòng trên
 // Cấu hình các middleware khác nếu cần
->>>>>>> 4496f0f9cd728b917af7fd664c9d18027ffc42fa
 
 // Định tuyến các controller
 app.MapControllers();

@@ -24,9 +24,10 @@ k dang nhap dang ky dc
 chua phan quyen dc
 ////////////////  bao cao tuan 2   ////////////////////////////////
 
-làm phan quyen + JWT 
+làm phan quyen + JWT
 phong
 dich vu 
 hoa don
+---huy
 
 
