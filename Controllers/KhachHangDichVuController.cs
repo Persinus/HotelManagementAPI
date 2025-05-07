@@ -8,7 +8,7 @@ namespace HotelManagementAPI.Controllers
     {
         public string Id { get; set; }
         public string MaKhachHang { get; set; }
-        public string MaChiTietDichVu { get; set; }
+        public string MaDichVu { get; set; }
         public int SoLuong { get; set; }
     }
     [ApiController]
@@ -51,7 +51,7 @@ namespace HotelManagementAPI.Controllers
         public async Task<IActionResult> Update(string id, [FromBody] KhachHangDichVuDTO khdv)
         {
             const string sql = "UPDATE KhachHang_DichVu SET MaKhachHang = @MaKhachHang, MaChiTietDichVu = @MaChiTietDichVu, SoLuong = @SoLuong WHERE Id = @Id";
-            await _db.ExecuteAsync(sql, new { khdv.MaKhachHang, khdv.MaChiTietDichVu, khdv.SoLuong, Id = id }); // Sử dụng DTO
+            await _db.ExecuteAsync(sql, new { khdv.MaKhachHang, khdv.MaDichVu, khdv.SoLuong, Id = id }); // Sử dụng DTO
             return Ok(khdv);
         }
 

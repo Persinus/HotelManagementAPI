@@ -29,6 +29,8 @@ public partial class PhongWithTienNghi
 
     public string? TienNghi { get; set; }
 
+    public double? SoSaoTrungBinh { get; set; }
+
     public virtual ICollection<DatPhong> DatPhongs { get; set; } = new List<DatPhong>();
 
     public virtual ICollection<UserFeedback> UserFeedbacks { get; set; } = new List<UserFeedback>();

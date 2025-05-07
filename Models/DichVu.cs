@@ -5,7 +5,7 @@ namespace HotelManagementAPI.Models;
 
 public partial class DichVu
 {
-    public string MaChiTietDichVu { get; set; } = null!;
+    public string MaDichVu { get; set; } = null!;
 
     public string TenDichVu { get; set; } = null!;
 
@@ -14,6 +14,8 @@ public partial class DichVu
     public string? MoTaDichVu { get; set; }
 
     public string? UrlAnh { get; set; }
+
+    public int TrangThai { get; set; }
 
     public virtual ICollection<HoaDonThanhToanDichVu> HoaDonThanhToanDichVus { get; set; } = new List<HoaDonThanhToanDichVu>();
 
