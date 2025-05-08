@@ -58,27 +58,27 @@ builder.Services.AddSwaggerGen(options =>
         new string[] {}
     }
 });
+    // Removed InjectJavascript from SwaggerGenOptions as it is not valid here
 });
 
 builder.Services.AddControllers();
 
 // Cấu hình Authentication
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-
-})
-.AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new TokenValidationParameters
+builder.Services.AddAuthentication("Bearer")
+    .AddJwtBearer("Bearer", options =>
     {
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("your_secret_key_here")),
-        ValidateIssuer = false,
-        ValidateAudience = false
-    };
-});
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = "your-issuer",
+            ValidAudience = "your-audience",
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your_super_secret_key_1234567890"))
+        };
+    });
+
 
 var app = builder.Build();
 app.UseStaticFiles();
@@ -93,6 +93,7 @@ if (enableSwagger)
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Hotel Management API V1");
         c.RoutePrefix = string.Empty; // Đặt Swagger UI ở root URL
         c.DocumentTitle = "Hotel Management API Documentation";
+        c.InjectJavascript("/swagger-login.js"); // Correctly inject JavaScript in SwaggerUIOptions
         c.InjectStylesheet("/swagger-custom.css");
     });
 }
@@ -100,13 +101,8 @@ if (enableSwagger)
 app.UseCors("AllowAllOrigins"); // Áp dụng chính sách CORS đã cấu hình
 
 // Sử dụng Authentication và Authorization nếu cần
-var useAuth = builder.Configuration.GetValue<bool>("UseAuthentication");
-if (useAuth)
-{
-    app.UseAuthentication();
-    app.UseAuthorization();
-}
-
+app.UseAuthentication();
+app.UseAuthorization();
 
 // Định tuyến các controller
 app.MapControllers();
