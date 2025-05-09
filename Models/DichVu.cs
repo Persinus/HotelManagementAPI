@@ -13,11 +13,15 @@ public partial class DichVu
 
     public string? MoTaDichVu { get; set; }
 
-    public string? UrlAnh { get; set; }
+    public string HinhAnhDichVu { get; set; } = null!;
+
+    public int SoLuong { get; set; }
 
     public int TrangThai { get; set; }
 
-    public virtual ICollection<HoaDonThanhToanDichVu> HoaDonThanhToanDichVus { get; set; } = new List<HoaDonThanhToanDichVu>();
+    public string LoaiDichVu { get; set; } = null!;
 
-    public virtual ICollection<KhachHangDichVu> KhachHangDichVus { get; set; } = new List<KhachHangDichVu>();
+    public string DonViTinh { get; set; } = null!;
+
+    public virtual ICollection<DatDichVu> DatDichVus { get; set; } = new List<DatDichVu>();
 }
