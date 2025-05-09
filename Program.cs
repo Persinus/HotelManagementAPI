@@ -63,22 +63,32 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddControllers();
 
-// Cấu hình Authentication
+// Cấu hình JWT
 builder.Services.AddAuthentication("Bearer")
-    .AddJwtBearer("Bearer", options =>
+    .AddJwtBearer(options =>
     {
-        options.TokenValidationParameters = new TokenValidationParameters
+        var secretKey = builder.Configuration["Jwt:SecretKey"] ?? throw new InvalidOperationException("Jwt:SecretKey is not configured.");
+        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
         {
             ValidateIssuer = true,
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = "your-issuer",
-            ValidAudience = "your-audience",
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your_super_secret_key_1234567890"))
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(
+                System.Text.Encoding.UTF8.GetBytes(secretKey)
+            )
         };
     });
 
+// Cấu hình phân quyền
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Quản trị viên", policy => policy.RequireRole("QuanTriVien"));
+    options.AddPolicy("Nhân viên", policy => policy.RequireRole("NhanVien"));
+    options.AddPolicy("Khách hàng", policy => policy.RequireRole("KhachHang"));
+});
 
 var app = builder.Build();
 app.UseStaticFiles();
@@ -100,9 +110,10 @@ if (enableSwagger)
 
 app.UseCors("AllowAllOrigins"); // Áp dụng chính sách CORS đã cấu hình
 
-// Sử dụng Authentication và Authorization nếu cần
+// Thêm middleware xác thực và phân quyền
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseMiddleware<RoleMiddleware>();
 
 // Định tuyến các controller
 app.MapControllers();
