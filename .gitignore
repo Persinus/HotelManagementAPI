@@ -34,3 +34,10 @@ Properties/PublishProfiles/
 *.log
 *.db
 *.v2
+
+# Bỏ qua các thư mục build
+bin/
+obj/
+.vscode/
+*.user
+*.suo
