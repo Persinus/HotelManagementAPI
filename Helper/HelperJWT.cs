@@ -2,28 +2,38 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using HotelManagementAPI.Models; // Added namespace for NguoiDung
 
 namespace HotelManagementAPI.Helper
 {
     public static class JwtHelper
     {
-        public static string GenerateJwtToken(NguoiDungDTO nguoiDung, string secretKey, string issuer, string audience)
+        public static string GenerateJwtToken(NguoiDung nguoiDung, string secretKey, string issuer, string audience)
         {
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, nguoiDung.MaNguoiDung),
-                new Claim(ClaimTypes.Email, nguoiDung.Email),
-                new Claim("VaiTro", nguoiDung.Vaitro) // Thêm claim VaiTro
+                new Claim(JwtRegisteredClaimNames.Sub, nguoiDung.MaNguoiDung.ToString()),
+                new Claim("Vaitro", nguoiDung.Vaitro), // Đảm bảo claim "Vaitro" được thêm
+                new Claim(JwtRegisteredClaimNames.Email, nguoiDung.Email),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
+            // Ghi log các claims khi tạo token
+            Console.WriteLine("Claims khi tạo JWT token:");
+            foreach (var claim in claims)
+            {
+                Console.WriteLine($"Claim Type: {claim.Type}, Claim Value: {claim.Value}");
+            }
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
             var token = new JwtSecurityToken(
-                issuer: "your-issuer",
-                audience: "your-audience",
+                issuer: issuer,
+                audience: audience,
                 claims: claims,
-                expires: DateTime.UtcNow.AddHours(1),
-                signingCredentials: new SigningCredentials(
-                    new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your_super_secret_key_1234567890")),
-                    SecurityAlgorithms.HmacSha256)
+                expires: DateTime.Now.AddHours(1),
+                signingCredentials: creds
             );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
