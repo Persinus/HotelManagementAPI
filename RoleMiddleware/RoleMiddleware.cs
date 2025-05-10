@@ -15,7 +15,7 @@ public class RoleMiddleware
 
     public async Task InvokeAsync(HttpContext context)
     {
-        // Bỏ qua middleware nếu endpoint được đánh dấu [AllowAnonymous]
+        // Bỏ qua kiểm tra nếu endpoint cho phép truy cập ẩn danh
         var endpoint = context.GetEndpoint();
         if (endpoint?.Metadata?.GetMetadata<AllowAnonymousAttribute>() != null)
         {
@@ -23,50 +23,38 @@ public class RoleMiddleware
             return;
         }
 
-        // Kiểm tra xem token có được gửi trong header Authorization hay không
-        var authHeader = context.Request.Headers["Authorization"].FirstOrDefault();
-        if (string.IsNullOrEmpty(authHeader) || !authHeader.StartsWith("Bearer "))
-        {
-            Console.WriteLine("Không tìm thấy token trong header Authorization.");
-            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-            await context.Response.WriteAsync("Token không được cung cấp.");
-            return;
-        }
-
-        // Kiểm tra xem user đã được xác thực chưa (token có hợp lệ không)
-        if (context.User?.Identity == null || !context.User.Identity.IsAuthenticated)
-        {
-            Console.WriteLine("Người dùng chưa được xác thực.");
-            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-            await context.Response.WriteAsync("Người dùng chưa được xác thực.");
-            return;
-        }
-
-        // Lấy vai trò từ claims
+        // Lấy thông tin vai trò từ token
         var userRole = context.User.Claims.FirstOrDefault(c => c.Type == "Vaitro")?.Value;
 
-        // Kiểm tra xem có vai trò không
+        // Kiểm tra nếu người dùng chưa đăng nhập
         if (string.IsNullOrEmpty(userRole))
         {
-            Console.WriteLine("Không tìm thấy vai trò người dùng (userRole is null or empty).");
-            context.Response.StatusCode = StatusCodes.Status403Forbidden;
-            await context.Response.WriteAsync("Không tìm thấy vai trò người dùng.");
+            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+            await context.Response.WriteAsync("Bạn cần đăng nhập để truy cập tài nguyên này.");
             return;
         }
 
-        // Ghi log thông tin người dùng
-        Console.WriteLine($"User authenticated. Role: {userRole}");
-
-        // Phân quyền dựa trên vai trò
-        if (context.Request.Path.StartsWithSegments("/api/quantri") && userRole != "QuanTriVien")
+        // Phân quyền dựa trên đường dẫn
+        if (context.Request.Path.StartsWithSegments("/api/quantrivien") && userRole != "QuanTriVien")
         {
-            Console.WriteLine("Người dùng không có quyền truy cập vào tài nguyên này.");
+            context.Response.StatusCode = StatusCodes.Status403Forbidden;
+            await context.Response.WriteAsync("Bạn không có quyền truy cập vào tài nguyên này.");
+            return;
+        }
+        else if (context.Request.Path.StartsWithSegments("/api/nhanvien") && userRole != "NhanVien" && userRole != "QuanTriVien")
+        {
+            context.Response.StatusCode = StatusCodes.Status403Forbidden;
+            await context.Response.WriteAsync("Bạn không có quyền truy cập vào tài nguyên này.");
+            return;
+        }
+        else if (context.Request.Path.StartsWithSegments("/api/khachhang") && userRole != "KhachHang" && userRole != "NhanVien" && userRole != "QuanTriVien")
+        {
             context.Response.StatusCode = StatusCodes.Status403Forbidden;
             await context.Response.WriteAsync("Bạn không có quyền truy cập vào tài nguyên này.");
             return;
         }
 
-        // Tiếp tục xử lý request
+        // Nếu không có vấn đề gì, tiếp tục xử lý request
         await _next(context);
     }
 }
