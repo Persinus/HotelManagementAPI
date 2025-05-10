@@ -155,6 +155,7 @@ namespace HotelManagementAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<PhongDTOs>> GetById(string id)
         {
+            // Lấy thông tin phòng
             const string roomQuery = @"
                 SELECT p.MaPhong, p.LoaiPhong, p.GiaPhong, p.TinhTrang, p.SoLuongPhong, p.Tang, 
                        p.KieuGiuong, p.MoTa, p.UrlAnhChinh, p.MotaPhong, p.SucChua, p.SoGiuong, 
