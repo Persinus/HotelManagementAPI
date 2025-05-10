@@ -51,3 +51,7 @@ hoa don
   "tenTaiKhoan": "admin",
   "matKhau": "matkhau_ma_hoa"
 }
+{
+  "tenTaiKhoan": "khachhang01",
+  "matKhau": "password123"
+}

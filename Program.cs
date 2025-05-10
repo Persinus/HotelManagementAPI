@@ -73,25 +73,49 @@ builder.Services.AddAuthentication("Bearer")
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = "your-issuer",
-            ValidAudience = "your-audience",
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your_super_secret_key_1234567890"))
+            ValidateIssuer = true, // Kiểm tra Issuer
+            ValidateAudience = true, // Kiểm tra Audience
+            ValidateLifetime = true, // Kiểm tra thời gian sống của token
+            ValidateIssuerSigningKey = true, // Kiểm tra chữ ký của token
+            ValidIssuer = "your-issuer", // Thay thế với Issuer của bạn
+            ValidAudience = "your-audience", // Thay thế với Audience của bạn
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes("your_super_secret_key_1234567890") // Khóa bí mật của bạn
+            ),
+            NameClaimType = "sub", // Chỉ định claim `sub` làm `Name`
+            RoleClaimType = "Vaitro" // Chỉ định claim `Vaitro` làm `Role`
+        };
+
+        // Đảm bảo rằng Bearer token được truyền vào
+        options.Events = new JwtBearerEvents
+        {
+            OnChallenge = context =>
+            {
+                // Kiểm tra xem token có trong header Authorization không
+                if (!context.Request.Headers.ContainsKey("Authorization"))
+                {
+                    context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                    context.Response.ContentType = "application/json";
+                    return Task.CompletedTask;
+                }
+
+                return Task.CompletedTask;
+            }
         };
     });
 
-// Cấu hình phân quyền
+
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("Quản trị viên", policy =>
-        policy.RequireClaim("VaiTro", "QuanTriVien"));
-    options.AddPolicy("Nhân viên", policy => policy.RequireRole("NhanVien"));
-    options.AddPolicy("Khách hàng", policy => policy.RequireRole("KhachHang"));
-});
+    options.AddPolicy("QuanTriVienPolicy", policy =>
+        policy.RequireClaim("Vaitro", "QuanTriVien"));
 
+    options.AddPolicy("NhanVienPolicy", policy =>
+        policy.RequireClaim("Vaitro", "NhanVien", "QuanTriVien"));
+
+    options.AddPolicy("KhachHangPolicy", policy =>
+        policy.RequireClaim("Vaitro", "KhachHang", "QuanTriVien"));
+});
 
 var app = builder.Build();
 app.UseStaticFiles();
@@ -117,8 +141,8 @@ app.UseCors("AllowAllOrigins"); // Áp dụng chính sách CORS đã cấu hình
 
 
 // Thêm middleware xác thực và phân quyền
-app.UseMiddleware<RoleMiddleware>();
 app.UseAuthentication();
+app.UseMiddleware<RoleMiddleware>();
 app.UseAuthorization();
 
 
