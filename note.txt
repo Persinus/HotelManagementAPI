@@ -31,3 +31,17 @@ hoa don
 ---huy
 
 
+{
+     "VaiTro":"KhachHang",
+     "MaNguoiDung":"ND201",
+    "Email": "khachhang@example.com",
+    "TenTaiKhoan": "khachhang01",
+    "MatKhau": "password123",
+    "HoTen": "Nguyen Van A",
+    "CanCuocCongDan": "123456789012",
+    "SoDienThoai": "0123456789",
+    "DiaChi": "123 Nguyen Trai, Ha Noi",
+    "NgaySinh": "1990-01-01",
+    "GioiTinh": "Nam",
+    "HinhAnhUrl": "https://example.com/avatar.jpg"
+}

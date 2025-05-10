@@ -61,26 +61,36 @@ builder.Services.AddSwaggerGen(options =>
         new string[] {}
     }
 });
+    // Removed InjectJavascript from SwaggerGenOptions as it is not valid here
 });
 
 builder.Services.AddControllers();
 
-// Cấu hình Authentication
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-
-})
-.AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new TokenValidationParameters
+// Cấu hình JWT
+builder.Services.AddAuthentication("Bearer")
+    .AddJwtBearer(options =>
     {
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("your_secret_key_here")),
-        ValidateIssuer = false,
-        ValidateAudience = false
-    };
+        var secretKey = builder.Configuration["Jwt:SecretKey"] ?? throw new InvalidOperationException("Jwt:SecretKey is not configured.");
+        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(
+                System.Text.Encoding.UTF8.GetBytes(secretKey)
+            )
+        };
+    });
+
+// Cấu hình phân quyền
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Quản trị viên", policy => policy.RequireRole("QuanTriVien"));
+    options.AddPolicy("Nhân viên", policy => policy.RequireRole("NhanVien"));
+    options.AddPolicy("Khách hàng", policy => policy.RequireRole("KhachHang"));
 });
 
 
@@ -97,6 +107,7 @@ if (enableSwagger)
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Hotel Management API V1");
         c.RoutePrefix = string.Empty; // Đặt Swagger UI ở root URL
         c.DocumentTitle = "Hotel Management API Documentation";
+        c.InjectJavascript("/swagger-login.js"); // Correctly inject JavaScript in SwaggerUIOptions
         c.InjectStylesheet("/swagger-custom.css");
     });
 }
@@ -104,13 +115,13 @@ if (enableSwagger)
 
 app.UseCors("AllowAllOrigins"); // Áp dụng chính sách CORS đã cấu hình
 
-// Sử dụng Authentication và Authorization nếu cần
-var useAuth = builder.Configuration.GetValue<bool>("UseAuthentication");
-if (useAuth)
-{
-    app.UseAuthentication();
-    app.UseAuthorization();
-}
+
+
+// Thêm middleware xác thực và phân quyền
+app.UseAuthentication();
+app.UseAuthorization();
+app.UseMiddleware<RoleMiddleware>();
+
 
 // Định tuyến các controller
 app.MapControllers();
