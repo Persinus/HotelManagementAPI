@@ -11,21 +11,19 @@ namespace HotelManagementAPI.Helper
         {
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, nguoiDung.MaNguoiDung),
-                new Claim("VaiTro", nguoiDung.Vaitro),
-                new Claim(JwtRegisteredClaimNames.Email, nguoiDung.Email),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                new Claim(ClaimTypes.NameIdentifier, nguoiDung.MaNguoiDung),
+                new Claim(ClaimTypes.Email, nguoiDung.Email),
+                new Claim("VaiTro", nguoiDung.Vaitro) // Thêm claim VaiTro
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
             var token = new JwtSecurityToken(
-                issuer: issuer,
-                audience: audience,
+                issuer: "your-issuer",
+                audience: "your-audience",
                 claims: claims,
-                expires: DateTime.Now.AddHours(1),
-                signingCredentials: creds
+                expires: DateTime.UtcNow.AddHours(1),
+                signingCredentials: new SigningCredentials(
+                    new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your_super_secret_key_1234567890")),
+                    SecurityAlgorithms.HmacSha256)
             );
 
             return new JwtSecurityTokenHandler().WriteToken(token);

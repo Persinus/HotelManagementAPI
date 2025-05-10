@@ -86,7 +86,7 @@ public class NguoiDungDTO
 namespace HotelManagementAPI.Controllers
 {
     [ApiController]
-    [Route("api/nguoidung")]
+    [Route("api/admin/nguoidung")]
     public class NguoiDungController : ControllerBase
     {
         private readonly IDbConnection _db;
@@ -96,13 +96,6 @@ namespace HotelManagementAPI.Controllers
             _db = db;
         }
 
-        /// <summary>
-        /// Lấy danh sách tất cả người dùng.
-        /// </summary>
-        /// <remarks>
-        /// **Quyền**: Chỉ dành cho Quản trị viên.
-        /// </remarks>
-        /// <returns>Danh sách người dùng.</returns>
         [HttpGet]
         [Authorize(Policy = "Quản trị viên")]
         public async Task<ActionResult<IEnumerable<NguoiDungDTO>>> GetAll()
@@ -112,14 +105,6 @@ namespace HotelManagementAPI.Controllers
             return Ok(users);
         }
 
-        /// <summary>
-        /// Lấy thông tin chi tiết của một người dùng.
-        /// </summary>
-        /// <remarks>
-        /// **Quyền**: Chỉ dành cho Quản trị viên.
-        /// </remarks>
-        /// <param name="id">Mã người dùng.</param>
-        /// <returns>Thông tin người dùng.</returns>
         [HttpGet("{id}")]
         [Authorize(Policy = "Quản trị viên")]
         public async Task<ActionResult<NguoiDungDTO>> GetById(string id)
@@ -133,14 +118,6 @@ namespace HotelManagementAPI.Controllers
             return Ok(user);
         }
 
-        /// <summary>
-        /// Tạo mới một người dùng.
-        /// </summary>
-        /// <remarks>
-        /// **Quyền**: Chỉ dành cho Quản trị viên.
-        /// </remarks>
-        /// <param name="nguoiDung">Thông tin người dùng cần tạo.</param>
-        /// <returns>Người dùng vừa được tạo.</returns>
         [HttpPost]
         [Authorize(Policy = "Quản trị viên")]
         public async Task<ActionResult<NguoiDungDTO>> Create([FromBody] NguoiDungDTO nguoiDung)
@@ -247,58 +224,6 @@ namespace HotelManagementAPI.Controllers
             return CreatedAtAction(nameof(GetById), new { id = nguoiDung.MaNguoiDung }, nguoiDung);
         }
 
-        [HttpPost("dangnhap")]
-        [AllowAnonymous]
-        public async Task<IActionResult> DangNhap([FromBody] DangNhapDTO dangNhap)
-        {
-            const string query = "SELECT * FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan AND MatKhau = @MatKhau";
-            var nguoiDung = await _db.QueryFirstOrDefaultAsync<NguoiDungDTO>(query, new { dangNhap.TenTaiKhoan, dangNhap.MatKhau });
-
-            if (nguoiDung == null)
-                return Unauthorized(new { Message = "Tên tài khoản hoặc mật khẩu không đúng." });
-
-            // Sử dụng JwtHelper để tạo token
-            var token = JwtHelper.GenerateJwtToken(
-                nguoiDung,
-                "your_super_secret_key_1234567890", // Secret Key
-                "your-issuer",                     // Issuer
-                "your-audience"                    // Audience
-            );
-
-            // Trả về token trong kết quả JSON
-            return Ok(new
-            {
-                Message = "Đăng nhập thành công.",
-                Token = token,
-                User = new
-                {
-                    nguoiDung.MaNguoiDung,
-                    nguoiDung.Vaitro,
-                    nguoiDung.Email,
-                    nguoiDung.TenTaiKhoan,
-                    nguoiDung.HoTen
-                }
-            });
-        }
-
-       
-
-        [HttpPost("dangky-quantrivien")]
-        [Authorize(Policy = "Quản trị viên")] // Chỉ dành cho quản trị viên
-        public async Task<ActionResult<NguoiDungDTO>> DangKyQuanTriVien([FromBody] NguoiDungDTO nguoiDung)
-        {
-            // Gán vai trò mặc định là "QuanTriVien"
-            nguoiDung.Vaitro = "QuanTriVien";
-            nguoiDung.NgayTao = DateTime.Now;
-
-            const string query = @"
-                INSERT INTO NguoiDung (MaNguoiDung, Vaitro, Email, TenTaiKhoan, MatKhau, HoTen, SoDienThoai, DiaChi, NgaySinh, GioiTinh, HinhAnhUrl, NgayTao)
-                VALUES (@MaNguoiDung, @Vaitro, @Email, @TenTaiKhoan, @MatKhau, @HoTen, @SoDienThoai, @DiaChi, @NgaySinh, @GioiTinh, @HinhAnhUrl, @NgayTao)";
-            await _db.ExecuteAsync(query, nguoiDung);
-
-            return CreatedAtAction(nameof(GetById), new { id = nguoiDung.MaNguoiDung }, nguoiDung);
-        }
-
         [HttpPut("update-profile/{id}")]
         [Authorize] // Yêu cầu người dùng phải đăng nhập
         public async Task<IActionResult> UpdateProfile(string id, [FromBody] NguoiDungDTO nguoiDung)
@@ -332,8 +257,7 @@ namespace HotelManagementAPI.Controllers
     }
 
     [ApiController]
-    [Route("api/nhanvien")]
-    [Authorize(Policy = "Quản trị viên")]
+    [Route("api/admin/nhanvien")]
     public class NhanVienController : ControllerBase
     {
         private readonly IDbConnection _db;
@@ -344,6 +268,7 @@ namespace HotelManagementAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "Quản trị viên")]
         public async Task<ActionResult<IEnumerable<NhanVienDTO>>> GetAll()
         {
             const string query = "SELECT * FROM NhanVien";
@@ -352,6 +277,7 @@ namespace HotelManagementAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Policy = "Quản trị viên")]
         public async Task<ActionResult<NhanVienDTO>> GetById(string id)
         {
             const string query = "SELECT * FROM NhanVien WHERE MaNhanVien = @Id";
@@ -429,6 +355,65 @@ namespace HotelManagementAPI.Controllers
             await _db.ExecuteAsync(insertNhanVienQuery, nhanVien);
 
             return CreatedAtAction(nameof(GetById), new { id = nhanVien.MaNhanVien }, nhanVien);
+        }
+    }
+
+    [ApiController]
+    [Route("api/auth")]
+    public class AuthController : ControllerBase
+    {
+        private readonly IDbConnection _db;
+
+        public AuthController(IDbConnection db)
+        {
+            _db = db;
+        }
+
+        [HttpPost("dangnhap")]
+        [AllowAnonymous]
+        public async Task<IActionResult> DangNhap([FromBody] DangNhapDTO dangNhap)
+        {
+            const string query = "SELECT * FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan AND MatKhau = @MatKhau";
+            var nguoiDung = await _db.QueryFirstOrDefaultAsync<NguoiDungDTO>(query, new { dangNhap.TenTaiKhoan, dangNhap.MatKhau });
+
+            if (nguoiDung == null)
+                return Unauthorized(new { Message = "Tên tài khoản hoặc mật khẩu không đúng." });
+
+            var token = JwtHelper.GenerateJwtToken(
+                nguoiDung,
+                "your_super_secret_key_1234567890",
+                "your-issuer",
+                "your-audience"
+            );
+
+            return Ok(new
+            {
+                Message = "Đăng nhập thành công.",
+                Token = token,
+                User = new
+                {
+                    nguoiDung.MaNguoiDung,
+                    nguoiDung.Vaitro,
+                    nguoiDung.Email,
+                    nguoiDung.TenTaiKhoan,
+                    nguoiDung.HoTen
+                }
+            });
+        }
+
+        [HttpPost("dangky")]
+        [AllowAnonymous]
+        public async Task<ActionResult<NguoiDungDTO>> DangKy([FromBody] NguoiDungDTO nguoiDung)
+        {
+            nguoiDung.Vaitro = "KhachHang";
+            nguoiDung.NgayTao = DateTime.Now;
+
+            const string query = @"
+                INSERT INTO NguoiDung (MaNguoiDung, Vaitro, Email, TenTaiKhoan, MatKhau, HoTen, SoDienThoai, DiaChi, NgaySinh, GioiTinh, HinhAnhUrl, NgayTao)
+                VALUES (@MaNguoiDung, @Vaitro, @Email, @TenTaiKhoan, @MatKhau, @HoTen, @SoDienThoai, @DiaChi, @NgaySinh, @GioiTinh, @HinhAnhUrl, @NgayTao)";
+            await _db.ExecuteAsync(query, nguoiDung);
+
+            return CreatedAtAction(nameof(DangNhap), new { id = nguoiDung.MaNguoiDung }, nguoiDung);
         }
     }
 }

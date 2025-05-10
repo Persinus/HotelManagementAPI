@@ -14,6 +14,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 // Đăng ký IDbConnection với DI
 builder.Services.AddScoped<IDbConnection>(sp => new SqlConnection(connectionString));
 
+builder.Logging.AddConsole();
 
 // Cấu hình CORS
 builder.Services.AddCors(options =>
@@ -70,25 +71,23 @@ builder.Services.AddControllers();
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer(options =>
     {
-        var secretKey = builder.Configuration["Jwt:SecretKey"] ?? throw new InvalidOperationException("Jwt:SecretKey is not configured.");
-        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+        options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = builder.Configuration["Jwt:Issuer"],
-            ValidAudience = builder.Configuration["Jwt:Audience"],
-            IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(
-                System.Text.Encoding.UTF8.GetBytes(secretKey)
-            )
+            ValidIssuer = "your-issuer",
+            ValidAudience = "your-audience",
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your_super_secret_key_1234567890"))
         };
     });
 
 // Cấu hình phân quyền
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("Quản trị viên", policy => policy.RequireRole("QuanTriVien"));
+    options.AddPolicy("Quản trị viên", policy =>
+        policy.RequireClaim("VaiTro", "QuanTriVien"));
     options.AddPolicy("Nhân viên", policy => policy.RequireRole("NhanVien"));
     options.AddPolicy("Khách hàng", policy => policy.RequireRole("KhachHang"));
 });
@@ -118,9 +117,10 @@ app.UseCors("AllowAllOrigins"); // Áp dụng chính sách CORS đã cấu hình
 
 
 // Thêm middleware xác thực và phân quyền
+app.UseMiddleware<RoleMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseMiddleware<RoleMiddleware>();
+
 
 
 // Định tuyến các controller

@@ -16,15 +16,8 @@ public class RoleMiddleware
         // Lấy vai trò từ JWT token
         var userRole = context.User.Claims.FirstOrDefault(c => c.Type == "VaiTro")?.Value;
 
-        // Kiểm tra quyền truy cập dựa trên vai trò
-        if (context.Request.Path.StartsWithSegments("/api/quantri") && userRole != "QuanTriVien")
-        {
-            context.Response.StatusCode = StatusCodes.Status403Forbidden;
-            await context.Response.WriteAsync("Bạn không có quyền truy cập vào tài nguyên này.");
-            return;
-        }
-
-        if (context.Request.Path.StartsWithSegments("/api/nhanvien") && userRole != "NhanVien" && userRole != "QuanTriVien")
+        // Kiểm tra quyền truy cập cho các API quản trị viên
+        if (context.Request.Path.StartsWithSegments("/api/admin") && userRole != "QuanTriVien")
         {
             context.Response.StatusCode = StatusCodes.Status403Forbidden;
             await context.Response.WriteAsync("Bạn không có quyền truy cập vào tài nguyên này.");

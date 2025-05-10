@@ -5,6 +5,7 @@ using Dapper;
 using Microsoft.AspNetCore.Mvc;
 using HotelManagementAPI.Models;
 using HotelManagementAPI.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 
 // Ensure the namespace containing PhongDTOs is imported
@@ -437,6 +438,37 @@ namespace HotelManagementAPI.Controllers
             
             var result = await _db.QueryAsync<PhongDTOs>(query);
             return Ok(result);
+        }
+
+        /// <summary>
+        /// Lấy danh sách tất cả phòng với tiện nghi.
+        /// </summary>
+        /// <remarks>
+        /// **Mô tả**: API này trả về danh sách tất cả phòng và tiện nghi có trong hệ thống.
+        /// **Trạng thái**:
+        /// - 0: Thành công, trả về danh sách phòng.
+        /// - 1: Lỗi máy chủ.
+        /// </remarks>
+        /// <returns>Danh sách phòng.</returns>
+        [HttpGet("danhsach")]
+        [AllowAnonymous]
+        public async Task<ActionResult<IEnumerable<object>>> GetAllRoomsWithAmenities()
+        {
+            try
+            {
+                const string query = @"
+                    SELECT p.MaPhong, p.TenPhong, p.LoaiPhong, p.GiaPhong, t.TenTienNghi
+                    FROM Phong p
+                    LEFT JOIN PhongTienNghi pt ON p.MaPhong = pt.MaPhong
+                    LEFT JOIN TienNghi t ON pt.MaTienNghi = t.MaTienNghi";
+
+                var rooms = await _db.QueryAsync(query);
+                return Ok(new { Status = 0, Data = rooms });
+            }
+            catch
+            {
+                return StatusCode(500, new { Status = 1, Message = "Lỗi máy chủ." });
+            }
         }
     }
 }

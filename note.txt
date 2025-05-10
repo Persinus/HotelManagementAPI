@@ -45,3 +45,9 @@ hoa don
     "GioiTinh": "Nam",
     "HinhAnhUrl": "https://example.com/avatar.jpg"
 }
+
+
+{
+  "tenTaiKhoan": "admin",
+  "matKhau": "matkhau_ma_hoa"
+}
