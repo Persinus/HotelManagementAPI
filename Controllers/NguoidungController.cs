@@ -9,79 +9,9 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using HotelManagementAPI.Helper;
+using HotelManagementAPI.DTOs;
 
-public class DangNhapDTO
-{
-    public string TenTaiKhoan { get; set; }
-    public string MatKhau { get; set; }
-}
 
-public class LichSuGiaoDichDTO
-{
-    public string MaGiaoDich { get; set; }
-    public string MaNguoiDung { get; set; }
-    public string LoaiGiaoDich { get; set; }
-    public DateTime? ThoiGianGiaoDich { get; set; }
-    public string? MoTa { get; set; }
-}
-
-public class HoaDonDTO
-{
-    public string MaHoaDon { get; set; }
-    public string MaNguoiDung { get; set; }
-    public string MaDatPhong { get; set; }
-    public decimal TongTien { get; set; }
-    public DateTime? NgayTaoHoaDon { get; set; }
-    public DateTime? NgayThanhToan { get; set; }
-    public string TinhTrangHoaDon { get; set; }
-}
-
-public class DatPhongDTO
-{
-    public string MaDatPhong { get; set; }
-    public string MaNguoiDung { get; set; }
-    public string MaPhong { get; set; }
-    public DateTime? NgayDat { get; set; }
-    public DateTime? NgayCheckIn { get; set; }
-    public DateTime? NgayCheckOut { get; set; }
-    public string TinhTrangDatPhong { get; set; }
-}
-
-public class NhanVienDTO
-{
-    public string MaNhanVien { get; set; } // Tự động tạo
-    public string MaNguoiDung { get; set; } // Tự động tạo
-    public string ChucVu { get; set; } // Bắt buộc
-    public decimal Luong { get; set; } // Bắt buộc
-    public DateTime? NgayVaoLam { get; set; } // Bắt buộc
-    public string? CaLamViec { get; set; } // Tùy chọn
-    public string Email { get; set; } // Bắt buộc
-    public string TenTaiKhoan { get; set; } // Bắt buộc
-    public string MatKhau { get; set; } // Bắt buộc
-    public string? HoTen { get; set; } // Tùy chọn
-    public string? SoDienThoai { get; set; } // Tùy chọn
-    public string? DiaChi { get; set; } // Tùy chọn
-    public DateTime? NgaySinh { get; set; } // Tùy chọn
-    public string? GioiTinh { get; set; } // Tùy chọn
-    public string? HinhAnhUrl { get; set; } // Tùy chọn
-}
-
-public class NguoiDungDTO
-{
-    public string MaNguoiDung { get; set; } // Tự động tạo
-    public string Vaitro { get; set; } // Tự động gán
-    public string Email { get; set; } // Bắt buộc
-    public string TenTaiKhoan { get; set; } // Bắt buộc
-    public string MatKhau { get; set; } // Bắt buộc
-    public string? HoTen { get; set; } // Tùy chọn
-    public string? SoDienThoai { get; set; } // Tùy chọn
-    public string? DiaChi { get; set; } // Tùy chọn
-    public DateTime? NgaySinh { get; set; } // Tùy chọn
-    public string? GioiTinh { get; set; } // Tùy chọn
-    public string? HinhAnhUrl { get; set; } // Tùy chọn
-    public DateTime? NgayTao { get; set; } // Tự động gán
-    public string? CanCuocCongDan { get; set; } // Tùy chọn
-}
 
 namespace HotelManagementAPI.Controllers
 {
@@ -96,13 +26,36 @@ namespace HotelManagementAPI.Controllers
             _db = db;
         }
 
+        /// <summary>
+        /// Lấy danh sách tất cả người dùng.
+        /// </summary>
         [HttpGet]
-        [Authorize(Policy = "Quản trị viên")]
+        [Authorize(Policy = "QuanTriVienPolicy")]
         public async Task<ActionResult<IEnumerable<NguoiDungDTO>>> GetAll()
         {
             const string query = "SELECT * FROM NguoiDung";
             var users = await _db.QueryAsync<NguoiDungDTO>(query);
             return Ok(users);
+        }
+
+        // Chỉ Nhân viên hoặc Quản trị viên mới có quyền truy cập
+        [HttpGet("nhanvien")]
+        [Authorize(Policy = "NhanVienPolicy")]
+        public async Task<ActionResult<IEnumerable<NguoiDungDTO>>> GetAllEmployees()
+        {
+            const string query = "SELECT * FROM NguoiDung WHERE Vaitro = 'NhanVien'";
+            var employees = await _db.QueryAsync<NguoiDungDTO>(query);
+            return Ok(employees);
+        }
+
+        // Chỉ Khách hàng hoặc Quản trị viên mới có quyền truy cập
+        [HttpGet("khachhang")]
+        [Authorize(Policy = "KhachHangPolicy")]
+        public async Task<ActionResult<IEnumerable<NguoiDungDTO>>> GetAllCustomers()
+        {
+            const string query = "SELECT * FROM NguoiDung WHERE Vaitro = 'KhachHang'";
+            var customers = await _db.QueryAsync<NguoiDungDTO>(query);
+            return Ok(customers);
         }
 
         [HttpGet("{id}")]
@@ -141,9 +94,9 @@ namespace HotelManagementAPI.Controllers
         /// <returns>Kết quả cập nhật.</returns>
         [HttpPut("{id}")]
         [Authorize(Policy = "Quản trị viên")]
-        public async Task<IActionResult> Update(string id, [FromBody] NguoiDungDTO nguoiDung)
+        public async Task<IActionResult> Update(int id, [FromBody] NguoiDungDTO nguoiDung)
         {
-            if (id != nguoiDung.MaNguoiDung)
+            if (id.ToString() != nguoiDung.MaNguoiDung)
                 return BadRequest(new { Message = "Mã người dùng không khớp." });
 
             const string query = @"
@@ -158,15 +111,10 @@ namespace HotelManagementAPI.Controllers
         }
 
         /// <summary>
-        /// Xóa một người dùng.
+        /// Xóa người dùng theo mã.
         /// </summary>
-        /// <remarks>
-        /// **Quyền**: Chỉ dành cho Quản trị viên.
-        /// </remarks>
-        /// <param name="id">Mã người dùng cần xóa.</param>
-        /// <returns>Kết quả xóa.</returns>
         [HttpDelete("{id}")]
-        [Authorize(Policy = "Quản trị viên")]
+        [Authorize(Policy = "QuanTriVienPolicy")]
         public async Task<IActionResult> Delete(string id)
         {
             const string query = "DELETE FROM NguoiDung WHERE MaNguoiDung = @Id";
@@ -204,15 +152,17 @@ namespace HotelManagementAPI.Controllers
             }
 
             // Kiểm tra trùng lặp Số CCCD
-            if (!string.IsNullOrEmpty(nguoiDung.CanCuocCongDan))
+            if (!int.TryParse(nguoiDung.CanCuocCongDan?.ToString(), out var canCuocCongDan))
             {
-                const string checkCCCDQuery = "SELECT COUNT(1) FROM NguoiDung WHERE CanCuocCongDan = @CanCuocCongDan";
-                var isCCCDDuplicate = await _db.ExecuteScalarAsync<int>(checkCCCDQuery, new { nguoiDung.CanCuocCongDan });
+                return BadRequest(new { Message = "Căn cước công dân không hợp lệ. Vui lòng nhập lại." });
+            }
 
-                if (isCCCDDuplicate > 0)
-                {
-                    return Conflict(new { Message = "Số CCCD đã tồn tại. Vui lòng kiểm tra lại." });
-                }
+            const string checkCCCDQuery = "SELECT COUNT(1) FROM NguoiDung WHERE CanCuocCongDan = @CanCuocCongDan";
+            var isCCCDDuplicate = await _db.ExecuteScalarAsync<int>(checkCCCDQuery, new { nguoiDung.CanCuocCongDan });
+
+            if (isCCCDDuplicate > 0)
+            {
+                return Conflict(new { Message = "Số CCCD đã tồn tại. Vui lòng kiểm tra lại." });
             }
 
             // Chèn dữ liệu nếu không trùng lặp
@@ -253,6 +203,13 @@ namespace HotelManagementAPI.Controllers
             });
 
             return affected > 0 ? NoContent() : NotFound(new { Message = "Không tìm thấy người dùng." });
+        }
+
+        [HttpGet("protected-resource")]
+        [Authorize(Policy = "QuanTriVienPolicy")]
+        public IActionResult GetProtectedResource()
+        {
+            return Ok("Bạn đã truy cập thành công tài nguyên được bảo vệ.");
         }
     }
 
@@ -359,61 +316,14 @@ namespace HotelManagementAPI.Controllers
     }
 
     [ApiController]
-    [Route("api/auth")]
-    public class AuthController : ControllerBase
+    [Route("api/quantri")]
+    public class QuanTriController : ControllerBase
     {
-        private readonly IDbConnection _db;
-
-        public AuthController(IDbConnection db)
+        [HttpGet]
+        [Authorize(Policy = "QuanTriVienPolicy")]
+        public IActionResult GetAdminResource()
         {
-            _db = db;
-        }
-
-        [HttpPost("dangnhap")]
-        [AllowAnonymous]
-        public async Task<IActionResult> DangNhap([FromBody] DangNhapDTO dangNhap)
-        {
-            const string query = "SELECT * FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan AND MatKhau = @MatKhau";
-            var nguoiDung = await _db.QueryFirstOrDefaultAsync<NguoiDungDTO>(query, new { dangNhap.TenTaiKhoan, dangNhap.MatKhau });
-
-            if (nguoiDung == null)
-                return Unauthorized(new { Message = "Tên tài khoản hoặc mật khẩu không đúng." });
-
-            var token = JwtHelper.GenerateJwtToken(
-                nguoiDung,
-                "your_super_secret_key_1234567890",
-                "your-issuer",
-                "your-audience"
-            );
-
-            return Ok(new
-            {
-                Message = "Đăng nhập thành công.",
-                Token = token,
-                User = new
-                {
-                    nguoiDung.MaNguoiDung,
-                    nguoiDung.Vaitro,
-                    nguoiDung.Email,
-                    nguoiDung.TenTaiKhoan,
-                    nguoiDung.HoTen
-                }
-            });
-        }
-
-        [HttpPost("dangky")]
-        [AllowAnonymous]
-        public async Task<ActionResult<NguoiDungDTO>> DangKy([FromBody] NguoiDungDTO nguoiDung)
-        {
-            nguoiDung.Vaitro = "KhachHang";
-            nguoiDung.NgayTao = DateTime.Now;
-
-            const string query = @"
-                INSERT INTO NguoiDung (MaNguoiDung, Vaitro, Email, TenTaiKhoan, MatKhau, HoTen, SoDienThoai, DiaChi, NgaySinh, GioiTinh, HinhAnhUrl, NgayTao)
-                VALUES (@MaNguoiDung, @Vaitro, @Email, @TenTaiKhoan, @MatKhau, @HoTen, @SoDienThoai, @DiaChi, @NgaySinh, @GioiTinh, @HinhAnhUrl, @NgayTao)";
-            await _db.ExecuteAsync(query, nguoiDung);
-
-            return CreatedAtAction(nameof(DangNhap), new { id = nguoiDung.MaNguoiDung }, nguoiDung);
+            return Ok("Bạn đã truy cập thành công tài nguyên dành cho quản trị viên.");
         }
     }
 }
