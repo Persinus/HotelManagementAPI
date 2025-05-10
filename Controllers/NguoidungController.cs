@@ -49,37 +49,38 @@ public class DatPhongDTO
 
 public class NhanVienDTO
 {
-    public string MaNhanVien { get; set; }
-    public string MaNguoiDung { get; set; }
-    public string ChucVu { get; set; }
-    public decimal Luong { get; set; }
-    public DateTime? NgayVaoLam { get; set; }
-    public string? CaLamViec { get; set; }
-    public string Email { get; set; }
-    public string TenTaiKhoan { get; set; }
-    public string MatKhau { get; set; }
-    public string HoTen { get; set; }
-    public string SoDienThoai { get; set; }
-    public string DiaChi { get; set; }
-    public DateTime? NgaySinh { get; set; }
-    public string GioiTinh { get; set; }
-    public string HinhAnhUrl { get; set; }
+    public string MaNhanVien { get; set; } // Tự động tạo
+    public string MaNguoiDung { get; set; } // Tự động tạo
+    public string ChucVu { get; set; } // Bắt buộc
+    public decimal Luong { get; set; } // Bắt buộc
+    public DateTime? NgayVaoLam { get; set; } // Bắt buộc
+    public string? CaLamViec { get; set; } // Tùy chọn
+    public string Email { get; set; } // Bắt buộc
+    public string TenTaiKhoan { get; set; } // Bắt buộc
+    public string MatKhau { get; set; } // Bắt buộc
+    public string? HoTen { get; set; } // Tùy chọn
+    public string? SoDienThoai { get; set; } // Tùy chọn
+    public string? DiaChi { get; set; } // Tùy chọn
+    public DateTime? NgaySinh { get; set; } // Tùy chọn
+    public string? GioiTinh { get; set; } // Tùy chọn
+    public string? HinhAnhUrl { get; set; } // Tùy chọn
 }
 
 public class NguoiDungDTO
 {
-    public string MaNguoiDung { get; set; }
-    public string Vaitro { get; set; }
-    public string Email { get; set; }
-    public string? TenTaiKhoan { get; set; }
-    public string? MatKhau { get; set; }
-    public string? HoTen { get; set; }
-    public string? SoDienThoai { get; set; }
-    public string? DiaChi { get; set; }
-    public DateTime? NgaySinh { get; set; }
-    public string? GioiTinh { get; set; }
-    public string? HinhAnhUrl { get; set; }
-    public DateTime? NgayTao { get; set; }
+    public string MaNguoiDung { get; set; } // Tự động tạo
+    public string Vaitro { get; set; } // Tự động gán
+    public string Email { get; set; } // Bắt buộc
+    public string TenTaiKhoan { get; set; } // Bắt buộc
+    public string MatKhau { get; set; } // Bắt buộc
+    public string? HoTen { get; set; } // Tùy chọn
+    public string? SoDienThoai { get; set; } // Tùy chọn
+    public string? DiaChi { get; set; } // Tùy chọn
+    public DateTime? NgaySinh { get; set; } // Tùy chọn
+    public string? GioiTinh { get; set; } // Tùy chọn
+    public string? HinhAnhUrl { get; set; } // Tùy chọn
+    public DateTime? NgayTao { get; set; } // Tự động gán
+    public string? CanCuocCongDan { get; set; } // Tùy chọn
 }
 
 namespace HotelManagementAPI.Controllers
@@ -216,15 +217,6 @@ namespace HotelManagementAPI.Controllers
             // Tự động tạo MaNguoiDung nếu chưa có
             nguoiDung.MaNguoiDung ??= Guid.NewGuid().ToString();
 
-            // Kiểm tra trùng lặp TenTaiKhoan
-            const string checkTenTaiKhoanQuery = "SELECT COUNT(1) FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan";
-            var isTenTaiKhoanDuplicate = await _db.ExecuteScalarAsync<int>(checkTenTaiKhoanQuery, new { nguoiDung.TenTaiKhoan });
-
-            if (isTenTaiKhoanDuplicate > 0)
-            {
-                return Conflict(new { Message = "Tên tài khoản đã tồn tại. Vui lòng chọn tên tài khoản khác." });
-            }
-
             // Kiểm tra trùng lặp Email
             const string checkEmailQuery = "SELECT COUNT(1) FROM NguoiDung WHERE Email = @Email";
             var isEmailDuplicate = await _db.ExecuteScalarAsync<int>(checkEmailQuery, new { nguoiDung.Email });
@@ -234,19 +226,23 @@ namespace HotelManagementAPI.Controllers
                 return Conflict(new { Message = "Email đã tồn tại. Vui lòng sử dụng email khác." });
             }
 
+            // Kiểm tra trùng lặp Số CCCD
+            if (!string.IsNullOrEmpty(nguoiDung.CanCuocCongDan))
+            {
+                const string checkCCCDQuery = "SELECT COUNT(1) FROM NguoiDung WHERE CanCuocCongDan = @CanCuocCongDan";
+                var isCCCDDuplicate = await _db.ExecuteScalarAsync<int>(checkCCCDQuery, new { nguoiDung.CanCuocCongDan });
+
+                if (isCCCDDuplicate > 0)
+                {
+                    return Conflict(new { Message = "Số CCCD đã tồn tại. Vui lòng kiểm tra lại." });
+                }
+            }
+
             // Chèn dữ liệu nếu không trùng lặp
             const string insertQuery = @"
-                INSERT INTO NguoiDung (MaNguoiDung, Vaitro, Email, TenTaiKhoan, MatKhau, NgayTao)
-                VALUES (@MaNguoiDung, @Vaitro, @Email, @TenTaiKhoan, @MatKhau, @NgayTao)";
-            await _db.ExecuteAsync(insertQuery, new
-            {
-                nguoiDung.MaNguoiDung,
-                nguoiDung.Vaitro,
-                nguoiDung.Email,
-                nguoiDung.TenTaiKhoan,
-                nguoiDung.MatKhau,
-                nguoiDung.NgayTao
-            });
+                INSERT INTO NguoiDung (MaNguoiDung, Vaitro, Email, TenTaiKhoan, MatKhau, HoTen, SoDienThoai, DiaChi, NgaySinh, GioiTinh, HinhAnhUrl, CanCuocCongDan, NgayTao)
+                VALUES (@MaNguoiDung, @Vaitro, @Email, @TenTaiKhoan, @MatKhau, @HoTen, @SoDienThoai, @DiaChi, @NgaySinh, @GioiTinh, @HinhAnhUrl, @CanCuocCongDan, @NgayTao)";
+            await _db.ExecuteAsync(insertQuery, nguoiDung);
 
             return CreatedAtAction(nameof(GetById), new { id = nguoiDung.MaNguoiDung }, nguoiDung);
         }
@@ -317,7 +313,7 @@ namespace HotelManagementAPI.Controllers
             // Cập nhật thông tin cá nhân
             const string query = @"
                 UPDATE NguoiDung
-                SET HoTen = @HoTen, SoDienThoai = @SoDienThoai, DiaChi = @DiaChi, NgaySinh = @NgaySinh, GioiTinh = @GioiTinh, HinhAnhUrl = @HinhAnhUrl
+                SET HoTen = @HoTen, SoDienThoai = @SoDienThoai, DiaChi = @DiaChi, NgaySinh = @NgaySinh, GioiTinh = @GioiTinh, HinhAnhUrl = @HinhAnhUrl, CanCuocCongDan = @CanCuocCongDan
                 WHERE MaNguoiDung = @MaNguoiDung";
             var affected = await _db.ExecuteAsync(query, new
             {
@@ -327,6 +323,7 @@ namespace HotelManagementAPI.Controllers
                 nguoiDung.NgaySinh,
                 nguoiDung.GioiTinh,
                 nguoiDung.HinhAnhUrl,
+                nguoiDung.CanCuocCongDan,
                 MaNguoiDung = id
             });
 
