@@ -29,6 +29,7 @@ namespace HotelManagementAPI.Controllers.KhachHang
             nguoiDung.MaNguoiDung = await GenerateUniqueMaNguoiDung();
             nguoiDung.NgayTao = DateTime.Now;
 
+            // Kiểm tra email trùng lặp
             const string checkEmailQuery = "SELECT COUNT(1) FROM NguoiDung WHERE Email = @Email";
             var isEmailDuplicate = await _db.ExecuteScalarAsync<int>(checkEmailQuery, new { nguoiDung.Email });
 
@@ -37,6 +38,16 @@ namespace HotelManagementAPI.Controllers.KhachHang
                 return Conflict(new { Message = "Email đã tồn tại. Vui lòng sử dụng email khác." });
             }
 
+            // Kiểm tra tên tài khoản trùng lặp
+            const string checkTenTaiKhoanQuery = "SELECT COUNT(1) FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan";
+            var isTenTaiKhoanDuplicate = await _db.ExecuteScalarAsync<int>(checkTenTaiKhoanQuery, new { nguoiDung.TenTaiKhoan });
+
+            if (isTenTaiKhoanDuplicate > 0)
+            {
+                return Conflict(new { Message = "Tên đăng nhập đã có người sử dụng. Vui lòng chọn tên đăng nhập khác." });
+            }
+
+            // Thêm người dùng mới
             const string insertQuery = @"
                 INSERT INTO NguoiDung (MaNguoiDung, Vaitro, Email, TenTaiKhoan, MatKhau, HoTen, SoDienThoai, DiaChi, NgaySinh, GioiTinh, HinhAnhUrl, CanCuocCongDan, NgayTao)
                 VALUES (@MaNguoiDung, @Vaitro, @Email, @TenTaiKhoan, @MatKhau, @HoTen, @SoDienThoai, @DiaChi, @NgaySinh, @GioiTinh, @HinhAnhUrl, @CanCuocCongDan, @NgayTao)";
