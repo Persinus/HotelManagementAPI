@@ -18,12 +18,6 @@ namespace HotelManagementAPI.Controllers.KhachHang
             _db = db;
         }
 
-        [HttpGet("dashboard")]
-        public IActionResult GetDashboard()
-        {
-            return Ok(new { Message = "Đây là dashboard của Khách hàng." });
-        }
-
         /// <summary>
         /// Đăng ký tài khoản khách hàng.
         /// </summary>

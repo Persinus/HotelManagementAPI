@@ -5,27 +5,30 @@ using Dapper;
 using HotelManagementAPI.DTOs;
 using HotelManagementAPI.Helper;
 using Microsoft.AspNetCore.Authorization;
-
-namespace HotelManagementAPI.Controllers.Chung
+using Microsoft.Extensions.Caching.Memory;
+namespace HotelManagementAPI.Controllers.AllowAnonymous
 {
     [ApiController]
-    [Route("api/auth")]
-    public class DangNhapController : ControllerBase
+    [AllowAnonymous] // Cho phép tất cả người dùng truy cập
+    [Route("api/allowanonymous")]
+    
+    public class AllowAnonymous_LoginController : ControllerBase
     {
         private readonly IDbConnection _db;
         private readonly IConfiguration _config;
+        
 
-        public DangNhapController(IDbConnection db, IConfiguration config)
+        public AllowAnonymous_LoginController(IDbConnection db, IConfiguration config, IMemoryCache cache)
         {
             _db = db;
             _config = config;
+           
         }
 
         /// <summary>
         /// Đăng nhập.
         /// </summary>
         [HttpPost("dangnhap")]
-        [AllowAnonymous]
         public async Task<ActionResult<string>> DangNhap([FromBody] LoginDTO login)
         {
             const string query = "SELECT * FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan AND MatKhau = @MatKhau";
@@ -59,6 +62,37 @@ namespace HotelManagementAPI.Controllers.Chung
             var token = JwtHelper.GenerateJwtToken(nguoiDungModel, secretKey, issuer, audience);
 
             return Ok(new { Token = token });
+        }
+
+        /// <summary>
+        /// Cập nhật mật khẩu mới.
+        /// </summary>
+        [HttpPut("datlaimatkhau")]
+     
+        public async Task<IActionResult> DatLaiMatKhau([FromBody] ResetPasswordDTO resetPassword)
+        {
+            try
+            {
+                // Kiểm tra email có tồn tại trong hệ thống không
+                const string query = "SELECT COUNT(1) FROM NguoiDung WHERE Email = @Email";
+                var emailExists = await _db.ExecuteScalarAsync<int>(query, new { resetPassword.Email });
+
+                if (emailExists == 0)
+                {
+                    return NotFound(new { Message = "Email không tồn tại trong hệ thống." });
+                }
+
+                // Cập nhật mật khẩu mới
+                const string updatePasswordQuery = "UPDATE NguoiDung SET MatKhau = @MatKhau WHERE Email = @Email";
+                await _db.ExecuteAsync(updatePasswordQuery, new { MatKhau = resetPassword.NewPassword, resetPassword.Email });
+
+                return Ok(new { Message = "Mật khẩu đã được cập nhật thành công." });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi: {ex.Message}");
+                return StatusCode(500, new { Message = "Đã xảy ra lỗi khi cập nhật mật khẩu." });
+            }
         }
     }
 }

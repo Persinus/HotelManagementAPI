@@ -16,7 +16,7 @@ using HotelManagementAPI.DTOs;
 namespace HotelManagementAPI.Controllers
 {
     [ApiController]
-    [Route("api/admin/nguoidung")]
+    [Route("api/Quatri/nguoidung")]
     public class NguoiDungController : ControllerBase
     {
         private readonly IDbConnection _db;
@@ -224,55 +224,6 @@ namespace HotelManagementAPI.Controllers
             _db = db;
         }
 
-        [HttpGet]
-        [Authorize(Policy = "Quản trị viên")]
-        public async Task<ActionResult<IEnumerable<NhanVienDTO>>> GetAll()
-        {
-            const string query = "SELECT * FROM NhanVien";
-            var employees = await _db.QueryAsync<NhanVienDTO>(query);
-            return Ok(employees);
-        }
-
-        [HttpGet("{id}")]
-        [Authorize(Policy = "Quản trị viên")]
-        public async Task<ActionResult<NhanVienDTO>> GetById(string id)
-        {
-            const string query = "SELECT * FROM NhanVien WHERE MaNhanVien = @Id";
-            var employee = await _db.QueryFirstOrDefaultAsync<NhanVienDTO>(query, new { Id = id });
-
-            if (employee == null)
-                return NotFound(new { Message = "Không tìm thấy nhân viên." });
-
-            return Ok(employee);
-        }
-
-        [HttpPost]
-        public async Task<ActionResult<NhanVienDTO>> Create([FromBody] NhanVienDTO nhanVien)
-        {
-            const string query = @"
-                INSERT INTO NhanVien (MaNhanVien, MaNguoiDung, ChucVu, Luong, NgayVaoLam, CaLamViec)
-                VALUES (@MaNhanVien, @MaNguoiDung, @ChucVu, @Luong, @NgayVaoLam, @CaLamViec)";
-            await _db.ExecuteAsync(query, nhanVien);
-
-            return CreatedAtAction(nameof(GetById), new { id = nhanVien.MaNhanVien }, nhanVien);
-        }
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(string id, [FromBody] NhanVienDTO nhanVien)
-        {
-            if (id != nhanVien.MaNhanVien)
-                return BadRequest(new { Message = "Mã nhân viên không khớp." });
-
-            const string query = @"
-                UPDATE NhanVien
-                SET MaNguoiDung = @MaNguoiDung, ChucVu = @ChucVu, Luong = @Luong, 
-                    NgayVaoLam = @NgayVaoLam, CaLamViec = @CaLamViec
-                WHERE MaNhanVien = @MaNhanVien";
-            var affected = await _db.ExecuteAsync(query, nhanVien);
-
-            return affected > 0 ? NoContent() : NotFound(new { Message = "Không tìm thấy nhân viên." });
-        }
-
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
@@ -282,38 +233,7 @@ namespace HotelManagementAPI.Controllers
             return affected > 0 ? NoContent() : NotFound(new { Message = "Không tìm thấy nhân viên." });
         }
 
-        [HttpPost("dangky")]
-        [Authorize(Policy = "Quản trị viên")] // Chỉ dành cho quản trị viên
-        public async Task<ActionResult<NhanVienDTO>> DangKyNhanVien([FromBody] NhanVienDTO nhanVien)
-        {
-            // Tạo tài khoản người dùng cho nhân viên
-            const string insertNguoiDungQuery = @"
-                INSERT INTO NguoiDung (MaNguoiDung, Vaitro, Email, TenTaiKhoan, MatKhau, HoTen, SoDienThoai, DiaChi, NgaySinh, GioiTinh, HinhAnhUrl, NgayTao)
-                VALUES (@MaNguoiDung, 'NhanVien', @Email, @TenTaiKhoan, @MatKhau, @HoTen, @SoDienThoai, @DiaChi, @NgaySinh, @GioiTinh, @HinhAnhUrl, @NgayTao)";
-            await _db.ExecuteAsync(insertNguoiDungQuery, new
-            {
-                nhanVien.MaNguoiDung,
-                nhanVien.Email,
-                nhanVien.TenTaiKhoan,
-                nhanVien.MatKhau,
-                nhanVien.HoTen,
-                nhanVien.SoDienThoai,
-                nhanVien.DiaChi,
-                nhanVien.NgaySinh,
-                nhanVien.GioiTinh,
-                nhanVien.HinhAnhUrl,
-                NgayTao = DateTime.Now
-            });
-
-            // Tạo thông tin nhân viên
-            const string insertNhanVienQuery = @"
-                INSERT INTO NhanVien (MaNhanVien, MaNguoiDung, ChucVu, Luong, NgayVaoLam, CaLamViec)
-                VALUES (@MaNhanVien, @MaNguoiDung, @ChucVu, @Luong, @NgayVaoLam, @CaLamViec)";
-            await _db.ExecuteAsync(insertNhanVienQuery, nhanVien);
-
-            return CreatedAtAction(nameof(GetById), new { id = nhanVien.MaNhanVien }, nhanVien);
-        }
-    }
+        
 
     [ApiController]
     [Route("api/quantri")]
@@ -326,4 +246,4 @@ namespace HotelManagementAPI.Controllers
             return Ok("Bạn đã truy cập thành công tài nguyên dành cho quản trị viên.");
         }
     }
-}
+    }}
