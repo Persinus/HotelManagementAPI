@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Caching.Memory;
 
 public class RoleMiddleware
 {
@@ -55,6 +56,32 @@ public class RoleMiddleware
         }
 
         // Nếu không có vấn đề gì, tiếp tục xử lý request
+        await _next(context);
+    }
+}
+
+public class TokenBlacklistMiddleware
+{
+    private readonly RequestDelegate _next;
+    private readonly IMemoryCache _cache;
+
+    public TokenBlacklistMiddleware(RequestDelegate next, IMemoryCache cache)
+    {
+        _next = next;
+        _cache = cache;
+    }
+
+    public async Task InvokeAsync(HttpContext context)
+    {
+        var token = context.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+
+        if (!string.IsNullOrEmpty(token) && _cache.TryGetValue(token, out _))
+        {
+            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+            await context.Response.WriteAsync("Token đã bị thu hồi. Vui lòng đăng nhập lại.");
+            return;
+        }
+
         await _next(context);
     }
 }
