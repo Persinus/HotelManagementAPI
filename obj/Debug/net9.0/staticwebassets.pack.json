@@ -1,0 +1,29 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\Desktop\\code30_4\\HotelManagementAPI\\wwwroot\\swagger-custom.css",
+      "PackagePath": "staticwebassets\\swagger-custom.css"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.HotelManagementAPI.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.HotelManagementAPI.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.HotelManagementAPI.props",
+      "PackagePath": "build\\HotelManagementAPI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildMultiTargeting.HotelManagementAPI.props",
+      "PackagePath": "buildMultiTargeting\\HotelManagementAPI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildTransitive.HotelManagementAPI.props",
+      "PackagePath": "buildTransitive\\HotelManagementAPI.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
