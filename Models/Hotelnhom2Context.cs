@@ -37,7 +37,7 @@ public partial class Hotelnhom2Context : DbContext
 
     public virtual DbSet<NguoiDung> NguoiDungs { get; set; }
 
-    public virtual DbSet<NhanVien> NhanViens { get; set; }
+   
 
     public virtual DbSet<Phong> Phongs { get; set; }
 
@@ -121,20 +121,27 @@ public partial class Hotelnhom2Context : DbContext
             entity.Property(e => e.TrangThai).HasDefaultValue((byte)1);
         });
 
-        modelBuilder.Entity<Feedback>(entity =>
-        {
-            entity.HasKey(e => e.MaFeedback).HasName("PK__Feedback__63042CF68D0745C0");
+       modelBuilder.Entity<Feedback>(entity =>
+{
+    entity.HasKey(e => e.MaFeedback).HasName("PK__Feedback__63042CF68D0745C0");
 
-            entity.Property(e => e.NgayFeedback).HasDefaultValueSql("(getdate())");
+    entity.Property(e => e.NgayFeedback).HasDefaultValueSql("(getdate())");
 
-            entity.HasOne(d => d.MaNguoiDungNavigation).WithMany(p => p.Feedbacks)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Feedback__MaNguo__11BF94B6");
+    entity.Property(e => e.PhanLoai)
+        .HasMaxLength(10)
+        .IsRequired()
+        .HasColumnName("PhanLoai");
 
-            entity.HasOne(d => d.MaPhongNavigation).WithMany(p => p.Feedbacks)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Feedback__MaPhon__10CB707D");
-        });
+    entity.HasOne(d => d.MaNguoiDungNavigation)
+        .WithMany(p => p.Feedbacks)
+        .OnDelete(DeleteBehavior.ClientSetNull)
+        .HasConstraintName("FK__Feedback__MaNguo__11BF94B6");
+
+    entity.HasOne(d => d.MaPhongNavigation)
+        .WithMany(p => p.Feedbacks)
+        .OnDelete(DeleteBehavior.ClientSetNull)
+        .HasConstraintName("FK__Feedback__MaPhon__10CB707D");
+});
 
         modelBuilder.Entity<GiamGium>(entity =>
         {
@@ -176,17 +183,7 @@ public partial class Hotelnhom2Context : DbContext
             entity.Property(e => e.Vaitro).HasDefaultValue("KhachHang");
         });
 
-        modelBuilder.Entity<NhanVien>(entity =>
-        {
-            entity.HasKey(e => e.MaNhanVien).HasName("PK__NhanVien__77B2CA47C2886D58");
-
-            entity.Property(e => e.NgayVaoLam).HasDefaultValueSql("(getdate())");
-
-            entity.HasOne(d => d.MaNguoiDungNavigation).WithMany(p => p.NhanViens)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__NhanVien__MaNguo__1590259A");
-        });
-
+      
         modelBuilder.Entity<Phong>(entity =>
         {
             entity.HasKey(e => e.MaPhong).HasName("PK__Phong__20BD5E5B3E27A9BD");
