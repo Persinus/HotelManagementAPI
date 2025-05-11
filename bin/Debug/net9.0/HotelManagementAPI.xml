@@ -1,0 +1,286 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HotelManagementAPI</name>
+    </assembly>
+    <members>
+        <member name="T:HotelManagementAPI.Controllers.AllowAnonymous.AllowAnonymous_DichVuController">
+            <summary>
+            Controller cho phép xem danh sách dịch vụ (không yêu cầu đăng nhập).
+            </summary>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.AllowAnonymous.AllowAnonymous_DichVuController.#ctor(System.Data.IDbConnection)">
+            <summary>
+            Khởi tạo controller với kết nối cơ sở dữ liệu.
+            </summary>
+            <param name="db">Kết nối cơ sở dữ liệu.</param>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.AllowAnonymous.AllowAnonymous_DichVuController.GetAllDichVu">
+            <summary>
+            Lấy danh sách toàn bộ dịch vụ.
+            </summary>
+            <returns>Danh sách dịch vụ.</returns>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.AllowAnonymous.AllowAnonymous_LoginController.DangNhap(HotelManagementAPI.DTOs.LoginDTO)">
+            <summary>
+            Đăng nhập.
+            </summary>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.AllowAnonymous.AllowAnonymous_LoginController.DatLaiMatKhau(HotelManagementAPI.DTOs.ResetPasswordDTO)">
+            <summary>
+            Cập nhật mật khẩu mới.
+            </summary>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.AllowAnonymous.PhongController.GetAll">
+            <summary>
+            Lấy danh sách tất cả phòng và tiện nghi.
+            </summary>
+            <remarks>
+            **Mô tả**: API này trả về danh sách tất cả phòng và tiện nghi có trong hệ thống.
+            **Trạng thái**:
+            - 200: Thành công, trả về danh sách phòng.
+            - 500: Lỗi máy chủ.
+            </remarks>
+            <returns>Danh sách phòng.</returns>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.Authorize.AuthorizeController.Logout">
+            <summary>
+            Đăng xuất người dùng dựa trên vai trò từ token.
+            </summary>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.KhachHang.DatDichVuController.DatDichVu(HotelManagementAPI.DTOs.DatDichVuDTO)">
+            <summary>
+            Đặt dịch vụ đi kèm.
+            </summary>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.KhachHang.DatDichVuController.LichSuDatDichVu(System.String)">
+            <summary>
+            Lấy lịch sử đặt dịch vụ.
+            </summary>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.KhachHang.DatDichVuController.GetAllDichVu">
+            <summary>
+            Lấy danh sách toàn bộ dịch vụ.
+            </summary>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.KhachHang.DatPhongController.TaoDonDatPhong(HotelManagementAPI.DTOs.DatPhongDTO)">
+            <summary>
+            Tạo đơn đặt phòng.
+            </summary>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.KhachHang.DatPhongController.LichSuDatPhong(System.String)">
+            <summary>
+            Lấy lịch sử đặt phòng của người dùng.
+            </summary>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.KhachHang.DatPhongController.HuyDatPhong(System.String)">
+            <summary>
+            Hủy đặt phòng.
+            </summary>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.KhachHang.KhachHangController.DangKyKhachHang(HotelManagementAPI.DTOs.NguoiDungDTO)">
+            <summary>
+            Đăng ký tài khoản khách hàng.
+            </summary>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.NguoiDungController.GetAll">
+            <summary>
+            Lấy danh sách tất cả người dùng.
+            </summary>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.NguoiDungController.Update(System.Int32,HotelManagementAPI.DTOs.NguoiDungDTO)">
+            <summary>
+            Cập nhật thông tin người dùng.
+            </summary>
+            <remarks>
+            **Quyền**: Chỉ dành cho Quản trị viên.
+            </remarks>
+            <param name="id">Mã người dùng cần cập nhật.</param>
+            <param name="nguoiDung">Thông tin người dùng cần cập nhật.</param>
+            <returns>Kết quả cập nhật.</returns>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.NguoiDungController.Delete(System.String)">
+            <summary>
+            Xóa người dùng theo mã.
+            </summary>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.NguoiDungController.DangKyKhachHang(HotelManagementAPI.DTOs.NguoiDungDTO)">
+            <summary>
+            Đăng ký tài khoản khách hàng.
+            </summary>
+            <remarks>
+            Vai trò mặc định là "KhachHang".
+            </remarks>
+            <param name="nguoiDung">Thông tin người dùng cần đăng ký.</param>
+            <returns>Người dùng vừa được đăng ký.</returns>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.NhanVien.NhanVienController.DangKyNhanVien(HotelManagementAPI.DTOs.NguoiDungDTO)">
+            <summary>
+            Đăng ký tài khoản nhân viên.
+            </summary>
+        </member>
+        <member name="T:HotelManagementAPI.Controllers.NhanVien.PhongQuanLyController">
+            <summary>
+            Controller quản lý trạng thái và thông tin phòng dành cho nhân viên.
+            </summary>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.NhanVien.PhongQuanLyController.#ctor(System.Data.IDbConnection)">
+            <summary>
+            Khởi tạo controller với kết nối cơ sở dữ liệu.
+            </summary>
+            <param name="db">Kết nối cơ sở dữ liệu.</param>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.NhanVien.PhongQuanLyController.CapNhatTrangThaiPhong(System.String,System.String)">
+            <summary>
+            Cập nhật trạng thái phòng (Trống, Đang dọn, Sử dụng).
+            </summary>
+            <param name="id">Mã phòng cần cập nhật trạng thái.</param>
+            <param name="trangThai">Trạng thái mới của phòng (Trống, Đang dọn, Sử dụng).</param>
+            <returns>Kết quả cập nhật trạng thái phòng.</returns>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.NhanVien.PhongQuanLyController.DatPhong(HotelManagementAPI.DTOs.DatPhongDTO)">
+            <summary>
+            Đặt phòng mới.
+            </summary>
+            <param name="datPhongDTO">Thông tin đặt phòng.</param>
+            <returns>Kết quả đặt phòng.</returns>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.QuanTriVien.QuanTriVienController.DangKyQuanTriVien(HotelManagementAPI.DTOs.NguoiDungDTO)">
+            <summary>
+            Đăng ký tài khoản quản trị viên.
+            </summary>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.QuanTriVien.QuanTriVienController.GetProfile">
+            <summary>
+            Lấy thông tin chi tiết của quản trị viên đã xác thực.
+            </summary>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.QuanTriVien.QuanTriVienController.GetAllKhachHang">
+            <summary>
+            Lấy danh sách tất cả khách hàng.
+            </summary>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.QuanTriVien.QuanTriVienController.GetAllNhanVien">
+            <summary>
+            Lấy danh sách tất cả nhân viên.
+            </summary>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.QuanTriVien.QuanTriVienController.GetKhachHangByMaNguoiDung(System.String)">
+            <summary>
+            Lấy thông tin chi tiết của một khách hàng dựa trên MaNguoiDung.
+            </summary>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.QuanTriVien.QuanTriVienController.GetNhanVienByMaNguoiDung(System.String)">
+            <summary>
+            Lấy thông tin chi tiết của một nhân viên dựa trên MaNguoiDung.
+            </summary>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.User_FeedbackController.CreateFeedback(HotelManagementAPI.Controllers.FeedbackDTO)">
+             <summary>
+             Gửi phản hồi về phòng.
+             </summary>
+             <remarks>
+             **Mô tả**: API này cho phép khách hàng đã đăng nhập gửi phản hồi về phòng.
+             Mã khách hàng (`MaKhachHang`) sẽ được lấy từ JWT Token.
+            
+             **Ví dụ Request Body**:
+             <code>
+             {
+               "MaPhong": "P203",
+               "NoiDung": "Phòng rất sạch sẽ và tiện nghi.",
+               "DanhGia": 5
+             }
+             </code>
+            
+             **Mã trạng thái**:
+             - 201: Gửi phản hồi thành công.
+             - 400: Dữ liệu không hợp lệ.
+             - 401: Không xác định được mã khách hàng.
+             - 500: Lỗi máy chủ.
+             </remarks>
+             <param name="feedback">Thông tin phản hồi của khách hàng.</param>
+             <returns>Thông báo kết quả.</returns>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.User_FeedbackController.GetFeedbackByRoom(System.String)">
+             <summary>
+             Lấy danh sách phản hồi của một phòng.
+             </summary>
+             <remarks>
+             **Mô tả**: API này trả về danh sách phản hồi của một phòng dựa trên mã phòng (`MaPhong`).
+            
+             **Mã trạng thái**:
+             - 200: Thành công, trả về danh sách phản hồi.
+             - 404: Không tìm thấy phản hồi cho phòng này.
+             - 500: Lỗi máy chủ.
+             </remarks>
+             <param name="maPhong">Mã phòng cần lấy phản hồi. Ví dụ: `P203`.</param>
+             <returns>Danh sách phản hồi.</returns>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.User_FeedbackController.GetFeedbacksByRoom(System.String)">
+             <summary>
+             Lấy danh sách phản hồi của một phòng (sử dụng User_User_Feedback).
+             </summary>
+             <remarks>
+             **Mô tả**: API này trả về danh sách phản hồi của một phòng dựa trên mã phòng (`MaPhong`) từ bảng User_Feedback.
+            
+             **Mã trạng thái**:
+             - 200: Thành công, trả về danh sách phản hồi.
+             - 404: Không tìm thấy phản hồi cho phòng này.
+             - 500: Lỗi máy chủ.
+             </remarks>
+             <param name="id">Mã phòng cần lấy phản hồi. Ví dụ: `P203`.</param>
+             <returns>Danh sách phản hồi.</returns>
+        </member>
+        <member name="T:HotelManagementAPI.Controllers.FeedbackDTO">
+            <summary>
+            DTO đại diện cho phản hồi của khách hàng.
+            </summary>
+        </member>
+        <member name="P:HotelManagementAPI.Controllers.FeedbackDTO.MaKhachHang">
+            <summary>
+            Mã khách hàng. Trường này sẽ được tự động lấy từ JWT Token.
+            </summary>
+        </member>
+        <member name="P:HotelManagementAPI.Controllers.FeedbackDTO.MaPhong">
+            <summary>
+            Mã phòng. Ví dụ: `P203`.
+            </summary>
+        </member>
+        <member name="P:HotelManagementAPI.Controllers.FeedbackDTO.NoiDung">
+            <summary>
+            Nội dung phản hồi. Ví dụ: `Phòng rất sạch sẽ và tiện nghi.`.
+            </summary>
+        </member>
+        <member name="P:HotelManagementAPI.Controllers.FeedbackDTO.DanhGia">
+            <summary>
+            Đánh giá của khách hàng (1-5). Ví dụ: `5`.
+            </summary>
+        </member>
+        <member name="T:ClaimsPrincipalExtensions">
+            <summary>
+            Provides extension methods for ClaimsPrincipal.
+            </summary>
+        </member>
+        <member name="M:ClaimsPrincipalExtensions.GetUserRole(System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            Gets the user role from the claims.
+            </summary>
+            <param name="user">The ClaimsPrincipal instance.</param>
+            <returns>The user role as a string.</returns>
+        </member>
+        <member name="M:ClaimsPrincipalExtensions.GetUserSub(System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            Gets the user ID (sub) from the claims.
+            </summary>
+            <param name="user">The ClaimsPrincipal instance.</param>
+            <returns>The user ID as a string.</returns>
+        </member>
+        <member name="M:ClaimsPrincipalExtensions.GetUserEmail(System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            Gets the user email from the claims.
+            </summary>
+            <param name="user">The ClaimsPrincipal instance.</param>
+            <returns>The user email as a string.</returns>
+        </member>
+    </members>
+</doc>
