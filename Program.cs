@@ -71,7 +71,7 @@ builder.Services.AddSwaggerGen(options =>
         Title = "🏨 Hệ thống Quản lý Khách sạn",
         Version = "v1",
         Description = @"
-📘 **Đề tài:** Xây dựng hệ thống quản lý khách sạn hiện đại phục vụ cho việc đặt phòng, quản lý người dùng, hóa đơn, dịch vụ và phản hồi khách hàng.
+📘 **Đề tài:** Xây dựng hệ thống quản lý khách sạn.
 
 🔧 **Công nghệ sử dụng:**
 - ASP.NET Core Web API
@@ -82,12 +82,15 @@ builder.Services.AddSwaggerGen(options =>
 - (Tuỳ chọn: React/Vue cho frontend, nếu có)
 
 🎯 **Chức năng chính:**
-- Đăng ký người dùng
-- Quản lý phòng: thêm, sửa, xoá, xem trạng thái
-- Đặt phòng, thanh toán, và xuất hoá đơn
+- Đăng ký người dùng bao gồm admin, nhân viên, khách hàng
++ admin*(quản trị viên) có quyền thêm sửa xóa phòng ,xem trạng thái phòng ,thêm tiện nghi 
++ nhân viên có quyền sửa phòng 
++ khách hàng có quyền đặt phòng
+
+- Đặt phòng, thanh toán, và xuất hoá đơn, và xem lịch sử giao dịch
 - Quản lý dịch vụ đi kèm
-- Phản hồi từ khách hàng (feedback)
-- Phân quyền người dùng (admin, lễ tân, khách hàng)
+- Xem phản hồi từ khách hàng (feedback)
+- Phân quyền người dùng (admin, nhân viên, khách hàng)
 
 🔗 **GitHub Repository:** [https://github.com/Persinus/HotelManagementAPI](https://github.com/Persinus/HotelManagementAPI)
 "
