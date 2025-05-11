@@ -43,6 +43,7 @@ builder.Services.AddSwaggerGen(options =>
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     options.IncludeXmlComments(xmlPath);
+
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -50,22 +51,53 @@ builder.Services.AddSwaggerGen(options =>
         Scheme = "Bearer",
         BearerFormat = "JWT",
         In = ParameterLocation.Header,
-        Description = "Enter 'Bearer' [space] and then your token",
+        Description = "Nhập 'Bearer' [space] và sau đó là token của bạn.",
     });
+
     options.AddSecurityRequirement(new OpenApiSecurityRequirement
-{
     {
-        new OpenApiSecurityScheme
         {
-            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
-        },
-        new string[] {}
-    }
-});
-    // Removed InjectJavascript from SwaggerGenOptions as it is not valid here
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
+            },
+            new string[] {}
+        }
+    });
+
+    // Thêm thông tin mô tả API
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "🏨 Hệ thống Quản lý Khách sạn",
+        Version = "v1",
+        Description = @"
+📘 **Đề tài:** Xây dựng hệ thống quản lý khách sạn hiện đại phục vụ cho việc đặt phòng, quản lý người dùng, hóa đơn, dịch vụ và phản hồi khách hàng.
+
+🔧 **Công nghệ sử dụng:**
+- ASP.NET Core Web API
+- SQL Server
+- Entity Framework/Dapper
+- JWT Authentication
+- Swagger UI
+- (Tuỳ chọn: React/Vue cho frontend, nếu có)
+
+🎯 **Chức năng chính:**
+- Đăng ký người dùng
+- Quản lý phòng: thêm, sửa, xoá, xem trạng thái
+- Đặt phòng, thanh toán, và xuất hoá đơn
+- Quản lý dịch vụ đi kèm
+- Phản hồi từ khách hàng (feedback)
+- Phân quyền người dùng (admin, lễ tân, khách hàng)
+
+🔗 **GitHub Repository:** [https://github.com/Persinus/HotelManagementAPI](https://github.com/Persinus/HotelManagementAPI)
+"
+    });
 });
 
 builder.Services.AddControllers();
+
+// Đăng ký IMemoryCache
+builder.Services.AddMemoryCache();
 
 // Cấu hình JWT
 builder.Services.AddAuthentication("Bearer")
@@ -114,7 +146,7 @@ builder.Services.AddAuthorization(options =>
         policy.RequireClaim("Vaitro", "NhanVien", "QuanTriVien"));
 
     options.AddPolicy("KhachHangPolicy", policy =>
-        policy.RequireClaim("Vaitro", "KhachHang", "QuanTriVien"));
+        policy.RequireClaim("Vaitro", "KhachHang","NhanVien", "QuanTriVien"));
 });
 
 var app = builder.Build();
@@ -135,17 +167,18 @@ if (enableSwagger)
     });
 }
 
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseCors("AllowAllOrigins"); // Áp dụng chính sách CORS đã cấu hình
-
-
 
 // Thêm middleware xác thực và phân quyền
 app.UseAuthentication();
 app.UseMiddleware<RoleMiddleware>();
 app.UseAuthorization();
-
-
 
 // Định tuyến các controller
 app.MapControllers();
