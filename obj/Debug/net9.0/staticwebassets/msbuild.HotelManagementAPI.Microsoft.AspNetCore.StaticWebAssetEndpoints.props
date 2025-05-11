@@ -1,0 +1,16 @@
+﻿<Project>
+  <ItemGroup>
+    <StaticWebAssetEndpoint Include="_content/HotelManagementAPI/swagger-custom.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\swagger-custom.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-9mkClxIAnRqGjLLG4RJ4fPVCX632i4fTFW5X5GQgxd0="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"35162"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u00229mkClxIAnRqGjLLG4RJ4fPVCX632i4fTFW5X5GQgxd0=\u0022"},{"Name":"Last-Modified","Value":"Wed, 30 Apr 2025 14:31:22 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/HotelManagementAPI/swagger-custom.ej1hozjj51.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\swagger-custom.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"ej1hozjj51"},{"Name":"integrity","Value":"sha256-9mkClxIAnRqGjLLG4RJ4fPVCX632i4fTFW5X5GQgxd0="},{"Name":"label","Value":"_content/HotelManagementAPI/swagger-custom.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"35162"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u00229mkClxIAnRqGjLLG4RJ4fPVCX632i4fTFW5X5GQgxd0=\u0022"},{"Name":"Last-Modified","Value":"Wed, 30 Apr 2025 14:31:22 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+  </ItemGroup>
+</Project>
