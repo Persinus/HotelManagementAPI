@@ -6,28 +6,23 @@ namespace HotelManagementAPI.DTOs
     public class DatPhongDTO
     {
         [Required]
-        [StringLength(10)]
-        public string MaDatPhong { get; set; } // Tự động tạo
+        public string MaPhong { get; set; } = null!;
 
         [Required]
-        [StringLength(10)]
-        public string MaNguoiDung { get; set; } // Bắt buộc
+        public string MaNguoiDung { get; set; } = null!;
 
         [Required]
-        [StringLength(10)]
-        public string MaPhong { get; set; } // Bắt buộc
+        public DateTime NgayDat { get; set; }
 
         [Required]
-        public DateTime? NgayDat { get; set; } // Bắt buộc
+        public DateTime NgayCheckIn { get; set; }
 
         [Required]
-        public DateTime? NgayCheckIn { get; set; } // Bắt buộc
+        public DateTime NgayCheckOut { get; set; }
 
         [Required]
-        public DateTime? NgayCheckOut { get; set; } // Bắt buộc
+        public string TinhTrangDatPhong { get; set; } = null!;
 
-        [Required]
-        [StringLength(20)]
-        public string TinhTrangDatPhong { get; set; } // Bắt buộc
+        public string? MaDatPhong { get; set; } // This will be generated later
     }
 }
