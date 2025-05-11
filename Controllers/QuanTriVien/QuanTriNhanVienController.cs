@@ -6,4 +6,4 @@
 
 //PUT /api/admin/nhanvien/{id} – Cập nhật thông tin nhân viên
 
-//DELETE /api/admin/nhanvien/{id} – Xóa nhân viên
+//DELETE /api/admin/nhanvien/{id} – Xóa nhân viên   
