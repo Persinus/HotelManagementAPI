@@ -5,8 +5,10 @@ namespace HotelManagementAPI.DTOs
    
 
     public class TienNghiDTO
-    {   [JsonIgnore]
-        public string? MaTienNghi { get; set; } = null!;
+
+    {
+        [StringLength(6)]
+        public string MaTienNghi { get; set; } = null!;
 
         [StringLength(100)]
         public string TenTienNghi { get; set; } = null!;

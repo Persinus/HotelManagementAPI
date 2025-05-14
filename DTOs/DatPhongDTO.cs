@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using System;
+
 namespace HotelManagementAPI.DTOs
 {
     public class DatPhongDTO
@@ -11,6 +13,7 @@ namespace HotelManagementAPI.DTOs
 
         [JsonIgnore]
         public string? MaNguoiDung { get; set; } = null!;
+
 
         [Required]
         public DateTime NgayDat { get; set; }

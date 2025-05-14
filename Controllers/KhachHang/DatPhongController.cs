@@ -42,6 +42,7 @@ namespace HotelManagementAPI.Controllers.KhachHang
             await _db.ExecuteAsync(updatePhongQuery, new { datPhongDTO.MaPhong });
 
             return Ok(new { Message = "Đặt phòng thành công.", datPhongDTO.MaDatPhong });
+            return Ok(new { Message = "Đặt phòng thành công.", MaDatPhong = datPhongDTO.MaDatPhong });
         }
 
         /// <summary>
