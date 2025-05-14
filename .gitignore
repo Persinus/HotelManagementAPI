@@ -1,0 +1,43 @@
+# Build results
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VS Code directory
+.vscode/
+
+# Visual Studio files
+.vs/
+
+# DLLs, EXEs and PDBs
+*.dll
+*.exe
+*.pdb
+
+# Cache files
+*.cache
+
+# Publish profiles
+Properties/PublishProfiles/
+
+# Backup files
+*~ 
+*.bak
+*.backup.json
+
+# Dotnet artifacts
+*.log
+*.db
+*.v2
+
+# Bỏ qua các thư mục build
+bin/
+obj/
+.vscode/
+*.user
+*.suo
