@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-
 namespace HotelManagementAPI.DTOs
 {
     public class PhongDetailsDTO
     {
+
         [JsonIgnore]
         public string MaPhong { get; set; } = null!;
 

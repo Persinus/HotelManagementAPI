@@ -36,6 +36,12 @@ namespace HotelManagementAPI.Controllers.KhachHang
                 VALUES (@MaDatPhong, @MaNguoiDung, @MaPhong, @NgayDat, @NgayNhan, @NgayTra, @TongTien, @TrangThai)";
             await _db.ExecuteAsync(insertQuery, datPhongDTO);
 
+            // Cập nhật trạng thái phòng về 2 (Đã đặt)
+            const string updatePhongQuery = @"
+                UPDATE Phong SET TinhTrang = 2 WHERE MaPhong = @MaPhong";
+            await _db.ExecuteAsync(updatePhongQuery, new { datPhongDTO.MaPhong });
+
+            return Ok(new { Message = "Đặt phòng thành công.", datPhongDTO.MaDatPhong });
             return Ok(new { Message = "Đặt phòng thành công.", MaDatPhong = datPhongDTO.MaDatPhong });
         }
 

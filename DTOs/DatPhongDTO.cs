@@ -1,15 +1,19 @@
-using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+using System;
 
 namespace HotelManagementAPI.DTOs
 {
     public class DatPhongDTO
     {
+
         [Required]
         public string MaPhong { get; set; } = null!;
 
-        [Required]
-        public string MaNguoiDung { get; set; } = null!;
+        [JsonIgnore]
+        public string? MaNguoiDung { get; set; } = null!;
+
 
         [Required]
         public DateTime NgayDat { get; set; }
@@ -19,10 +23,11 @@ namespace HotelManagementAPI.DTOs
 
         [Required]
         public DateTime NgayCheckOut { get; set; }
+        
+         [Range(1, 3, ErrorMessage = "TinhTrangDatPhong chỉ nhận giá trị từ 1 đến 3.")]
+        public byte? TinhTrangDatPhong { get; set; } = null!;
 
-        [Required]
-        public string TinhTrangDatPhong { get; set; } = null!;
-
+        [JsonIgnore]
         public string? MaDatPhong { get; set; } // This will be generated later
     }
 }
