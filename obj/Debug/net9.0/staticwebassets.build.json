@@ -1,12 +1,362 @@
 {
   "Version": 1,
-  "Hash": "Wpe6eW7vGv7B3gjtoGA0Ljsgl8IdK3fRGNnZajtoCfk=",
+  "Hash": "g9/0JoLAHPszyt5P6gbi2iovpI2DMtVSPuKaSKkVpRE=",
   "Source": "HotelManagementAPI",
   "BasePath": "_content/HotelManagementAPI",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "HotelManagementAPI\\wwwroot",
+      "Source": "HotelManagementAPI",
+      "ContentRoot": "D:\\Desktop\\code30_4\\HotelManagementAPI\\wwwroot\\",
+      "BasePath": "_content/HotelManagementAPI",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\Desktop\\code30_4\\HotelManagementAPI\\obj\\Debug\\net9.0\\compressed\\66v20z1wre-ej1hozjj51.gz",
+      "SourceId": "HotelManagementAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Desktop\\code30_4\\HotelManagementAPI\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/HotelManagementAPI",
+      "RelativePath": "swagger-custom#[.{fingerprint=ej1hozjj51}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "D:\\Desktop\\code30_4\\HotelManagementAPI\\wwwroot\\swagger-custom.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "hus4lh2nxg",
+      "Integrity": "95t2X6oQq9H51LtZknSXzpR8QnmDHwhxOZgu1uttV/Q=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "D:\\Desktop\\code30_4\\HotelManagementAPI\\wwwroot\\swagger-custom.css"
+    },
+    {
+      "Identity": "D:\\Desktop\\code30_4\\HotelManagementAPI\\wwwroot\\swagger-custom.css",
+      "SourceId": "HotelManagementAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Desktop\\code30_4\\HotelManagementAPI\\wwwroot\\",
+      "BasePath": "_content/HotelManagementAPI",
+      "RelativePath": "swagger-custom#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ej1hozjj51",
+      "Integrity": "9mkClxIAnRqGjLLG4RJ4fPVCX632i4fTFW5X5GQgxd0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\swagger-custom.css"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "swagger-custom.css",
+      "AssetFile": "D:\\Desktop\\code30_4\\HotelManagementAPI\\obj\\Debug\\net9.0\\compressed\\66v20z1wre-ej1hozjj51.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000180440274"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5541"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"95t2X6oQq9H51LtZknSXzpR8QnmDHwhxOZgu1uttV/Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 12 May 2025 16:28:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"9mkClxIAnRqGjLLG4RJ4fPVCX632i4fTFW5X5GQgxd0=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-9mkClxIAnRqGjLLG4RJ4fPVCX632i4fTFW5X5GQgxd0="
+        }
+      ]
+    },
+    {
+      "Route": "swagger-custom.css",
+      "AssetFile": "D:\\Desktop\\code30_4\\HotelManagementAPI\\wwwroot\\swagger-custom.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "35162"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9mkClxIAnRqGjLLG4RJ4fPVCX632i4fTFW5X5GQgxd0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 12 May 2025 16:28:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-9mkClxIAnRqGjLLG4RJ4fPVCX632i4fTFW5X5GQgxd0="
+        }
+      ]
+    },
+    {
+      "Route": "swagger-custom.css.gz",
+      "AssetFile": "D:\\Desktop\\code30_4\\HotelManagementAPI\\obj\\Debug\\net9.0\\compressed\\66v20z1wre-ej1hozjj51.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5541"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"95t2X6oQq9H51LtZknSXzpR8QnmDHwhxOZgu1uttV/Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 12 May 2025 16:28:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-95t2X6oQq9H51LtZknSXzpR8QnmDHwhxOZgu1uttV/Q="
+        }
+      ]
+    },
+    {
+      "Route": "swagger-custom.ej1hozjj51.css",
+      "AssetFile": "D:\\Desktop\\code30_4\\HotelManagementAPI\\obj\\Debug\\net9.0\\compressed\\66v20z1wre-ej1hozjj51.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000180440274"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5541"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"95t2X6oQq9H51LtZknSXzpR8QnmDHwhxOZgu1uttV/Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 12 May 2025 16:28:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"9mkClxIAnRqGjLLG4RJ4fPVCX632i4fTFW5X5GQgxd0=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ej1hozjj51"
+        },
+        {
+          "Name": "label",
+          "Value": "swagger-custom.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9mkClxIAnRqGjLLG4RJ4fPVCX632i4fTFW5X5GQgxd0="
+        }
+      ]
+    },
+    {
+      "Route": "swagger-custom.ej1hozjj51.css",
+      "AssetFile": "D:\\Desktop\\code30_4\\HotelManagementAPI\\wwwroot\\swagger-custom.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "35162"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9mkClxIAnRqGjLLG4RJ4fPVCX632i4fTFW5X5GQgxd0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 12 May 2025 16:28:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ej1hozjj51"
+        },
+        {
+          "Name": "label",
+          "Value": "swagger-custom.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9mkClxIAnRqGjLLG4RJ4fPVCX632i4fTFW5X5GQgxd0="
+        }
+      ]
+    },
+    {
+      "Route": "swagger-custom.ej1hozjj51.css.gz",
+      "AssetFile": "D:\\Desktop\\code30_4\\HotelManagementAPI\\obj\\Debug\\net9.0\\compressed\\66v20z1wre-ej1hozjj51.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5541"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"95t2X6oQq9H51LtZknSXzpR8QnmDHwhxOZgu1uttV/Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 12 May 2025 16:28:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ej1hozjj51"
+        },
+        {
+          "Name": "label",
+          "Value": "swagger-custom.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-95t2X6oQq9H51LtZknSXzpR8QnmDHwhxOZgu1uttV/Q="
+        }
+      ]
+    }
+  ]
 }

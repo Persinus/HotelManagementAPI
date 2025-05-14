@@ -10,8 +10,8 @@ namespace HotelManagementAPI.Models;
 public partial class DichVu
 {
     [Key]
-    [StringLength(10)]
-    public string MaChiTietDichVu { get; set; } = null!;
+    [StringLength(6)]
+    public string MaDichVu { get; set; } = null!;
 
     [StringLength(100)]
     public string TenDichVu { get; set; } = null!;
@@ -23,11 +23,18 @@ public partial class DichVu
     public string? MoTaDichVu { get; set; }
 
     [StringLength(255)]
-    public string? UrlAnh { get; set; }
+    public string HinhAnhDichVu { get; set; } = null!;
 
-    [InverseProperty("MaChiTietDichVuNavigation")]
-    public virtual ICollection<HoaDonThanhToanDichVu> HoaDonThanhToanDichVus { get; set; } = new List<HoaDonThanhToanDichVu>();
+    public int SoLuong { get; set; }
 
-    [InverseProperty("MaChiTietDichVuNavigation")]
-    public virtual ICollection<KhachHangDichVu> KhachHangDichVus { get; set; } = new List<KhachHangDichVu>();
+    public byte TrangThai { get; set; }
+
+    [StringLength(50)]
+    public string LoaiDichVu { get; set; } = null!;
+
+    [StringLength(50)]
+    public string DonViTinh { get; set; } = null!;
+
+    [InverseProperty("MaDichVuNavigation")]
+    public virtual ICollection<DatDichVu> DatDichVus { get; set; } = new List<DatDichVu>();
 }

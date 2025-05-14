@@ -49,16 +49,6 @@ namespace HotelManagementAPI.Controllers
         }
 
         // Tạo khách hàng mới
-        [HttpPost]
-        public async Task<ActionResult<KhachHangDTO>> Create([FromBody] KhachHangDTO khachHangDto)
-        {
-            const string query = @"
-                INSERT INTO KhachHang (MaKhachHang, TenKhachHang, DiaChi, SoDienThoai)
-                VALUES (@MaKhachHang, @HoTen, @DiaChi, @SoDienThoai)";
-    
-            await _dbConnection.ExecuteAsync(query, khachHangDto);
-            return CreatedAtAction(nameof(GetById), new { id = khachHangDto.MaKhachHang }, khachHangDto);
-        }
 
         // Cập nhật khách hàng
         [HttpPut("{id}")]

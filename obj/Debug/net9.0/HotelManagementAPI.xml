@@ -4,22 +4,25 @@
         <name>HotelManagementAPI</name>
     </assembly>
     <members>
-        <member name="T:HotelManagementAPI.Controllers.AllowAnonymous.AllowAnonymous_DichVuController">
+        <member name="M:HotelManagementAPI.Controllers.AllowAnonymous.AllowAnonymousViewController.GetAllPhong">
             <summary>
-            Controller cho phép xem danh sách dịch vụ (không yêu cầu đăng nhập).
+            Lấy danh sách tất cả phòng.
             </summary>
         </member>
-        <member name="M:HotelManagementAPI.Controllers.AllowAnonymous.AllowAnonymous_DichVuController.#ctor(System.Data.IDbConnection)">
+        <member name="M:HotelManagementAPI.Controllers.AllowAnonymous.AllowAnonymousViewController.GetAllTienNghi">
             <summary>
-            Khởi tạo controller với kết nối cơ sở dữ liệu.
+            Lấy danh sách tất cả tiện nghi.
             </summary>
-            <param name="db">Kết nối cơ sở dữ liệu.</param>
         </member>
-        <member name="M:HotelManagementAPI.Controllers.AllowAnonymous.AllowAnonymous_DichVuController.GetAllDichVu">
+        <member name="M:HotelManagementAPI.Controllers.AllowAnonymous.AllowAnonymousViewController.GetAllDichVu">
             <summary>
             Lấy danh sách toàn bộ dịch vụ.
             </summary>
-            <returns>Danh sách dịch vụ.</returns>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.AllowAnonymous.AllowAnonymousViewController.GetFeedbackByPhong(System.String)">
+            <summary>
+            Lấy danh sách feedback của một phòng.
+            </summary>
         </member>
         <member name="M:HotelManagementAPI.Controllers.AllowAnonymous.AllowAnonymous_LoginController.DangNhap(HotelManagementAPI.DTOs.LoginDTO)">
             <summary>
@@ -31,17 +34,10 @@
             Cập nhật mật khẩu mới.
             </summary>
         </member>
-        <member name="M:HotelManagementAPI.Controllers.AllowAnonymous.PhongController.GetAll">
+        <member name="M:HotelManagementAPI.Controllers.AllowAnonymous.AllowAnonymousDangKyController.DangKyNguoiDung(HotelManagementAPI.DTOs.NguoiDungDTO)">
             <summary>
-            Lấy danh sách tất cả phòng và tiện nghi.
+            Đăng ký tài khoản cho người dùng chưa phải là khách hàng.
             </summary>
-            <remarks>
-            **Mô tả**: API này trả về danh sách tất cả phòng và tiện nghi có trong hệ thống.
-            **Trạng thái**:
-            - 200: Thành công, trả về danh sách phòng.
-            - 500: Lỗi máy chủ.
-            </remarks>
-            <returns>Danh sách phòng.</returns>
         </member>
         <member name="M:HotelManagementAPI.Controllers.Authorize.AuthorizeController.Logout">
             <summary>
@@ -83,67 +79,43 @@
             Đăng ký tài khoản khách hàng.
             </summary>
         </member>
-        <member name="M:HotelManagementAPI.Controllers.NguoiDungController.GetAll">
-            <summary>
-            Lấy danh sách tất cả người dùng.
-            </summary>
-        </member>
-        <member name="M:HotelManagementAPI.Controllers.NguoiDungController.Update(System.Int32,HotelManagementAPI.DTOs.NguoiDungDTO)">
-            <summary>
-            Cập nhật thông tin người dùng.
-            </summary>
-            <remarks>
-            **Quyền**: Chỉ dành cho Quản trị viên.
-            </remarks>
-            <param name="id">Mã người dùng cần cập nhật.</param>
-            <param name="nguoiDung">Thông tin người dùng cần cập nhật.</param>
-            <returns>Kết quả cập nhật.</returns>
-        </member>
-        <member name="M:HotelManagementAPI.Controllers.NguoiDungController.Delete(System.String)">
-            <summary>
-            Xóa người dùng theo mã.
-            </summary>
-        </member>
-        <member name="M:HotelManagementAPI.Controllers.NguoiDungController.DangKyKhachHang(HotelManagementAPI.DTOs.NguoiDungDTO)">
-            <summary>
-            Đăng ký tài khoản khách hàng.
-            </summary>
-            <remarks>
-            Vai trò mặc định là "KhachHang".
-            </remarks>
-            <param name="nguoiDung">Thông tin người dùng cần đăng ký.</param>
-            <returns>Người dùng vừa được đăng ký.</returns>
-        </member>
         <member name="M:HotelManagementAPI.Controllers.NhanVien.NhanVienController.DangKyNhanVien(HotelManagementAPI.DTOs.NguoiDungDTO)">
             <summary>
             Đăng ký tài khoản nhân viên.
             </summary>
         </member>
-        <member name="T:HotelManagementAPI.Controllers.NhanVien.PhongQuanLyController">
+        <member name="M:HotelManagementAPI.Controllers.NhanVien.QuanTriVienPhongController.ThemPhong(HotelManagementAPI.DTOs.PhongDetailsDTO)">
             <summary>
-            Controller quản lý trạng thái và thông tin phòng dành cho nhân viên.
+            Thêm phòng mới.
             </summary>
         </member>
-        <member name="M:HotelManagementAPI.Controllers.NhanVien.PhongQuanLyController.#ctor(System.Data.IDbConnection)">
+        <member name="M:HotelManagementAPI.Controllers.NhanVien.QuanTriVienPhongController.CapNhatPhong(System.String,HotelManagementAPI.DTOs.PhongDetailsDTO)">
+            <summary>
+            Sửa thông tin phòng.
+            </summary>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.NhanVien.QuanTriVienPhongController.XoaPhong(System.String)">
+            <summary>
+            Xóa phòng.
+            </summary>
+        </member>
+        <member name="T:HotelManagementAPI.Controllers.QuanTriVien.QuanLyDichVuQTVController">
+            <summary>
+            Controller quản lý dịch vụ dành cho Quản trị viên.
+            </summary>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.QuanTriVien.QuanLyDichVuQTVController.#ctor(System.Data.IDbConnection)">
             <summary>
             Khởi tạo controller với kết nối cơ sở dữ liệu.
             </summary>
             <param name="db">Kết nối cơ sở dữ liệu.</param>
         </member>
-        <member name="M:HotelManagementAPI.Controllers.NhanVien.PhongQuanLyController.CapNhatTrangThaiPhong(System.String,System.String)">
+        <member name="M:HotelManagementAPI.Controllers.QuanTriVien.QuanLyDichVuQTVController.ThemDichVu(HotelManagementAPI.DTOs.DichVuDTO)">
             <summary>
-            Cập nhật trạng thái phòng (Trống, Đang dọn, Sử dụng).
+            Thêm dịch vụ mới (Mã dịch vụ tự sinh).
             </summary>
-            <param name="id">Mã phòng cần cập nhật trạng thái.</param>
-            <param name="trangThai">Trạng thái mới của phòng (Trống, Đang dọn, Sử dụng).</param>
-            <returns>Kết quả cập nhật trạng thái phòng.</returns>
-        </member>
-        <member name="M:HotelManagementAPI.Controllers.NhanVien.PhongQuanLyController.DatPhong(HotelManagementAPI.DTOs.DatPhongDTO)">
-            <summary>
-            Đặt phòng mới.
-            </summary>
-            <param name="datPhongDTO">Thông tin đặt phòng.</param>
-            <returns>Kết quả đặt phòng.</returns>
+            <param name="dichVuDTO">Thông tin dịch vụ.</param>
+            <returns>Kết quả thêm dịch vụ.</returns>
         </member>
         <member name="M:HotelManagementAPI.Controllers.QuanTriVien.QuanTriVienController.DangKyQuanTriVien(HotelManagementAPI.DTOs.NguoiDungDTO)">
             <summary>

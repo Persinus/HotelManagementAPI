@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Desktop\\baitaphomnahy\\HotelManagementAPI\\HotelManagementAPI.csproj": {}
+    "D:\\Desktop\\code30_4\\HotelManagementAPI\\HotelManagementAPI.csproj": {}
   },
   "projects": {
-    "D:\\Desktop\\baitaphomnahy\\HotelManagementAPI\\HotelManagementAPI.csproj": {
+    "D:\\Desktop\\code30_4\\HotelManagementAPI\\HotelManagementAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Desktop\\baitaphomnahy\\HotelManagementAPI\\HotelManagementAPI.csproj",
+        "projectUniqueName": "D:\\Desktop\\code30_4\\HotelManagementAPI\\HotelManagementAPI.csproj",
         "projectName": "HotelManagementAPI",
-        "projectPath": "D:\\Desktop\\baitaphomnahy\\HotelManagementAPI\\HotelManagementAPI.csproj",
+        "projectPath": "D:\\Desktop\\code30_4\\HotelManagementAPI\\HotelManagementAPI.csproj",
         "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-        "outputPath": "D:\\Desktop\\baitaphomnahy\\HotelManagementAPI\\obj\\",
+        "outputPath": "D:\\Desktop\\code30_4\\HotelManagementAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -66,7 +66,7 @@
             },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
-              "version": "[9.0.3, )"
+              "version": "[9.0.4, )"
             },
             "Microsoft.AspNetCore.SignalR": {
               "target": "Package",
@@ -78,7 +78,7 @@
             },
             "Microsoft.Data.SqlClient": {
               "target": "Package",
-              "version": "[6.0.1, )"
+              "version": "[6.0.2, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -94,13 +94,25 @@
               "target": "Package",
               "version": "[9.0.4, )"
             },
+            "Microsoft.ML": {
+              "target": "Package",
+              "version": "[4.0.2, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.20.72, )"
+            },
             "Serilog.AspNetCore": {
               "target": "Package",
               "version": "[9.0.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.6.2, )"
+              "version": "[8.1.1, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.9.3, )"
             }
           },
           "imports": [
