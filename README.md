@@ -15,3 +15,7 @@ It showcases clean architecture principles and dependency injection using .NET C
 - Visual Studio 2022 or later
 
 ### Structure
+# Force GitHub Linguist to recognize C# as the main language
+*.cs linguist-language=C#
+*.config linguist-language=XML
+*.json linguist-language=JSON
