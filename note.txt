@@ -25,6 +25,7 @@ k dang nhap dang ky dc
 chua phan quyen dc
 ////////////////  bao cao tuan 2   ////////////////////////////////
 
+<<<<<<< HEAD
 làm phan quyen + JWT
 phong
 dich vu 
@@ -133,3 +134,11 @@ Task 5: add thêm dữ liệu Khách hàng (Post API swagger)
 =======
 - ghi chú Sql 
 >>>>>>> baf6ee7 (them_note.txt)
+=======
+làm phan quyen + JWT 
+phong
+dich vu 
+hoa don
+
+
+>>>>>>> 8e2fcb0 (lambai)
