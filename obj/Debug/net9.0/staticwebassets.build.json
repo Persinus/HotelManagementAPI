@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "g9/0JoLAHPszyt5P6gbi2iovpI2DMtVSPuKaSKkVpRE=",
+  "Hash": "XjiJxtSSkkTqiOVfhIE1XdzaGEFkScKV+Xmfv1+x+ks=",
   "Source": "HotelManagementAPI",
   "BasePath": "_content/HotelManagementAPI",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "HotelManagementAPI\\wwwroot",
       "Source": "HotelManagementAPI",
-      "ContentRoot": "D:\\Desktop\\code30_4\\HotelManagementAPI\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\wwwroot\\",
       "BasePath": "_content/HotelManagementAPI",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "D:\\Desktop\\code30_4\\HotelManagementAPI\\obj\\Debug\\net9.0\\compressed\\66v20z1wre-ej1hozjj51.gz",
+      "Identity": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\obj\\Debug\\net9.0\\compressed\\66v20z1wre-ej1hozjj51.gz",
       "SourceId": "HotelManagementAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Desktop\\code30_4\\HotelManagementAPI\\obj\\Debug\\net9.0\\compressed\\",
+      "ContentRoot": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/HotelManagementAPI",
       "RelativePath": "swagger-custom#[.{fingerprint=ej1hozjj51}]?.css.gz",
       "AssetKind": "All",
@@ -28,20 +28,20 @@
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "D:\\Desktop\\code30_4\\HotelManagementAPI\\wwwroot\\swagger-custom.css",
+      "RelatedAsset": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\wwwroot\\swagger-custom.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
       "Fingerprint": "hus4lh2nxg",
       "Integrity": "95t2X6oQq9H51LtZknSXzpR8QnmDHwhxOZgu1uttV/Q=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "D:\\Desktop\\code30_4\\HotelManagementAPI\\wwwroot\\swagger-custom.css"
+      "OriginalItemSpec": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\wwwroot\\swagger-custom.css"
     },
     {
-      "Identity": "D:\\Desktop\\code30_4\\HotelManagementAPI\\wwwroot\\swagger-custom.css",
+      "Identity": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\wwwroot\\swagger-custom.css",
       "SourceId": "HotelManagementAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Desktop\\code30_4\\HotelManagementAPI\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\wwwroot\\",
       "BasePath": "_content/HotelManagementAPI",
       "RelativePath": "swagger-custom#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -62,7 +62,7 @@
   "Endpoints": [
     {
       "Route": "swagger-custom.css",
-      "AssetFile": "D:\\Desktop\\code30_4\\HotelManagementAPI\\obj\\Debug\\net9.0\\compressed\\66v20z1wre-ej1hozjj51.gz",
+      "AssetFile": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\obj\\Debug\\net9.0\\compressed\\66v20z1wre-ej1hozjj51.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -85,7 +85,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 12 May 2025 16:28:32 GMT"
+          "Value": "Tue, 06 May 2025 12:47:12 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -117,7 +117,7 @@
     },
     {
       "Route": "swagger-custom.css",
-      "AssetFile": "D:\\Desktop\\code30_4\\HotelManagementAPI\\wwwroot\\swagger-custom.css",
+      "AssetFile": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\wwwroot\\swagger-custom.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -138,7 +138,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 12 May 2025 16:28:32 GMT"
+          "Value": "Tue, 06 May 2025 12:47:12 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -154,7 +154,7 @@
     },
     {
       "Route": "swagger-custom.css.gz",
-      "AssetFile": "D:\\Desktop\\code30_4\\HotelManagementAPI\\obj\\Debug\\net9.0\\compressed\\66v20z1wre-ej1hozjj51.gz",
+      "AssetFile": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\obj\\Debug\\net9.0\\compressed\\66v20z1wre-ej1hozjj51.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -175,7 +175,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 12 May 2025 16:28:32 GMT"
+          "Value": "Tue, 06 May 2025 12:47:12 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -199,7 +199,7 @@
     },
     {
       "Route": "swagger-custom.ej1hozjj51.css",
-      "AssetFile": "D:\\Desktop\\code30_4\\HotelManagementAPI\\obj\\Debug\\net9.0\\compressed\\66v20z1wre-ej1hozjj51.gz",
+      "AssetFile": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\obj\\Debug\\net9.0\\compressed\\66v20z1wre-ej1hozjj51.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -222,7 +222,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 12 May 2025 16:28:32 GMT"
+          "Value": "Tue, 06 May 2025 12:47:12 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -262,7 +262,7 @@
     },
     {
       "Route": "swagger-custom.ej1hozjj51.css",
-      "AssetFile": "D:\\Desktop\\code30_4\\HotelManagementAPI\\wwwroot\\swagger-custom.css",
+      "AssetFile": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\wwwroot\\swagger-custom.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -283,7 +283,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 12 May 2025 16:28:32 GMT"
+          "Value": "Tue, 06 May 2025 12:47:12 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -307,7 +307,7 @@
     },
     {
       "Route": "swagger-custom.ej1hozjj51.css.gz",
-      "AssetFile": "D:\\Desktop\\code30_4\\HotelManagementAPI\\obj\\Debug\\net9.0\\compressed\\66v20z1wre-ej1hozjj51.gz",
+      "AssetFile": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\obj\\Debug\\net9.0\\compressed\\66v20z1wre-ej1hozjj51.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -328,7 +328,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 12 May 2025 16:28:32 GMT"
+          "Value": "Tue, 06 May 2025 12:47:12 GMT"
         },
         {
           "Name": "Cache-Control",
