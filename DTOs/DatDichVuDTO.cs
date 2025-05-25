@@ -1,26 +1,18 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace HotelManagementAPI.DTOs
 {
     public class DatDichVuDTO
     {
-        [Required]
-        [StringLength(6)]
-        public string MaDatDichVu { get; set; } = null!;
-
-        [Required]
-        [StringLength(6)]
-        public string MaDatPhong { get; set; } = null!;
-
-        [Required]
-        [StringLength(6)]
-        public string MaDichVu { get; set; } = null!;
-
-        [Required]
-        [Range(1, 1000, ErrorMessage = "Số lượng phải nằm trong khoảng từ 1 đến 1000.")]
+        [JsonIgnore]
+        public string? MaDatDichVu { get; set; } // Không required, BE tự sinh
+        [JsonIgnore]
+        public string? MaDatPhong { get; set; } // BE tự gán khi đặt dịch vụ kèm phòng
+        [JsonIgnore]
+        public string MaDichVu { get; set; }
         public int SoLuong { get; set; }
-
-        [StringLength(6)]
+        
         public string? MaHoaDon { get; set; }
     }
 }

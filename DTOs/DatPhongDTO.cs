@@ -7,27 +7,17 @@ namespace HotelManagementAPI.DTOs
 {
     public class DatPhongDTO
     {
-
-        [Required]
-        public string MaPhong { get; set; } = null!;
-
         [JsonIgnore]
-        public string? MaNguoiDung { get; set; } = null!;
+        public string? MaDatPhong { get; set; } // Không required, BE tự sinh
+        [JsonIgnore]
+        public string? MaNguoiDung { get; set; } // BE tự lấy từ JWT
 
-
-        [Required]
+        public string? MaPhong { get; set; }
         public DateTime NgayDat { get; set; }
-
-        [Required]
-        public DateTime NgayCheckIn { get; set; }
-
-        [Required]
-        public DateTime NgayCheckOut { get; set; }
-        
-         [Range(1, 3, ErrorMessage = "TinhTrangDatPhong chỉ nhận giá trị từ 1 đến 3.")]
-        public byte? TinhTrangDatPhong { get; set; } = null!;
-
-        [JsonIgnore]
-        public string? MaDatPhong { get; set; } // This will be generated later
+        public DateTime NgayNhan { get; set; }
+        public DateTime NgayTra { get; set; }
+        public decimal TongTien { get; set; }
+        public int TrangThai { get; set; }
+        public List<DatDichVuDTO>? DichVuDiKem { get; set; }
     }
 }

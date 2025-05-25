@@ -4,10 +4,8 @@
         <name>HotelManagementAPI</name>
     </assembly>
     <members>
-        <member name="M:HotelManagementAPI.Controllers.AllowAnonymous.AllowAnonymousViewController.GetAllPhong">
-            <summary>
-            Lấy danh sách tất cả phòng.
-            </summary>
+        <member name="M:HotelManagementAPI.Controllers.AllowAnonymous.AllowAnonymousViewController.GetAll">
+            <returns>Danh sách phòng.</returns>
         </member>
         <member name="M:HotelManagementAPI.Controllers.AllowAnonymous.AllowAnonymousViewController.GetAllTienNghi">
             <summary>
@@ -44,27 +42,12 @@
             Đăng xuất người dùng dựa trên vai trò từ token.
             </summary>
         </member>
-        <member name="M:HotelManagementAPI.Controllers.KhachHang.DatDichVuController.DatDichVu(HotelManagementAPI.DTOs.DatDichVuDTO)">
-            <summary>
-            Đặt dịch vụ đi kèm.
-            </summary>
-        </member>
-        <member name="M:HotelManagementAPI.Controllers.KhachHang.DatDichVuController.LichSuDatDichVu(System.String)">
-            <summary>
-            Lấy lịch sử đặt dịch vụ.
-            </summary>
-        </member>
-        <member name="M:HotelManagementAPI.Controllers.KhachHang.DatDichVuController.GetAllDichVu">
-            <summary>
-            Lấy danh sách toàn bộ dịch vụ.
-            </summary>
-        </member>
         <member name="M:HotelManagementAPI.Controllers.KhachHang.DatPhongController.TaoDonDatPhong(HotelManagementAPI.DTOs.DatPhongDTO)">
             <summary>
-            Tạo đơn đặt phòng.
+            Tạo đơn đặt phòng (kèm dịch vụ đi kèm nếu có).
             </summary>
         </member>
-        <member name="M:HotelManagementAPI.Controllers.KhachHang.DatPhongController.LichSuDatPhong(System.String)">
+        <member name="M:HotelManagementAPI.Controllers.KhachHang.DatPhongController.LichSuDatPhong">
             <summary>
             Lấy lịch sử đặt phòng của người dùng.
             </summary>
@@ -72,6 +55,16 @@
         <member name="M:HotelManagementAPI.Controllers.KhachHang.DatPhongController.HuyDatPhong(System.String)">
             <summary>
             Hủy đặt phòng.
+            </summary>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.KhachHang.DatPhongController.DatDichVu(HotelManagementAPI.DTOs.DatDichVuDTO)">
+            <summary>
+            Đặt thêm dịch vụ đi kèm cho đơn đặt phòng đã có.
+            </summary>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.KhachHang.DatPhongController.LichSuDatDichVu(System.String)">
+            <summary>
+            Lấy lịch sử đặt dịch vụ cho một đơn đặt phòng.
             </summary>
         </member>
         <member name="M:HotelManagementAPI.Controllers.KhachHang.KhachHangController.DangKyKhachHang(HotelManagementAPI.DTOs.NguoiDungDTO)">

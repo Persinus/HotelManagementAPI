@@ -31,6 +31,7 @@ namespace HotelManagementAPI.DTOs
         [Required]
         public string KieuGiuong { get; set; } = null!;
 
+
         public string? MoTa { get; set; }
 
         [Required]
@@ -55,12 +56,18 @@ namespace HotelManagementAPI.DTOs
         public decimal SoSaoTrungBinh { get; set; }
 
         // Danh sách ảnh phụ
-        public List<string> UrlAnhPhu { get; set; } = new List<string>();
+        public List<PhongAnhDTO> UrlAnhPhu { get; set; } = new List<PhongAnhDTO>();
 
         // Danh sách tiện nghi
         public List<TienNghiDTO> TienNghi { get; set; } = new List<TienNghiDTO>();
 
         // Danh sách giảm giá
         public List<GiamGiaDTO> GiamGia { get; set; } = new List<GiamGiaDTO>();
+        // Danh sách feedback
+        public List<FeedBackDTO> Feedbacks { get; set; } = new List<FeedBackDTO>();
+
+        [Required]
+        [Range(0, double.MaxValue, ErrorMessage = "Giá phòng sau giảm phải lớn hơn hoặc bằng 0.")]
+        public decimal GiaPhongSauGiam { get; set; }
     }
 }
