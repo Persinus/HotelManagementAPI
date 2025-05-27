@@ -7,7 +7,7 @@ namespace HotelManagementAPI.DTOs
     public class PhongDetailsDTO
     {
 
-        [JsonIgnore]
+        [Required]
         public string MaPhong { get; set; } = null!;
 
         [Required]
@@ -20,8 +20,8 @@ namespace HotelManagementAPI.DTOs
         [Required]
         public string TinhTrang { get; set; } = null!;
 
-        [Required]
-        [Range(1, int.MaxValue, ErrorMessage = "Số lượng phòng phải lớn hơn hoặc bằng 1.")]
+        [JsonIgnore]
+       
         public int SoLuongPhong { get; set; }
 
         [Required]

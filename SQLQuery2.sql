@@ -15,6 +15,54 @@ CREATE TABLE NguoiDung (
     NgayTao DATETIME DEFAULT GETDATE()               -- Ngày tạo
 );
 
+
+ALTER TABLE NguoiDung
+ALTER COLUMN CanCuocCongDan NVARCHAR(20);  -- hoặc NVARCHAR(12) nếu chắc chắn là CCCD Việt Nam
+
+ALTER TABLE NguoiDung
+ALTER COLUMN SoDienThoai NVARCHAR(15);     -- đủ dài để chứa số điện thoại Việt Nam, kể cả mã quốc gia
+
+ALTER TABLE NguoiDung
+ALTER COLUMN Vaitro NVARCHAR(15); 
+
+ALTER TABLE NguoiDung DROP CONSTRAINT UQ__NguoiDun__9A7D3DD7ACBA3F05;
+ALTER TABLE NguoiDung ALTER COLUMN CanCuocCongDan NVARCHAR(20);
+ALTER TABLE NguoiDung ADD CONSTRAINT UQ_CanCuocCongDan UNIQUE (CanCuocCongDan);
+
+ALTER TABLE NguoiDung DROP CONSTRAINT UQ__NguoiDun__0389B7BD3800E751; -- Cho SoDienThoai
+ALTER TABLE NguoiDung ALTER COLUMN SoDienThoai NVARCHAR(15);
+ALTER TABLE NguoiDung ADD CONSTRAINT UQ_SoDienThoai UNIQUE (SoDienThoai);
+
+select * from NguoiDung
+
+INSERT INTO NguoiDung (
+    MaNguoiDung, Vaitro, Email, TenTaiKhoan, MatKhau, HoTen,
+    CanCuocCongDan, SoDienThoai, DiaChi, NgaySinh, GioiTinh
+)
+VALUES (
+    'ND002', 'QuanTriVien', 'admin@example.com', 'admin01', 'admin123',
+    N'Nguyễn Quản Trị', 123456789, 912345678, N'Hà Nội', '1990-01-01', N'Nam'
+);
+
+INSERT INTO NguoiDung (
+    MaNguoiDung, Vaitro, Email, TenTaiKhoan, MatKhau, HoTen,
+    CanCuocCongDan, SoDienThoai, DiaChi, NgaySinh, GioiTinh
+)
+VALUES (
+    'ND004', 'NhanVien', 'admin@xample.com', 'admin01', 'admin123',
+    N'Nguyễn Quản Trị', 123456786, 9123459678, N'Hà Nội', '1990-01-01', N'Nam'
+); 
+
+
+
+INSERT INTO NguoiDung (
+    MaNguoiDung, Vaitro, Email, TenTaiKhoan, MatKhau, HoTen,
+    CanCuocCongDan, SoDienThoai, DiaChi, NgaySinh, GioiTinh
+)
+VALUES (
+    'ND005', 'NhanVien', 'admisn@xample.com', '11111', '11111',
+    N'Nguyễn Quản Trị', 1234586243, 9512345678, N'Hà Nội', '1990-01-01', N'Nam'
+); 
 -- Bảng Phong
 CREATE TABLE Phong (
     MaPhong NVARCHAR(6) PRIMARY KEY,           -- Mã phòng tự động tăng
@@ -113,8 +161,20 @@ CREATE TABLE DatDichVu (
     MaHoaDon NVarchar(6) NULL,                              -- Mã hóa đơn liên kết
     FOREIGN KEY (MaDatPhong) REFERENCES DatPhong(MaDatPhong),
     FOREIGN KEY (MaDichVu) REFERENCES DichVu(MaDichVu),
-    FOREIGN KEY (MaHoaDon) REFERENCES HoaDon(MaHoaDon)
+
 );
+
+-- Xóa ràng buộc FK nếu chưa đặt tên, cần lấy tên bằng cách truy vấn (xem phía dưới nếu cần)
+ALTER TABLE DatDichVu
+DROP CONSTRAINT FK__DatDichVu__MaHoa__0371755F;  -- Tên này có thể khác, cần thay đúng tên
+
+-- Xóa cột
+ALTER TABLE DatDichVu
+DROP COLUMN MaHoaDon;
+
+SELECT name 
+FROM sys.foreign_keys 
+WHERE parent_object_id = OBJECT_ID('DatDichVu');
 
 -- Bảng HoaDon
 CREATE TABLE HoaDon (
@@ -163,6 +223,10 @@ CREATE TABLE Feedback (
     FOREIGN KEY (MaNguoiDung) REFERENCES NguoiDung(MaNguoiDung)
 );
 
+ALTER TABLE Feedback
+ADD PhanLoai NVARCHAR(10) NOT NULL
+    CHECK (PhanLoai IN ('TichCuc', 'TieuCuc'));
+
 -- Bảng NhanVien
 CREATE TABLE NhanVien (
     MaNhanVien NVARCHAR(6) PRIMARY KEY,             -- Mã nhân viên
@@ -200,3 +264,23 @@ CREATE TABLE ChiTietBaoCao (
     GiaTri DECIMAL(18,2) NOT NULL,                   -- Giá trị (ví dụ: doanh thu, tỷ lệ sử dụng)
     FOREIGN KEY (MaBaoCao) REFERENCES BaoCao(MaBaoCao)
 );
+
+
+
+DROP TABLE NhanVien;
+SELECT p.MaPhong, p.LoaiPhong, p.GiaPhong, p.TinhTrang, p.SoLuongPhong, p.Tang, 
+       p.KieuGiuong, p.MoTa, p.UrlAnhChinh, p.SucChua, p.SoGiuong, 
+       p.DonViTinh, p.SoSaoTrungBinh
+FROM Phong p
+
+
+ SELECT tn.MaTienNghi, tn.TenTienNghi, tn.MoTa
+FROM TienNghi tn
+JOIN Phong_TienNghi ptn ON tn.MaTienNghi = ptn.MaTienNghi
+WHERE ptn.MaPhong = 'P001'
+SELECT gg.MaGiamGia, gg.TenGiamGia, gg.LoaiGiamGia, gg.GiaTriGiam, gg.NgayBatDau, gg.NgayKetThuc, gg.MoTa
+FROM GiamGia gg
+JOIN Phong_GiamGia pg ON gg.MaGiamGia = pg.MaGiamGia
+WHERE pg.MaPhong = 'P001'
+
+Select* from Phong
