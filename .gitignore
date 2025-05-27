@@ -36,8 +36,9 @@ Properties/PublishProfiles/
 *.v2
 
 # Bỏ qua các thư mục build
-bin/
-obj/
+
 .vscode/
 *.user
 *.suo
+/bin/
+/obj/
