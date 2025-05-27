@@ -94,7 +94,7 @@ public partial class Hotelnhom2Context : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__DatDichVu__MaDic__027D5126");
 
-            entity.HasOne(d => d.MaHoaDonNavigation).WithMany(p => p.DatDichVus).HasConstraintName("FK__DatDichVu__MaHoa__0371755F");
+          
         });
 
         modelBuilder.Entity<DatPhong>(entity =>

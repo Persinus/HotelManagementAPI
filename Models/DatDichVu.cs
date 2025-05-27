@@ -21,8 +21,7 @@ public partial class DatDichVu
 
     public int SoLuong { get; set; }
 
-    [StringLength(6)]
-    public string? MaHoaDon { get; set; }
+ 
 
     [ForeignKey("MaDatPhong")]
     [InverseProperty("DatDichVus")]
@@ -32,7 +31,4 @@ public partial class DatDichVu
     [InverseProperty("DatDichVus")]
     public virtual DichVu MaDichVuNavigation { get; set; } = null!;
 
-    [ForeignKey("MaHoaDon")]
-    [InverseProperty("DatDichVus")]
-    public virtual HoaDon? MaHoaDonNavigation { get; set; }
 }
