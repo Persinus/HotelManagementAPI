@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using Dapper;
 using HotelManagementAPI.DTOs;
 using Microsoft.AspNetCore.Authorization;
+using HotelManagementAPI.Helper;
+using BCrypt.Net;
 
 namespace HotelManagementAPI.Controllers.AllowAnonymous
 {
@@ -25,7 +27,7 @@ namespace HotelManagementAPI.Controllers.AllowAnonymous
         [HttpPost("dangky")]
         public async Task<ActionResult<NguoiDungDTO>> DangKyNguoiDung([FromBody] NguoiDungDTO nguoiDung)
         {
-            nguoiDung.Vaitro = "KhachHang"; // Mặc định vai trò là Khách hàng
+            nguoiDung.Vaitro = "KhachHang";
             nguoiDung.MaNguoiDung = await GenerateUniqueMaNguoiDung();
             nguoiDung.NgayTao = DateTime.Now;
 
@@ -46,6 +48,13 @@ namespace HotelManagementAPI.Controllers.AllowAnonymous
             {
                 return Conflict(new { Message = "Tên đăng nhập đã có người sử dụng. Vui lòng chọn tên đăng nhập khác." });
             }
+
+            // Mã hóa CCCD trước khi lưu
+            if (!string.IsNullOrEmpty(nguoiDung.CanCuocCongDan))
+                nguoiDung.CanCuocCongDan = SensitiveDataHelper.Encrypt(nguoiDung.CanCuocCongDan);
+
+            // Mã hóa mật khẩu (nên dùng BCrypt hoặc ít nhất là SHA256)
+            nguoiDung.MatKhau = BCrypt.Net.BCrypt.HashPassword(nguoiDung.MatKhau);
 
             // Thêm người dùng mới
             const string insertQuery = @"

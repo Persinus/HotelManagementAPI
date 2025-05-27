@@ -6,6 +6,7 @@ using HotelManagementAPI.DTOs;
 using HotelManagementAPI.Helper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Caching.Memory;
+
 namespace HotelManagementAPI.Controllers.AllowAnonymous
 {
     [ApiController]
@@ -31,15 +32,19 @@ namespace HotelManagementAPI.Controllers.AllowAnonymous
         [HttpPost("dangnhap")]
         public async Task<ActionResult<string>> DangNhap([FromBody] LoginDTO login)
         {
-            const string query = "SELECT * FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan AND MatKhau = @MatKhau";
-            var nguoiDung = await _db.QueryFirstOrDefaultAsync<NguoiDungDTO>(query, new { login.TenTaiKhoan, login.MatKhau });
+            // Lấy user theo tên tài khoản
+            const string query = "SELECT * FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan";
+            var nguoiDung = await _db.QueryFirstOrDefaultAsync<NguoiDungDTO>(query, new { login.TenTaiKhoan });
 
             if (nguoiDung == null)
-            {
-                return Unauthorized(new { Message = "Tên tài khoản hoặc mật khẩu không đúng." });
-            }
+                return Unauthorized(new { Message = "Tên tài khoản hoặc mật khẩu không đúng 1." });
 
-            // Tạo JWT token
+            // So sánh mật khẩu nhập vào với mật khẩu đã hash trong DB
+            bool isValid = BCrypt.Net.BCrypt.Verify(login.MatKhau, nguoiDung.MatKhau);
+            if (!isValid)
+                return Unauthorized(new { Message = "Tên tài khoản hoặc mật khẩu không đúng 2." });
+
+            // Tạo JWT token như cũ...
             var secretKey = _config["Jwt:SecretKey"];
             var issuer = _config["Jwt:Issuer"];
             var audience = _config["Jwt:Audience"];
@@ -82,9 +87,12 @@ namespace HotelManagementAPI.Controllers.AllowAnonymous
                     return NotFound(new { Message = "Email không tồn tại trong hệ thống." });
                 }
 
-                // Cập nhật mật khẩu mới
+                // Mã hóa mật khẩu mới trước khi lưu
+                var hashedPassword = BCrypt.Net.BCrypt.HashPassword(resetPassword.NewPassword);
+
+                // Cập nhật mật khẩu mới (đã mã hóa)
                 const string updatePasswordQuery = "UPDATE NguoiDung SET MatKhau = @MatKhau WHERE Email = @Email";
-                await _db.ExecuteAsync(updatePasswordQuery, new { MatKhau = resetPassword.NewPassword, resetPassword.Email });
+                await _db.ExecuteAsync(updatePasswordQuery, new { MatKhau = hashedPassword, resetPassword.Email });
 
                 return Ok(new { Message = "Mật khẩu đã được cập nhật thành công." });
             }
@@ -94,5 +102,7 @@ namespace HotelManagementAPI.Controllers.AllowAnonymous
                 return StatusCode(500, new { Message = "Đã xảy ra lỗi khi cập nhật mật khẩu." });
             }
         }
+
+        
     }
 }
