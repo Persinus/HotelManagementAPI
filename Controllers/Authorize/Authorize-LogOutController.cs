@@ -9,11 +9,11 @@ namespace HotelManagementAPI.Controllers.Authorize
 {
     [ApiController]
     [Route("api/logout")]
-    public class AuthorizeController : ControllerBase
+    public class AuthorizeLogoutController : ControllerBase
     {
         private readonly IMemoryCache _cache;
 
-        public AuthorizeController(IMemoryCache cache)
+        public AuthorizeLogoutController(IMemoryCache cache)
         {
             _cache = cache;
         }
