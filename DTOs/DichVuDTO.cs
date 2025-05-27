@@ -5,7 +5,7 @@ namespace HotelManagementAPI.DTOs
 {
     public class DichVuDTO
     {
-        [JsonIgnore]
+
         public string? MaDichVu { get; set; } 
 
         [Required]
