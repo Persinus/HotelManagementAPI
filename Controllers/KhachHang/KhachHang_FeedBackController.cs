@@ -18,12 +18,12 @@ namespace HotelManagementAPI.Controllers.KhachHang
 
     [ApiController]
     [Route("api/feedback")]
-    public class FeedBackController : ControllerBase
+    public class KhachHang_FeedBackController : ControllerBase
     {
         private readonly IDbConnection _db;
         private readonly PredictionEngine<SentimentData, SentimentPrediction> _predictionEngine;
 
-        public FeedBackController(IDbConnection db, IConfiguration configuration)
+        public KhachHang_FeedBackController(IDbConnection db, IConfiguration configuration)
         {
             _db = db;
             var mlContext = new MLContext();

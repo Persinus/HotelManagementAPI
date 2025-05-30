@@ -10,11 +10,11 @@ namespace HotelManagementAPI.Controllers.KhachHang
 {
     [ApiController]
     [Route("api/KhachHang/datphong")]
-    public class DatPhongController : ControllerBase
+    public class KhachHang_DatPhongController : ControllerBase
     {
         private readonly IDbConnection _db;
 
-        public DatPhongController(IDbConnection db)
+        public KhachHang_DatPhongController(IDbConnection db)
         {
             _db = db;
         }

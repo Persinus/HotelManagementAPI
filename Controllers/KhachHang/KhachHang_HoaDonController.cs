@@ -14,11 +14,11 @@ namespace HotelManagementAPI.Controllers.KhachHang
 {
     [ApiController]
     [Route("api/KhachHang/hoadon")]
-    public class HoaDonController : ControllerBase
+    public class KhachHang_HoaDonController : ControllerBase
     {
         private readonly IDbConnection _db;
 
-        public HoaDonController(IDbConnection db)
+        public KhachHang_HoaDonController(IDbConnection db)
         {
             _db = db;
         }
