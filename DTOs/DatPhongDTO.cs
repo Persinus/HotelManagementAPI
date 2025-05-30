@@ -20,7 +20,7 @@ namespace HotelManagementAPI.DTOs
         public DateTime NgayCheckOut { get; set; }
         // Nếu DB không có cột TongTien thì bỏ dòng này
         // public decimal TongTien { get; set; }
- 
+        [JsonIgnore]
         public byte TinhTrangDatPhong { get; set; }
         public List<DatDichVuDTO>? DichVuDiKem { get; set; }
     }
