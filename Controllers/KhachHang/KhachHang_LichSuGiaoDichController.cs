@@ -11,11 +11,11 @@ namespace HotelManagementAPI.Controllers.KhachHang
     //GET /api/lichsu – Lấy toàn bộ lịch sử giao dịch
     [ApiController]
     [Route("api/KhachHang/lichsu")]
-    public class LichSuGiaoDichController : ControllerBase
+    public class KhachHang_LichSuGiaoDichController : ControllerBase
     {
         private readonly IDbConnection _db;
 
-        public LichSuGiaoDichController(IDbConnection db)
+        public KhachHang_LichSuGiaoDichController(IDbConnection db)
         {
             _db = db;
         }
