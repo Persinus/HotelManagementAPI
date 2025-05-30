@@ -125,8 +125,8 @@ namespace HotelManagementAPI.Controllers.KhachHang
             }
 
             // Cập nhật trạng thái phòng về 2 (đã có người đặt chính là mình đã đặt 1 rồi ko đặt nữa , chờ thanh toán)
-            const string updatePhongQuery = @"UPDATE Phong SET TinhTrang = 2 WHERE MaPhong = @MaPhong";
-            await _db.ExecuteAsync(updatePhongQuery, new { datPhongDTO.MaPhong });
+            // const string updatePhongQuery = @"UPDATE Phong SET TinhTrang = 2 WHERE MaPhong = @MaPhong";
+            // await _db.ExecuteAsync(updatePhongQuery, new { datPhongDTO.MaPhong });
 
             return Ok(new
             {
@@ -149,7 +149,7 @@ namespace HotelManagementAPI.Controllers.KhachHang
 
             const string query = @"
                 SELECT dp.MaDatPhong, dp.MaNguoiDung, dp.MaPhong, dp.NgayDat, dp.NgayCheckIn, dp.NgayCheckOut, dp.TinhTrangDatPhong,
-                       p.TenPhong, p.LoaiPhong, p.GiaPhong
+                       p.LoaiPhong, p.GiaPhong
                 FROM DatPhong dp
                 INNER JOIN Phong p ON dp.MaPhong = p.MaPhong
                 WHERE dp.MaNguoiDung = @MaNguoiDung";
