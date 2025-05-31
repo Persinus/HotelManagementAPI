@@ -105,11 +105,15 @@ builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
 // Đăng ký IMemoryCache
 builder.Services.AddMemoryCache();
-
+// Cấu hình Cloudinary
+builder.Services.Configure<CloudinarySettings>(
+    builder.Configuration.GetSection("CloudinarySettings"));
 // Cấu hình JWT
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer(options =>
     {
+          
+
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true, // Kiểm tra Issuer
@@ -157,27 +161,29 @@ builder.Services.AddAuthorization(options =>
 });
 
 var app = builder.Build();
-app.UseStaticFiles();
+
 
 // Cấu hình Swagger
 var enableSwagger = builder.Configuration.GetValue<bool>("Swagger:Enable");
-if (enableSwagger)
+if (enableSwagger || app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Hotel Management API V1");
-        c.RoutePrefix = string.Empty; // Đặt Swagger UI ở root URL
+        c.RoutePrefix = string.Empty;
         c.DocumentTitle = "Hotel Management API Documentation";
-        c.InjectJavascript("/swagger-login.js"); // Correctly inject JavaScript in SwaggerUIOptions
-        c.InjectStylesheet("/swagger-custom.css");
+        c.DisplayRequestDuration();
+        c.ConfigObject.PersistAuthorization = true;
+        c.ConfigObject.DefaultModelsExpandDepth = -1;
+        c.ConfigObject.ShowExtensions = true;
+        c.ConfigObject.ShowCommonExtensions = true;
+        c.ConfigObject.DisplayOperationId = true;
+        c.ConfigObject.DisplayRequestDuration = true;
+  
+        c.ConfigObject.DeepLinking = true;
+   
     });
-}
-
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
 }
 
 app.UseCors("AllowAllOrigins"); // Áp dụng chính sách CORS đã cấu hình
