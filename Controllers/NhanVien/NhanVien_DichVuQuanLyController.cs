@@ -19,11 +19,11 @@ namespace HotelManagementAPI.Controllers.NhanVien
 {
     [ApiController]
     [Route("api/dichvu")]
-    public class DichVuQuanLyController : ControllerBase
+    public class NhanVien_DichVuQuanLyController : ControllerBase
     {
         private readonly IDbConnection _db;
 
-        public DichVuQuanLyController(IDbConnection db)
+        public NhanVien_DichVuQuanLyController(IDbConnection db)
         {
             _db = db;
         }

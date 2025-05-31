@@ -81,7 +81,7 @@ public class TokenBlacklistMiddleware
             await context.Response.WriteAsync("Token đã bị thu hồi. Vui lòng đăng nhập lại.");
             return;
         }
-
+       
         await _next(context);
     }
 }

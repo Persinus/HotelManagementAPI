@@ -9,12 +9,12 @@ namespace HotelManagementAPI.Controllers.NhanVien
 {
     [ApiController]
     [Route("api/giamgia")]
-    [Authorize(Roles = "NhanVien,QuanTriVien")]
-    public class GiamGiaController : ControllerBase
+    [Authorize(Roles = "NhanVien")]
+    public class NhanVien_GiamGiaController : ControllerBase
     {
         private readonly IDbConnection _db;
 
-        public GiamGiaController(IDbConnection db)
+        public NhanVien_GiamGiaController(IDbConnection db)
         {
             _db = db;
         }
