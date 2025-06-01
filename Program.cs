@@ -45,6 +45,11 @@ builder.Services.AddSwaggerGen(options =>
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     options.IncludeXmlComments(xmlPath);
+    options.UseInlineDefinitionsForEnums(); // ✅ Hiển thị enum trong Swagger
+    options.EnableAnnotations(); // ✅ Bật hỗ trợ ghi chú trong Swagger
+    options.DescribeAllParametersInCamelCase(); // ✅ Hiển thị tham số theo camelCase
+    options.CustomSchemaIds(type => type.FullName); // Sử dụng tên đầy đủ của lớp làm ID schema
+
 
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
@@ -162,7 +167,6 @@ builder.Services.AddAuthorization(options =>
 
 var app = builder.Build();
 
-
 // Cấu hình Swagger
 var enableSwagger = builder.Configuration.GetValue<bool>("Swagger:Enable");
 if (enableSwagger || app.Environment.IsDevelopment())
@@ -172,17 +176,23 @@ if (enableSwagger || app.Environment.IsDevelopment())
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Hotel Management API V1");
         c.RoutePrefix = string.Empty;
+    
+    
+
         c.DocumentTitle = "Hotel Management API Documentation";
         c.DisplayRequestDuration();
         c.ConfigObject.PersistAuthorization = true;
-        c.ConfigObject.DefaultModelsExpandDepth = -1;
         c.ConfigObject.ShowExtensions = true;
         c.ConfigObject.ShowCommonExtensions = true;
         c.ConfigObject.DisplayOperationId = true;
         c.ConfigObject.DisplayRequestDuration = true;
-  
+
         c.ConfigObject.DeepLinking = true;
-   
+
+
+
+       
+
     });
 }
 
