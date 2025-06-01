@@ -16,6 +16,6 @@ public class PhongDetailsDTOValidator : AbstractValidator<PhongDetailsDTO>
         RuleFor(x => x.SoGiuong).GreaterThanOrEqualTo(1).WithMessage("Số giường phải lớn hơn hoặc bằng 1.");
         RuleFor(x => x.DonViTinh).NotEmpty();
         RuleFor(x => x.SoSaoTrungBinh).InclusiveBetween(0, 5).WithMessage("Số sao trung bình phải nằm trong khoảng từ 0 đến 5.");
-        RuleFor(x => x.GiaPhongSauGiam).GreaterThanOrEqualTo(0).WithMessage("Giá phòng sau giảm phải lớn hơn hoặc bằng 0.");
+       
     }
 }
