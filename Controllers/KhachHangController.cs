@@ -7,11 +7,13 @@ using System.Security.Claims;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HotelManagementAPI.Controllers
 {
     [ApiController]
     [Route("api/khachhang")]
+    [Authorize (Roles = "KhachHang")]
     public class KhachHangController : ControllerBase
     {
         private readonly IDbConnection _db;
@@ -22,8 +24,14 @@ namespace HotelManagementAPI.Controllers
         }
 
         // ----------- ĐẶT PHÒNG -----------
+        /// <summary>
+        /// Đặt phòng mới cho khách hàng.
+        /// </summary>
+        /// <remarks>
+        /// Tạo đơn đặt phòng mới, kiểm tra trạng thái phòng và dịch vụ đi kèm.
+        /// </remarks>
         [HttpPost("datphong")]
-        public async Task<IActionResult> TaoDonDatPhong([FromBody] DatPhongDTO datPhongDTO)
+        public async Task<IActionResult> TaoDonDatPhong([FromBody] KhachHangDatPhongDTO datPhongDTO)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -124,6 +132,9 @@ namespace HotelManagementAPI.Controllers
             });
         }
 
+        /// <summary>
+        /// Lấy lịch sử đặt phòng của khách hàng.
+        /// </summary>
         [HttpGet("datphong/lichsu")]
         public async Task<IActionResult> LichSuDatPhong()
         {
@@ -143,6 +154,10 @@ namespace HotelManagementAPI.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Hủy đơn đặt phòng theo mã.
+        /// </summary>
+        /// <param name="id">Mã đặt phòng</param>
         [HttpDelete("datphong/{id}")]
         public async Task<IActionResult> HuyDatPhong(string id)
         {
@@ -158,6 +173,10 @@ namespace HotelManagementAPI.Controllers
         }
 
         // ----------- HÓA ĐƠN -----------
+        /// <summary>
+        /// Lấy hóa đơn theo mã đặt phòng.
+        /// </summary>
+        /// <param name="maDatPhong">Mã đặt phòng</param>
         [HttpGet("hoadon/by-madatphong/{maDatPhong}")]
         public async Task<IActionResult> GetHoaDonByMaDatPhong(string maDatPhong)
         {
@@ -171,7 +190,7 @@ namespace HotelManagementAPI.Controllers
                 return Forbid("Bạn không có quyền xem hóa đơn này.");
 
             const string query = @"SELECT * FROM HoaDon WHERE MaDatPhong = @MaDatPhong";
-            var hoaDon = await _db.QueryFirstOrDefaultAsync<HoaDonDTO>(query, new { MaDatPhong = maDatPhong });
+            var hoaDon = await _db.QueryFirstOrDefaultAsync<KhachHangHoaDonDTO>(query, new { MaDatPhong = maDatPhong });
 
             if (hoaDon == null)
                 return NotFound(new { Message = "Không tìm thấy hóa đơn cho mã đặt phòng này." });
@@ -179,6 +198,9 @@ namespace HotelManagementAPI.Controllers
             return Ok(hoaDon);
         }
 
+        /// <summary>
+        /// Tạo hóa đơn mới cho đơn đặt phòng.
+        /// </summary>
         [HttpPost("hoadon/tao")]
         public async Task<IActionResult> TaoHoaDon([FromBody] TaoHoaDonRequestDTO request)
         {
@@ -186,7 +208,7 @@ namespace HotelManagementAPI.Controllers
                 SELECT dp.MaDatPhong, dp.MaNguoiDung, dp.MaPhong, dp.NgayCheckIn, dp.NgayCheckOut
                 FROM DatPhong dp
                 WHERE dp.MaDatPhong = @MaDatPhong";
-            var datPhong = await _db.QueryFirstOrDefaultAsync<DatPhongDTO>(datPhongQuery, new { request.MaDatPhong });
+            var datPhong = await _db.QueryFirstOrDefaultAsync<KhachHangDatPhongDTO>(datPhongQuery, new { request.MaDatPhong });
 
             if (datPhong == null)
                 return NotFound(new { Message = "Không tìm thấy mã đặt phòng." });
@@ -217,7 +239,7 @@ namespace HotelManagementAPI.Controllers
             const string insertHoaDonQuery = @"
                 INSERT INTO HoaDon (MaHoaDon, MaNguoiDung, MaDatPhong, TongTien, NgayTaoHoaDon, NgayThanhToan, TinhTrangHoaDon)
                 VALUES (@MaHoaDon, @MaNguoiDung, @MaDatPhong, @TongTien, @NgayTaoHoaDon, @NgayThanhToan, @TinhTrangHoaDon)";
-            var hoaDonDTO = new HoaDonDTO
+            var hoaDonDTO = new KhachHangHoaDonDTO
             {
                 MaHoaDon = maHoaDon,
                 MaNguoiDung = datPhong.MaNguoiDung!,
@@ -233,8 +255,11 @@ namespace HotelManagementAPI.Controllers
         }
 
         // ----------- THANH TOÁN -----------
+        /// <summary>
+        /// Thanh toán hóa đơn.
+        /// </summary>
         [HttpPost("thanhtoan")]
-        public async Task<IActionResult> ThanhToan([FromBody] ThanhToanDTO request)
+        public async Task<IActionResult> ThanhToan([FromBody] KhachHangThanhToanDTO request)
         {
             var maNguoiDung = User.FindFirstValue("sub") ?? User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(maNguoiDung))
@@ -268,6 +293,9 @@ namespace HotelManagementAPI.Controllers
             return Ok(new { Message = "Thanh toán thành công!", NgayThanhToan = now });
         }
 
+        /// <summary>
+        /// Lấy lịch sử thanh toán của khách hàng.
+        /// </summary>
         [HttpGet("thanhtoan/lichsu")]
         public async Task<IActionResult> LichSuThanhToan()
         {
@@ -282,11 +310,13 @@ namespace HotelManagementAPI.Controllers
                 WHERE h.MaNguoiDung = @MaNguoiDung
                 ORDER BY t.NgayThanhToan DESC";
 
-            var lichSu = await _db.QueryAsync<ThanhToanDTO>(query, new { MaNguoiDung = maNguoiDung });
+            var lichSu = await _db.QueryAsync<KhachHangThanhToanDTO>(query, new { MaNguoiDung = maNguoiDung });
             return Ok(lichSu);
         }
 
-        // ----------- LỊCH SỬ GIAO DỊCH -----------
+        /// <summary>
+        /// Lấy tổng hợp lịch sử giao dịch của khách hàng.
+        /// </summary>
         [HttpGet("lichsu")]
         public async Task<IActionResult> GetLichSuGiaoDich()
         {
