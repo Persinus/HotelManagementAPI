@@ -265,7 +265,24 @@ CREATE TABLE ChiTietBaoCao (
     FOREIGN KEY (MaBaoCao) REFERENCES BaoCao(MaBaoCao)
 );
 
+CREATE TABLE PhongYeuThich (
+    Id INT IDENTITY PRIMARY KEY,
+    MaPhong NVARCHAR(6) NOT NULL,
+    MaNguoiDung INT NOT NULL,
+    NgayYeuThich DATETIME DEFAULT GETDATE(),
+    CONSTRAINT FK_PhongYeuThich_Phong FOREIGN KEY (MaPhong) REFERENCES Phong(MaPhong),
+    CONSTRAINT FK_PhongYeuThich_NguoiDung FOREIGN KEY (MaNguoiDung) REFERENCES NguoiDung(MaNguoiDung),
+    CONSTRAINT UQ_PhongYeuThich UNIQUE (MaPhong, MaNguoiDung) -- 1 người chỉ thích 1 phòng 1 lần
+);
 
+
+CREATE TABLE NoiQuy (
+  id INT PRIMARY KEY ,
+  soThuTu INT NOT NULL,              -- Số thứ tự hiển thị
+  tieuDe NVARCHAR(255) NOT NULL,     -- Tiêu đề ngắn (vd: Giờ nhận phòng)
+  noiDung NVARCHAR(MAX) NOT NULL,    -- Nội dung
+  hinhAnh NVARCHAR(500)              -- Link ảnh minh họa
+);
 
 DROP TABLE NhanVien;
 SELECT p.MaPhong, p.LoaiPhong, p.GiaPhong, p.TinhTrang, p.SoLuongPhong, p.Tang, 
