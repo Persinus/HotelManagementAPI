@@ -1,7 +1,7 @@
 using FluentValidation;
 using HotelManagementAPI.DTOs;
 
-public class HoaDonDTOValidator : AbstractValidator<HoaDonDTO>
+public class HoaDonDTOValidator : AbstractValidator<KhachHangHoaDonDTO>
 {
     public HoaDonDTOValidator()
     {
