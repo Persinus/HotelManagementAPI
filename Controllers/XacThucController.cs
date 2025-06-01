@@ -79,26 +79,7 @@ namespace HotelManagementAPI.Controllers
             return Ok(new { Profile = profile });
         }
 
-        /// <summary>
-        /// Lấy thông tin người dùng đã mã hóa (chỉ trả về CanCuocCongDan và MatKhau).
-        /// </summary>
-        [HttpGet("profile/mahoa")]
-        [Authorize]
-        public async Task<IActionResult> GetProfileMaHoa()
-        {
-            var maNguoiDung = User.FindFirstValue("sub") ?? User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (string.IsNullOrEmpty(maNguoiDung))
-                return Unauthorized(new { Message = "Không xác định được người dùng." });
-
-            const string query = "SELECT CanCuocCongDan, MatKhau FROM NguoiDung WHERE MaNguoiDung = @MaNguoiDung";
-            var result = await _db.QueryFirstOrDefaultAsync(query, new { MaNguoiDung = maNguoiDung });
-
-            if (result == null)
-                return NotFound(new { Message = "Không tìm thấy thông tin người dùng." });
-
-            return Ok(result);
-        }
-
+       
         /// <summary>
         /// Lấy thông tin người dùng đã mã hóa và giải mã (trả về CanCuocCongDan gốc và MatKhau).
         /// </summary>

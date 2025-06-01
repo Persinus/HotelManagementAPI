@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace HotelManagementAPI.DTOs
 {
-    public class HoaDonDTO
+    public class KhachHangHoaDonDTO
     {
       
         public string MaHoaDon { get; set; } = null!; // Tự động tạo

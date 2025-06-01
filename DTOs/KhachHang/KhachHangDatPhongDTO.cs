@@ -4,7 +4,7 @@ using System;
 
 namespace HotelManagementAPI.DTOs
 {
-    public class DatPhongDTO
+    public class KhachHangDatPhongDTO
     {
         [JsonIgnore]
         public string? MaDatPhong { get; set; }
@@ -22,6 +22,6 @@ namespace HotelManagementAPI.DTOs
         // public decimal TongTien { get; set; }
         [JsonIgnore]
         public byte TinhTrangDatPhong { get; set; }
-        public List<DatDichVuDTO>? DichVuDiKem { get; set; }
+        public List<KhachHangDatDichVuDTO>? DichVuDiKem { get; set; }
     }
 }

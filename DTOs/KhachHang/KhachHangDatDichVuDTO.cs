@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace HotelManagementAPI.DTOs
 {
-    public class DatDichVuDTO
+    public class KhachHangDatDichVuDTO
     {
         [JsonIgnore]
         public string? MaDatDichVu { get; set; } // Không required, BE tự sinh

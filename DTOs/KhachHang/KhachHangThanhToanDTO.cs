@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HotelManagementAPI.DTOs
 {
-    public class ThanhToanDTO
+    public class KhachHangThanhToanDTO
     {
         [Required]
         [StringLength(6)]

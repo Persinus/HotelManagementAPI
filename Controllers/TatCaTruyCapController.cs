@@ -10,23 +10,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 
-namespace HotelManagementAPI.Controllers.AnDanh
+namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
 {
     [ApiController]
     [AllowAnonymous]
-    [Route("api/andanh")]
-    public class AnDanhController : ControllerBase
+    [Route("api/TatCaTruyCap")]
+
+    public class TatCaTruyCapController : ControllerBase
     {
         private readonly IDbConnection _db;
         private readonly IConfiguration _config;
 
-        public AnDanhController(IDbConnection db, IConfiguration config)
+        public TatCaTruyCapController(IDbConnection db, IConfiguration config)
         {
             _db = db;
             _config = config;
         }
 
-        // Đăng nhập
+        /// <summary>
+        /// Đăng nhập hệ thống.
+        /// </summary>
+        /// <param name="login">Thông tin đăng nhập</param>
+        /// <returns>JWT Token nếu đăng nhập thành công</returns>
         [HttpPost("dangnhap")]
         public async Task<ActionResult<string>> DangNhap([FromBody] LoginDTO login)
         {
@@ -64,7 +69,10 @@ namespace HotelManagementAPI.Controllers.AnDanh
             return Ok(new { Token = token });
         }
 
-        // Đăng ký
+        /// <summary>
+        /// Đăng ký khách hàng.
+        /// </summary>
+        /// <param name="nguoiDung">Thông tin người dùng</param>
         [HttpPost("dangky")]
         public async Task<ActionResult<NguoiDungDTO>> DangKyNguoiDung([FromBody] NguoiDungDTO nguoiDung)
         {
@@ -102,7 +110,10 @@ namespace HotelManagementAPI.Controllers.AnDanh
             return CreatedAtAction(nameof(DangKyNguoiDung), new { id = nguoiDung.MaNguoiDung }, nguoiDung);
         }
 
-        // Đặt lại mật khẩu
+        /// <summary>
+        /// Đặt lại mật khẩu.
+        /// </summary>
+        /// <param name="resetPassword">Thông tin đặt lại mật khẩu</param>
         [HttpPut("datlaimatkhau")]
         public async Task<IActionResult> DatLaiMatKhau([FromBody] ResetPasswordDTO resetPassword)
         {
@@ -120,7 +131,9 @@ namespace HotelManagementAPI.Controllers.AnDanh
             return Ok(new { Message = "Mật khẩu đã được cập nhật thành công." });
         }
 
-        // Xem tất cả phòng
+        /// <summary>
+        /// Lấy tất cả phòng (chi tiết).
+        /// </summary>
         [HttpGet("phong")]
         public async Task<ActionResult<IEnumerable<PhongDetailsDTO>>> GetAllPhong()
         {
@@ -203,27 +216,23 @@ namespace HotelManagementAPI.Controllers.AnDanh
                     var giamGia = room.GiamGia.First();
                     if (giamGia.LoaiGiamGia?.ToLower() == "phantram")
                     {
-                        room.GiaPhongSauGiam = room.GiaPhong - (room.GiaPhong * giamGia.GiaTriGiam / 100);
+                        room.GiaPhong = room.GiaPhong - (room.GiaPhong * giamGia.GiaTriGiam / 100);
                     }
                     else if (giamGia.LoaiGiamGia?.ToLower() == "trutien")
                     {
-                        room.GiaPhongSauGiam = room.GiaPhong - giamGia.GiaTriGiam;
+                        room.GiaPhong = room.GiaPhong - giamGia.GiaTriGiam;
                     }
-                    else
-                    {
-                        room.GiaPhongSauGiam = room.GiaPhong;
-                    }
+                    // Nếu không phải loại giảm giá hợp lệ thì giữ nguyên
                 }
-                else
-                {
-                    room.GiaPhongSauGiam = room.GiaPhong;
-                }
+                // Không cần else vì giữ nguyên giá gốc
             }
 
             return Ok(rooms);
         }
 
-        // Lấy tất cả tiện nghi
+        /// <summary>
+        /// Lấy tất cả tiện nghi.
+        /// </summary>
         [HttpGet("tiennghi")]
         public async Task<IActionResult> GetAllTienNghi()
         {
@@ -234,7 +243,9 @@ namespace HotelManagementAPI.Controllers.AnDanh
             return Ok(tienNghiList);
         }
 
-        // Lấy tất cả dịch vụ
+        /// <summary>
+        /// Lấy tất cả dịch vụ.
+        /// </summary>
         [HttpGet("dichvu")]
         public async Task<IActionResult> GetAllDichVu()
         {
@@ -254,7 +265,10 @@ namespace HotelManagementAPI.Controllers.AnDanh
             return Ok(dichVuList);
         }
 
-        // Lấy feedback của một phòng
+        /// <summary>
+        /// Lấy feedback của một phòng.
+        /// </summary>
+        /// <param name="maPhong">Mã phòng</param>
         [HttpGet("feedback/phong/{maPhong}")]
         public async Task<IActionResult> GetFeedbackByPhong(string maPhong)
         {
@@ -264,6 +278,132 @@ namespace HotelManagementAPI.Controllers.AnDanh
                 WHERE MaPhong = @MaPhong";
             var feedbacks = await _db.QueryAsync<FeedBackDTO>(query, new { MaPhong = maPhong });
             return Ok(feedbacks);
+        }
+
+        /// <summary>
+        /// Lấy danh sách phòng rút gọn (chỉ các khóa chính liên quan).
+        /// </summary>
+        [HttpGet("phong-rutgon")]
+        public async Task<ActionResult<IEnumerable<PhongDTO>>> GetAllPhongRutGon()
+        {
+            // Lấy danh sách phòng
+            const string phongQuery = "SELECT MaPhong FROM Phong";
+            var maPhongs = (await _db.QueryAsync<string>(phongQuery)).ToList();
+
+            var result = new List<PhongDTO>();
+
+            foreach (var maPhong in maPhongs)
+            {
+                // Lấy danh sách mã ảnh
+                const string anhQuery = "SELECT MaAnh FROM PhongAnh WHERE MaPhong = @MaPhong";
+                var maAnhList = (await _db.QueryAsync<string>(anhQuery, new { MaPhong = maPhong })).ToList();
+
+                // Lấy danh sách mã tiện nghi
+                const string tienNghiQuery = @"
+                    SELECT MaTienNghi FROM Phong_TienNghi WHERE MaPhong = @MaPhong";
+                var maTienNghiList = (await _db.QueryAsync<string>(tienNghiQuery, new { MaPhong = maPhong })).ToList();
+
+                // Lấy danh sách mã giảm giá
+                const string giamGiaQuery = @"
+                    SELECT MaGiamGia FROM Phong_GiamGia WHERE MaPhong = @MaPhong";
+                var maGiamGiaList = (await _db.QueryAsync<string>(giamGiaQuery, new { MaPhong = maPhong })).ToList();
+
+                // Lấy danh sách mã feedback
+                const string feedbackQuery = @"
+                    SELECT MaFeedback FROM Feedback WHERE MaPhong = @MaPhong";
+                var maFeedbackList = (await _db.QueryAsync<string>(feedbackQuery, new { MaPhong = maPhong })).ToList();
+
+                result.Add(new PhongDTO
+                {
+                    MaPhong = maPhong,
+                    MaAnhList = maAnhList,
+                    MaTienNghiList = maTienNghiList,
+                    MaGiamGiaList = maGiamGiaList,
+                    MaFeedbackList = maFeedbackList
+                });
+            }
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Đăng ký nhân viên.
+        /// </summary>
+        /// <param name="nguoiDung">Thông tin nhân viên</param>
+        [HttpPost("dangky-nhanvien")]
+        [AllowAnonymous]
+        public async Task<ActionResult<NguoiDungDTO>> DangKyNhanVien([FromBody] NguoiDungDTO nguoiDung)
+        {
+            nguoiDung.Vaitro = "NhanVien";
+            nguoiDung.MaNguoiDung = await GenerateUniqueMaNguoiDung();
+            nguoiDung.NgayTao = DateTime.Now;
+
+            // Kiểm tra email trùng lặp
+            const string checkEmailQuery = "SELECT COUNT(1) FROM NguoiDung WHERE Email = @Email";
+            var isEmailDuplicate = await _db.ExecuteScalarAsync<int>(checkEmailQuery, new { nguoiDung.Email });
+            if (isEmailDuplicate > 0)
+                return Conflict(new { Message = "Email đã tồn tại. Vui lòng sử dụng email khác." });
+
+            // Kiểm tra tên tài khoản trùng lặp
+            const string checkTenTaiKhoanQuery = "SELECT COUNT(1) FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan";
+            var isTenTaiKhoanDuplicate = await _db.ExecuteScalarAsync<int>(checkTenTaiKhoanQuery, new { nguoiDung.TenTaiKhoan });
+            if (isTenTaiKhoanDuplicate > 0)
+                return Conflict(new { Message = "Tên đăng nhập đã có người sử dụng. Vui lòng chọn tên đăng nhập khác." });
+
+            // Mã hóa CCCD trước khi lưu
+            if (!string.IsNullOrEmpty(nguoiDung.CanCuocCongDan))
+                nguoiDung.CanCuocCongDan = SensitiveDataHelper.Encrypt(nguoiDung.CanCuocCongDan);
+
+            // Mã hóa mật khẩu
+            nguoiDung.MatKhau = BCrypt.Net.BCrypt.HashPassword(nguoiDung.MatKhau);
+
+            // Thêm người dùng mới
+            const string insertQuery = @"
+                INSERT INTO NguoiDung (MaNguoiDung, Vaitro, Email, TenTaiKhoan, MatKhau, HoTen, SoDienThoai, DiaChi, NgaySinh, GioiTinh, HinhAnhUrl, CanCuocCongDan, NgayTao)
+                VALUES (@MaNguoiDung, @Vaitro, @Email, @TenTaiKhoan, @MatKhau, @HoTen, @SoDienThoai, @DiaChi, @NgaySinh, @GioiTinh, @HinhAnhUrl, @CanCuocCongDan, @NgayTao)";
+            await _db.ExecuteAsync(insertQuery, nguoiDung);
+
+            return CreatedAtAction(nameof(DangKyNhanVien), new { id = nguoiDung.MaNguoiDung }, nguoiDung);
+        }
+
+        /// <summary>
+        /// Đăng ký quản trị viên.
+        /// </summary>
+        /// <param name="nguoiDung">Thông tin quản trị viên</param>
+        [HttpPost("dangky-quantrivien")]
+        [AllowAnonymous]
+        public async Task<ActionResult<NguoiDungDTO>> DangKyQuanTriVien([FromBody] NguoiDungDTO nguoiDung)
+        {
+            nguoiDung.Vaitro = "QuanTriVien";
+            nguoiDung.MaNguoiDung = await GenerateUniqueMaNguoiDung();
+            nguoiDung.NgayTao = DateTime.Now;
+
+            // Kiểm tra email trùng lặp
+            const string checkEmailQuery = "SELECT COUNT(1) FROM NguoiDung WHERE Email = @Email";
+            var isEmailDuplicate = await _db.ExecuteScalarAsync<int>(checkEmailQuery, new { nguoiDung.Email });
+            if (isEmailDuplicate > 0)
+                return Conflict(new { Message = "Email đã tồn tại. Vui lòng sử dụng email khác." });
+
+            // Kiểm tra tên tài khoản trùng lặp
+            const string checkTenTaiKhoanQuery = "SELECT COUNT(1) FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan";
+            var isTenTaiKhoanDuplicate = await _db.ExecuteScalarAsync<int>(checkTenTaiKhoanQuery, new { nguoiDung.TenTaiKhoan });
+            if (isTenTaiKhoanDuplicate > 0)
+                return Conflict(new { Message = "Tên đăng nhập đã có người sử dụng. Vui lòng chọn tên đăng nhập khác." });
+
+            // Mã hóa CCCD trước khi lưu
+            if (!string.IsNullOrEmpty(nguoiDung.CanCuocCongDan))
+                nguoiDung.CanCuocCongDan = SensitiveDataHelper.Encrypt(nguoiDung.CanCuocCongDan);
+
+            // Mã hóa mật khẩu
+            nguoiDung.MatKhau = BCrypt.Net.BCrypt.HashPassword(nguoiDung.MatKhau);
+
+            // Thêm người dùng mới
+            const string insertQuery = @"
+                INSERT INTO NguoiDung (MaNguoiDung, Vaitro, Email, TenTaiKhoan, MatKhau, HoTen, SoDienThoai, DiaChi, NgaySinh, GioiTinh, HinhAnhUrl, CanCuocCongDan, NgayTao)
+                VALUES (@MaNguoiDung, @Vaitro, @Email, @TenTaiKhoan, @MatKhau, @HoTen, @SoDienThoai, @DiaChi, @NgaySinh, @GioiTinh, @HinhAnhUrl, @CanCuocCongDan, @NgayTao)";
+            await _db.ExecuteAsync(insertQuery, nguoiDung);
+
+            return CreatedAtAction(nameof(DangKyQuanTriVien), new { id = nguoiDung.MaNguoiDung }, nguoiDung);
         }
 
         // Helper tạo mã người dùng duy nhất
