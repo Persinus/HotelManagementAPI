@@ -7,7 +7,7 @@ using System.Text;
 using Microsoft.OpenApi.Models;
 using FluentValidation;
 using FluentValidation.AspNetCore;
-
+using HotelManagementAPI.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Cấu hình chuỗi kết nối
@@ -164,6 +164,9 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("KhachHangPolicy", policy =>
         policy.RequireClaim("Vaitro", "KhachHang","NhanVien", "QuanTriVien"));
 });
+
+
+builder.Services.AddSingleton<IVnpayService, VnpayService>();
 
 var app = builder.Build();
 
