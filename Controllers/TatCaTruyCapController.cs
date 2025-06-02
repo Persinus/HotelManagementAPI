@@ -165,7 +165,7 @@ namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
                     FROM GiamGia gg
                     JOIN Phong_GiamGia pg ON gg.MaGiamGia = pg.MaGiamGia
                     WHERE pg.MaPhong = @MaPhong";
-                room.GiamGia = (await _db.QueryAsync<GiamGiaDTO>(discountsQuery, new { MaPhong = room.MaPhong })).ToList();
+                room.GiamGia = (await _db.QueryAsync<GiamGiaDetailDTO>(discountsQuery, new { MaPhong = room.MaPhong })).ToList();
 
                 // Lấy danh sách feedback
                 const string feedbackQuery = @"
@@ -195,9 +195,9 @@ namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
                 // Giảm giá
                 if (room.GiamGia == null || !room.GiamGia.Any())
                 {
-                    room.GiamGia = new List<GiamGiaDTO>
+                    room.GiamGia = new List<GiamGiaDetailDTO>
                     {
-                        new GiamGiaDTO { MaGiamGia = "", TenGiamGia = "Phòng này chưa có giảm giá nào." }
+                        new GiamGiaDetailDTO { MaGiamGia = "", TenGiamGia = "Phòng này chưa có giảm giá nào." }
                     };
                 }
 
@@ -226,7 +226,11 @@ namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
                 }
                 // Không cần else vì giữ nguyên giá gốc
             }
-
+            // Lay danh sach phong yeu thich
+            const string yeuThichQuery = @"
+                SELECT MaPhong, MaNguoiDung
+                FROM PhongYeuThich";
+            var yeuThichList = await _db.QueryAsync<PhongYeuThichDTO>(yeuThichQuery);
             return Ok(rooms);
         }
 
@@ -281,49 +285,42 @@ namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
         }
 
         /// <summary>
-        /// Lấy danh sách phòng rút gọn (chỉ các khóa chính liên quan).
+        /// Lấy danh sách phòng rút gọn (chỉ các trường cần thiết).
         /// </summary>
         [HttpGet("phong-rutgon")]
         public async Task<ActionResult<IEnumerable<PhongDTO>>> GetAllPhongRutGon()
         {
-            // Lấy danh sách phòng
-            const string phongQuery = "SELECT MaPhong FROM Phong";
-            var maPhongs = (await _db.QueryAsync<string>(phongQuery)).ToList();
+            // Lấy danh sách phòng với các trường cần thiết
+            const string phongQuery = @"
+                SELECT MaPhong, LoaiPhong, GiaPhong, Tang, TinhTrang, DonViTinh, SoSaoTrungBinh
+                FROM Phong";
+            var phongList = (await _db.QueryAsync<PhongDTO>(phongQuery)).ToList();
 
-            var result = new List<PhongDTO>();
-
-            foreach (var maPhong in maPhongs)
+            foreach (var room in phongList)
             {
-                // Lấy danh sách mã ảnh
-                const string anhQuery = "SELECT MaAnh FROM PhongAnh WHERE MaPhong = @MaPhong";
-                var maAnhList = (await _db.QueryAsync<string>(anhQuery, new { MaPhong = maPhong })).ToList();
-
-                // Lấy danh sách mã tiện nghi
-                const string tienNghiQuery = @"
-                    SELECT MaTienNghi FROM Phong_TienNghi WHERE MaPhong = @MaPhong";
-                var maTienNghiList = (await _db.QueryAsync<string>(tienNghiQuery, new { MaPhong = maPhong })).ToList();
-
-                // Lấy danh sách mã giảm giá
+                // Lấy giảm giá (nếu có)
                 const string giamGiaQuery = @"
-                    SELECT MaGiamGia FROM Phong_GiamGia WHERE MaPhong = @MaPhong";
-                var maGiamGiaList = (await _db.QueryAsync<string>(giamGiaQuery, new { MaPhong = maPhong })).ToList();
+                    SELECT gg.MaGiamGia, gg.TenGiamGia, gg.LoaiGiamGia, gg.GiaTriGiam, gg.NgayBatDau, gg.NgayKetThuc, gg.MoTa
+                    FROM GiamGia gg
+                    JOIN Phong_GiamGia pg ON gg.MaGiamGia = pg.MaGiamGia
+                    WHERE pg.MaPhong = @MaPhong";
+                var giamGiaList = (await _db.QueryAsync<GiamGiaDTO>(giamGiaQuery, new { MaPhong = room.MaPhong })).ToList();
+                room.GiamGia = giamGiaList;
 
-                // Lấy danh sách mã feedback
-                const string feedbackQuery = @"
-                    SELECT MaFeedback FROM Feedback WHERE MaPhong = @MaPhong";
-                var maFeedbackList = (await _db.QueryAsync<string>(feedbackQuery, new { MaPhong = maPhong })).ToList();
-
-                result.Add(new PhongDTO
+                // Tính giá ưu đãi
+                decimal giaUuDai = room.GiaPhong;
+                if (giamGiaList.Any())
                 {
-                    MaPhong = maPhong,
-                    MaAnhList = maAnhList,
-                    MaTienNghiList = maTienNghiList,
-                    MaGiamGiaList = maGiamGiaList,
-                    MaFeedbackList = maFeedbackList
-                });
+                    var giamGia = giamGiaList.First();
+                    if (giamGia.LoaiGiamGia?.ToLower() == "phantram")
+                        giaUuDai = room.GiaPhong - (room.GiaPhong * giamGia.GiaTriGiam / 100);
+                    else if (giamGia.LoaiGiamGia?.ToLower() == "trutien")
+                        giaUuDai = room.GiaPhong - giamGia.GiaTriGiam;
+                }
+                room.GiaUuDai = giaUuDai;
             }
 
-            return Ok(result);
+            return Ok(phongList);
         }
 
         /// <summary>

@@ -11,11 +11,11 @@ namespace HotelManagementAPI.Controllers.NhanVien
     [ApiController]
     [Route("api/nhanvien")]
     [Authorize(Roles = "NhanVien")]
-    public class PhongQuanLyController : ControllerBase
+    public class NhanVienController : ControllerBase
     {
         private readonly IDbConnection _db;
 
-        public PhongQuanLyController(IDbConnection db)
+        public NhanVienController(IDbConnection db)
         {
             _db = db;
         }

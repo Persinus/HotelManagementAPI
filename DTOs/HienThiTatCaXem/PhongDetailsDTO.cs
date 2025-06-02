@@ -22,7 +22,8 @@ namespace HotelManagementAPI.DTOs
         public decimal SoSaoTrungBinh { get; set; }
         public List<PhongAnhDTO> UrlAnhPhu { get; set; } = new List<PhongAnhDTO>();
         public List<TienNghiDTO> TienNghi { get; set; } = new List<TienNghiDTO>();
-        public List<GiamGiaDTO> GiamGia { get; set; } = new List<GiamGiaDTO>();
+        public List<GiamGiaDetailDTO> GiamGia { get; set; } = new List<GiamGiaDetailDTO>();
         public List<FeedBackDTO> Feedbacks { get; set; } = new List<FeedBackDTO>();
+        public List<PhongYeuThichDTO> YeuThich { get; set; } = new List<PhongYeuThichDTO>();
     }
 }
