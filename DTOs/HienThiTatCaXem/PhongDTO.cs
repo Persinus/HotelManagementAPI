@@ -5,9 +5,13 @@ namespace HotelManagementAPI.DTOs
     public class PhongDTO
     {
         public string MaPhong { get; set; } = null!;
-        public List<string> MaAnhList { get; set; } = new();
-        public List<string> MaTienNghiList { get; set; } = new();
-        public List<string> MaGiamGiaList { get; set; } = new();
-        public List<string> MaFeedbackList { get; set; } = new();
+        public string LoaiPhong { get; set; } = null!;
+        public decimal GiaPhong { get; set; }
+        public decimal GiaUuDai { get; set; }
+        public int Tang { get; set; }
+        public string TinhTrang { get; set; } = null!;
+        public string DonViTinh { get; set; } = null!;
+        public decimal SoSaoTrungBinh { get; set; }
+        public List<GiamGiaDTO> GiamGia { get; set; } = new List<GiamGiaDTO>();
     }
 }
