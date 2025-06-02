@@ -20,5 +20,6 @@ public partial class Feedback
     public string PhanLoai { get; set; } = null!;
 
     public virtual NguoiDung MaNguoiDungNavigation { get; set; } = null!;
+
     public virtual Phong MaPhongNavigation { get; set; } = null!;
 }
