@@ -9,6 +9,10 @@ using Microsoft.Extensions.Caching.Memory;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Configuration;
 
 namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
 {
@@ -19,12 +23,23 @@ namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
     public class TatCaTruyCapController : ControllerBase
     {
         private readonly IDbConnection _db;
+        private readonly Cloudinary _cloudinary;
         private readonly IConfiguration _config;
 
-        public TatCaTruyCapController(IDbConnection db, IConfiguration config)
+        public TatCaTruyCapController(
+            IDbConnection db,
+            IOptions<CloudinarySettings> cloudinaryOptions,
+            IConfiguration config)
         {
             _db = db;
             _config = config;
+            var settings = cloudinaryOptions.Value;
+            var account = new Account(
+                settings.CloudName,
+                settings.ApiKey,
+                settings.ApiSecret
+            );
+            _cloudinary = new Cloudinary(account);
         }
 
         /// <summary>
@@ -74,25 +89,55 @@ namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
         /// </summary>
         /// <param name="nguoiDung">Thông tin người dùng</param>
         [HttpPost("dangky")]
-        public async Task<ActionResult<NguoiDungDTO>> DangKyNguoiDung([FromBody] NguoiDungDTO nguoiDung)
+        public async Task<IActionResult> DangKyNguoiDung([FromForm] NguoiDungDangKyDTO dto, IFormFile? file)
         {
-            nguoiDung.Vaitro = "KhachHang";
-            nguoiDung.MaNguoiDung = await GenerateUniqueMaNguoiDung();
-            nguoiDung.NgayTao = DateTime.Now;
-
             // Kiểm tra email trùng lặp
             const string checkEmailQuery = "SELECT COUNT(1) FROM NguoiDung WHERE Email = @Email";
-            var isEmailDuplicate = await _db.ExecuteScalarAsync<int>(checkEmailQuery, new { nguoiDung.Email });
+            var isEmailDuplicate = await _db.ExecuteScalarAsync<int>(checkEmailQuery, new { dto.Email });
 
             if (isEmailDuplicate > 0)
                 return Conflict(new { Message = "Email đã tồn tại. Vui lòng sử dụng email khác." });
 
             // Kiểm tra tên tài khoản trùng lặp
             const string checkTenTaiKhoanQuery = "SELECT COUNT(1) FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan";
-            var isTenTaiKhoanDuplicate = await _db.ExecuteScalarAsync<int>(checkTenTaiKhoanQuery, new { nguoiDung.TenTaiKhoan });
+            var isTenTaiKhoanDuplicate = await _db.ExecuteScalarAsync<int>(checkTenTaiKhoanQuery, new { dto.TenTaiKhoan });
 
             if (isTenTaiKhoanDuplicate > 0)
                 return Conflict(new { Message = "Tên đăng nhập đã có người sử dụng. Vui lòng chọn tên đăng nhập khác." });
+
+            string? imageUrl = null;
+            if (file != null && file.Length > 0)
+            {
+                await using var stream = file.OpenReadStream();
+                var uploadParams = new ImageUploadParams
+                {
+                    File = new FileDescription(file.FileName, stream),
+                    Transformation = new Transformation().Width(400).Height(400).Crop("limit"),
+                    Folder = "avatar"
+                };
+                var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+                if (uploadResult.StatusCode == System.Net.HttpStatusCode.OK)
+                    imageUrl = uploadResult.SecureUrl.ToString();
+                else
+                    return StatusCode(500, $"Upload ảnh thất bại: {uploadResult.Error?.Message}");
+            }
+
+            var nguoiDung = new NguoiDungDTO
+            {
+                TenTaiKhoan = dto.TenTaiKhoan,
+                MatKhau = dto.MatKhau,
+                HoTen = dto.HoTen,
+                SoDienThoai = dto.SoDienThoai,
+                DiaChi = dto.DiaChi,
+                NgaySinh = dto.NgaySinh,
+                GioiTinh = dto.GioiTinh,
+                Email = dto.Email,
+                Vaitro = "KhachHang",
+                MaNguoiDung = await GenerateUniqueMaNguoiDung(),
+                NgayTao = DateTime.Now,
+                HinhAnhUrl = imageUrl,
+                CanCuocCongDan = dto.CanCuocCongDan // BỔ SUNG DÒNG NÀY
+            };
 
             // Mã hóa CCCD trước khi lưu
             if (!string.IsNullOrEmpty(nguoiDung.CanCuocCongDan))

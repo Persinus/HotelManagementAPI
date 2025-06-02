@@ -5,6 +5,9 @@ using Dapper;
 using HotelManagementAPI.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using HotelManagementAPI.DTOs.NhanVien;
+using System.Security.Claims;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
 
 namespace HotelManagementAPI.Controllers.NhanVien
 {
@@ -14,10 +17,12 @@ namespace HotelManagementAPI.Controllers.NhanVien
     public class NhanVienController : ControllerBase
     {
         private readonly IDbConnection _db;
+        private readonly Cloudinary _cloudinary;
 
-        public NhanVienController(IDbConnection db)
+        public NhanVienController(IDbConnection db, Cloudinary cloudinary)
         {
             _db = db;
+            _cloudinary = cloudinary;
         }
 
         /// <summary>
@@ -201,6 +206,102 @@ namespace HotelManagementAPI.Controllers.NhanVien
             });
             if (affected == 0) return NotFound();
             return Ok(new { Message = "Cập nhật dịch vụ thành công." });
+        }
+
+        /// <summary>
+        /// Thêm bài viết mới (nhân viên).
+        /// </summary>
+        
+        [HttpPost("baiviet")]
+        public async Task<IActionResult> ThemBaiViet([FromForm] NhanVienThemBaiVietDTO dto, IFormFile? file)
+        {
+            var maNguoiDung = User.FindFirstValue("sub") ?? User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(maNguoiDung))
+                return Unauthorized(new { Message = "Không xác định được nhân viên." });
+
+            string? imageUrl = null;
+            if (file != null && file.Length > 0)
+            {
+                await using var stream = file.OpenReadStream();
+                var uploadParams = new ImageUploadParams
+                {
+                    File = new FileDescription(file.FileName, stream),
+                    Transformation = new Transformation().Width(800).Height(800).Crop("limit"),
+                    Folder = "baiviet"
+                };
+                var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+                if (uploadResult.StatusCode == System.Net.HttpStatusCode.OK)
+                    imageUrl = uploadResult.SecureUrl.ToString();
+                else
+                    return StatusCode(500, $"Upload ảnh thất bại: {uploadResult.Error?.Message}");
+            }
+
+            var maBaiViet = Guid.NewGuid().ToString("N").Substring(0, 6);
+            const string sql = @"
+        INSERT INTO BaiViet (MaBaiViet, MaNguoiDung, TieuDe, NoiDung, NgayDang, HinhAnhUrl, TrangThai)
+        VALUES (@MaBaiViet, @MaNguoiDung, @TieuDe, @NoiDung, @NgayDang, @HinhAnhUrl, @TrangThai)";
+            await _db.ExecuteAsync(sql, new
+            {
+                MaBaiViet = maBaiViet,
+                MaNguoiDung = maNguoiDung,
+                dto.TieuDe,
+                dto.NoiDung,
+                NgayDang = DateTime.UtcNow.AddHours(7),
+                HinhAnhUrl = imageUrl,
+                dto.TrangThai
+            });
+            return Ok(new { Message = "Thêm bài viết thành công.", MaBaiViet = maBaiViet, HinhAnhUrl = imageUrl });
+        }
+
+        /// <summary>
+        /// Sửa bài viết (nhân viên).
+        /// </summary>
+        [HttpPut("baiviet")]
+        public async Task<IActionResult> SuaBaiViet([FromBody] NhanVienSuaBaiVietDTO dto)
+        {
+            var maNguoiDung = User.FindFirstValue("sub") ?? User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(maNguoiDung))
+                return Unauthorized(new { Message = "Không xác định được nhân viên." });
+
+            // Chỉ cho phép sửa bài viết của chính mình
+            const string checkQuery = "SELECT COUNT(1) FROM BaiViet WHERE MaBaiViet = @MaBaiViet AND MaNguoiDung = @MaNguoiDung";
+            var isExists = await _db.ExecuteScalarAsync<int>(checkQuery, new { dto.MaBaiViet, MaNguoiDung = maNguoiDung });
+            if (isExists == 0)
+                return NotFound(new { Message = "Không tìm thấy bài viết hoặc bạn không có quyền sửa." });
+
+            const string sql = @"
+        UPDATE BaiViet
+        SET TieuDe = @TieuDe, NoiDung = @NoiDung, HinhAnhUrl = @HinhAnhUrl
+        WHERE MaBaiViet = @MaBaiViet";
+            await _db.ExecuteAsync(sql, new
+            {
+                dto.MaBaiViet,
+                dto.TieuDe,
+                dto.NoiDung,
+                dto.HinhAnhUrl
+            });
+            return Ok(new { Message = "Sửa bài viết thành công." });
+        }
+
+        /// <summary>
+        /// Xóa bài viết (nhân viên).
+        /// </summary>
+        [HttpDelete("baiviet/{maBaiViet}")]
+        public async Task<IActionResult> XoaBaiViet(string maBaiViet)
+        {
+            var maNguoiDung = User.FindFirstValue("sub") ?? User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(maNguoiDung))
+                return Unauthorized(new { Message = "Không xác định được nhân viên." });
+
+            // Chỉ cho phép xóa bài viết của chính mình
+            const string checkQuery = "SELECT COUNT(1) FROM BaiViet WHERE MaBaiViet = @MaBaiViet AND MaNguoiDung = @MaNguoiDung";
+            var isExists = await _db.ExecuteScalarAsync<int>(checkQuery, new { MaBaiViet = maBaiViet, MaNguoiDung = maNguoiDung });
+            if (isExists == 0)
+                return NotFound(new { Message = "Không tìm thấy bài viết hoặc bạn không có quyền xóa." });
+
+            const string sql = "DELETE FROM BaiViet WHERE MaBaiViet = @MaBaiViet";
+            await _db.ExecuteAsync(sql, new { MaBaiViet = maBaiViet });
+            return Ok(new { Message = "Xóa bài viết thành công." });
         }
     }
 
