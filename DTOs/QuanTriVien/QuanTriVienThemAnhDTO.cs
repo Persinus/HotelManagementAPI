@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace HotelManagementAPI.DTOs.QuanTriVien
@@ -7,8 +8,6 @@ namespace HotelManagementAPI.DTOs.QuanTriVien
         [Required]
         public string MaPhong { get; set; } = null!;
 
-        [Required]
-        [Url(ErrorMessage = "URL ảnh không hợp lệ.")]
-        public string UrlAnh { get; set; } = null!;
+       
     }
 }
