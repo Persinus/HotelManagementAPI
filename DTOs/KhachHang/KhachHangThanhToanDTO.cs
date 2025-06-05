@@ -24,7 +24,6 @@ namespace HotelManagementAPI.DTOs
         public string PhuongThucThanhToan { get; set; } = null!;
 
         [Required]
-        [StringLength(1)]
+   
         public string TinhTrangThanhToan { get; set; } = null!;
-    }
-}
+    }}
