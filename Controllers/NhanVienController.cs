@@ -9,6 +9,7 @@ using System.Security.Claims;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using Swashbuckle.AspNetCore.Annotations;
+using Microsoft.Extensions.Options;
 
 namespace HotelManagementAPI.Controllers.NhanVien
 {
@@ -20,10 +21,19 @@ namespace HotelManagementAPI.Controllers.NhanVien
         private readonly IDbConnection _db;
         private readonly Cloudinary _cloudinary;
 
-        public NhanVienController(IDbConnection db, Cloudinary cloudinary)
+        public NhanVienController(
+            IDbConnection db,
+            IOptions<CloudinarySettings> cloudinaryOptions,
+            IConfiguration config)
         {
             _db = db;
-            _cloudinary = cloudinary;
+            var settings = cloudinaryOptions.Value;
+            var account = new Account(
+                settings.CloudName,
+                settings.ApiKey,
+                settings.ApiSecret
+            );
+            _cloudinary = new Cloudinary(account);
         }
 
         /// <summary>
@@ -36,7 +46,6 @@ namespace HotelManagementAPI.Controllers.NhanVien
         )]
         [SwaggerResponse(200, "Thêm bài viết thành công.")]
         [SwaggerResponse(401, "Không xác định được nhân viên.")]
-      
         public async Task<IActionResult> ThemBaiViet([FromForm] NhanVienThemBaiVietDTO dto, IFormFile? file)
         {
             var maNguoiDung = User.FindFirstValue("sub") ?? User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -62,8 +71,8 @@ namespace HotelManagementAPI.Controllers.NhanVien
 
             // Sinh mã bài viết tự động dạng MB001, MB002, ...
             const string getMaxSql = "SELECT ISNULL(MAX(CAST(SUBSTRING(MaBaiViet, 3, LEN(MaBaiViet)-2) AS INT)), 0) + 1 FROM BaiViet";
-var nextId = await _db.ExecuteScalarAsync<int>(getMaxSql);
-var maBaiViet = $"MB{nextId:D3}";
+            var nextId = await _db.ExecuteScalarAsync<int>(getMaxSql);
+            var maBaiViet = $"MB{nextId:D3}";
             const string sql = @"
     INSERT INTO BaiViet (MaBaiViet, MaNguoiDung, TieuDe, NoiDung, NgayDang, HinhAnhUrl, TrangThai)
     VALUES (@MaBaiViet, @MaNguoiDung, @TieuDe, @NoiDung, @NgayDang, @HinhAnhUrl, @TrangThai)";
@@ -91,7 +100,6 @@ var maBaiViet = $"MB{nextId:D3}";
         [SwaggerResponse(200, "Sửa bài viết thành công.")]
         [SwaggerResponse(401, "Không xác định được nhân viên.")]
         [SwaggerResponse(404, "Không tìm thấy bài viết hoặc không có quyền sửa.")]
-       
         public async Task<IActionResult> SuaBaiViet([FromBody] NhanVienSuaBaiVietDTO dto)
         {
             var maNguoiDung = User.FindFirstValue("sub") ?? User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -129,7 +137,6 @@ var maBaiViet = $"MB{nextId:D3}";
         [SwaggerResponse(200, "Xóa bài viết thành công.")]
         [SwaggerResponse(401, "Không xác định được nhân viên.")]
         [SwaggerResponse(404, "Không tìm thấy bài viết hoặc không có quyền xóa.")]
-    
         public async Task<IActionResult> XoaBaiViet(string maBaiViet)
         {
             var maNguoiDung = User.FindFirstValue("sub") ?? User.FindFirstValue(ClaimTypes.NameIdentifier);

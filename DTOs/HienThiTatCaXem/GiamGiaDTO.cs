@@ -6,7 +6,6 @@ namespace HotelManagementAPI.DTOs
     {
         [Range(0, double.MaxValue)]
         public decimal GiaTriGiam { get; set; }
-        public string? LoaiGiamGia { get; set; }
         public DateTime NgayKetThuc { get; set; }
     }
 }

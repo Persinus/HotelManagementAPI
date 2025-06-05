@@ -1,23 +1,13 @@
-using System.ComponentModel.DataAnnotations;
-
-namespace HotelManagementAPI.DTOs
+namespace HotelManagementAPI.DTOs.QuanTriVien
 {
-    public class GiamGiaDetailDTO
+    public class QuanTriVienSuaGiamGiaDTO
     {
-        [StringLength(6)]
         public string MaGiamGia { get; set; } = null!;
-
-        [StringLength(50)]
         public string TenGiamGia { get; set; } = null!;
-
-        [Range(0, double.MaxValue)]
+        public string? LoaiGiamGia { get; set; }
         public decimal GiaTriGiam { get; set; }
-
         public DateTime NgayBatDau { get; set; }
-
         public DateTime NgayKetThuc { get; set; }
-
-        [StringLength(255)]
         public string? MoTa { get; set; }
     }
 }

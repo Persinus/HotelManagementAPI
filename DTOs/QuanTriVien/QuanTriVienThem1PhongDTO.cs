@@ -25,8 +25,7 @@ namespace HotelManagementAPI.DTOs.QuanTriVien
 
         public string? MoTa { get; set; }
 
-        [Required]
-        public string UrlAnhChinh { get; set; } = null!;
+       
 
         [Required]
         public int SucChua { get; set; }

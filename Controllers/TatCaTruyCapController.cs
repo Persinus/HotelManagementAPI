@@ -13,6 +13,7 @@ using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Configuration;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
 {
@@ -161,7 +162,7 @@ namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
 
                 // Lấy danh sách giảm giá
                 const string discountsQuery = @"
-                    SELECT gg.MaGiamGia, gg.TenGiamGia, gg.LoaiGiamGia, gg.GiaTriGiam, gg.NgayBatDau, gg.NgayKetThuc, gg.MoTa
+                    SELECT gg.MaGiamGia, gg.TenGiamGia, gg.GiaTriGiam, gg.NgayBatDau, gg.NgayKetThuc, gg.MoTa
                     FROM GiamGia gg
                     JOIN Phong_GiamGia pg ON gg.MaGiamGia = pg.MaGiamGia
                     WHERE pg.MaPhong = @MaPhong";
@@ -214,15 +215,7 @@ namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
                 if (room.GiamGia != null && room.GiamGia.Any())
                 {
                     var giamGia = room.GiamGia.First();
-                    if (giamGia.LoaiGiamGia?.ToLower() == "phantram")
-                    {
-                        room.GiaPhong = room.GiaPhong - (room.GiaPhong * giamGia.GiaTriGiam / 100);
-                    }
-                    else if (giamGia.LoaiGiamGia?.ToLower() == "trutien")
-                    {
-                        room.GiaPhong = room.GiaPhong - giamGia.GiaTriGiam;
-                    }
-                    // Nếu không phải loại giảm giá hợp lệ thì giữ nguyên
+                    room.GiaPhong = room.GiaPhong - (room.GiaPhong * giamGia.GiaTriGiam / 100);
                 }
                 // Không cần else vì giữ nguyên giá gốc
             }
@@ -312,27 +305,39 @@ namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
             {
                 // Lấy giảm giá (nếu có)
                 const string giamGiaQuery = @"
-                    SELECT gg.MaGiamGia, gg.TenGiamGia, gg.LoaiGiamGia, gg.GiaTriGiam, gg.NgayBatDau, gg.NgayKetThuc, gg.MoTa
+                    SELECT gg.MaGiamGia, gg.TenGiamGia, gg.GiaTriGiam, gg.NgayBatDau, gg.NgayKetThuc, gg.MoTa
                     FROM GiamGia gg
                     JOIN Phong_GiamGia pg ON gg.MaGiamGia = pg.MaGiamGia
                     WHERE pg.MaPhong = @MaPhong";
                 var giamGiaList = (await _db.QueryAsync<GiamGiaDTO>(giamGiaQuery, new { MaPhong = room.MaPhong })).ToList();
                 room.GiamGia = giamGiaList;
 
-                // Tính giá ưu đãi
+                // Tính giá ưu đãi (mặc định giảm giá phần trăm)
                 decimal giaUuDai = room.GiaPhong;
                 if (giamGiaList.Any())
                 {
                     var giamGia = giamGiaList.First();
-                    if (giamGia.LoaiGiamGia?.ToLower() == "phantram")
-                        giaUuDai = room.GiaPhong - (room.GiaPhong * giamGia.GiaTriGiam / 100);
-                    else if (giamGia.LoaiGiamGia?.ToLower() == "trutien")
-                        giaUuDai = room.GiaPhong - giamGia.GiaTriGiam;
+                    giaUuDai = room.GiaPhong - (room.GiaPhong * giamGia.GiaTriGiam / 100);
                 }
                 room.GiaUuDai = giaUuDai;
             }
 
             return Ok(phongList);
+        }
+         /// <summary>
+        /// Lấy danh sách bài viết đã duyệt.
+        /// </summary>
+        [HttpGet("baiviet/daduyet")]
+        [SwaggerOperation(
+            Summary = "Danh sách bài viết đã duyệt",
+            Description = "Lấy tất cả bài viết có trạng thái 'Đã Duyệt'."
+        )]
+        [SwaggerResponse(200, "Danh sách bài viết đã duyệt.")]
+        public async Task<IActionResult> GetBaiVietDaDuyet()
+        {
+            const string query = "SELECT * FROM BaiViet WHERE TrangThai = N'Đã Duyệt' ORDER BY NgayDang DESC";
+            var list = await _db.QueryAsync<TatCaBaiVietDTO>(query);
+            return Ok(list);
         }
 
         private async Task<IActionResult> DangKyNguoiDungChung(NguoiDungDangKyDTO dto, IFormFile? file, string vaitro)

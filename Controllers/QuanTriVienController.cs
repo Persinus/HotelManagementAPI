@@ -12,6 +12,7 @@ using CloudinaryDotNet.Actions;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Annotations;
 using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.Extensions.Configuration;
 
 namespace HotelManagementAPI.Controllers.QuanTriVien
 {
@@ -21,10 +22,23 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
     public class QuanTriVienController : ControllerBase
     {
         private readonly IDbConnection _db;
+        private readonly IConfiguration _config;
+        private readonly Cloudinary _cloudinary;
 
-        public QuanTriVienController(IDbConnection db)
+        public QuanTriVienController(
+            IDbConnection db,
+            IOptions<CloudinarySettings> cloudinaryOptions,
+            IConfiguration config)
         {
             _db = db;
+            _config = config;
+            var settings = cloudinaryOptions.Value;
+            var account = new Account(
+                settings.CloudName,
+                settings.ApiKey,
+                settings.ApiSecret
+            );
+            _cloudinary = new Cloudinary(account);
         }
    
         // Dashboard
@@ -35,47 +49,7 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
             return Ok(new { Message = "Đây là dashboard của Quản trị viên." });
         }
 
-        // Đăng ký tài khoản quản trị viên
-        [HttpPost("dangky")]
-        public async Task<ActionResult<NguoiDungDTO>> DangKyQuanTriVien([FromBody] NguoiDungDTO nguoiDung)
-        {
-            nguoiDung.Vaitro = "QuanTriVien";
-            nguoiDung.MaNguoiDung = await GenerateUniqueMaNguoiDung();
-            nguoiDung.NgayTao = DateTime.Now;
-
-            const string checkEmailQuery = "SELECT COUNT(1) FROM NguoiDung WHERE Email = @Email";
-            var isEmailDuplicate = await _db.ExecuteScalarAsync<int>(checkEmailQuery, new { nguoiDung.Email });
-
-            if (isEmailDuplicate > 0)
-            {
-                return Conflict(new { Message = "Email đã tồn tại. Vui lòng sử dụng email khác." });
-            }
-
-            const string insertQuery = @"
-                INSERT INTO NguoiDung (MaNguoiDung, Vaitro, Email, TenTaiKhoan, MatKhau, HoTen, SoDienThoai, DiaChi, NgaySinh, GioiTinh, HinhAnhUrl, CanCuocCongDan, NgayTao)
-                VALUES (@MaNguoiDung, @Vaitro, @Email, @TenTaiKhoan, @MatKhau, @HoTen, @SoDienThoai, @DiaChi, @NgaySinh, @GioiTinh, @HinhAnhUrl, @CanCuocCongDan, @NgayTao)";
-            await _db.ExecuteAsync(insertQuery, nguoiDung);
-
-            return CreatedAtAction(nameof(DangKyQuanTriVien), new { id = nguoiDung.MaNguoiDung }, nguoiDung);
-        }
-
-        // Lấy profile quản trị viên
-        [HttpGet("profile")]
-        public async Task<ActionResult<NguoiDungDTO>> GetProfile()
-        {
-            var maNguoiDung = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            if (string.IsNullOrEmpty(maNguoiDung))
-                return Unauthorized(new { Message = "Không tìm thấy thông tin người dùng trong token." });
-
-            const string query = "SELECT * FROM NguoiDung WHERE MaNguoiDung = @MaNguoiDung";
-            var nguoiDung = await _db.QueryFirstOrDefaultAsync<NguoiDungDTO>(query, new { MaNguoiDung = maNguoiDung });
-
-            if (nguoiDung == null)
-                return NotFound(new { Message = "Không tìm thấy thông tin người dùng." });
-
-            return Ok(nguoiDung);
-        }
-
+        
         // Lấy danh sách tất cả khách hàng
         [HttpGet("khachhang")]
         public async Task<ActionResult<IEnumerable<NguoiDungDTO>>> GetAllKhachHang()
@@ -178,74 +152,9 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
             return Ok(new { Message = $"Đã đổi vai trò thành công cho người dùng {maNguoiDung} thành {dto.VaiTroMoi}" });
         }
 
-        // Thêm phòng mới
-        [HttpPost("phong")]
-        public async Task<IActionResult> ThemPhong([FromBody] PhongDetailsDTO phongDetailsDTO)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+       
 
-            // Sinh mã phòng tự động dạng P001, P002, ...
-            var maPhong = await GenerateMaPhong();
-
-            const string insertQuery = @"
-                INSERT INTO Phong (MaPhong, LoaiPhong, GiaPhong, TinhTrang, SoLuongPhong, Tang, KieuGiuong, MoTa, UrlAnhChinh, SucChua, SoGiuong, DonViTinh, SoSaoTrungBinh)
-                VALUES (@MaPhong, @LoaiPhong, @GiaPhong, @TinhTrang, @SoLuongPhong, @Tang, @KieuGiuong, @MoTa, @UrlAnhChinh, @SucChua, @SoGiuong, @DonViTinh, @SoSaoTrungBinh)";
-            await _db.ExecuteAsync(insertQuery, new
-            {
-                MaPhong = maPhong,
-                phongDetailsDTO.LoaiPhong,
-                phongDetailsDTO.GiaPhong,
-                phongDetailsDTO.TinhTrang,
-                phongDetailsDTO.SoLuongPhong,
-                phongDetailsDTO.Tang,
-                phongDetailsDTO.KieuGiuong,
-                phongDetailsDTO.MoTa,
-                phongDetailsDTO.UrlAnhChinh,
-                phongDetailsDTO.SucChua,
-                phongDetailsDTO.SoGiuong,
-                phongDetailsDTO.DonViTinh,
-                phongDetailsDTO.SoSaoTrungBinh
-            });
-
-            return Ok(new { Message = "Thêm phòng thành công.", MaPhong = maPhong });
-        }
-
-        // Sửa thông tin phòng
-        [HttpPut("phong/{maPhong}")]
-        public async Task<IActionResult> CapNhatPhong(string maPhong, [FromBody] PhongDetailsDTO phongDetailsDTO)
-        {
-            const string checkQuery = "SELECT COUNT(1) FROM Phong WHERE MaPhong = @MaPhong";
-            var isExists = await _db.ExecuteScalarAsync<int>(checkQuery, new { MaPhong = maPhong });
-
-            if (isExists == 0)
-                return NotFound(new { Message = "Phòng không tồn tại." });
-
-            const string updateQuery = @"
-                UPDATE Phong
-                SET LoaiPhong = @LoaiPhong, GiaPhong = @GiaPhong, TinhTrang = @TinhTrang, SoLuongPhong = @SoLuongPhong,
-                    Tang = @Tang, KieuGiuong = @KieuGiuong, MoTa = @MoTa, UrlAnhChinh = @UrlAnhChinh, SucChua = @SucChua,
-                    SoGiuong = @SoGiuong, DonViTinh = @DonViTinh, SoSaoTrungBinh = @SoSaoTrungBinh
-                WHERE MaPhong = @MaPhong";
-            await _db.ExecuteAsync(updateQuery, new
-            {
-                MaPhong = maPhong,
-                phongDetailsDTO.LoaiPhong,
-                phongDetailsDTO.GiaPhong,
-                phongDetailsDTO.TinhTrang,
-                phongDetailsDTO.SoLuongPhong,
-                phongDetailsDTO.Tang,
-                phongDetailsDTO.KieuGiuong,
-                phongDetailsDTO.MoTa,
-                phongDetailsDTO.UrlAnhChinh,
-                phongDetailsDTO.SucChua,
-                phongDetailsDTO.SoGiuong,
-                phongDetailsDTO.DonViTinh,
-                phongDetailsDTO.SoSaoTrungBinh
-            });
-
-            return Ok(new { Message = "Cập nhật phòng thành công." });
-        }
+       
 
         // Xóa phòng
         [HttpDelete("phong/{maPhong}")]
@@ -280,6 +189,87 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
             return Ok(new { Message = "Xóa phòng thành công." });
         }
 
+        // Thêm nội quy mới
+        [HttpPost("noiquy/them")]
+        [SwaggerOperation(Summary = "Thêm nội quy", Description = "Thêm một nội quy mới cho hệ thống.")]
+        [SwaggerResponse(200, "Thêm nội quy thành công.")]
+        public async Task<IActionResult> ThemNoiQuy([FromBody] QuanTriVienThem1NoiQuyDTO dto)
+        {
+            var maNoiQuy = await GenerateMaNoiQuy();
+            const string insertQuery = @"
+                INSERT INTO NoiQuy (MaNoiQuy, TieuDe, NoiDung, NgayTao, NgayCapNhat)
+                VALUES (@MaNoiQuy, @TieuDe, @NoiDung, @NgayTao, @NgayCapNhat)";
+            await _db.ExecuteAsync(insertQuery, new
+            {
+                MaNoiQuy = maNoiQuy,
+                TieuDe = dto.TenNoiQuy,
+                NoiDung = dto.MoTa,
+                NgayTao = dto.NgayTao,
+                NgayCapNhat = dto.NgayCapNhat
+            });
+            return Ok(new { Message = "Thêm nội quy thành công.", MaNoiQuy = maNoiQuy });
+        }
+
+        // Sửa nội quy
+        [HttpPut("noiquy/sua/{id}")]
+        [SwaggerOperation(Summary = "Sửa nội quy", Description = "Sửa thông tin nội quy theo Id.")]
+        [SwaggerResponse(200, "Sửa nội quy thành công.")]
+        [SwaggerResponse(404, "Không tìm thấy nội quy.")]
+        public async Task<IActionResult> SuaNoiQuy(int id, [FromBody] QuanTriVienSuaNoiQuyDTO dto)
+        {
+            const string checkQuery = "SELECT COUNT(1) FROM NoiQuy WHERE Id = @Id";
+            var exists = await _db.ExecuteScalarAsync<int>(checkQuery, new { Id = id });
+            if (exists == 0)
+                return NotFound(new { Message = "Không tìm thấy nội quy." });
+
+            const string updateQuery = @"
+                UPDATE NoiQuy
+                SET TieuDe = @TenNoiQuy, NoiDung = @MoTa, NgayCapNhat = @NgayCapNhat
+                WHERE Id = @Id";
+            await _db.ExecuteAsync(updateQuery, new
+            {
+                Id = id,
+                TenNoiQuy = dto.TenNoiQuy,
+                MoTa = dto.MoTa,
+                NgayCapNhat = dto.NgayCapNhat
+            });
+            return Ok(new { Message = "Sửa nội quy thành công." });
+        }
+
+        // Xóa nội quy theo ID
+        [HttpDelete("noiquy/xoa/{id}")]
+        [SwaggerOperation(Summary = "Xóa nội quy", Description = "Xóa nội quy theo Id.")]
+        [SwaggerResponse(200, "Xóa nội quy thành công.")]
+        [SwaggerResponse(404, "Không tìm thấy nội quy.")]
+        public async Task<IActionResult> XoaNoiQuy(int id)
+        {
+            const string checkQuery = "SELECT COUNT(1) FROM NoiQuy WHERE Id = @Id";
+            var exists = await _db.ExecuteScalarAsync<int>(checkQuery, new { Id = id });
+            if (exists == 0)
+                return NotFound(new { Message = "Không tìm thấy nội quy." });
+
+            const string deleteQuery = "DELETE FROM NoiQuy WHERE Id = @Id";
+            await _db.ExecuteAsync(deleteQuery, new { Id = id });
+            return Ok(new { Message = "Xóa nội quy thành công." });
+        }
+
+        // Xóa nội quy theo Id (dùng DTO)
+        [HttpDelete("noiquy/xoa1")]
+        [SwaggerOperation(Summary = "Xóa 1 nội quy", Description = "Xóa 1 nội quy dựa theo Id.")]
+        [SwaggerResponse(200, "Xóa nội quy thành công.")]
+        [SwaggerResponse(404, "Không tìm thấy nội quy.")]
+        public async Task<IActionResult> Xoa1NoiQuy([FromBody] QuanTriVienXoaNoiQuyDTO dto)
+        {
+            const string checkQuery = "SELECT COUNT(1) FROM NoiQuy WHERE Id = @Id";
+            var exists = await _db.ExecuteScalarAsync<int>(checkQuery, new { dto.Id });
+            if (exists == 0)
+                return NotFound(new { Message = "Không tìm thấy nội quy." });
+
+            const string deleteQuery = "DELETE FROM NoiQuy WHERE Id = @Id";
+            await _db.ExecuteAsync(deleteQuery, new { dto.Id });
+            return Ok(new { Message = "Xóa nội quy thành công." });
+        }
+
         // Hàm sinh mã người dùng tự động
         private async Task<string> GenerateUniqueMaNguoiDung()
         {
@@ -299,6 +289,16 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
                 FROM Phong";
             var nextId = await _db.ExecuteScalarAsync<int>(query);
             return $"P{nextId:D3}";
+        }
+
+        // Hàm sinh mã nội quy tự động (NQ001, NQ002, ...)
+        private async Task<string> GenerateMaNoiQuy()
+        {
+            const string query = @"
+                SELECT ISNULL(MAX(CAST(SUBSTRING(MaNoiQuy, 3, LEN(MaNoiQuy) - 2) AS INT)), 0) + 1
+                FROM NoiQuy";
+            var nextId = await _db.ExecuteScalarAsync<int>(query);
+            return $"NQ{nextId:D3}";
         }
 
         /// <summary>
@@ -556,22 +556,7 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
             return Ok(new { Message = "Duyệt bài viết thành công." });
         }
 
-        /// <summary>
-        /// Lấy danh sách bài viết đã duyệt.
-        /// </summary>
-        [HttpGet("baiviet/daduyet")]
-        [SwaggerOperation(
-            Summary = "Danh sách bài viết đã duyệt",
-            Description = "Lấy tất cả bài viết có trạng thái 'Đã Duyệt'."
-        )]
-        [SwaggerResponse(200, "Danh sách bài viết đã duyệt.")]
-        public async Task<IActionResult> GetBaiVietDaDuyet()
-        {
-            const string query = "SELECT * FROM BaiViet WHERE TrangThai = N'Đã Duyệt' ORDER BY NgayDang DESC";
-            var list = await _db.QueryAsync<TatCaBaiVietDTO>(query);
-            return Ok(list);
-        }
-
+        
         /// <summary>
         /// Lấy danh sách bài viết chưa duyệt.
         /// </summary>
@@ -617,6 +602,135 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
             const string deleteQuery = "DELETE FROM TienNghi WHERE MaTienNghi = @MaTienNghi";
             await _db.ExecuteAsync(deleteQuery, new { dto.MaTienNghi });
             return Ok(new { Message = "Xóa tiện nghi thành công." });
+        }
+
+        // Thêm phòng mới
+        [HttpPost("phong/them1phong")]
+        [SwaggerOperation(Summary = "Thêm 1 phòng mới", Description = "Thêm một phòng mới vào hệ thống, upload ảnh chính lên Cloudinary.")]
+        [SwaggerResponse(200, "Thêm phòng thành công.")]
+        [SwaggerResponse(400, "Dữ liệu không hợp lệ hoặc upload ảnh thất bại.")]
+        public async Task<IActionResult> Them1Phong([FromForm] QuanTriVienThem1PhongDTO dto, IFormFile? file, [FromServices] Cloudinary cloudinary)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            // Upload ảnh chính lên Cloudinary
+            string? imageUrl = null;
+            if (file != null && file.Length > 0)
+            {
+                await using var stream = file.OpenReadStream();
+                var uploadParams = new ImageUploadParams
+                {
+                    File = new FileDescription(file.FileName, stream),
+                    Transformation = new Transformation().Width(1200).Height(800).Crop("limit"),
+                    Folder = "phong"
+                };
+                var uploadResult = await cloudinary.UploadAsync(uploadParams);
+                if (uploadResult.StatusCode == System.Net.HttpStatusCode.OK)
+                    imageUrl = uploadResult.SecureUrl.ToString();
+                else
+                    return StatusCode(500, $"Upload ảnh thất bại: {uploadResult.Error?.Message}");
+            }
+            else
+            {
+                return BadRequest(new { Message = "Phải upload ảnh chính cho phòng." });
+            }
+
+            // Sinh mã phòng tự động theo quy tắc Pxxx
+            var maPhong = await GenerateMaPhong(); // Ví dụ: P001, P002, ...
+
+            const string insertQuery = @"
+                INSERT INTO Phong (MaPhong, LoaiPhong, GiaPhong, TinhTrang, SoLuongPhong, Tang, KieuGiuong, MoTa, UrlAnhChinh, SucChua, SoGiuong, DonViTinh, SoSaoTrungBinh)
+                VALUES (@MaPhong, @LoaiPhong, @GiaPhong, @TinhTrang, @SoLuongPhong, @Tang, @KieuGiuong, @MoTa, @UrlAnhChinh, @SucChua, @SoGiuong, @DonViTinh, @SoSaoTrungBinh)";
+            await _db.ExecuteAsync(insertQuery, new
+            {
+                MaPhong = maPhong,
+                dto.LoaiPhong,
+                dto.GiaPhong,
+                dto.TinhTrang,
+                dto.SoLuongPhong,
+                dto.Tang,
+                dto.KieuGiuong,
+                dto.MoTa,
+                UrlAnhChinh = imageUrl,
+                dto.SucChua,
+                dto.SoGiuong,
+                dto.DonViTinh,
+                dto.SoSaoTrungBinh
+            });
+
+            return Ok(new { Message = "Thêm phòng thành công.", MaPhong = maPhong, UrlAnhChinh = imageUrl });
+        }
+
+        // Thêm ảnh cho phòng
+        [HttpPost("phong/themanh")]
+        [SwaggerOperation(Summary = "Thêm nhiều ảnh cho phòng", Description = "Upload nhiều ảnh lên Cloudinary và lưu vào bảng PhongAnh.")]
+        [SwaggerResponse(200, "Thêm ảnh thành công.")]
+        [SwaggerResponse(404, "Không tìm thấy phòng.")]
+        public async Task<IActionResult> ThemNhieuAnhPhong([FromForm] string maPhong, [FromForm] List<IFormFile> files, [FromServices] Cloudinary cloudinary)
+        {
+            // Kiểm tra phòng tồn tại
+            const string checkPhong = "SELECT COUNT(1) FROM Phong WHERE MaPhong = @MaPhong";
+            var exists = await _db.ExecuteScalarAsync<int>(checkPhong, new { MaPhong = maPhong });
+            if (exists == 0)
+                return NotFound(new { Message = "Không tìm thấy phòng." });
+
+            if (files == null || files.Count == 0)
+                return BadRequest(new { Message = "Phải upload ít nhất 1 ảnh." });
+
+            var results = new List<object>();
+
+            foreach (var file in files)
+            {
+                string? imageUrl = null;
+                await using var stream = file.OpenReadStream();
+                var uploadParams = new ImageUploadParams
+                {
+                    File = new FileDescription(file.FileName, stream),
+                    Transformation = new Transformation().Width(1200).Height(800).Crop("limit"),
+                    Folder = "phong"
+                };
+                var uploadResult = await cloudinary.UploadAsync(uploadParams);
+                if (uploadResult.StatusCode == System.Net.HttpStatusCode.OK)
+                    imageUrl = uploadResult.SecureUrl.ToString();
+                else
+                    return StatusCode(500, $"Upload ảnh thất bại: {uploadResult.Error?.Message}");
+
+                // Sinh mã ảnh tự động
+                const string getMaxSql = "SELECT ISNULL(MAX(CAST(SUBSTRING(MaAnh, 3, LEN(MaAnh)-2) AS INT)), 0) + 1 FROM PhongAnh";
+                var nextId = await _db.ExecuteScalarAsync<int>(getMaxSql);
+                var maAnh = $"PA{nextId:D3}";
+
+                // Lưu vào DB
+                const string insertQuery = @"
+                    INSERT INTO PhongAnh (MaAnh, MaPhong, UrlAnh)
+                    VALUES (@MaAnh, @MaPhong, @UrlAnh)";
+                await _db.ExecuteAsync(insertQuery, new
+                {
+                    MaAnh = maAnh,
+                    MaPhong = maPhong,
+                    UrlAnh = imageUrl
+                });
+
+                results.Add(new { MaAnh = maAnh, UrlAnh = imageUrl });
+            }
+
+            return Ok(new { Message = "Thêm ảnh thành công.", DanhSach = results });
+        }
+
+        // Lấy danh sách giảm giá của một phòng
+        [HttpGet("phong/{maPhong}/giamgia")]
+        [SwaggerOperation(Summary = "Lấy danh sách giảm giá của phòng")]
+        public async Task<IActionResult> GetDanhSachGiamGia(string maPhong)
+        {
+            const string query = @"
+                SELECT gg.MaGiamGia, gg.TenGiamGia, gg.GiaTriGiam, gg.NgayBatDau, gg.NgayKetThuc, gg.MoTa
+                FROM GiamGia gg
+                JOIN Phong_GiamGia pg ON gg.MaGiamGia = pg.MaGiamGia
+                WHERE pg.MaPhong = @MaPhong";
+
+            var danhSachGiamGia = await _db.QueryAsync(query, new { MaPhong = maPhong });
+            return Ok(danhSachGiamGia);
         }
     }
 }
