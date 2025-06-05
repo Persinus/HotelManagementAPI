@@ -28,9 +28,7 @@ namespace HotelManagementAPI.DTOs
         [Range(0, int.MaxValue, ErrorMessage = "Số lượng phải lớn hơn hoặc bằng 0.")]
         public int SoLuong { get; set; }
 
-        [Required]
-        [Range(0, 1, ErrorMessage = "Trạng thái phải là 0 (không hoạt động) hoặc 1 (hoạt động).")]
-        public byte TrangThai { get; set; }
+     
 
         [Required]
         [StringLength(50)]
