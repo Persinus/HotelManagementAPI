@@ -310,6 +310,9 @@ public async Task<IActionResult> HuyDatPhongHoanToan(string maDatPhong)
 
             var tongTien = giaPhong * soNgay + tongTienDichVu;
 
+            // Áp dụng giảm giá nếu có
+            decimal tongTienSauGiamGia = tongTien * (1 - (request.GiaTriGiam / 100m));
+
             string maHoaDon = await GenerateUniqueMaHoaDon();
 
             const string insertHoaDonQuery = @"
@@ -320,7 +323,7 @@ public async Task<IActionResult> HuyDatPhongHoanToan(string maDatPhong)
                 MaHoaDon = maHoaDon,
                 MaNguoiDung = datPhong.MaNguoiDung!,
                 MaDatPhong = datPhong.MaDatPhong!,
-                TongTien = tongTien,
+                TongTien = tongTienSauGiamGia,
                 NgayTaoHoaDon = DateTime.Now,
                 NgayThanhToan = null,
                 TinhTrangHoaDon = 1
