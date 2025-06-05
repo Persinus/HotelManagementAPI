@@ -48,6 +48,12 @@ public class RoleMiddleware
             await context.Response.WriteAsync("Bạn không có quyền truy cập vào tài nguyên này.");
             return;
         }
+        else if (context.Request.Path.StartsWithSegments("/api/quanlychung") && userRole != "NhanVien" && userRole != "QuanTriVien")
+        {
+            context.Response.StatusCode = StatusCodes.Status403Forbidden;
+            await context.Response.WriteAsync("Bạn không có quyền truy cập vào tài nguyên này.");
+            return;
+        }
         else if (context.Request.Path.StartsWithSegments("/api/khachhang") && userRole != "KhachHang" && userRole != "NhanVien" && userRole != "QuanTriVien")
         {
             context.Response.StatusCode = StatusCodes.Status403Forbidden;

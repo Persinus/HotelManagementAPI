@@ -8,12 +8,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using Microsoft.AspNetCore.Authorization;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace HotelManagementAPI.Controllers
 {
     [ApiController]
     [Route("api/khachhang")]
-    [Authorize (Roles = "KhachHang")]
+    [Authorize(Roles = "KhachHang")]
     public class KhachHangController : ControllerBase
     {
         private readonly IDbConnection _db;
@@ -31,6 +32,14 @@ namespace HotelManagementAPI.Controllers
         /// Tạo đơn đặt phòng mới, kiểm tra trạng thái phòng và dịch vụ đi kèm.
         /// </remarks>
         [HttpPost("datphong")]
+        [SwaggerOperation(
+            Summary = "Đặt phòng mới",
+            Description = "Tạo đơn đặt phòng mới cho khách hàng, kiểm tra trạng thái phòng và dịch vụ đi kèm."
+        )]
+        [SwaggerResponse(200, "Đặt phòng thành công, trả về mã đặt phòng và tổng tiền tạm tính.")]
+        [SwaggerResponse(400, "Dữ liệu không hợp lệ hoặc phòng/dịch vụ không hợp lệ.")]
+        [SwaggerResponse(401, "Không xác định được người dùng.")]
+      
         public async Task<IActionResult> TaoDonDatPhong([FromBody] KhachHangDatPhongDTO datPhongDTO)
         {
             if (!ModelState.IsValid)
@@ -136,6 +145,12 @@ namespace HotelManagementAPI.Controllers
         /// Lấy lịch sử đặt phòng của khách hàng.
         /// </summary>
         [HttpGet("datphong/lichsu")]
+        [SwaggerOperation(
+            Summary = "Lấy lịch sử đặt phòng",
+            Description = "Trả về danh sách các đơn đặt phòng của khách hàng hiện tại."
+        )]
+        [SwaggerResponse(200, "Danh sách lịch sử đặt phòng.")]
+        [SwaggerResponse(401, "Không xác định được người dùng.")]
         public async Task<IActionResult> LichSuDatPhong()
         {
             var maNguoiDung = User.FindFirstValue("sub") ?? User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -159,6 +174,13 @@ namespace HotelManagementAPI.Controllers
         /// </summary>
         /// <param name="id">Mã đặt phòng</param>
         [HttpDelete("datphong/{id}")]
+        [SwaggerOperation(
+            Summary = "Hủy đơn đặt phòng",
+            Description = "Hủy đơn đặt phòng theo mã đặt phòng."
+        )]
+        [SwaggerResponse(200, "Hủy đặt phòng thành công.")]
+        [SwaggerResponse(404, "Mã đặt phòng không tồn tại.")]
+       
         public async Task<IActionResult> HuyDatPhong(string id)
         {
             const string checkQuery = "SELECT COUNT(1) FROM DatPhong WHERE MaDatPhong = @MaDatPhong";
@@ -172,12 +194,58 @@ namespace HotelManagementAPI.Controllers
             return Ok(new { Message = "Hủy đặt phòng thành công." });
         }
 
+        /// <summary>
+/// Hủy đặt phòng hoàn toàn (reset trạng thái phòng, đặt phòng, xóa hóa đơn và thanh toán liên quan).
+/// </summary>
+[HttpPost("datphong/huy-hoan-toan/{maDatPhong}")]
+[SwaggerOperation(
+    Summary = "Hủy đặt phòng hoàn toàn",
+    Description = "Hủy đặt phòng đã tạo hóa đơn/thanh toán: reset trạng thái phòng, trạng thái đặt phòng, xóa hóa đơn và thanh toán liên quan."
+)]
+[SwaggerResponse(200, "Hủy đặt phòng hoàn toàn thành công.")]
+[SwaggerResponse(404, "Không tìm thấy mã đặt phòng.")]
+public async Task<IActionResult> HuyDatPhongHoanToan(string maDatPhong)
+{
+    // Kiểm tra tồn tại
+    const string checkQuery = "SELECT MaPhong FROM DatPhong WHERE MaDatPhong = @MaDatPhong";
+    var maPhong = await _db.ExecuteScalarAsync<string>(checkQuery, new { MaDatPhong = maDatPhong });
+    if (string.IsNullOrEmpty(maPhong))
+        return NotFound(new { Message = "Không tìm thấy mã đặt phòng." });
+
+    // Reset trạng thái phòng về 1 (chưa đặt)
+    const string updatePhong = "UPDATE Phong SET TinhTrang = 1 WHERE MaPhong = @MaPhong";
+    await _db.ExecuteAsync(updatePhong, new { MaPhong = maPhong });
+
+    // Reset trạng thái đặt phòng về 1 (chưa đặt)
+    const string updateDatPhong = "UPDATE DatPhong SET TinhTrangDatPhong = 1 WHERE MaDatPhong = @MaDatPhong";
+    await _db.ExecuteAsync(updateDatPhong, new { MaDatPhong = maDatPhong });
+
+    // Xóa thanh toán liên quan
+    const string deleteThanhToan = @"
+        DELETE FROM ThanhToan WHERE MaHoaDon IN (SELECT MaHoaDon FROM HoaDon WHERE MaDatPhong = @MaDatPhong)";
+    await _db.ExecuteAsync(deleteThanhToan, new { MaDatPhong = maDatPhong });
+
+    // Xóa hóa đơn
+    const string deleteHoaDon = "DELETE FROM HoaDon WHERE MaDatPhong = @MaDatPhong";
+    await _db.ExecuteAsync(deleteHoaDon, new { MaDatPhong = maDatPhong });
+
+    return Ok(new { Message = "Hủy đặt phòng hoàn toàn thành công." });
+}
+
         // ----------- HÓA ĐƠN -----------
         /// <summary>
         /// Lấy hóa đơn theo mã đặt phòng.
         /// </summary>
         /// <param name="maDatPhong">Mã đặt phòng</param>
         [HttpGet("hoadon/by-madatphong/{maDatPhong}")]
+        [SwaggerOperation(
+            Summary = "Lấy hóa đơn theo mã đặt phòng",
+            Description = "Trả về hóa đơn tương ứng với mã đặt phòng."
+        )]
+        [SwaggerResponse(200, "Trả về hóa đơn.")]
+        [SwaggerResponse(401, "Không xác định được người dùng hoặc không có quyền.")]
+        [SwaggerResponse(404, "Không tìm thấy hóa đơn.")]
+      
         public async Task<IActionResult> GetHoaDonByMaDatPhong(string maDatPhong)
         {
             var maNguoiDung = User.FindFirstValue("sub") ?? User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -202,6 +270,14 @@ namespace HotelManagementAPI.Controllers
         /// Tạo hóa đơn mới cho đơn đặt phòng.
         /// </summary>
         [HttpPost("hoadon/tao")]
+        [SwaggerOperation(
+            Summary = "Tạo hóa đơn mới",
+            Description = "Tạo hóa đơn mới cho đơn đặt phòng đã đặt."
+        )]
+        [SwaggerResponse(200, "Tạo hóa đơn thành công.")]
+        [SwaggerResponse(401, "Không xác định được người dùng hoặc không có quyền.")]
+        [SwaggerResponse(404, "Không tìm thấy mã đặt phòng.")]
+       
         public async Task<IActionResult> TaoHoaDon([FromBody] TaoHoaDonRequestDTO request)
         {
             const string datPhongQuery = @"
@@ -259,6 +335,13 @@ namespace HotelManagementAPI.Controllers
         /// Thanh toán hóa đơn.
         /// </summary>
         [HttpPost("thanhtoan")]
+        [SwaggerOperation(
+            Summary = "Thanh toán hóa đơn",
+            Description = "Thực hiện thanh toán cho hóa đơn của khách hàng."
+        )]
+        [SwaggerResponse(200, "Thanh toán thành công.")]
+        [SwaggerResponse(401, "Không xác định được người dùng hoặc không có quyền.")]
+       
         public async Task<IActionResult> ThanhToan([FromBody] KhachHangThanhToanDTO request)
         {
             var maNguoiDung = User.FindFirstValue("sub") ?? User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -297,6 +380,12 @@ namespace HotelManagementAPI.Controllers
         /// Lấy lịch sử thanh toán của khách hàng.
         /// </summary>
         [HttpGet("thanhtoan/lichsu")]
+        [SwaggerOperation(
+            Summary = "Lấy lịch sử thanh toán",
+            Description = "Trả về danh sách các giao dịch thanh toán của khách hàng."
+        )]
+        [SwaggerResponse(200, "Danh sách lịch sử thanh toán.")]
+        [SwaggerResponse(401, "Không xác định được người dùng.")]
         public async Task<IActionResult> LichSuThanhToan()
         {
             var maNguoiDung = User.FindFirstValue("sub") ?? User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -318,6 +407,12 @@ namespace HotelManagementAPI.Controllers
         /// Lấy tổng hợp lịch sử giao dịch của khách hàng.
         /// </summary>
         [HttpGet("lichsu")]
+        [SwaggerOperation(
+            Summary = "Lấy tổng hợp lịch sử giao dịch",
+            Description = "Trả về tổng hợp lịch sử đặt phòng, hóa đơn, thanh toán của khách hàng."
+        )]
+        [SwaggerResponse(200, "Tổng hợp lịch sử giao dịch.")]
+        [SwaggerResponse(401, "Không xác định được người dùng.")]
         public async Task<IActionResult> GetLichSuGiaoDich()
         {
             var maNguoiDung = User.FindFirstValue("sub") ?? User.FindFirstValue(ClaimTypes.NameIdentifier);

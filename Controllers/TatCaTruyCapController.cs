@@ -89,71 +89,26 @@ namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
         /// </summary>
         /// <param name="nguoiDung">Thông tin người dùng</param>
         [HttpPost("dangky")]
-        public async Task<IActionResult> DangKyNguoiDung([FromForm] NguoiDungDangKyDTO dto, IFormFile? file)
-        {
-            // Kiểm tra email trùng lặp
-            const string checkEmailQuery = "SELECT COUNT(1) FROM NguoiDung WHERE Email = @Email";
-            var isEmailDuplicate = await _db.ExecuteScalarAsync<int>(checkEmailQuery, new { dto.Email });
+        public async Task<IActionResult> DangKyKhachHang([FromForm] NguoiDungDangKyDTO dto, IFormFile? file)
+            => await DangKyNguoiDungChung(dto, file, "KhachHang");
 
-            if (isEmailDuplicate > 0)
-                return Conflict(new { Message = "Email đã tồn tại. Vui lòng sử dụng email khác." });
+        /// <summary>
+        /// Đăng ký nhân viên.
+        /// </summary>
+        /// <param name="nguoiDung">Thông tin nhân viên</param>
+        [HttpPost("dangky-nhanvien")]
+        [AllowAnonymous]
+        public async Task<IActionResult> DangKyNhanVien([FromForm] NguoiDungDangKyDTO dto, IFormFile? file)
+            => await DangKyNguoiDungChung(dto, file, "NhanVien");
 
-            // Kiểm tra tên tài khoản trùng lặp
-            const string checkTenTaiKhoanQuery = "SELECT COUNT(1) FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan";
-            var isTenTaiKhoanDuplicate = await _db.ExecuteScalarAsync<int>(checkTenTaiKhoanQuery, new { dto.TenTaiKhoan });
-
-            if (isTenTaiKhoanDuplicate > 0)
-                return Conflict(new { Message = "Tên đăng nhập đã có người sử dụng. Vui lòng chọn tên đăng nhập khác." });
-
-            string? imageUrl = null;
-            if (file != null && file.Length > 0)
-            {
-                await using var stream = file.OpenReadStream();
-                var uploadParams = new ImageUploadParams
-                {
-                    File = new FileDescription(file.FileName, stream),
-                    Transformation = new Transformation().Width(400).Height(400).Crop("limit"),
-                    Folder = "avatar"
-                };
-                var uploadResult = await _cloudinary.UploadAsync(uploadParams);
-                if (uploadResult.StatusCode == System.Net.HttpStatusCode.OK)
-                    imageUrl = uploadResult.SecureUrl.ToString();
-                else
-                    return StatusCode(500, $"Upload ảnh thất bại: {uploadResult.Error?.Message}");
-            }
-
-            var nguoiDung = new NguoiDungDTO
-            {
-                TenTaiKhoan = dto.TenTaiKhoan,
-                MatKhau = dto.MatKhau,
-                HoTen = dto.HoTen,
-                SoDienThoai = dto.SoDienThoai,
-                DiaChi = dto.DiaChi,
-                NgaySinh = dto.NgaySinh,
-                GioiTinh = dto.GioiTinh,
-                Email = dto.Email,
-                Vaitro = "KhachHang",
-                MaNguoiDung = await GenerateUniqueMaNguoiDung(),
-                NgayTao = DateTime.Now,
-                HinhAnhUrl = imageUrl,
-                CanCuocCongDan = dto.CanCuocCongDan // BỔ SUNG DÒNG NÀY
-            };
-
-            // Mã hóa CCCD trước khi lưu
-            if (!string.IsNullOrEmpty(nguoiDung.CanCuocCongDan))
-                nguoiDung.CanCuocCongDan = SensitiveDataHelper.Encrypt(nguoiDung.CanCuocCongDan);
-
-            // Mã hóa mật khẩu
-            nguoiDung.MatKhau = BCrypt.Net.BCrypt.HashPassword(nguoiDung.MatKhau);
-
-            // Thêm người dùng mới
-            const string insertQuery = @"
-                INSERT INTO NguoiDung (MaNguoiDung, Vaitro, Email, TenTaiKhoan, MatKhau, HoTen, SoDienThoai, DiaChi, NgaySinh, GioiTinh, HinhAnhUrl, CanCuocCongDan, NgayTao)
-                VALUES (@MaNguoiDung, @Vaitro, @Email, @TenTaiKhoan, @MatKhau, @HoTen, @SoDienThoai, @DiaChi, @NgaySinh, @GioiTinh, @HinhAnhUrl, @CanCuocCongDan, @NgayTao)";
-            await _db.ExecuteAsync(insertQuery, nguoiDung);
-
-            return CreatedAtAction(nameof(DangKyNguoiDung), new { id = nguoiDung.MaNguoiDung }, nguoiDung);
-        }
+        /// <summary>
+        /// Đăng ký quản trị viên.
+        /// </summary>
+        /// <param name="nguoiDung">Thông tin quản trị viên</param>
+        [HttpPost("dangky-quantrivien")]
+        [AllowAnonymous]
+        public async Task<IActionResult> DangKyQuanTriVien([FromForm] NguoiDungDangKyDTO dto, IFormFile? file)
+            => await DangKyNguoiDungChung(dto, file, "QuanTriVien");
 
         /// <summary>
         /// Đặt lại mật khẩu.
@@ -310,8 +265,20 @@ namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
                     LoaiDichVu, 
                     DonViTinh
                 FROM DichVu";
-            var dichVuList = await _db.QueryAsync<DichVuDTO>(query);
-            return Ok(dichVuList);
+            var dichVuList = (await _db.QueryAsync<DichVuDTO>(query)).ToList();
+            var result = dichVuList.Select(dv => new
+            {
+                dv.MaDichVu,
+                dv.TenDichVu,
+                dv.DonGia,
+                dv.MoTaDichVu,
+                dv.HinhAnhDichVu,
+                dv.SoLuong,
+                dv.LoaiDichVu,
+                dv.DonViTinh,
+                TrangThai = dv.SoLuong > 0 ? "Còn hàng" : "Hết hàng"
+            });
+            return Ok(result);
         }
 
         /// <summary>
@@ -368,84 +335,59 @@ namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
             return Ok(phongList);
         }
 
-        /// <summary>
-        /// Đăng ký nhân viên.
-        /// </summary>
-        /// <param name="nguoiDung">Thông tin nhân viên</param>
-        [HttpPost("dangky-nhanvien")]
-        [AllowAnonymous]
-        public async Task<ActionResult<NguoiDungDTO>> DangKyNhanVien([FromBody] NguoiDungDTO nguoiDung)
+        private async Task<IActionResult> DangKyNguoiDungChung(NguoiDungDangKyDTO dto, IFormFile? file, string vaitro)
         {
-            nguoiDung.Vaitro = "NhanVien";
-            nguoiDung.MaNguoiDung = await GenerateUniqueMaNguoiDung();
-            nguoiDung.NgayTao = DateTime.Now;
-
             // Kiểm tra email trùng lặp
             const string checkEmailQuery = "SELECT COUNT(1) FROM NguoiDung WHERE Email = @Email";
-            var isEmailDuplicate = await _db.ExecuteScalarAsync<int>(checkEmailQuery, new { nguoiDung.Email });
+            var isEmailDuplicate = await _db.ExecuteScalarAsync<int>(checkEmailQuery, new { dto.Email });
             if (isEmailDuplicate > 0)
                 return Conflict(new { Message = "Email đã tồn tại. Vui lòng sử dụng email khác." });
 
             // Kiểm tra tên tài khoản trùng lặp
             const string checkTenTaiKhoanQuery = "SELECT COUNT(1) FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan";
-            var isTenTaiKhoanDuplicate = await _db.ExecuteScalarAsync<int>(checkTenTaiKhoanQuery, new { nguoiDung.TenTaiKhoan });
+            var isTenTaiKhoanDuplicate = await _db.ExecuteScalarAsync<int>(checkTenTaiKhoanQuery, new { dto.TenTaiKhoan });
             if (isTenTaiKhoanDuplicate > 0)
                 return Conflict(new { Message = "Tên đăng nhập đã có người sử dụng. Vui lòng chọn tên đăng nhập khác." });
 
-            // Mã hóa CCCD trước khi lưu
-            if (!string.IsNullOrEmpty(nguoiDung.CanCuocCongDan))
-                nguoiDung.CanCuocCongDan = SensitiveDataHelper.Encrypt(nguoiDung.CanCuocCongDan);
+            string? imageUrl = null;
+            if (file != null && file.Length > 0)
+            {
+                await using var stream = file.OpenReadStream();
+                var uploadParams = new ImageUploadParams
+                {
+                    File = new FileDescription(file.FileName, stream),
+                    Transformation = new Transformation().Width(400).Height(400).Crop("limit"),
+                    Folder = "avatar"
+                };
+                var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+                if (uploadResult.StatusCode == System.Net.HttpStatusCode.OK)
+                    imageUrl = uploadResult.SecureUrl.ToString();
+                else
+                    return StatusCode(500, $"Upload ảnh thất bại: {uploadResult.Error?.Message}");
+            }
 
-            // Mã hóa mật khẩu
-            nguoiDung.MatKhau = BCrypt.Net.BCrypt.HashPassword(nguoiDung.MatKhau);
+            var nguoiDung = new NguoiDungDTO
+            {
+                TenTaiKhoan = dto.TenTaiKhoan,
+                MatKhau = BCrypt.Net.BCrypt.HashPassword(dto.MatKhau),
+                HoTen = dto.HoTen,
+                SoDienThoai = dto.SoDienThoai,
+                DiaChi = dto.DiaChi,
+                NgaySinh = dto.NgaySinh,
+                GioiTinh = dto.GioiTinh,
+                Email = dto.Email,
+                Vaitro = vaitro,
+                MaNguoiDung = await GenerateUniqueMaNguoiDung(),
+                NgayTao = DateTime.Now,
+                HinhAnhUrl = imageUrl,
+                CanCuocCongDan = string.IsNullOrEmpty(dto.CanCuocCongDan) ? null : SensitiveDataHelper.Encrypt(dto.CanCuocCongDan)
+            };
 
-            // Thêm người dùng mới
             const string insertQuery = @"
-                INSERT INTO NguoiDung (MaNguoiDung, Vaitro, Email, TenTaiKhoan, MatKhau, HoTen, SoDienThoai, DiaChi, NgaySinh, GioiTinh, HinhAnhUrl, CanCuocCongDan, NgayTao)
-                VALUES (@MaNguoiDung, @Vaitro, @Email, @TenTaiKhoan, @MatKhau, @HoTen, @SoDienThoai, @DiaChi, @NgaySinh, @GioiTinh, @HinhAnhUrl, @CanCuocCongDan, @NgayTao)";
+        INSERT INTO NguoiDung (MaNguoiDung, Vaitro, Email, TenTaiKhoan, MatKhau, HoTen, SoDienThoai, DiaChi, NgaySinh, GioiTinh, HinhAnhUrl, CanCuocCongDan, NgayTao)
+        VALUES (@MaNguoiDung, @Vaitro, @Email, @TenTaiKhoan, @MatKhau, @HoTen, @SoDienThoai, @DiaChi, @NgaySinh, @GioiTinh, @HinhAnhUrl, @CanCuocCongDan, @NgayTao)";
             await _db.ExecuteAsync(insertQuery, nguoiDung);
-
-            return CreatedAtAction(nameof(DangKyNhanVien), new { id = nguoiDung.MaNguoiDung }, nguoiDung);
-        }
-
-        /// <summary>
-        /// Đăng ký quản trị viên.
-        /// </summary>
-        /// <param name="nguoiDung">Thông tin quản trị viên</param>
-        [HttpPost("dangky-quantrivien")]
-        [AllowAnonymous]
-        public async Task<ActionResult<NguoiDungDTO>> DangKyQuanTriVien([FromBody] NguoiDungDTO nguoiDung)
-        {
-            nguoiDung.Vaitro = "QuanTriVien";
-            nguoiDung.MaNguoiDung = await GenerateUniqueMaNguoiDung();
-            nguoiDung.NgayTao = DateTime.Now;
-
-            // Kiểm tra email trùng lặp
-            const string checkEmailQuery = "SELECT COUNT(1) FROM NguoiDung WHERE Email = @Email";
-            var isEmailDuplicate = await _db.ExecuteScalarAsync<int>(checkEmailQuery, new { nguoiDung.Email });
-            if (isEmailDuplicate > 0)
-                return Conflict(new { Message = "Email đã tồn tại. Vui lòng sử dụng email khác." });
-
-            // Kiểm tra tên tài khoản trùng lặp
-            const string checkTenTaiKhoanQuery = "SELECT COUNT(1) FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan";
-            var isTenTaiKhoanDuplicate = await _db.ExecuteScalarAsync<int>(checkTenTaiKhoanQuery, new { nguoiDung.TenTaiKhoan });
-            if (isTenTaiKhoanDuplicate > 0)
-                return Conflict(new { Message = "Tên đăng nhập đã có người sử dụng. Vui lòng chọn tên đăng nhập khác." });
-
-            // Mã hóa CCCD trước khi lưu
-            if (!string.IsNullOrEmpty(nguoiDung.CanCuocCongDan))
-                nguoiDung.CanCuocCongDan = SensitiveDataHelper.Encrypt(nguoiDung.CanCuocCongDan);
-
-            // Mã hóa mật khẩu
-            nguoiDung.MatKhau = BCrypt.Net.BCrypt.HashPassword(nguoiDung.MatKhau);
-
-            // Thêm người dùng mới
-            const string insertQuery = @"
-                INSERT INTO NguoiDung (MaNguoiDung, Vaitro, Email, TenTaiKhoan, MatKhau, HoTen, SoDienThoai, DiaChi, NgaySinh, GioiTinh, HinhAnhUrl, CanCuocCongDan, NgayTao)
-                VALUES (@MaNguoiDung, @Vaitro, @Email, @TenTaiKhoan, @MatKhau, @HoTen, @SoDienThoai, @DiaChi, @NgaySinh, @GioiTinh, @HinhAnhUrl, @CanCuocCongDan, @NgayTao)";
-            await _db.ExecuteAsync(insertQuery, nguoiDung);
-
-            return CreatedAtAction(nameof(DangKyQuanTriVien), new { id = nguoiDung.MaNguoiDung }, nguoiDung);
+            return Ok(new { Message = "Đăng ký thành công!", MaNguoiDung = nguoiDung.MaNguoiDung });
         }
 
         // Helper tạo mã người dùng duy nhất
