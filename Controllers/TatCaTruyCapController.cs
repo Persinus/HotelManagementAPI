@@ -13,6 +13,7 @@ using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Configuration;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
 {

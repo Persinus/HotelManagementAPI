@@ -664,34 +664,73 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
 
         // Thêm ảnh cho phòng
         [HttpPost("phong/themanh")]
-        [SwaggerOperation(Summary = "Thêm ảnh cho phòng", Description = "Thêm một ảnh vào phòng, mã ảnh tự sinh, nhiều phòng có thể dùng chung ảnh.")]
+        [SwaggerOperation(Summary = "Thêm nhiều ảnh cho phòng", Description = "Upload nhiều ảnh lên Cloudinary và lưu vào bảng PhongAnh.")]
         [SwaggerResponse(200, "Thêm ảnh thành công.")]
         [SwaggerResponse(404, "Không tìm thấy phòng.")]
-        public async Task<IActionResult> ThemAnhPhong([FromBody] QuanTriVienThemAnhDTO dto)
+        public async Task<IActionResult> ThemNhieuAnhPhong([FromForm] string maPhong, [FromForm] List<IFormFile> files, [FromServices] Cloudinary cloudinary)
         {
             // Kiểm tra phòng tồn tại
             const string checkPhong = "SELECT COUNT(1) FROM Phong WHERE MaPhong = @MaPhong";
-            var exists = await _db.ExecuteScalarAsync<int>(checkPhong, new { dto.MaPhong });
+            var exists = await _db.ExecuteScalarAsync<int>(checkPhong, new { MaPhong = maPhong });
             if (exists == 0)
                 return NotFound(new { Message = "Không tìm thấy phòng." });
 
-            // Sinh mã ảnh tự động (ví dụ: PA001, PA002, ...)
-            const string getMaxSql = "SELECT ISNULL(MAX(CAST(SUBSTRING(MaAnh, 3, LEN(MaAnh)-2) AS INT)), 0) + 1 FROM PhongAnh";
-            var nextId = await _db.ExecuteScalarAsync<int>(getMaxSql);
-            var maAnh = $"PA{nextId:D3}";
+            if (files == null || files.Count == 0)
+                return BadRequest(new { Message = "Phải upload ít nhất 1 ảnh." });
 
-            // Thêm vào bảng PhongAnh
-            const string insertQuery = @"
-                INSERT INTO PhongAnh (MaAnh, MaPhong, UrlAnh)
-                VALUES (@MaAnh, @MaPhong, @UrlAnh)";
-            await _db.ExecuteAsync(insertQuery, new
+            var results = new List<object>();
+
+            foreach (var file in files)
             {
-                MaAnh = maAnh,
-                MaPhong = dto.MaPhong,
-                UrlAnh = dto.UrlAnh
-            });
+                string? imageUrl = null;
+                await using var stream = file.OpenReadStream();
+                var uploadParams = new ImageUploadParams
+                {
+                    File = new FileDescription(file.FileName, stream),
+                    Transformation = new Transformation().Width(1200).Height(800).Crop("limit"),
+                    Folder = "phong"
+                };
+                var uploadResult = await cloudinary.UploadAsync(uploadParams);
+                if (uploadResult.StatusCode == System.Net.HttpStatusCode.OK)
+                    imageUrl = uploadResult.SecureUrl.ToString();
+                else
+                    return StatusCode(500, $"Upload ảnh thất bại: {uploadResult.Error?.Message}");
 
-            return Ok(new { Message = "Thêm ảnh thành công.", MaAnh = maAnh, MaPhong = dto.MaPhong, UrlAnh = dto.UrlAnh });
+                // Sinh mã ảnh tự động
+                const string getMaxSql = "SELECT ISNULL(MAX(CAST(SUBSTRING(MaAnh, 3, LEN(MaAnh)-2) AS INT)), 0) + 1 FROM PhongAnh";
+                var nextId = await _db.ExecuteScalarAsync<int>(getMaxSql);
+                var maAnh = $"PA{nextId:D3}";
+
+                // Lưu vào DB
+                const string insertQuery = @"
+                    INSERT INTO PhongAnh (MaAnh, MaPhong, UrlAnh)
+                    VALUES (@MaAnh, @MaPhong, @UrlAnh)";
+                await _db.ExecuteAsync(insertQuery, new
+                {
+                    MaAnh = maAnh,
+                    MaPhong = maPhong,
+                    UrlAnh = imageUrl
+                });
+
+                results.Add(new { MaAnh = maAnh, UrlAnh = imageUrl });
+            }
+
+            return Ok(new { Message = "Thêm ảnh thành công.", DanhSach = results });
+        }
+
+        // Lấy danh sách giảm giá của một phòng
+        [HttpGet("phong/{maPhong}/giamgia")]
+        [SwaggerOperation(Summary = "Lấy danh sách giảm giá của phòng")]
+        public async Task<IActionResult> GetDanhSachGiamGia(string maPhong)
+        {
+            const string query = @"
+                SELECT gg.MaGiamGia, gg.TenGiamGia, gg.GiaTriGiam, gg.NgayBatDau, gg.NgayKetThuc, gg.MoTa
+                FROM GiamGia gg
+                JOIN Phong_GiamGia pg ON gg.MaGiamGia = pg.MaGiamGia
+                WHERE pg.MaPhong = @MaPhong";
+
+            var danhSachGiamGia = await _db.QueryAsync(query, new { MaPhong = maPhong });
+            return Ok(danhSachGiamGia);
         }
     }
 }
