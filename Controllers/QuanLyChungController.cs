@@ -161,6 +161,29 @@ namespace HotelManagementAPI.Controllers
             return Ok(new { Message = "Cập nhật ảnh phòng thành công." });
         }
 
+        // Xem tất cả mã giảm giá
+        [HttpGet("giamgia/all")]
+        [SwaggerOperation(Summary = "Lấy tất cả mã giảm giá", Description = "Lấy danh sách tất cả mã giảm giá.")]
+        [SwaggerResponse(200, "Danh sách mã giảm giá.")]
+        public async Task<IActionResult> GetAllGiamGia()
+        {
+            const string query = "SELECT * FROM GiamGia";
+            var list = await _db.QueryAsync<GiamGiaDetailDTO>(query);
+            return Ok(list);
+        }
+
+        // Xem chi tiết mã giảm giá theo mã
+        [HttpGet("giamgia/{maGiamGia}")]
+        [SwaggerOperation(Summary = "Lấy chi tiết mã giảm giá", Description = "Lấy chi tiết một mã giảm giá theo mã.")]
+        [SwaggerResponse(200, "Chi tiết mã giảm giá.")]
+        [SwaggerResponse(404, "Không tìm thấy mã giảm giá.")]
+        public async Task<IActionResult> GetGiamGiaByMa(string maGiamGia)
+        {
+            const string query = "SELECT * FROM GiamGia WHERE MaGiamGia = @MaGiamGia";
+            var result = await _db.QueryFirstOrDefaultAsync<GiamGiaDetailDTO>(query, new { MaGiamGia = maGiamGia });
+            if (result == null)
+                return NotFound(new { Message = "Không tìm thấy mã giảm giá." });
+            return Ok(result);
+        }
     }
-    
 }
