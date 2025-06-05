@@ -10,9 +10,6 @@ namespace HotelManagementAPI.DTOs
         [StringLength(50)]
         public string TenGiamGia { get; set; } = null!;
 
-        [StringLength(6)]
-        public string? LoaiGiamGia { get; set; }
-
         [Range(0, double.MaxValue)]
         public decimal GiaTriGiam { get; set; }
 
