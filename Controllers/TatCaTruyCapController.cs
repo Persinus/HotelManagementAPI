@@ -334,6 +334,21 @@ namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
 
             return Ok(phongList);
         }
+         /// <summary>
+        /// Lấy danh sách bài viết đã duyệt.
+        /// </summary>
+        [HttpGet("baiviet/daduyet")]
+        [SwaggerOperation(
+            Summary = "Danh sách bài viết đã duyệt",
+            Description = "Lấy tất cả bài viết có trạng thái 'Đã Duyệt'."
+        )]
+        [SwaggerResponse(200, "Danh sách bài viết đã duyệt.")]
+        public async Task<IActionResult> GetBaiVietDaDuyet()
+        {
+            const string query = "SELECT * FROM BaiViet WHERE TrangThai = N'Đã Duyệt' ORDER BY NgayDang DESC";
+            var list = await _db.QueryAsync<TatCaBaiVietDTO>(query);
+            return Ok(list);
+        }
 
         private async Task<IActionResult> DangKyNguoiDungChung(NguoiDungDangKyDTO dto, IFormFile? file, string vaitro)
         {
