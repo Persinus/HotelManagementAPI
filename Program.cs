@@ -71,6 +71,7 @@ builder.Services.AddSwaggerGen(options =>
             new string[] {}
         }
     });
+    
 
     // Thêm thông tin mô tả API
     options.SwaggerDoc("v1", new OpenApiInfo
@@ -134,22 +135,29 @@ builder.Services.AddAuthentication("Bearer")
             RoleClaimType = "Vaitro" // Chỉ định claim `Vaitro` làm `Role`
         };
 
-        // Đảm bảo rằng Bearer token được truyền vào
-        options.Events = new JwtBearerEvents
+     options.Events = new JwtBearerEvents
+{
+    OnChallenge = context =>
+    {
+        if (!context.Request.Headers.ContainsKey("Authorization"))
         {
-            OnChallenge = context =>
-            {
-                // Kiểm tra xem token có trong header Authorization không
-                if (!context.Request.Headers.ContainsKey("Authorization"))
-                {
-                    context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                    context.Response.ContentType = "application/json";
-                    return Task.CompletedTask;
-                }
+            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+            context.Response.ContentType = "application/json";
+            return context.Response.WriteAsync("{\"error\":\"Unauthorized. Authorization header is missing.\"}");
+        }
 
-                return Task.CompletedTask;
-            }
-        };
+        context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+        context.Response.ContentType = "application/json";
+        return context.Response.WriteAsync("{\"error\":\"Unauthorized. Token is missing or invalid.\"}");
+    },
+    OnAuthenticationFailed = context =>
+    {
+        context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+        context.Response.ContentType = "application/json";
+        return context.Response.WriteAsync("{\"error\":\"Authentication failed. Invalid token.\"}");
+    }
+};
+
     });
 
 
