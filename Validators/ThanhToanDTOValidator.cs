@@ -1,5 +1,5 @@
 using FluentValidation;
-using HotelManagementAPI.DTOs;
+using HotelManagementAPI.DTOs.KhachHang;
 
 public class ThanhToanDTOValidator : AbstractValidator<KhachHangThanhToanDTO>
 {

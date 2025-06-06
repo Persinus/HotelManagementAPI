@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System;
 
-namespace HotelManagementAPI.DTOs
+namespace HotelManagementAPI.DTOs.KhachHang
 {
     public class KhachHangDatPhongDTO
     {

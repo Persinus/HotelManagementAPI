@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace HotelManagementAPI.DTOs
+namespace HotelManagementAPI.DTOs.KhachHang
 {
     public class KhachHangDatDichVuDTO
     {

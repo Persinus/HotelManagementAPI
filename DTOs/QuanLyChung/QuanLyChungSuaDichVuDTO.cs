@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace HotelManagementAPI.DTOs.NhanVien
+namespace HotelManagementAPI.DTOs.QuanLyChung
 {
-    public class NhanVienSuaDichVuDTO
+    public class QuanLyChungSuaDichVuDTO
     {
       
 

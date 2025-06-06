@@ -89,43 +89,7 @@ namespace HotelManagementAPI.Controllers.NhanVien
             return Ok(new { Message = "Thêm bài viết thành công.", MaBaiViet = maBaiViet, HinhAnhUrl = imageUrl });
         }
 
-        /// <summary>
-        /// Sửa bài viết (nhân viên).
-        /// </summary>
-        [HttpPut("baiviet")]
-        [SwaggerOperation(
-            Summary = "Sửa bài viết",
-            Description = "Nhân viên chỉ được sửa bài viết của chính mình."
-        )]
-        [SwaggerResponse(200, "Sửa bài viết thành công.")]
-        [SwaggerResponse(401, "Không xác định được nhân viên.")]
-        [SwaggerResponse(404, "Không tìm thấy bài viết hoặc không có quyền sửa.")]
-        public async Task<IActionResult> SuaBaiViet([FromBody] NhanVienSuaBaiVietDTO dto)
-        {
-            var maNguoiDung = User.FindFirstValue("sub") ?? User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (string.IsNullOrEmpty(maNguoiDung))
-                return Unauthorized(new { Message = "Không xác định được nhân viên." });
-
-            // Chỉ cho phép sửa bài viết của chính mình
-            const string checkQuery = "SELECT COUNT(1) FROM BaiViet WHERE MaBaiViet = @MaBaiViet AND MaNguoiDung = @MaNguoiDung";
-            var isExists = await _db.ExecuteScalarAsync<int>(checkQuery, new { dto.MaBaiViet, MaNguoiDung = maNguoiDung });
-            if (isExists == 0)
-                return NotFound(new { Message = "Không tìm thấy bài viết hoặc bạn không có quyền sửa." });
-
-            const string sql = @"
-        UPDATE BaiViet
-        SET TieuDe = @TieuDe, NoiDung = @NoiDung, HinhAnhUrl = @HinhAnhUrl
-        WHERE MaBaiViet = @MaBaiViet";
-            await _db.ExecuteAsync(sql, new
-            {
-                dto.MaBaiViet,
-                dto.TieuDe,
-                dto.NoiDung,
-                dto.HinhAnhUrl
-            });
-            return Ok(new { Message = "Sửa bài viết thành công." });
-        }
-
+      
         /// <summary>
         /// Xóa bài viết (nhân viên).
         /// </summary>

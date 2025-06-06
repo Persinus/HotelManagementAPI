@@ -7,7 +7,8 @@ public class NguoiDungDTOValidator : AbstractValidator<NguoiDungDTO>
     {
         RuleFor(x => x.Email)
             .NotEmpty().WithMessage("Email là bắt buộc.")
-            .EmailAddress().WithMessage("Email không hợp lệ.");
+            .EmailAddress().WithMessage("Email không hợp lệ.")
+            .Matches(@"^[a-zA-Z0-9._%+-]+@gmail\.com$").WithMessage("Email phải có định dạng @gmail.com");
 
         RuleFor(x => x.TenTaiKhoan)
             .NotEmpty().WithMessage("Tên tài khoản là bắt buộc.")

@@ -2,9 +2,9 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace HotelManagementAPI.DTOs.NhanVien
+namespace HotelManagementAPI.DTOs.QuanLyChung
 {
-    public class NhanVienSuaBaiVietDTO
+    public class QuanLyChungSuaBaiVietDTO
     {
         [Required]
         public string MaBaiViet { get; set; } = null!;

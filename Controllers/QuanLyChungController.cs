@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Threading.Tasks;
 using Dapper;
+using HotelManagementAPI.DTOs.QuanLyChung;
 using HotelManagementAPI.DTOs;
-using HotelManagementAPI.DTOs.NhanVien;
+using System.Security.Claims;
 using Swashbuckle.AspNetCore.Annotations;
+using Microsoft.Extensions.Configuration;
 
 
 namespace HotelManagementAPI.Controllers
@@ -32,7 +34,7 @@ namespace HotelManagementAPI.Controllers
         )]
         [SwaggerResponse(200, "Cập nhật tiện nghi phòng thành công.")]
         [SwaggerResponse(404, "Tiện nghi không tồn tại.")]
-        public async Task<IActionResult> CapNhatTienNghi(string maPhong, string maTienNghi, [FromBody] NhanVienSuaPhongTienNghiDTO dto)
+        public async Task<IActionResult> CapNhatTienNghi(string maPhong, string maTienNghi, [FromBody] QuanLyChungSuaPhongTienNghiDTO dto)
         {
             const string checkQuery = "SELECT COUNT(1) FROM Phong_TienNghi WHERE MaPhong = @MaPhong AND MaTienNghi = @MaTienNghi";
             var isExists = await _db.ExecuteScalarAsync<int>(checkQuery, new { MaPhong = maPhong, MaTienNghi = maTienNghi });
@@ -64,7 +66,7 @@ namespace HotelManagementAPI.Controllers
         )]
         [SwaggerResponse(200, "Cập nhật dịch vụ thành công.")]
         [SwaggerResponse(404, "Dịch vụ không tồn tại.")]
-        public async Task<IActionResult> UpdateDichVu(string maDichVu, [FromBody] NhanVienSuaDichVuDTO dto)
+        public async Task<IActionResult> UpdateDichVu(string maDichVu, [FromBody] QuanLyChungSuaDichVuDTO dto)
         {
             // Kiểm tra xem dịch vụ có tồn tại không
             const string checkQuery = "SELECT COUNT(1) FROM DichVu WHERE MaDichVu = @MaDichVu";
@@ -104,7 +106,7 @@ namespace HotelManagementAPI.Controllers
         /// <param name="dto">Thông tin giảm giá mới</param>
         // PUT: /api/nhanvien/phong/{maPhong}/giamgia/{maGiamGia}
         [HttpPut("{maPhong}/giamgia/{maGiamGia}")]
-        public async Task<IActionResult> CapNhatGiamGia(string maPhong, string maGiamGia, [FromBody] NhanVienSuaPhongGiamGiaDTO dto)
+        public async Task<IActionResult> CapNhatGiamGia(string maPhong, string maGiamGia, [FromBody] QuanLyChungSuaPhongGiamGiaDTO dto)
         {
             const string checkQuery = "SELECT COUNT(1) FROM Phong_GiamGia WHERE MaPhong = @MaPhong AND MaGiamGia = @MaGiamGia";
             var isExists = await _db.ExecuteScalarAsync<int>(checkQuery, new { MaPhong = maPhong, MaGiamGia = maGiamGia });
@@ -139,7 +141,7 @@ namespace HotelManagementAPI.Controllers
         /// <param name="dto">Thông tin ảnh mới</param>
         // PUT: /api/nhanvien/phong/{maPhong}/phonganh/{maAnh}
         [HttpPut("{maPhong}/phonganh/{maAnh}")]
-        public async Task<IActionResult> CapNhatPhongAnh(string maPhong, string maAnh, [FromBody] NhanVienSuaPhongAnhDTO dto)
+        public async Task<IActionResult> CapNhatPhongAnh(string maPhong, string maAnh, [FromBody] QuanLyChungSuaPhongAnhDTO dto)
         {
             const string checkQuery = "SELECT COUNT(1) FROM PhongAnh WHERE MaPhong = @MaPhong AND MaAnh = @MaAnh";
             var isExists = await _db.ExecuteScalarAsync<int>(checkQuery, new { MaPhong = maPhong, MaAnh = maAnh });
@@ -184,6 +186,42 @@ namespace HotelManagementAPI.Controllers
             if (result == null)
                 return NotFound(new { Message = "Không tìm thấy mã giảm giá." });
             return Ok(result);
+        }
+        /// <summary>
+        /// Sửa bài viết (nhân viên).
+        /// </summary>
+        [HttpPut("baiviet")]
+        [SwaggerOperation(
+            Summary = "Sửa bài viết",
+            Description = "Nhân viên chỉ được sửa bài viết của chính mình."
+        )]
+        [SwaggerResponse(200, "Sửa bài viết thành công.")]
+        [SwaggerResponse(401, "Không xác định được nhân viên.")]
+        [SwaggerResponse(404, "Không tìm thấy bài viết hoặc không có quyền sửa.")]
+        public async Task<IActionResult> SuaBaiViet([FromBody] QuanLyChungSuaBaiVietDTO dto)
+        {
+            var maNguoiDung = User.FindFirstValue("sub") ?? User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(maNguoiDung))
+                return Unauthorized(new { Message = "Không xác định được nhân viên." });
+
+            // Chỉ cho phép sửa bài viết của chính mình
+            const string checkQuery = "SELECT COUNT(1) FROM BaiViet WHERE MaBaiViet = @MaBaiViet AND MaNguoiDung = @MaNguoiDung";
+            var isExists = await _db.ExecuteScalarAsync<int>(checkQuery, new { dto.MaBaiViet, MaNguoiDung = maNguoiDung });
+            if (isExists == 0)
+                return NotFound(new { Message = "Không tìm thấy bài viết hoặc bạn không có quyền sửa." });
+
+            const string sql = @"
+        UPDATE BaiViet
+        SET TieuDe = @TieuDe, NoiDung = @NoiDung, HinhAnhUrl = @HinhAnhUrl
+        WHERE MaBaiViet = @MaBaiViet";
+            await _db.ExecuteAsync(sql, new
+            {
+                dto.MaBaiViet,
+                dto.TieuDe,
+                dto.NoiDung,
+                dto.HinhAnhUrl
+            });
+            return Ok(new { Message = "Sửa bài viết thành công." });
         }
     }
 }
