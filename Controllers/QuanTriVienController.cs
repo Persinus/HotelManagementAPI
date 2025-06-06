@@ -41,17 +41,12 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
             _cloudinary = new Cloudinary(account);
         }
    
-        // Dashboard
-        [HttpGet("dashboard")]
         
-        public IActionResult GetDashboard()
-        {
-            return Ok(new { Message = "Đây là dashboard của Quản trị viên." });
-        }
-
         
         // Lấy danh sách tất cả khách hàng
         [HttpGet("khachhang")]
+        [SwaggerOperation(Summary = "Lấy danh sách tất cả khách hàng", Description = "Trả về danh sách tất cả khách hàng trong hệ thống.")]
+        [SwaggerResponse(200, "Danh sách khách hàng.")]
         public async Task<ActionResult<IEnumerable<NguoiDungDTO>>> GetAllKhachHang()
         {
             const string query = "SELECT * FROM NguoiDung WHERE Vaitro = 'KhachHang'";
@@ -61,6 +56,8 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
 
         // Lấy danh sách tất cả nhân viên
         [HttpGet("nhanvien")]
+        [SwaggerOperation(Summary = "Lấy danh sách tất cả nhân viên", Description = "Trả về danh sách tất cả nhân viên trong hệ thống.")]
+        [SwaggerResponse(200, "Danh sách nhân viên.")]
         public async Task<ActionResult<IEnumerable<NguoiDungDTO>>> GetAllNhanVien()
         {
             const string query = "SELECT * FROM NguoiDung WHERE Vaitro = 'NhanVien'";
@@ -70,7 +67,10 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
 
         // Lấy thông tin chi tiết của một khách hàng
         [HttpGet("khachhang/{maNguoiDung}")]
-        public async Task<ActionResult<NguoiDungDTO>> GetKhachHangByMaNguoiDung(string maNguoiDung)
+        [SwaggerOperation(Summary = "Lấy thông tin chi tiết khách hàng", Description = "Trả về thông tin chi tiết của một khách hàng theo mã.")]
+        [SwaggerResponse(200, "Thông tin khách hàng.")]
+        [SwaggerResponse(404, "Không tìm thấy thông tin khách hàng.")]
+        public async Task<ActionResult<NguoiDungDTO>> GetKhachHangByMaNguoiDung([FromRoute] string maNguoiDung)
         {
             const string query = "SELECT * FROM NguoiDung WHERE MaNguoiDung = @MaNguoiDung AND Vaitro = 'KhachHang'";
             var khachHang = await _db.QueryFirstOrDefaultAsync<NguoiDungDTO>(query, new { MaNguoiDung = maNguoiDung });
@@ -83,7 +83,10 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
 
         // Lấy thông tin chi tiết của một nhân viên
         [HttpGet("nhanvien/{maNguoiDung}")]
-        public async Task<ActionResult<NguoiDungDTO>> GetNhanVienByMaNguoiDung(string maNguoiDung)
+        [SwaggerOperation(Summary = "Lấy thông tin chi tiết nhân viên", Description = "Trả về thông tin chi tiết của một nhân viên theo mã.")]
+        [SwaggerResponse(200, "Thông tin nhân viên.")]
+        [SwaggerResponse(404, "Không tìm thấy thông tin nhân viên.")]
+        public async Task<ActionResult<NguoiDungDTO>> GetNhanVienByMaNguoiDung([FromRoute] string maNguoiDung)
         {
             const string query = "SELECT * FROM NguoiDung WHERE MaNguoiDung = @MaNguoiDung AND Vaitro = 'NhanVien'";
             var nhanVien = await _db.QueryFirstOrDefaultAsync<NguoiDungDTO>(query, new { MaNguoiDung = maNguoiDung });
@@ -94,29 +97,7 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
             return Ok(nhanVien);
         }
 
-        // Thêm dịch vụ mới (Mã dịch vụ tự sinh)
-        [HttpPost("dichvu/themdichvu")]
-        public async Task<IActionResult> ThemDichVu([FromBody] DichVuDTO dichVuDTO)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            // Tạo mã dịch vụ tự động
-            const string generateMaDichVuQuery = @"
-                SELECT ISNULL(MAX(CAST(SUBSTRING(MaDichVu, 3, LEN(MaDichVu) - 2) AS INT)), 0) + 1
-                FROM DichVu";
-            var nextId = await _db.ExecuteScalarAsync<int>(generateMaDichVuQuery);
-            dichVuDTO.MaDichVu = $"DV{nextId:D3}";
-
-            // Thêm dịch vụ vào cơ sở dữ liệu
-            const string insertQuery = @"
-                INSERT INTO DichVu (MaDichVu, TenDichVu, DonGia, MoTaDichVu, HinhAnhDichVu, SoLuong, LoaiDichVu, DonViTinh)
-                VALUES (@MaDichVu, @TenDichVu, @DonGia, @MoTaDichVu, @HinhAnhDichVu, @SoLuong, @LoaiDichVu, @DonViTinh)";
-            await _db.ExecuteAsync(insertQuery, dichVuDTO);
-
-            return Ok(new { Message = "Thêm dịch vụ thành công.", MaDichVu = dichVuDTO.MaDichVu });
-        }
-
+       
         // Xem vai trò hiện tại của người dùng
         [HttpGet("hethong/nguoidung/{maNguoiDung}/vaitro")]
         [SwaggerOperation(Summary = "Xem vai trò người dùng")]
@@ -655,8 +636,7 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
                 UrlAnhChinh = imageUrl,
                 dto.SucChua,
                 dto.SoGiuong,
-                dto.DonViTinh,
-                dto.SoSaoTrungBinh
+                DonViTinh = "1 ngày", // Luôn mặc định "1 ngày"
             });
 
             return Ok(new { Message = "Thêm phòng thành công.", MaPhong = maPhong, UrlAnhChinh = imageUrl });
@@ -732,5 +712,57 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
             var danhSachGiamGia = await _db.QueryAsync(query, new { MaPhong = maPhong });
             return Ok(danhSachGiamGia);
         }
-    }
-}
+
+        // Áp dụng mã giảm giá cho nhiều phòng
+        [HttpPost("giamgia/apdung")]
+        [SwaggerOperation(Summary = "Áp dụng mã giảm giá cho nhiều phòng", Description = "Quản trị viên áp dụng một mã giảm giá cho nhiều phòng dựa theo danh sách mã phòng.")]
+        [SwaggerResponse(200, "Áp dụng giảm giá thành công.")]
+        [SwaggerResponse(404, "Không tìm thấy mã giảm giá.")]
+        public async Task<IActionResult> ApDungGiamGiaChoNhieuPhong([FromBody] QuanTriVienApDungGiamGiaDTO dto)
+        {
+            // Kiểm tra mã giảm giá tồn tại
+            const string checkGiamGia = "SELECT COUNT(1) FROM GiamGia WHERE MaGiamGia = @MaGiamGia";
+            var giamGiaExists = await _db.ExecuteScalarAsync<int>(checkGiamGia, new { dto.MaGiamGia });
+            if (giamGiaExists == 0)
+                return NotFound(new { Message = "Không tìm thấy mã giảm giá." });
+
+            var notFoundRooms = new List<string>();
+            var existedRooms = new List<string>();
+            var successRooms = new List<string>();
+
+            foreach (var maPhong in dto.DanhSachMaPhong)
+            {
+                // Kiểm tra phòng tồn tại
+                const string checkPhong = "SELECT COUNT(1) FROM Phong WHERE MaPhong = @MaPhong";
+                var phongExists = await _db.ExecuteScalarAsync<int>(checkPhong, new { MaPhong = maPhong });
+                if (phongExists == 0)
+                {
+                    notFoundRooms.Add(maPhong);
+                    continue;
+                }
+
+                // Kiểm tra đã có mã giảm giá này chưa
+                const string checkExist = "SELECT COUNT(1) FROM Phong_GiamGia WHERE MaPhong = @MaPhong AND MaGiamGia = @MaGiamGia";
+                var exist = await _db.ExecuteScalarAsync<int>(checkExist, new { MaPhong = maPhong, MaGiamGia = dto.MaGiamGia });
+                if (exist > 0)
+                {
+                    existedRooms.Add(maPhong);
+                    continue;
+                }
+
+                // Thêm vào bảng Phong_GiamGia
+                const string insertQuery = "INSERT INTO Phong_GiamGia (MaPhong, MaGiamGia) VALUES (@MaPhong, @MaGiamGia)";
+                await _db.ExecuteAsync(insertQuery, new { MaPhong = maPhong, MaGiamGia = dto.MaGiamGia });
+                successRooms.Add(maPhong);
+            }
+
+            return Ok(new
+            {
+                Message = "Áp dụng giảm giá hoàn tất.",
+                ThanhCong = successRooms,
+                PhongKhongTonTai = notFoundRooms,
+                PhongDaCoMaGiamGia = existedRooms
+            });
+        }
+
+}}
