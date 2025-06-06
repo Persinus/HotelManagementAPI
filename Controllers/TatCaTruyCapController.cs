@@ -279,7 +279,12 @@ namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
         /// </summary>
         /// <param name="maPhong">Mã phòng</param>
         [HttpGet("feedback/phong/{maPhong}")]
-        public async Task<IActionResult> GetFeedbackByPhong(string maPhong)
+        [SwaggerOperation(
+            Summary = "Lấy feedback của một phòng",
+            Description = "Trả về danh sách feedback (số sao, bình luận, phân loại) của một phòng."
+        )]
+        [SwaggerResponse(200, "Danh sách feedback của phòng.")]
+        public async Task<IActionResult> GetFeedbackByPhong([FromRoute] string maPhong)
         {
             const string query = @"
                 SELECT SoSao, BinhLuan, PhanLoai
