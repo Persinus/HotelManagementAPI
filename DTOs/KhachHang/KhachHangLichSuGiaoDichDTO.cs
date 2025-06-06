@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace HotelManagementAPI.DTOs
+namespace HotelManagementAPI.DTOs.KhachHang
 {
     public class KhachHangLichSuGiaoDichDTO
     {
