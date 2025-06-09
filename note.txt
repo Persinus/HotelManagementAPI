@@ -1,0 +1,144 @@
+- Tìm hiểu controllers dapper dto
+- Program 
+- TÌm hiểu Packages
+- TÌm hiểu Models
+<<<<<<< HEAD
+- ghi chú Sql 
+-huy
+cài các gói thư viện 
+sửa file đặt phòng 
+sửa hóa đơn Phòng 
+sửa hóa đơn khách hàng DV ()
+Xóa Quản trị viên QTV ko cần thêm sửa xóa :v
+Người dùng khi đăng nhập vào thì auto làm khách hàng 
+
+
+
+
+
+
+Huy làm Phòng và ng dùng , khách hàng 
+Khiêm làm QTV và dịch vụ ,  nhân viên
+
+ng dung them dc 
+k dang nhap dang ky dc 
+chua phan quyen dc
+////////////////  bao cao tuan 2   ////////////////////////////////
+
+<<<<<<< HEAD
+làm phan quyen + JWT
+phong
+dich vu 
+hoa don
+---huy
+
+
+{
+     "VaiTro":"KhachHang",
+     "MaNguoiDung":"ND201",
+    "Email": "khachhang@example.com",
+    "TenTaiKhoan": "khachhang01",
+    "MatKhau": "password123",
+    "HoTen": "Nguyen Van A",
+    "CanCuocCongDan": "123456789012",
+    "SoDienThoai": "0123456789",
+    "DiaChi": "123 Nguyen Trai, Ha Noi",
+    "NgaySinh": "1990-01-01",
+    "GioiTinh": "Nam",
+    "HinhAnhUrl": "https://example.com/avatar.jpg"
+}
+
+
+{
+  "tenTaiKhoan": "admin",
+  "matKhau": "matkhau_ma_hoa"
+}
+{
+  "tenTaiKhoan": "khachhang01",
+  "matKhau": "password123"
+}
+
+nhiem vu :
+sửa nội dung này 
+📘 **Đề tài:** Xây dựng hệ thống quản lý khách sạn hiện đại phục vụ cho việc đặt phòng, quản lý người dùng, hóa đơn, dịch vụ và phản hồi khách hàng.
+
+🔧 **Công nghệ sử dụng:**
+- ASP.NET Core Web API
+- SQL Server
+- Entity Framework/Dapper
+- JWT Authentication
+- Swagger UI
+- (Tuỳ chọn: React/Vue cho frontend, nếu có)
+
+🎯 **Chức năng chính:**
+- Đăng ký người dùng
+- Quản lý phòng: thêm, sửa, xoá, xem trạng thái
+- Đặt phòng, thanh toán, và xuất hoá đơn
+- Quản lý dịch vụ đi kèm
+- Phản hồi từ khách hàng (feedback)
+- Phân quyền người dùng (admin, lễ tân, khách hàng)
+
+🔗 **GitHub Repository:** [https://github.com/Persinus/HotelManagementAPI](https://github.com/Persinus/HotelManagementAPI)
+"
+
+sử dụng using System.ComponentModel.DataAnnotations;
+ và requie vào các dto tự sinh bỏ qua
+
+về phần aloww anynumous
+Login thì những người đăng nhập dc thì code trong đấy 
+Phòng cũng v 
+
+Authorize
+Ai có quyền mới vào dc (ví dụ logout profile bản thân)
+
+có 3 quyền thì code 3 file Khachhangcontroller tuân thủ theo middleware 
+//
+    // Phân quyền dựa trên đường dẫn
+        if (context.Request.Path.StartsWithSegments("/api/quantrivien") && userRole != "QuanTriVien")
+        {
+            context.Response.StatusCode = StatusCodes.Status403Forbidden;
+            await context.Response.WriteAsync("Bạn không có quyền truy cập vào tài nguyên này.");
+            return;
+        }
+        else if (context.Request.Path.StartsWithSegments("/api/nhanvien") && userRole != "NhanVien" && userRole != "QuanTriVien")
+        {
+            context.Response.StatusCode = StatusCodes.Status403Forbidden;
+            await context.Response.WriteAsync("Bạn không có quyền truy cập vào tài nguyên này.");
+            return;
+        }
+        else if (context.Request.Path.StartsWithSegments("/api/khachhang") && userRole != "KhachHang" && userRole != "NhanVien" && userRole != "QuanTriVien")
+        {
+            context.Response.StatusCode = StatusCodes.Status403Forbidden;
+            await context.Response.WriteAsync("Bạn không có quyền truy cập vào tài nguyên này.");
+            return;
+        }
+
+
+
+sinh lỗi cụ thể --- Email ko dc trùng , sdt (nếu ko log lỗi thì 500 error )
+
+
+Code thêm Sumary vào từng đoạn code hướng dẫn ng dùng swagger thêm,sửa xoa1 dữ liệu ....
+
+- thêm 1 số khách hàng vào database = swagger 
+
+
+Task 1 : Sửa tiêu đề swagger //ok
+Task2 : thêm tatt61 cả DTO vào bài //ok
+Task 3: sửa Using (sử dụng using System.ComponentModel.DataAnnotations;
+)//ok
+Task 4: Thêm Sumany của từng controller (test Oke thì làm )
+Task 5: add thêm dữ liệu Khách hàng (Post API swagger)
+
+
+=======
+- ghi chú Sql 
+>>>>>>> baf6ee7 (them_note.txt)
+=======
+làm phan quyen + JWT 
+phong
+dich vu 
+hoa don
+
+
+>>>>>>> 8e2fcb0 (lambai)

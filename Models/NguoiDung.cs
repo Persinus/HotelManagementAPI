@@ -1,46 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 namespace HotelManagementAPI.Models;
 
-[Table("NguoiDung")]
-[Index("Email", Name = "UQ__NguoiDun__A9D105349E3B3289", IsUnique = true)]
 public partial class NguoiDung
 {
-    [Key]
-    [StringLength(10)]
     public string MaNguoiDung { get; set; } = null!;
 
-    [StringLength(100)]
+    public string? Vaitro { get; set; }
+
     public string Email { get; set; } = null!;
 
-    [StringLength(50)]
-    public string TenTaiKhoan { get; set; } = null!;
+    public string? TenTaiKhoan { get; set; }
 
-    [StringLength(255)]
-    public string MatKhau { get; set; } = null!;
+    public string? MatKhau { get; set; }
 
-    [StringLength(20)]
-    public string VaiTro { get; set; } = null!;
+    public string? HoTen { get; set; }
 
-    [Column("JWK")]
-    public string? Jwk { get; set; }
+    public string? CanCuocCongDan { get; set; }
 
-    [Column(TypeName = "datetime")]
+    public string? SoDienThoai { get; set; }
+
+    public string? DiaChi { get; set; }
+
+    public DateTime? NgaySinh { get; set; }
+
+    public string? GioiTinh { get; set; }
+
+    public string HinhAnhUrl { get; set; } = null!;
+
     public DateTime? NgayTao { get; set; }
 
-    [Column(TypeName = "datetime")]
-    public DateTime? NgayCapNhat { get; set; }
+    public virtual ICollection<BaiViet> BaiViets { get; set; } = new List<BaiViet>();
 
-    [InverseProperty("MaNguoiDungNavigation")]
-    public virtual KhachHang? KhachHang { get; set; }
+    public virtual ICollection<DatPhong> DatPhongs { get; set; } = new List<DatPhong>();
 
-    [InverseProperty("MaNguoiDungNavigation")]
-    public virtual NhanVien? NhanVien { get; set; }
+    public virtual ICollection<Feedback> Feedbacks { get; set; } = new List<Feedback>();
 
-    [InverseProperty("MaNguoiDungNavigation")]
-    public virtual QuanTriVien? QuanTriVien { get; set; }
+    public virtual ICollection<HoaDon> HoaDons { get; set; } = new List<HoaDon>();
+
+    public virtual ICollection<LichSuGiaoDich> LichSuGiaoDiches { get; set; } = new List<LichSuGiaoDich>();
+
+    public virtual ICollection<PhongYeuThich> PhongYeuThiches { get; set; } = new List<PhongYeuThich>();
 }

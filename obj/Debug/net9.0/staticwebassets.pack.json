@@ -5,10 +5,6 @@
       "PackagePath": "staticwebassets\\swagger-custom.css"
     },
     {
-      "Id": "C:\\Users\\admin\\Documents\\Back_end-Hotel\\HotelManagementAPI\\wwwroot\\test.jpg",
-      "PackagePath": "staticwebassets\\test.jpg"
-    },
-    {
       "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.HotelManagementAPI.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },

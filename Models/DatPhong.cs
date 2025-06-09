@@ -1,51 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 namespace HotelManagementAPI.Models;
 
-[Table("DatPhong")]
 public partial class DatPhong
 {
-    [Key]
-    [StringLength(10)]
     public string MaDatPhong { get; set; } = null!;
 
-    [StringLength(10)]
-    public string MaKhachHang { get; set; } = null!;
+    public string MaNguoiDung { get; set; } = null!;
 
-    [StringLength(10)]
-    public string MaNhanVien { get; set; } = null!;
-
-    [StringLength(10)]
     public string MaPhong { get; set; } = null!;
 
-    [Column(TypeName = "datetime")]
-    public DateTime NgayDat { get; set; }
+    public DateTime? NgayDat { get; set; }
 
-    [Column(TypeName = "datetime")]
-    public DateTime NgayNhanPhong { get; set; }
+    public DateTime? NgayCheckIn { get; set; }
 
-    [Column(TypeName = "datetime")]
-    public DateTime NgayTraPhong { get; set; }
+    public DateTime? NgayCheckOut { get; set; }
 
-    [StringLength(1)]
-    public string TrangThai { get; set; } = null!;
+    public byte TinhTrangDatPhong { get; set; }
 
-    [InverseProperty("MaDatPhongNavigation")]
-    public virtual ICollection<HoaDonThanhToanPhong> HoaDonThanhToanPhongs { get; set; } = new List<HoaDonThanhToanPhong>();
+    public virtual ICollection<DatDichVu> DatDichVus { get; set; } = new List<DatDichVu>();
 
-    [ForeignKey("MaKhachHang")]
-    [InverseProperty("DatPhongs")]
-    public virtual KhachHang MaKhachHangNavigation { get; set; } = null!;
+    public virtual ICollection<HoaDon> HoaDons { get; set; } = new List<HoaDon>();
 
-    [ForeignKey("MaNhanVien")]
-    [InverseProperty("DatPhongs")]
-    public virtual NhanVien MaNhanVienNavigation { get; set; } = null!;
+    public virtual NguoiDung MaNguoiDungNavigation { get; set; } = null!;
 
-    [ForeignKey("MaPhong")]
-    [InverseProperty("DatPhongs")]
-    public virtual PhongWithTienNghi MaPhongNavigation { get; set; } = null!;
+    public virtual Phong MaPhongNavigation { get; set; } = null!;
 }
