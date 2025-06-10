@@ -53,7 +53,7 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
         {
             const string query = "SELECT * FROM NguoiDung WHERE Vaitro = 'KhachHang'";
             var khachHangList = await _db.QueryAsync<NguoiDungDTO>(query);
-            return Ok(khachHangList);
+            return Ok(new { Message = "✅ Lấy danh sách khách hàng thành công.", Data = khachHangList });
         }
 
         // Lấy danh sách tất cả nhân viên
@@ -64,7 +64,7 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
         {
             const string query = "SELECT * FROM NguoiDung WHERE Vaitro = 'NhanVien'";
             var nhanVienList = await _db.QueryAsync<NguoiDungDTO>(query);
-            return Ok(nhanVienList);
+            return Ok(new { Message = "✅ Lấy danh sách nhân viên thành công.", Data = nhanVienList });
         }
 
         // Lấy thông tin chi tiết của một khách hàng
@@ -77,10 +77,10 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
             const string query = "SELECT * FROM NguoiDung WHERE MaNguoiDung = @MaNguoiDung AND Vaitro = 'KhachHang'";
             var khachHang = await _db.QueryFirstOrDefaultAsync<NguoiDungDTO>(query, new { MaNguoiDung = maNguoiDung });
 
+            // Lấy thông tin chi tiết khách hàng
             if (khachHang == null)
-                return NotFound(new { Message = "Không tìm thấy thông tin khách hàng." });
-
-            return Ok(khachHang);
+                return NotFound(new { Message = "❌ Không tìm thấy thông tin khách hàng." });
+            return Ok(new { Message = "✅ Lấy thông tin khách hàng thành công.", Data = khachHang });
         }
 
         // Lấy thông tin chi tiết của một nhân viên
@@ -93,10 +93,10 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
             const string query = "SELECT * FROM NguoiDung WHERE MaNguoiDung = @MaNguoiDung AND Vaitro = 'NhanVien'";
             var nhanVien = await _db.QueryFirstOrDefaultAsync<NguoiDungDTO>(query, new { MaNguoiDung = maNguoiDung });
 
+            // Lấy thông tin chi tiết nhân viên
             if (nhanVien == null)
-                return NotFound(new { Message = "Không tìm thấy thông tin nhân viên." });
-
-            return Ok(nhanVien);
+                return NotFound(new { Message = "❌ Không tìm thấy thông tin nhân viên." });
+            return Ok(new { Message = "✅ Lấy thông tin nhân viên thành công.", Data = nhanVien });
         }
 
        
@@ -107,9 +107,11 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
         {
             const string query = "SELECT Vaitro FROM NguoiDung WHERE MaNguoiDung = @MaNguoiDung";
             var vaiTro = await _db.ExecuteScalarAsync<string>(query, new { MaNguoiDung = maNguoiDung });
+
+            // Xem vai trò người dùng
             if (vaiTro == null)
-                return NotFound(new { Message = "Không tìm thấy người dùng." });
-            return Ok(new { MaNguoiDung = maNguoiDung, VaiTro = vaiTro });
+                return NotFound(new { Message = "❌ Không tìm thấy người dùng." });
+            return Ok(new { Message = "✅ Lấy vai trò người dùng thành công.", MaNguoiDung = maNguoiDung, VaiTro = vaiTro });
         }
 
         // Đổi vai trò người dùng (chỉ cho phép giữa Nhân viên và Quản trị viên)
@@ -122,17 +124,13 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
             // Kiểm tra tồn tại
             const string checkQuery = "SELECT COUNT(1) FROM NguoiDung WHERE MaNguoiDung = @MaNguoiDung";
             var exists = await _db.ExecuteScalarAsync<int>(checkQuery, new { MaNguoiDung = maNguoiDung });
+            
+            // Đổi vai trò người dùng
             if (exists == 0)
-                return NotFound(new { Message = "Không tìm thấy người dùng." });
-
-            // Chỉ cho phép đổi sang "NhanVien" hoặc "QuanTriVien"
+                return NotFound(new { Message = "❌ Không tìm thấy người dùng." });
             if (dto.VaiTroMoi != "NhanVien" && dto.VaiTroMoi != "QuanTriVien")
-                return BadRequest(new { Message = "Chỉ được đổi sang 'NhanVien' hoặc 'QuanTriVien'." });
-
-            const string updateQuery = "UPDATE NguoiDung SET Vaitro = @VaiTroMoi WHERE MaNguoiDung = @MaNguoiDung";
-            await _db.ExecuteAsync(updateQuery, new { VaiTroMoi = dto.VaiTroMoi, MaNguoiDung = maNguoiDung });
-
-            return Ok(new { Message = $"Đã đổi vai trò thành công cho người dùng {maNguoiDung} thành {dto.VaiTroMoi}" });
+                return BadRequest(new { Message = "❌ Chỉ được đổi sang 'NhanVien' hoặc 'QuanTriVien'." });
+            return Ok(new { Message = $"🎉 Đã đổi vai trò thành công cho người dùng {maNguoiDung} thành {dto.VaiTroMoi}." });
         }
 
        
@@ -146,13 +144,13 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
             const string checkQuery = "SELECT COUNT(1) FROM Phong WHERE MaPhong = @MaPhong";
             var isExists = await _db.ExecuteScalarAsync<int>(checkQuery, new { MaPhong = maPhong });
 
+            // Xóa phòng
             if (isExists == 0)
-                return NotFound(new { Message = "Phòng không tồn tại." });
-
+                return NotFound(new { Message = "❌ Phòng không tồn tại." });
             const string deleteQuery = "DELETE FROM Phong WHERE MaPhong = @MaPhong";
             await _db.ExecuteAsync(deleteQuery, new { MaPhong = maPhong });
 
-            return Ok(new { Message = "Xóa phòng thành công." });
+            return Ok(new { Message = "✅ Xóa phòng thành công." });
         }
 
        
@@ -174,7 +172,7 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
                 NgayTao = dto.NgayTao,
                 NgayCapNhat = dto.NgayCapNhat
             });
-            return Ok(new { Message = "Thêm nội quy thành công.", MaNoiQuy = maNoiQuy });
+            return Ok(new { Message = "🎉 Thêm nội quy thành công.", MaNoiQuy = maNoiQuy });
         }
 
         // Sửa nội quy
@@ -186,9 +184,10 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
         {
             const string checkQuery = "SELECT COUNT(1) FROM NoiQuy WHERE Id = @Id";
             var exists = await _db.ExecuteScalarAsync<int>(checkQuery, new { Id = id });
+            
+            // Sửa nội quy
             if (exists == 0)
-                return NotFound(new { Message = "Không tìm thấy nội quy." });
-
+                return NotFound(new { Message = "❌ Không tìm thấy nội quy." });
             const string updateQuery = @"
                 UPDATE NoiQuy
                 SET TieuDe = @TenNoiQuy, NoiDung = @MoTa, NgayCapNhat = @NgayCapNhat
@@ -200,7 +199,7 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
                 MoTa = dto.MoTa,
                 NgayCapNhat = dto.NgayCapNhat
             });
-            return Ok(new { Message = "Sửa nội quy thành công." });
+            return Ok(new { Message = "✅ Sửa nội quy thành công." });
         }
 
         // Xóa nội quy theo ID
@@ -212,12 +211,13 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
         {
             const string checkQuery = "SELECT COUNT(1) FROM NoiQuy WHERE Id = @Id";
             var exists = await _db.ExecuteScalarAsync<int>(checkQuery, new { Id = id });
+            
+            // Xóa nội quy
             if (exists == 0)
-                return NotFound(new { Message = "Không tìm thấy nội quy." });
-
+                return NotFound(new { Message = "❌ Không tìm thấy nội quy." });
             const string deleteQuery = "DELETE FROM NoiQuy WHERE Id = @Id";
             await _db.ExecuteAsync(deleteQuery, new { Id = id });
-            return Ok(new { Message = "Xóa nội quy thành công." });
+            return Ok(new { Message = "✅ Xóa nội quy thành công." });
         }
 
         // Xóa nội quy theo Id (dùng DTO)
@@ -229,12 +229,13 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
         {
             const string checkQuery = "SELECT COUNT(1) FROM NoiQuy WHERE Id = @Id";
             var exists = await _db.ExecuteScalarAsync<int>(checkQuery, new { dto.Id });
+            
+            // Xóa nội quy
             if (exists == 0)
-                return NotFound(new { Message = "Không tìm thấy nội quy." });
-
+                return NotFound(new { Message = "❌ Không tìm thấy nội quy." });
             const string deleteQuery = "DELETE FROM NoiQuy WHERE Id = @Id";
             await _db.ExecuteAsync(deleteQuery, new { dto.Id });
-            return Ok(new { Message = "Xóa nội quy thành công." });
+            return Ok(new { Message = "✅ Xóa nội quy thành công." });
         }
 
         // Hàm sinh mã người dùng tự động
@@ -318,7 +319,8 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
                 dto.DonViTinh
             });
 
-            return Ok(new { Message = "Thêm dịch vụ thành công.", MaDichVu = maDichVu, HinhAnhUrl = imageUrl });
+            // Thêm dịch vụ thành công
+            return Ok(new { Message = "🎉 Thêm dịch vụ thành công.", MaDichVu = maDichVu, HinhAnhUrl = imageUrl });
         }
 
         /// <summary>
@@ -384,7 +386,8 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
                 results.Add(new { MaDichVu = maDichVu, HinhAnhUrl = imageUrl });
             }
 
-            return Ok(new { Message = "Thêm nhiều dịch vụ thành công.", DanhSach = results });
+            // Thêm nhiều dịch vụ thành công
+            return Ok(new { Message = "🎉 Thêm nhiều dịch vụ thành công.", DanhSach = results });
         }
 
         /// <summary>
@@ -433,7 +436,8 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
                 HinhAnhTienNghi = imageUrl
             });
 
-            return Ok(new { Message = "Thêm tiện nghi thành công.", MaTienNghi = maTienNghi, HinhAnhUrl = imageUrl });
+            // Thêm tiện nghi thành công
+            return Ok(new { Message = "🎉 Thêm tiện nghi thành công.", MaTienNghi = maTienNghi, HinhAnhUrl = imageUrl });
         }
 
         /// <summary>
@@ -495,7 +499,8 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
                 results.Add(new { MaTienNghi = maTienNghi, HinhAnhUrl = imageUrl });
             }
 
-            return Ok(new { Message = "Thêm nhiều tiện nghi thành công.", DanhSach = results });
+            // Thêm nhiều tiện nghi thành công
+            return Ok(new { Message = "🎉 Thêm nhiều tiện nghi thành công.", DanhSach = results });
         }
 
         /// <summary>
@@ -513,14 +518,14 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
             // Kiểm tra bài viết tồn tại và trạng thái "Chờ Duyệt"
             const string checkQuery = "SELECT COUNT(1) FROM BaiViet WHERE MaBaiViet = @MaBaiViet AND TrangThai = N'Chờ Duyệt'";
             var exists = await _db.ExecuteScalarAsync<int>(checkQuery, new { MaBaiViet = maBaiViet });
+            
+            // Duyệt bài viết
             if (exists == 0)
-                return NotFound(new { Message = "Không tìm thấy bài viết hoặc bài viết đã được duyệt." });
-
-            // Cập nhật trạng thái
+                return NotFound(new { Message = "❌ Không tìm thấy bài viết hoặc bài viết đã được duyệt." });
             const string updateQuery = "UPDATE BaiViet SET TrangThai = N'Đã Duyệt' WHERE MaBaiViet = @MaBaiViet";
             await _db.ExecuteAsync(updateQuery, new { MaBaiViet = maBaiViet });
 
-            return Ok(new { Message = "Duyệt bài viết thành công." });
+            return Ok(new { Message = "✅ Duyệt bài viết thành công." });
         }
 
         
@@ -551,7 +556,7 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
             {
                 await _db.ExecuteAsync(deleteQuery, new { MaTienNghi = ma });
             }
-            return Ok(new { Message = "Xóa nhiều tiện nghi thành công." });
+            return Ok(new { Message = "✅ Xóa nhiều tiện nghi thành công." });
         }
 
         // Xóa 1 tiện nghi
@@ -563,12 +568,13 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
         {
             const string checkQuery = "SELECT COUNT(1) FROM TienNghi WHERE MaTienNghi = @MaTienNghi";
             var exists = await _db.ExecuteScalarAsync<int>(checkQuery, new { dto.MaTienNghi });
+            
+            // Xóa 1 tiện nghi
             if (exists == 0)
-                return NotFound(new { Message = "Tiện nghi không tồn tại." });
-
+                return NotFound(new { Message = "❌ Tiện nghi không tồn tại." });
             const string deleteQuery = "DELETE FROM TienNghi WHERE MaTienNghi = @MaTienNghi";
             await _db.ExecuteAsync(deleteQuery, new { dto.MaTienNghi });
-            return Ok(new { Message = "Xóa tiện nghi thành công." });
+            return Ok(new { Message = "✅ Xóa tiện nghi thành công." });
         }
 
         // Thêm phòng mới
@@ -625,7 +631,8 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
                 DonViTinh = "1 ngày", // Luôn mặc định "1 ngày"
             });
 
-            return Ok(new { Message = "Thêm phòng thành công.", MaPhong = maPhong, UrlAnhChinh = imageUrl });
+            // Thêm phòng thành công
+            return Ok(new { Message = "🎉 Thêm phòng thành công.", MaPhong = maPhong, UrlAnhChinh = imageUrl });
         }
 
         // Thêm ảnh cho phòng
@@ -639,10 +646,10 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
             const string checkPhong = "SELECT COUNT(1) FROM Phong WHERE MaPhong = @MaPhong";
             var exists = await _db.ExecuteScalarAsync<int>(checkPhong, new { MaPhong = maPhong });
             if (exists == 0)
-                return NotFound(new { Message = "Không tìm thấy phòng." });
+                return NotFound(new { Message = "❌ Không tìm thấy phòng." });
 
             if (files == null || files.Count == 0)
-                return BadRequest(new { Message = "Phải upload ít nhất 1 ảnh." });
+                return BadRequest(new { Message = "❌ Phải upload ít nhất 1 ảnh." });
 
             var results = new List<object>();
 
@@ -681,7 +688,8 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
                 results.Add(new { MaAnh = maAnh, UrlAnh = imageUrl });
             }
 
-            return Ok(new { Message = "Thêm ảnh thành công.", DanhSach = results });
+            // Thêm ảnh cho phòng thành công
+            return Ok(new { Message = "✅ Thêm ảnh thành công.", DanhSach = results });
         }
 
         // Lấy danh sách giảm giá của một phòng
@@ -696,7 +704,7 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
                 WHERE pg.MaPhong = @MaPhong";
 
             var danhSachGiamGia = await _db.QueryAsync(query, new { MaPhong = maPhong });
-            return Ok(danhSachGiamGia);
+            return Ok(new { Message = "✅ Lấy danh sách giảm giá thành công.", Data = danhSachGiamGia });
         }
 
         // Áp dụng mã giảm giá cho nhiều phòng
@@ -712,7 +720,7 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
             const string checkGiamGia = "SELECT COUNT(1) FROM GiamGia WHERE MaGiamGia = @MaGiamGia";
             var giamGiaExists = await _db.ExecuteScalarAsync<int>(checkGiamGia, new { MaGiamGia = maGiamGia });
             if (giamGiaExists == 0)
-                return NotFound(new { Message = "Không tìm thấy mã giảm giá." });
+                return NotFound(new { Message = "❌ Không tìm thấy mã giảm giá." });
 
             var notFoundRooms = new List<string>();
             var existedRooms = new List<string>();
@@ -746,10 +754,16 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
 
             return Ok(new
             {
-                Message = "Áp dụng giảm giá hoàn tất.",
-                ThanhCong = successRooms,
-                PhongKhongTonTai = notFoundRooms,
-                PhongDaCoMaGiamGia = existedRooms
+                Message = "🎉 Áp dụng mã giảm giá hoàn tất!",
+                ThanhCong = successRooms.Any()
+                    ? $"Chúc mừng! Đã áp dụng thành công cho các phòng: {string.Join(", ", successRooms)}."
+                    : "Không có phòng nào được áp dụng thành công.",
+                PhongKhongTonTai = notFoundRooms.Any()
+                    ? $"❌ Các phòng không tồn tại: {string.Join(", ", notFoundRooms)}."
+                    : null,
+                PhongDaCoMaGiamGia = existedRooms.Any()
+                    ? $"⚠️ Các phòng đã có mã giảm giá này: {string.Join(", ", existedRooms)}."
+                    : null
             });
         }
 
