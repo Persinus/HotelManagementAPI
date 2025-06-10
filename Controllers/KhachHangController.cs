@@ -146,9 +146,10 @@ public async Task<IActionResult> TaoDonDatPhong([FromBody] KhachHangDatPhongDTO 
         }
     }
 
+    // Đặt phòng thành công
     return Ok(new
     {
-        Message = $"Đặt phòng thành công. Tổng tiền tạm tính là: {tongTien:N0} VNĐ. Hãy sang phần tạo hóa đơn, nhập mã đặt phòng để nhận các thông tin thanh toán chi tiết.",
+        Message = $"🎉 Đặt phòng thành công! Tổng tiền tạm tính là: {tongTien:N0} VNĐ. Hãy sang phần tạo hóa đơn để hoàn tất thanh toán.",
         MaDatPhong = datPhongDTO.MaDatPhong,
         TongTienTamTinh = tongTien
     });
@@ -181,7 +182,10 @@ public async Task<IActionResult> LichSuDatPhong()
 
     var result = await _db.QueryAsync(query, new { MaNguoiDung = maNguoiDung });
 
-    return Ok(result);
+    // Lấy lịch sử đặt phòng
+    if (result == null || !result.Any())
+        return NotFound(new { Message = "❌ Xin lỗi, bạn chưa có lịch sử đặt phòng nào." });
+    return Ok(new { Message = "✅ Lấy lịch sử đặt phòng thành công.", Data = result });
 }
 
         
@@ -214,10 +218,10 @@ public async Task<IActionResult> GetHoaDonByMaDatPhong([FromRoute] string maDatP
     const string query = @"SELECT * FROM HoaDon WHERE MaDatPhong = @MaDatPhong";
     var hoaDon = await _db.QueryFirstOrDefaultAsync<KhachHangHoaDonDTO>(query, new { MaDatPhong = maDatPhong });
 
+    // Lấy hóa đơn theo mã đặt phòng
     if (hoaDon == null)
-        return NotFound(new { Message = "Không tìm thấy hóa đơn cho mã đặt phòng này." });
-
-    return Ok(hoaDon);
+        return NotFound(new { Message = "❌ Không tìm thấy hóa đơn cho mã đặt phòng này." });
+    return Ok(new { Message = "✅ Lấy hóa đơn thành công.", Data = hoaDon });
 }
 
         /// <summary>
@@ -287,7 +291,8 @@ public async Task<IActionResult> TaoHoaDon([FromBody] TaoHoaDonRequestDTO reques
     };
     await _db.ExecuteAsync(insertHoaDonQuery, hoaDonDTO);
 
-    return Ok(hoaDonDTO);
+    // Tạo hóa đơn thành công
+    return Ok(new { Message = "🎉 Tạo hóa đơn thành công! Vui lòng tiến hành thanh toán.", Data = hoaDonDTO });
 }
 
         // ----------- THANH TOÁN -----------
@@ -325,7 +330,7 @@ public async Task<IActionResult> ThanhToan([FromBody] KhachHangThanhToanDTO requ
     if (soTienKhachTra < soTienPhaiTra)
     {
         decimal thieu = soTienPhaiTra - soTienKhachTra;
-        return BadRequest(new { Message = $"Vui lòng trả đủ số tiền. Bạn còn thiếu {thieu:N0} đồng." });
+        return BadRequest(new { Message = $"❌ Vui lòng trả đủ số tiền. Bạn còn thiếu {thieu:N0} đồng." });
     }
 
     // Sinh mã thanh toán tự động
@@ -358,14 +363,14 @@ public async Task<IActionResult> ThanhToan([FromBody] KhachHangThanhToanDTO requ
 
     if (soTienKhachTra == soTienPhaiTra)
     {
-        return Ok(new { Message = "Thanh toán thành công!", MaThanhToan = maThanhToan, NgayThanhToan = now });
+        return Ok(new { Message = "🎉 Thanh toán thành công! Cảm ơn bạn đã sử dụng dịch vụ.", MaThanhToan = maThanhToan, NgayThanhToan = now });
     }
     else // Khách trả thừa
     {
         decimal tienThua = soTienKhachTra - soTienPhaiTra;
         return Ok(new
         {
-            Message = $"Thanh toán thành công! Bạn đã trả thừa {tienThua:N0} đồng, số tiền này sẽ được nhân viên hoàn lại.",
+            Message = $"🎉 Thanh toán thành công! Bạn đã trả thừa {tienThua:N0} đồng, số tiền này sẽ được nhân viên hoàn lại.",
             MaThanhToan = maThanhToan,
             NgayThanhToan = now
         });
@@ -397,7 +402,10 @@ public async Task<IActionResult> LichSuThanhToan()
         ORDER BY t.NgayThanhToan DESC";
 
     var lichSu = await _db.QueryAsync<KhachHangThanhToanDTO>(query, new { MaNguoiDung = maNguoiDung });
-    return Ok(lichSu);
+    // Lịch sử thanh toán
+    if (lichSu == null || !lichSu.Any())
+        return NotFound(new { Message = "❌ Xin lỗi, bạn chưa có lịch sử thanh toán nào." });
+    return Ok(new { Message = "✅ Lấy lịch sử thanh toán thành công.", Data = lichSu });
 }
 
         /// <summary>
@@ -437,8 +445,10 @@ public async Task<IActionResult> GetLichSuGiaoDich()
         WHERE h.MaNguoiDung = @MaNguoiDung";
     var thanhToans = await _db.QueryAsync(thanhToanQuery, new { MaNguoiDung = maNguoiDung });
 
+    // Tổng hợp lịch sử giao dịch
     return Ok(new
     {
+        Message = "✅ Lấy tổng hợp lịch sử giao dịch thành công.",
         DatPhongs = datPhongs,
         HoaDons = hoaDons,
         ThanhToans = thanhToans
@@ -491,7 +501,8 @@ if (!string.IsNullOrWhiteSpace(dto.BinhLuan))
         NgayFeedback = DateTime.Now
     });
 
-    return Ok(new { Message = "Gửi feedback thành công!", MaFeedback = maFeedback, PhanLoai = phanLoai });
+    // Gửi feedback thành công
+    return Ok(new { Message = "🎉 Gửi feedback thành công! Cảm ơn bạn đã đóng góp ý kiến.", MaFeedback = maFeedback, PhanLoai = phanLoai });
 }
 
         // ----------- Helper methods -----------
@@ -565,7 +576,8 @@ public async Task<IActionResult> HuyThanhToan([FromRoute] string maThanhToan)
     const string updateDatPhong = "UPDATE DatPhong SET TinhTrangDatPhong = 1 WHERE MaDatPhong = @MaDatPhong";
     await _db.ExecuteAsync(updateDatPhong, new { MaDatPhong = maDatPhong });
 
-    return Ok(new { Message = "Hủy thanh toán thành công." });
+    // Hủy thanh toán thành công
+    return Ok(new { Message = "✅ Hủy thanh toán thành công. Phòng đã được mở lại cho khách khác." });
 }
 
         /// <summary>
@@ -577,7 +589,7 @@ public async Task<IActionResult> HuyThanhToan([FromRoute] string maThanhToan)
 public IActionResult PhanLoaiBinhLuan([FromBody] string binhLuan, [FromServices] SentimentModelConfig sentimentConfig)
 {
     if (string.IsNullOrWhiteSpace(binhLuan))
-        return BadRequest(new { Message = "Bình luận không được để trống." });
+        return BadRequest(new { Message = "❌ Bình luận không được để trống." });
 
     var mlContext = new MLContext();
     var model = mlContext.Model.Load(sentimentConfig.ModelPath, out var schema);
@@ -586,7 +598,7 @@ public IActionResult PhanLoaiBinhLuan([FromBody] string binhLuan, [FromServices]
     var result = predictionEngine.Predict(new SentimentData { SentimentText = binhLuan });
     var phanLoai = result.Prediction ? "Tích cực" : "Tiêu cực";
 
-    return Ok(new { PhanLoai = phanLoai });
+    return Ok(new { Message = "✅ Phân loại bình luận thành công.", PhanLoai = phanLoai });
 }
     }
 }
