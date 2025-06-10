@@ -298,13 +298,21 @@ namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
         /// Lấy danh sách phòng rút gọn (chỉ các trường cần thiết).
         /// </summary>
         [HttpGet("phong-rutgon")]
-        public async Task<ActionResult<IEnumerable<PhongDTO>>> GetAllPhongRutGon()
+        public async Task<ActionResult<IEnumerable<PhongDTO>>> GetAllPhongRutGon([FromQuery] int page = 1, [FromQuery] int pageSize = 8)
         {
-            // Lấy danh sách phòng với các trường cần thiết
+            if (page < 1 || pageSize < 1)
+                return BadRequest(new { Message = "Page và pageSize phải lớn hơn 0." });
+
+            int skip = (page - 1) * pageSize;
             const string phongQuery = @"
-                SELECT MaPhong, LoaiPhong, GiaPhong, Tang, TinhTrang, DonViTinh, SoSaoTrungBinh ,MoTa,UrlAnhChinh
-                FROM Phong";
-            var phongList = (await _db.QueryAsync<PhongDTO>(phongQuery)).ToList();
+                SELECT MaPhong, LoaiPhong, GiaPhong, Tang, TinhTrang, DonViTinh, SoSaoTrungBinh, MoTa, UrlAnhChinh
+                FROM Phong
+                ORDER BY MaPhong
+                OFFSET @Skip ROWS FETCH NEXT @PageSize ROWS ONLY";
+            var phongList = (await _db.QueryAsync<PhongDTO>(phongQuery, new { Skip = skip, PageSize = pageSize })).ToList();
+
+            if (!phongList.Any())
+                return NotFound(new { Message = "Không tìm thấy phòng nào." });
 
             foreach (var room in phongList)
             {
@@ -327,7 +335,7 @@ namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
                 room.GiaUuDai = giaUuDai;
             }
 
-            return Ok(phongList);
+            return Ok(new { Message = "Lấy danh sách phòng thành công.", Data = phongList });
         }
          /// <summary>
         /// Lấy danh sách bài viết đã duyệt.
@@ -343,6 +351,21 @@ namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
             const string query = "SELECT * FROM BaiViet WHERE TrangThai = N'Đã Duyệt' ORDER BY NgayDang DESC";
             var list = await _db.QueryAsync<TatCaBaiVietDTO>(query);
             return Ok(list);
+        }
+
+        /// <summary>
+        /// Lấy tất cả mã giảm giá.
+        /// </summary>
+        [HttpGet("giamgia")]
+        [SwaggerOperation(Summary = "Lấy tất cả mã giảm giá", Description = "Trả về danh sách tất cả mã giảm giá trong hệ thống.")]
+        [SwaggerResponse(200, "Danh sách mã giảm giá.")]
+        public async Task<IActionResult> GetAllGiamGia()
+        {
+            const string query = @"
+                SELECT MaGiamGia, TenGiamGia, GiaTriGiam, NgayBatDau, NgayKetThuc, MoTa
+                FROM GiamGia";
+            var giamGiaList = await _db.QueryAsync<GiamGiaDTO>(query);
+            return Ok(giamGiaList);
         }
 
         private async Task<IActionResult> DangKyNguoiDungChung(NguoiDungDangKyDTO dto, IFormFile? file, string vaitro)
