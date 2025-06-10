@@ -7,8 +7,7 @@ namespace HotelManagementAPI.DTOs.QuanTriVien
     {
         public string LoaiPhong { get; set; }
         public decimal GiaPhong { get; set; }
-        public byte TinhTrang { get; set; }
-        public int SoLuongPhong { get; set; }
+
         public int Tang { get; set; }
         public string KieuGiuong { get; set; }
         public string? MoTa { get; set; }
