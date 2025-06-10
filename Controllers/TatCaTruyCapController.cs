@@ -55,11 +55,11 @@ namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
             var nguoiDung = await _db.QueryFirstOrDefaultAsync<NguoiDungDTO>(query, new { login.TenTaiKhoan });
 
             if (nguoiDung == null)
-                return Unauthorized(new { Message = "Tên tài khoản hoặc mật khẩu không đúng 1." });
+                return Unauthorized(new { Message = "❌ Xin lỗi, tên tài khoản hoặc mật khẩu không đúng. Vui lòng thử lại." });
 
             bool isValid = BCrypt.Net.BCrypt.Verify(login.MatKhau, nguoiDung.MatKhau);
             if (!isValid)
-                return Unauthorized(new { Message = "Tên tài khoản hoặc mật khẩu không đúng 2." });
+                return Unauthorized(new { Message = "❌ Xin lỗi, tên tài khoản hoặc mật khẩu không đúng. Vui lòng thử lại." });
 
             var secretKey = _config["Jwt:SecretKey"];
             var issuer = _config["Jwt:Issuer"];
@@ -82,7 +82,8 @@ namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
 
             var token = JwtHelper.GenerateJwtToken(nguoiDungModel, secretKey, issuer, audience);
 
-            return Ok(new { Token = token });
+            // Đăng nhập thành công
+            return Ok(new { Message = "🎉 Đăng nhập thành công! Chào mừng bạn quay trở lại.", Token = token });
         }
 
         /// <summary>
@@ -122,14 +123,15 @@ namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
             var emailExists = await _db.ExecuteScalarAsync<int>(query, new { resetPassword.Email });
 
             if (emailExists == 0)
-                return NotFound(new { Message = "Email không tồn tại trong hệ thống." });
+                return NotFound(new { Message = "❌ Xin lỗi, email không tồn tại trong hệ thống." });
 
             var hashedPassword = BCrypt.Net.BCrypt.HashPassword(resetPassword.NewPassword);
 
             const string updatePasswordQuery = "UPDATE NguoiDung SET MatKhau = @MatKhau WHERE Email = @Email";
             await _db.ExecuteAsync(updatePasswordQuery, new { MatKhau = hashedPassword, resetPassword.Email });
 
-            return Ok(new { Message = "Mật khẩu đã được cập nhật thành công." });
+            // Đặt lại mật khẩu thành công
+            return Ok(new { Message = "✅ Mật khẩu đã được cập nhật thành công. Chúc bạn sử dụng dịch vụ vui vẻ!" });
         }
 
         /// <summary>
@@ -271,7 +273,8 @@ namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
                 dv.DonViTinh,
                 TrangThai = dv.SoLuong > 0 ? "Còn hàng" : "Hết hàng"
             });
-            return Ok(result);
+            // Lấy danh sách dịch vụ thành công
+            return Ok(new { Message = "✅ Lấy danh sách dịch vụ thành công.", Data = result });
         }
 
         /// <summary>
@@ -291,7 +294,8 @@ namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
                 FROM Feedback
                 WHERE MaPhong = @MaPhong";
             var feedbacks = await _db.QueryAsync<FeedBackDTO>(query, new { MaPhong = maPhong });
-            return Ok(feedbacks);
+            // Lấy feedback thành công
+            return Ok(new { Message = "✅ Lấy feedback thành công.", Data = feedbacks });
         }
 
         /// <summary>
@@ -312,7 +316,7 @@ namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
             var phongList = (await _db.QueryAsync<PhongDTO>(phongQuery, new { Skip = skip, PageSize = pageSize })).ToList();
 
             if (!phongList.Any())
-                return NotFound(new { Message = "Không tìm thấy phòng nào." });
+                return NotFound(new { Message = "❌ Xin lỗi, không tìm thấy phòng nào phù hợp." });
 
             foreach (var room in phongList)
             {
@@ -335,7 +339,8 @@ namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
                 room.GiaUuDai = giaUuDai;
             }
 
-            return Ok(new { Message = "Lấy danh sách phòng thành công.", Data = phongList });
+            // Lấy danh sách phòng thành công
+            return Ok(new { Message = "✅ Lấy danh sách phòng thành công.", Data = phongList });
         }
          /// <summary>
         /// Lấy danh sách bài viết đã duyệt.
@@ -365,7 +370,8 @@ namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
                 SELECT MaGiamGia, TenGiamGia, GiaTriGiam, NgayBatDau, NgayKetThuc, MoTa
                 FROM GiamGia";
             var giamGiaList = await _db.QueryAsync<GiamGiaDTO>(query);
-            return Ok(giamGiaList);
+            // Lấy tất cả mã giảm giá thành công
+            return Ok(new { Message = "✅ Lấy danh sách mã giảm giá thành công.", Data = giamGiaList });
         }
 
         private async Task<IActionResult> DangKyNguoiDungChung(NguoiDungDangKyDTO dto, IFormFile? file, string vaitro)
@@ -374,13 +380,15 @@ namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
             const string checkEmailQuery = "SELECT COUNT(1) FROM NguoiDung WHERE Email = @Email";
             var isEmailDuplicate = await _db.ExecuteScalarAsync<int>(checkEmailQuery, new { dto.Email });
             if (isEmailDuplicate > 0)
-                return Conflict(new { Message = "Email đã tồn tại. Vui lòng sử dụng email khác." });
+                // Đăng ký thất bại do email trùng
+                return Conflict(new { Message = "❌ Xin lỗi, email này đã được sử dụng. Vui lòng chọn email khác." });
 
             // Kiểm tra tên tài khoản trùng lặp
             const string checkTenTaiKhoanQuery = "SELECT COUNT(1) FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan";
             var isTenTaiKhoanDuplicate = await _db.ExecuteScalarAsync<int>(checkTenTaiKhoanQuery, new { dto.TenTaiKhoan });
             if (isTenTaiKhoanDuplicate > 0)
-                return Conflict(new { Message = "Tên đăng nhập đã có người sử dụng. Vui lòng chọn tên đăng nhập khác." });
+                // Đăng ký thất bại do tên tài khoản trùng
+                return Conflict(new { Message = "❌ Xin lỗi, tên đăng nhập đã tồn tại. Vui lòng chọn tên khác." });
 
             string? imageUrl = null;
             if (file != null && file.Length > 0)
@@ -396,7 +404,8 @@ namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
                 if (uploadResult.StatusCode == System.Net.HttpStatusCode.OK)
                     imageUrl = uploadResult.SecureUrl.ToString();
                 else
-                    return StatusCode(500, $"Upload ảnh thất bại: {uploadResult.Error?.Message}");
+                    // Upload ảnh thất bại
+                    return StatusCode(500, new { Message = $"❌ Xin lỗi, upload ảnh thất bại: {uploadResult.Error?.Message}" });
             }
 
             var nguoiDung = new NguoiDungDTO
@@ -404,15 +413,15 @@ namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
                 TenTaiKhoan = dto.TenTaiKhoan,
                 MatKhau = BCrypt.Net.BCrypt.HashPassword(dto.MatKhau),
                 HoTen = dto.HoTen,
-                SoDienThoai = dto.SoDienThoai,
-                DiaChi = dto.DiaChi,
-                NgaySinh = dto.NgaySinh,
-                GioiTinh = dto.GioiTinh,
+                SoDienThoai = string.IsNullOrWhiteSpace(dto.SoDienThoai) ? "0123456789" : dto.SoDienThoai,
+                DiaChi = string.IsNullOrWhiteSpace(dto.DiaChi) ? "Chưa cập nhật" : dto.DiaChi,
+                NgaySinh = dto.NgaySinh ?? new DateTime(2000, 1, 1),
+                GioiTinh = string.IsNullOrWhiteSpace(dto.GioiTinh) ? "Không xác định" : dto.GioiTinh,
                 Email = dto.Email,
                 Vaitro = vaitro,
                 MaNguoiDung = await GenerateUniqueMaNguoiDung(),
                 NgayTao = DateTime.Now,
-                HinhAnhUrl = imageUrl,
+                HinhAnhUrl = string.IsNullOrWhiteSpace(imageUrl) ? "https://i.imgur.com/placeholder.png" : imageUrl,
                 CanCuocCongDan = string.IsNullOrEmpty(dto.CanCuocCongDan) ? null : SensitiveDataHelper.Encrypt(dto.CanCuocCongDan)
             };
 
@@ -420,7 +429,8 @@ namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
         INSERT INTO NguoiDung (MaNguoiDung, Vaitro, Email, TenTaiKhoan, MatKhau, HoTen, SoDienThoai, DiaChi, NgaySinh, GioiTinh, HinhAnhUrl, CanCuocCongDan, NgayTao)
         VALUES (@MaNguoiDung, @Vaitro, @Email, @TenTaiKhoan, @MatKhau, @HoTen, @SoDienThoai, @DiaChi, @NgaySinh, @GioiTinh, @HinhAnhUrl, @CanCuocCongDan, @NgayTao)";
             await _db.ExecuteAsync(insertQuery, nguoiDung);
-            return Ok(new { Message = "Đăng ký thành công!", MaNguoiDung = nguoiDung.MaNguoiDung });
+            // Đăng ký thành công
+            return Ok(new { Message = "🎉 Đăng ký thành công! Chúc mừng bạn đã trở thành thành viên của hệ thống.", MaNguoiDung = nguoiDung.MaNguoiDung });
         }
 
         // Helper tạo mã người dùng duy nhất
