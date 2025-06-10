@@ -49,13 +49,10 @@ namespace HotelManagementAPI.Controllers
         {
             var maNguoiDung = User.FindFirstValue("sub") ?? User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(maNguoiDung))
-                return Unauthorized(new { Message = "Không xác định được người dùng." });
+                return Unauthorized(new { Message = "❌ Không xác định được người dùng. Vui lòng đăng nhập lại." });
 
             const string query = @"SELECT * FROM NguoiDung WHERE MaNguoiDung = @MaNguoiDung";
             var profile = await _db.QueryFirstOrDefaultAsync<NguoiDungDTO>(query, new { MaNguoiDung = maNguoiDung });
-
-            if (profile == null)
-                return NotFound(new { Message = "Không tìm thấy thông tin người dùng." });
 
             // Giải mã CCCD nếu có
             try
@@ -67,7 +64,10 @@ namespace HotelManagementAPI.Controllers
                 profile.CanCuocCongDan = "Không giải mã được";
             }
 
-            return Ok(profile);
+            if (profile == null)
+                return NotFound(new { Message = "❌ Không tìm thấy thông tin người dùng." });
+
+            return Ok(new { Message = "✅ Lấy thông tin người dùng thành công.", Data = profile });
         }
 
       
@@ -79,7 +79,7 @@ namespace HotelManagementAPI.Controllers
         {
             var maNguoiDung = User.FindFirstValue("sub") ?? User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(maNguoiDung))
-                return Unauthorized(new { Message = "Không xác định được người dùng." });
+                return Unauthorized(new { Message = "❌ Không xác định được người dùng. Vui lòng đăng nhập lại." });
 
             // Lấy link ảnh cũ
             const string getSql = "SELECT HinhAnhUrl, CanCuocCongDan FROM NguoiDung WHERE MaNguoiDung = @MaNguoiDung";
@@ -101,7 +101,7 @@ namespace HotelManagementAPI.Controllers
                 if (uploadResult.StatusCode == System.Net.HttpStatusCode.OK)
                     imageUrl = uploadResult.SecureUrl.ToString();
                 else
-                    return StatusCode(500, $"Upload ảnh thất bại: {uploadResult.Error?.Message}");
+                    return StatusCode(500, new { Message = $"❌ Upload ảnh thất bại: {uploadResult.Error?.Message}" });
             }
 
             // Mã hóa CCCD nếu có cập nhật mới
@@ -132,9 +132,9 @@ namespace HotelManagementAPI.Controllers
             });
 
             if (affected == 0)
-                return NotFound(new { Message = "Không tìm thấy người dùng để cập nhật." });
+                return NotFound(new { Message = "❌ Không tìm thấy người dùng để cập nhật." });
 
-            return Ok(new { Message = "Cập nhật thông tin thành công.", HinhAnhUrl = imageUrl });
+            return Ok(new { Message = "🎉 Cập nhật thông tin thành công! Chúc bạn một ngày tốt lành.", HinhAnhUrl = imageUrl });
         }
     }
 }
