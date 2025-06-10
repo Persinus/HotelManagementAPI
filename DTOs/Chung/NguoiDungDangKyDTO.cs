@@ -13,8 +13,7 @@ namespace HotelManagementAPI.DTOs
         public string? GioiTinh { get; set; }
         public string Email { get; set; } = null!;
         public string? CanCuocCongDan { get; set; }
-        public string? TrangThai { get; set; }
-
+     
         // Không cần HinhAnhUrl vì sẽ upload qua Cloudinary và gán ở controller
     }
 }
