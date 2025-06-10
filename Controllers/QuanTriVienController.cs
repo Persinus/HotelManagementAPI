@@ -280,7 +280,7 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
         [SwaggerResponse(200, "Thêm dịch vụ thành công.")]
         [SwaggerResponse(400, "Dữ liệu không hợp lệ hoặc upload ảnh thất bại.")]
    
-        public async Task<IActionResult> Them1DichVu([FromForm] QuanTriVienThem1DichVuDTO dto, IFormFile? file, [FromServices] Cloudinary cloudinary)
+        public async Task<IActionResult> Them1DichVu([FromForm] QuanTriVienThem1DichVuDTO dto, IFormFile? file)
         {
             string? imageUrl = null;
             if (file != null && file.Length > 0)
@@ -292,7 +292,7 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
                     Transformation = new Transformation().Width(800).Height(800).Crop("limit"),
                     Folder = "dichvu"
                 };
-                var uploadResult = await cloudinary.UploadAsync(uploadParams);
+                var uploadResult = await _cloudinary.UploadAsync(uploadParams);
                 if (uploadResult.StatusCode == System.Net.HttpStatusCode.OK)
                     imageUrl = uploadResult.SecureUrl.ToString();
                 else
@@ -334,7 +334,7 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
         [SwaggerResponse(200, "Thêm nhiều dịch vụ thành công.")]
         [SwaggerResponse(400, "Số lượng file ảnh phải bằng số lượng dịch vụ hoặc upload ảnh thất bại.")]
       
-        public async Task<IActionResult> ThemNhieuDichVu([FromForm] QuanTriVienThemNhieuDichVuDTO dto, List<IFormFile> files, [FromServices] Cloudinary cloudinary)
+        public async Task<IActionResult> ThemNhieuDichVu([FromForm] QuanTriVienThemNhieuDichVuDTO dto, List<IFormFile> files)
         {
             if (dto.DanhSachDichVu.Count != files.Count)
                 return BadRequest("Số lượng file ảnh phải bằng số lượng dịch vụ.");
@@ -356,7 +356,7 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
                         Transformation = new Transformation().Width(800).Height(800).Crop("limit"),
                         Folder = "dichvu"
                     };
-                    var uploadResult = await cloudinary.UploadAsync(uploadParams);
+                    var uploadResult = await _cloudinary.UploadAsync(uploadParams);
                     if (uploadResult.StatusCode == System.Net.HttpStatusCode.OK)
                         imageUrl = uploadResult.SecureUrl.ToString();
                     else
@@ -401,7 +401,7 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
         [SwaggerResponse(200, "Thêm tiện nghi thành công.")]
         [SwaggerResponse(400, "Dữ liệu không hợp lệ hoặc upload ảnh thất bại.")]
   
-        public async Task<IActionResult> Them1TienNghi([FromForm] QuanTriVienThem1TienNghiDTO dto, IFormFile? file, [FromServices] Cloudinary cloudinary)
+        public async Task<IActionResult> Them1TienNghi([FromForm] QuanTriVienThem1TienNghiDTO dto, IFormFile? file)
         {
             string? imageUrl = null;
             if (file != null && file.Length > 0)
@@ -413,7 +413,7 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
                     Transformation = new Transformation().Width(800).Height(800).Crop("limit"),
                     Folder = "tiennghi"
                 };
-                var uploadResult = await cloudinary.UploadAsync(uploadParams);
+                var uploadResult = await _cloudinary.UploadAsync(uploadParams);
                 if (uploadResult.StatusCode == System.Net.HttpStatusCode.OK)
                     imageUrl = uploadResult.SecureUrl.ToString();
                 else
@@ -431,12 +431,11 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
             await _db.ExecuteAsync(insertQuery, new
             {
                 MaTienNghi = maTienNghi,
-                dto.TenTienNghi,
-                dto.MoTa,
+                TenTienNghi = dto.TenTienNghi,
+                MoTa = dto.MoTa,
                 HinhAnhTienNghi = imageUrl
             });
 
-            // Thêm tiện nghi thành công
             return Ok(new { Message = "🎉 Thêm tiện nghi thành công.", MaTienNghi = maTienNghi, HinhAnhUrl = imageUrl });
         }
 
@@ -451,7 +450,7 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
         [SwaggerResponse(200, "Thêm nhiều tiện nghi thành công.")]
         [SwaggerResponse(400, "Số lượng file ảnh phải bằng số lượng tiện nghi hoặc upload ảnh thất bại.")]
 
-        public async Task<IActionResult> ThemNhieuTienNghi([FromForm] QuanTriVienThemNhieuTienNghiDTO dto, List<IFormFile> files, [FromServices] Cloudinary cloudinary)
+        public async Task<IActionResult> ThemNhieuTienNghi([FromForm] QuanTriVienThemNhieuTienNghiDTO dto, List<IFormFile> files)
         {
             if (dto.DanhSachTienNghi.Count != files.Count)
                 return BadRequest("Số lượng file ảnh phải bằng số lượng tiện nghi.");
@@ -473,7 +472,7 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
                         Transformation = new Transformation().Width(800).Height(800).Crop("limit"),
                         Folder = "tiennghi"
                     };
-                    var uploadResult = await cloudinary.UploadAsync(uploadParams);
+                    var uploadResult = await _cloudinary.UploadAsync(uploadParams);
                     if (uploadResult.StatusCode == System.Net.HttpStatusCode.OK)
                         imageUrl = uploadResult.SecureUrl.ToString();
                     else
@@ -491,8 +490,8 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
                 await _db.ExecuteAsync(insertQuery, new
                 {
                     MaTienNghi = maTienNghi,
-                    tienNghi.TenTienNghi,
-                    tienNghi.MoTa,
+                    TenTienNghi = tienNghi.TenTienNghi,
+                    MoTa = tienNghi.MoTa,
                     HinhAnhTienNghi = imageUrl
                 });
 
@@ -582,7 +581,7 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
         [SwaggerOperation(Summary = "Thêm 1 phòng mới", Description = "Thêm một phòng mới vào hệ thống, upload ảnh chính lên Cloudinary.")]
         [SwaggerResponse(200, "Thêm phòng thành công.")]
         [SwaggerResponse(400, "Dữ liệu không hợp lệ hoặc upload ảnh thất bại.")]
-        public async Task<IActionResult> Them1Phong([FromForm] QuanTriVienThem1PhongDTO dto, IFormFile? file, [FromServices] Cloudinary cloudinary)
+        public async Task<IActionResult> Them1Phong([FromForm] QuanTriVienThem1PhongDTO dto, IFormFile? file)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -598,7 +597,7 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
                     Transformation = new Transformation().Width(1200).Height(800).Crop("limit"),
                     Folder = "phong"
                 };
-                var uploadResult = await cloudinary.UploadAsync(uploadParams);
+                var uploadResult = await _cloudinary.UploadAsync(uploadParams);
                 if (uploadResult.StatusCode == System.Net.HttpStatusCode.OK)
                     imageUrl = uploadResult.SecureUrl.ToString();
                 else
@@ -610,28 +609,27 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
             }
 
             // Sinh mã phòng tự động theo quy tắc Pxxx
-            var maPhong = await GenerateMaPhong(); // Ví dụ: P001, P002, ...
+            var maPhong = await GenerateMaPhong();
 
             const string insertQuery = @"
-                INSERT INTO Phong (MaPhong, LoaiPhong, GiaPhong, TinhTrang, SoLuongPhong, Tang, KieuGiuong, MoTa, UrlAnhChinh, SucChua, SoGiuong, DonViTinh, SoSaoTrungBinh)
-                VALUES (@MaPhong, @LoaiPhong, @GiaPhong, @TinhTrang, @SoLuongPhong, @Tang, @KieuGiuong, @MoTa, @UrlAnhChinh, @SucChua, @SoGiuong, @DonViTinh, @SoSaoTrungBinh)";
+                INSERT INTO Phong (MaPhong, LoaiPhong, GiaPhong, TinhTrang, Tang, KieuGiuong, MoTa, UrlAnhChinh, SucChua, SoGiuong, DonViTinh, SoSaoTrungBinh)
+                VALUES (@MaPhong, @LoaiPhong, @GiaPhong, @TinhTrang, @Tang, @KieuGiuong, @MoTa, @UrlAnhChinh, @SucChua, @SoGiuong, @DonViTinh, @SoSaoTrungBinh)";
             await _db.ExecuteAsync(insertQuery, new
             {
                 MaPhong = maPhong,
-                dto.LoaiPhong,
-                dto.GiaPhong,
-                dto.TinhTrang,
-                dto.SoLuongPhong,
-                dto.Tang,
-                dto.KieuGiuong,
-                dto.MoTa,
+                LoaiPhong = dto.LoaiPhong,
+                GiaPhong = dto.GiaPhong,
+                TinhTrang = "1", // Mặc định là 1 khi thêm mới
+                Tang = dto.Tang,
+                KieuGiuong = dto.KieuGiuong,
+                MoTa = dto.MoTa,
                 UrlAnhChinh = imageUrl,
-                dto.SucChua,
-                dto.SoGiuong,
-                DonViTinh = "1 ngày", // Luôn mặc định "1 ngày"
+                SucChua = dto.SucChua,
+                SoGiuong = dto.SoGiuong,
+                DonViTinh = "1 ngày",
+                SoSaoTrungBinh = 0
             });
 
-            // Thêm phòng thành công
             return Ok(new { Message = "🎉 Thêm phòng thành công.", MaPhong = maPhong, UrlAnhChinh = imageUrl });
         }
 
@@ -640,7 +638,7 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
         [SwaggerOperation(Summary = "Thêm nhiều ảnh cho phòng", Description = "Upload nhiều ảnh lên Cloudinary và lưu vào bảng PhongAnh.")]
         [SwaggerResponse(200, "Thêm ảnh thành công.")]
         [SwaggerResponse(404, "Không tìm thấy phòng.")]
-        public async Task<IActionResult> ThemNhieuAnhPhong([FromForm] string maPhong, [FromForm] List<IFormFile> files, [FromServices] Cloudinary cloudinary)
+        public async Task<IActionResult> ThemNhieuAnhPhong([FromForm] string maPhong, [FromForm] List<IFormFile> files)
         {
             // Kiểm tra phòng tồn tại
             const string checkPhong = "SELECT COUNT(1) FROM Phong WHERE MaPhong = @MaPhong";
@@ -663,7 +661,7 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
                     Transformation = new Transformation().Width(1200).Height(800).Crop("limit"),
                     Folder = "phong"
                 };
-                var uploadResult = await cloudinary.UploadAsync(uploadParams);
+                var uploadResult = await _cloudinary.UploadAsync(uploadParams);
                 if (uploadResult.StatusCode == System.Net.HttpStatusCode.OK)
                     imageUrl = uploadResult.SecureUrl.ToString();
                 else
@@ -767,4 +765,22 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
             });
         }
 
-}}
+        // Sửa trạng thái phòng
+        [HttpPatch("phong/{maPhong}/trangthai")]
+        [SwaggerOperation(Summary = "Sửa trạng thái phòng", Description = "Cập nhật trạng thái phòng theo mã phòng.")]
+        [SwaggerResponse(200, "Cập nhật trạng thái phòng thành công.")]
+        [SwaggerResponse(404, "Không tìm thấy phòng.")]
+        public async Task<IActionResult> SuaTrangThaiPhong([FromRoute] string maPhong, [FromBody] int trangThai)
+        {
+            const string checkQuery = "SELECT COUNT(1) FROM Phong WHERE MaPhong = @MaPhong";
+            var exists = await _db.ExecuteScalarAsync<int>(checkQuery, new { MaPhong = maPhong });
+            if (exists == 0)
+                return NotFound(new { Message = "❌ Không tìm thấy phòng." });
+
+            const string updateQuery = "UPDATE Phong SET TinhTrang = @TinhTrang WHERE MaPhong = @MaPhong";
+            await _db.ExecuteAsync(updateQuery, new { TinhTrang = trangThai, MaPhong = maPhong });
+
+            return Ok(new { Message = "✅ Cập nhật trạng thái phòng thành công.", MaPhong = maPhong, TrangThai = trangThai });
+        }
+    }
+}
