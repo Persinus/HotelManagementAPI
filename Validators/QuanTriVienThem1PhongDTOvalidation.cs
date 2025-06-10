@@ -11,11 +11,9 @@ public class QuanTriVienThem1PhongDTOValidator : AbstractValidator<QuanTriVienTh
         RuleFor(x => x.GiaPhong)
             .GreaterThanOrEqualTo(0).WithMessage("Giá phòng phải lớn hơn hoặc bằng 0.");
 
-        RuleFor(x => x.TinhTrang)
-            .InclusiveBetween((byte)0, (byte)2).WithMessage("Tình trạng phải là 0, 1 hoặc 2.");
+       
 
-        RuleFor(x => x.SoLuongPhong)
-            .GreaterThanOrEqualTo(1).WithMessage("Số lượng phòng phải lớn hơn hoặc bằng 1.");
+       
 
         RuleFor(x => x.Tang)
             .GreaterThanOrEqualTo(0).WithMessage("Tầng phải lớn hơn hoặc bằng 0.");
