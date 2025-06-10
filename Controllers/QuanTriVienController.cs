@@ -24,6 +24,7 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
         private readonly IDbConnection _db;
         private readonly IConfiguration _config;
         private readonly Cloudinary _cloudinary;
+        private readonly CloudinarySettings _settings;
 
         public QuanTriVienController(
             IDbConnection db,
@@ -32,11 +33,12 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
         {
             _db = db;
             _config = config;
-            var settings = cloudinaryOptions.Value;
+            _settings = cloudinaryOptions.Value;
+
             var account = new Account(
-                settings.CloudName,
-                settings.ApiKey,
-                settings.ApiSecret
+                _settings.CloudName,
+                _settings.ApiKey,
+                _settings.ApiSecret
             );
             _cloudinary = new Cloudinary(account);
         }
@@ -153,23 +155,7 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
             return Ok(new { Message = "Xóa phòng thành công." });
         }
 
-        // Xóa 1 phòng
-        [HttpDelete("phong/xoa1")]
-        [SwaggerOperation(Summary = "Xóa 1 phòng", Description = "Xóa 1 phòng dựa theo mã phòng.")]
-        [SwaggerResponse(200, "Xóa phòng thành công.")]
-        [SwaggerResponse(404, "Không tìm thấy phòng.")]
-        public async Task<IActionResult> Xoa1Phong([FromBody] QuanTriVienXoa1PhongDTO dto)
-        {
-            const string checkQuery = "SELECT COUNT(1) FROM Phong WHERE MaPhong = @MaPhong";
-            var exists = await _db.ExecuteScalarAsync<int>(checkQuery, new { dto.MaPhong });
-            if (exists == 0)
-                return NotFound(new { Message = "Phòng không tồn tại." });
-
-            const string deleteQuery = "DELETE FROM Phong WHERE MaPhong = @MaPhong";
-            await _db.ExecuteAsync(deleteQuery, new { dto.MaPhong });
-            return Ok(new { Message = "Xóa phòng thành công." });
-        }
-
+       
         // Thêm nội quy mới
         [HttpPost("noiquy/them")]
         [SwaggerOperation(Summary = "Thêm nội quy", Description = "Thêm một nội quy mới cho hệ thống.")]
@@ -718,11 +704,13 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
         [SwaggerOperation(Summary = "Áp dụng mã giảm giá cho nhiều phòng", Description = "Quản trị viên áp dụng một mã giảm giá cho nhiều phòng dựa theo danh sách mã phòng.")]
         [SwaggerResponse(200, "Áp dụng giảm giá thành công.")]
         [SwaggerResponse(404, "Không tìm thấy mã giảm giá.")]
-        public async Task<IActionResult> ApDungGiamGiaChoNhieuPhong([FromBody] QuanTriVienApDungGiamGiaDTO dto)
+        public async Task<IActionResult> ApDungGiamGiaChoNhieuPhong(
+            [FromQuery] string maGiamGia,
+            [FromBody] List<string> danhSachMaPhong)
         {
             // Kiểm tra mã giảm giá tồn tại
             const string checkGiamGia = "SELECT COUNT(1) FROM GiamGia WHERE MaGiamGia = @MaGiamGia";
-            var giamGiaExists = await _db.ExecuteScalarAsync<int>(checkGiamGia, new { dto.MaGiamGia });
+            var giamGiaExists = await _db.ExecuteScalarAsync<int>(checkGiamGia, new { MaGiamGia = maGiamGia });
             if (giamGiaExists == 0)
                 return NotFound(new { Message = "Không tìm thấy mã giảm giá." });
 
@@ -730,7 +718,7 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
             var existedRooms = new List<string>();
             var successRooms = new List<string>();
 
-            foreach (var maPhong in dto.DanhSachMaPhong)
+            foreach (var maPhong in danhSachMaPhong)
             {
                 // Kiểm tra phòng tồn tại
                 const string checkPhong = "SELECT COUNT(1) FROM Phong WHERE MaPhong = @MaPhong";
@@ -743,7 +731,7 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
 
                 // Kiểm tra đã có mã giảm giá này chưa
                 const string checkExist = "SELECT COUNT(1) FROM Phong_GiamGia WHERE MaPhong = @MaPhong AND MaGiamGia = @MaGiamGia";
-                var exist = await _db.ExecuteScalarAsync<int>(checkExist, new { MaPhong = maPhong, MaGiamGia = dto.MaGiamGia });
+                var exist = await _db.ExecuteScalarAsync<int>(checkExist, new { MaPhong = maPhong, MaGiamGia = maGiamGia });
                 if (exist > 0)
                 {
                     existedRooms.Add(maPhong);
@@ -752,7 +740,7 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
 
                 // Thêm vào bảng Phong_GiamGia
                 const string insertQuery = "INSERT INTO Phong_GiamGia (MaPhong, MaGiamGia) VALUES (@MaPhong, @MaGiamGia)";
-                await _db.ExecuteAsync(insertQuery, new { MaPhong = maPhong, MaGiamGia = dto.MaGiamGia });
+                await _db.ExecuteAsync(insertQuery, new { MaPhong = maPhong, MaGiamGia = maGiamGia });
                 successRooms.Add(maPhong);
             }
 
