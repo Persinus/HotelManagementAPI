@@ -40,7 +40,7 @@ namespace HotelManagementAPI.Controllers
             var isExists = await _db.ExecuteScalarAsync<int>(checkQuery, new { MaPhong = maPhong, MaTienNghi = maTienNghi });
 
             if (isExists == 0)
-                return NotFound(new { Message = "Tiện nghi không tồn tại." });
+                return NotFound(new { Message = "❌ Xin lỗi, tiện nghi không tồn tại." });
 
             const string updateQuery = @"
                 UPDATE TienNghi
@@ -53,7 +53,7 @@ namespace HotelManagementAPI.Controllers
                 dto.MoTa
             });
 
-            return Ok(new { Message = "Cập nhật tiện nghi phòng thành công." });
+            return Ok(new { Message = "✅ Cập nhật tiện nghi phòng thành công!" });
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace HotelManagementAPI.Controllers
             const string checkQuery = "SELECT COUNT(1) FROM DichVu WHERE MaDichVu = @MaDichVu";
             var exists = await _db.ExecuteScalarAsync<int>(checkQuery, new { MaDichVu = maDichVu });
             if (exists == 0)
-                return NotFound(new { Message = "Dịch vụ không tồn tại." });
+                return NotFound(new { Message = "❌ Xin lỗi, dịch vụ không tồn tại." });
 
             const string sql = @"
                 UPDATE DichVu SET
@@ -96,7 +96,7 @@ namespace HotelManagementAPI.Controllers
                 dto.DonViTinh
             });
             if (affected == 0) return NotFound();
-            return Ok(new { Message = "Cập nhật dịch vụ thành công." });
+            return Ok(new { Message = "✅ Cập nhật dịch vụ thành công!" });
         }
         /// <summary>
         /// Cập nhật thông tin giảm giá của phòng.
@@ -112,7 +112,7 @@ namespace HotelManagementAPI.Controllers
             var isExists = await _db.ExecuteScalarAsync<int>(checkQuery, new { MaPhong = maPhong, MaGiamGia = maGiamGia });
 
             if (isExists == 0)
-                return NotFound(new { Message = "Giảm giá không tồn tại." });
+                return NotFound(new { Message = "❌ Xin lỗi, giảm giá không tồn tại." });
 
             const string updateQuery = @"
                 UPDATE GiamGia
@@ -130,7 +130,7 @@ namespace HotelManagementAPI.Controllers
                 dto.MoTa
             });
 
-            return Ok(new { Message = "Cập nhật giảm giá cho phòng thành công." });
+            return Ok(new { Message = "✅ Cập nhật giảm giá cho phòng thành công!" });
         }
 
         /// <summary>
@@ -147,7 +147,7 @@ namespace HotelManagementAPI.Controllers
             var isExists = await _db.ExecuteScalarAsync<int>(checkQuery, new { MaPhong = maPhong, MaAnh = maAnh });
 
             if (isExists == 0)
-                return NotFound(new { Message = "Ảnh không tồn tại." });
+                return NotFound(new { Message = "❌ Xin lỗi, ảnh không tồn tại." });
 
             const string updateQuery = @"
                 UPDATE PhongAnh
@@ -160,7 +160,7 @@ namespace HotelManagementAPI.Controllers
                 dto.UrlAnh
             });
 
-            return Ok(new { Message = "Cập nhật ảnh phòng thành công." });
+            return Ok(new { Message = "✅ Cập nhật ảnh phòng thành công!" });
         }
 
         // Xem tất cả mã giảm giá
@@ -171,7 +171,7 @@ namespace HotelManagementAPI.Controllers
         {
             const string query = "SELECT * FROM GiamGia";
             var list = await _db.QueryAsync<GiamGiaDetailDTO>(query);
-            return Ok(list);
+            return Ok(new { Message = "✅ Lấy danh sách mã giảm giá thành công!", Data = list });
         }
 
         // Xem chi tiết mã giảm giá theo mã
@@ -184,8 +184,8 @@ namespace HotelManagementAPI.Controllers
             const string query = "SELECT * FROM GiamGia WHERE MaGiamGia = @MaGiamGia";
             var result = await _db.QueryFirstOrDefaultAsync<GiamGiaDetailDTO>(query, new { MaGiamGia = maGiamGia });
             if (result == null)
-                return NotFound(new { Message = "Không tìm thấy mã giảm giá." });
-            return Ok(result);
+                return NotFound(new { Message = "❌ Không tìm thấy mã giảm giá." });
+            return Ok(new { Message = "✅ Lấy chi tiết mã giảm giá thành công!", Data = result });
         }
         /// <summary>
         /// Sửa bài viết (nhân viên).
@@ -202,13 +202,13 @@ namespace HotelManagementAPI.Controllers
         {
             var maNguoiDung = User.FindFirstValue("sub") ?? User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(maNguoiDung))
-                return Unauthorized(new { Message = "Không xác định được nhân viên." });
+                return Unauthorized(new { Message = "❌ Không xác định được nhân viên. Vui lòng đăng nhập lại." });
 
             // Chỉ cho phép sửa bài viết của chính mình
             const string checkQuery = "SELECT COUNT(1) FROM BaiViet WHERE MaBaiViet = @MaBaiViet AND MaNguoiDung = @MaNguoiDung";
             var isExists = await _db.ExecuteScalarAsync<int>(checkQuery, new { dto.MaBaiViet, MaNguoiDung = maNguoiDung });
             if (isExists == 0)
-                return NotFound(new { Message = "Không tìm thấy bài viết hoặc bạn không có quyền sửa." });
+                return NotFound(new { Message = "❌ Không tìm thấy bài viết hoặc bạn không có quyền sửa." });
 
             const string sql = @"
         UPDATE BaiViet
@@ -221,7 +221,7 @@ namespace HotelManagementAPI.Controllers
                 dto.NoiDung,
                 dto.HinhAnhUrl
             });
-            return Ok(new { Message = "Sửa bài viết thành công." });
+            return Ok(new { Message = "✅ Sửa bài viết thành công!" });
         }
     }
 }
