@@ -88,9 +88,14 @@ public async Task<IActionResult> TaoDonDatPhong([FromBody] KhachHangDatPhongDTO 
         }
     }
 
-    // Lấy giá phòng
-    const string getGiaPhongQuery = "SELECT GiaPhong FROM Phong WHERE MaPhong = @MaPhong";
-    var giaPhong = await _db.ExecuteScalarAsync<decimal>(getGiaPhongQuery, new { datPhongDTO.MaPhong });
+    // Lấy thông tin giá phòng và giá ưu đãi (nếu có)
+    const string getGiaPhongQuery = "SELECT GiaPhong, GiaUuDai FROM Phong WHERE MaPhong = @MaPhong";
+    var phong = await _db.QueryFirstOrDefaultAsync<(decimal GiaPhong, decimal? GiaUuDai)>(getGiaPhongQuery, new { MaPhong = datPhongDTO.MaPhong });
+
+    // Chọn giá thanh toán: nếu có giảm giá thì lấy GiaUuDai, không thì lấy GiaPhong
+    decimal giaThanhToan = phong.GiaUuDai.HasValue && phong.GiaUuDai.Value < phong.GiaPhong
+        ? phong.GiaUuDai.Value
+        : phong.GiaPhong;
 
     // Tính số ngày ở (tối thiểu 1 ngày)
     var soNgay = (datPhongDTO.NgayCheckOut.Date - datPhongDTO.NgayCheckIn.Date).Days;
@@ -108,7 +113,7 @@ public async Task<IActionResult> TaoDonDatPhong([FromBody] KhachHangDatPhongDTO 
         }
     }
 
-    var tongTien = giaPhong * soNgay + tongTienDichVu;
+    var tongTien = giaThanhToan * soNgay + tongTienDichVu;
 
     // Thêm đơn đặt phòng
     const string insertQuery = @"
@@ -116,9 +121,13 @@ public async Task<IActionResult> TaoDonDatPhong([FromBody] KhachHangDatPhongDTO 
         VALUES (@MaDatPhong, @MaNguoiDung, @MaPhong, @NgayDat, @NgayCheckIn, @NgayCheckOut, @TinhTrangDatPhong)";
     await _db.ExecuteAsync(insertQuery, datPhongDTO);
 
-    // Ngay sau khi insert, cập nhật trạng thái sang 2
+    // Ngay sau khi insert, cập nhật trạng thái đặt phòng sang 2
     const string updateTinhTrangDatPhong = "UPDATE DatPhong SET TinhTrangDatPhong = 2 WHERE MaDatPhong = @MaDatPhong";
     await _db.ExecuteAsync(updateTinhTrangDatPhong, new { datPhongDTO.MaDatPhong });
+
+    // **Cập nhật trạng thái phòng sang 2 (đã đặt)**
+    const string updateTinhTrangPhong = "UPDATE Phong SET TinhTrang = 2 WHERE MaPhong = @MaPhong";
+    await _db.ExecuteAsync(updateTinhTrangPhong, new { datPhongDTO.MaPhong });
 
     // Thêm dịch vụ đi kèm (nếu có)
     if (datPhongDTO.DichVuDiKem != null && datPhongDTO.DichVuDiKem.Any())
@@ -175,27 +184,7 @@ public async Task<IActionResult> LichSuDatPhong()
     return Ok(result);
 }
 
-        /// <summary>
-        /// Hủy đơn đặt phòng theo mã.
-        /// </summary>
-        /// <param name="id">Mã đặt phòng</param>
-      
-        [HttpDelete("datphong/{id}")]
-        [SwaggerResponse(200, "Hủy đặt phòng thành công.")]
-        [SwaggerResponse(404, "Mã đặt phòng không tồn tại.")]
-        public async Task<IActionResult> HuyDatPhong([FromRoute] string id)
-        {
-            const string checkQuery = "SELECT COUNT(1) FROM DatPhong WHERE MaDatPhong = @MaDatPhong";
-            var isExists = await _db.ExecuteScalarAsync<int>(checkQuery, new { MaDatPhong = id });
-            if (isExists == 0)
-                return NotFound(new { Message = "Mã đặt phòng không tồn tại." });
-
-            const string deleteQuery = "DELETE FROM DatPhong WHERE MaDatPhong = @MaDatPhong";
-    await _db.ExecuteAsync(deleteQuery, new { MaDatPhong = id });
-
-    return Ok(new { Message = "Hủy đặt phòng thành công." });
-}
-
+        
         
         // ----------- HÓA ĐƠN -----------
         /// <summary>
@@ -262,9 +251,11 @@ public async Task<IActionResult> TaoHoaDon([FromBody] TaoHoaDonRequestDTO reques
     const string getGiaPhongQuery = "SELECT GiaPhong FROM Phong WHERE MaPhong = @MaPhong";
     var giaPhong = await _db.ExecuteScalarAsync<decimal>(getGiaPhongQuery, new { datPhong.MaPhong });
 
+    // Tính số ngày ở (tối thiểu 1 ngày)
     var soNgay = (datPhong.NgayCheckOut.Date - datPhong.NgayCheckIn.Date).Days;
     if (soNgay < 1) soNgay = 1;
 
+    // Tính tổng tiền dịch vụ
     const string getDichVuQuery = @"
         SELECT ddv.SoLuong, dv.DonGia
         FROM DatDichVu ddv
@@ -273,10 +264,11 @@ public async Task<IActionResult> TaoHoaDon([FromBody] TaoHoaDonRequestDTO reques
     var dichVus = await _db.QueryAsync<(int SoLuong, decimal DonGia)>(getDichVuQuery, new { datPhong.MaDatPhong });
     decimal tongTienDichVu = dichVus.Sum(x => x.SoLuong * x.DonGia);
 
-    var tongTien = giaPhong * soNgay + tongTienDichVu;
+    // Tổng tiền hóa đơn
+    decimal tongTien = giaPhong * soNgay + tongTienDichVu;
 
-    // Áp dụng giảm giá nếu có
-    decimal tongTienSauGiamGia = tongTien * (1 - (request.GiaTriGiam / 100m));
+    // Không áp dụng giảm giá từ request nữa
+    decimal tongTienSauGiamGia = tongTien; // Giữ nguyên tổng tiền
 
     string maHoaDon = await GenerateUniqueMaHoaDon();
 
@@ -309,40 +301,75 @@ public async Task<IActionResult> TaoHoaDon([FromBody] TaoHoaDonRequestDTO reques
         )]
         [SwaggerResponse(200, "Thanh toán thành công.")]
         [SwaggerResponse(401, "Không xác định được người dùng hoặc không có quyền.")]
-        // Thanh toán hóa đơn
-       
 public async Task<IActionResult> ThanhToan([FromBody] KhachHangThanhToanDTO request)
 {
     var maNguoiDung = User.FindFirstValue("sub") ?? User.FindFirstValue(ClaimTypes.NameIdentifier);
     if (string.IsNullOrEmpty(maNguoiDung))
         return Unauthorized(new { Message = "Không xác định được người dùng." });
 
-    const string checkQuery = "SELECT MaNguoiDung FROM HoaDon WHERE MaHoaDon = @MaHoaDon";
-    var owner = await _db.ExecuteScalarAsync<string>(checkQuery, new { request.MaHoaDon });
-    if (owner != maNguoiDung)
+    // Lấy hóa đơn
+    const string hoaDonQuery = "SELECT * FROM HoaDon WHERE MaHoaDon = @MaHoaDon";
+    var hoaDon = await _db.QueryFirstOrDefaultAsync<KhachHangHoaDonDTO>(hoaDonQuery, new { request.MaHoaDon });
+    if (hoaDon == null)
+        return NotFound(new { Message = "Không tìm thấy hóa đơn." });
+
+    if (hoaDon.MaNguoiDung != maNguoiDung)
         return Forbid("Bạn không có quyền thanh toán hóa đơn này.");
 
+    if (hoaDon.TinhTrangHoaDon == 2)
+        return BadRequest(new { Message = "Hóa đơn này đã được thanh toán." });
+
+    decimal soTienPhaiTra = hoaDon.TongTien;
+    decimal soTienKhachTra = request.SoTienThanhToan;
+
+    if (soTienKhachTra < soTienPhaiTra)
+    {
+        decimal thieu = soTienPhaiTra - soTienKhachTra;
+        return BadRequest(new { Message = $"Vui lòng trả đủ số tiền. Bạn còn thiếu {thieu:N0} đồng." });
+    }
+
+    // Sinh mã thanh toán tự động
+    const string getMaxSql = "SELECT ISNULL(MAX(CAST(SUBSTRING(MaThanhToan, 3, LEN(MaThanhToan)-2) AS INT)), 0) + 1 FROM ThanhToan";
+    var nextId = await _db.ExecuteScalarAsync<int>(getMaxSql);
+    var maThanhToan = $"TT{nextId:D3}";
+
+    var now = DateTime.Now;
+
+    // Cập nhật hóa đơn: đã thanh toán
     const string updateHoaDonQuery = @"
         UPDATE HoaDon
         SET NgayThanhToan = @NgayThanhToan, TinhTrangHoaDon = 2
         WHERE MaHoaDon = @MaHoaDon";
-    var now = DateTime.Now;
-    await _db.ExecuteAsync(updateHoaDonQuery, new { NgayThanhToan = now, request.MaHoaDon });
+    await _db.ExecuteAsync(updateHoaDonQuery, new { NgayThanhToan = now, MaHoaDon = request.MaHoaDon });
 
+    // Thêm bản ghi thanh toán
     const string insertThanhToanQuery = @"
         INSERT INTO ThanhToan (MaThanhToan, MaHoaDon, SoTienThanhToan, NgayThanhToan, PhuongThucThanhToan, TinhTrangThanhToan)
         VALUES (@MaThanhToan, @MaHoaDon, @SoTienThanhToan, @NgayThanhToan, @PhuongThucThanhToan, @TinhTrangThanhToan)";
     await _db.ExecuteAsync(insertThanhToanQuery, new
     {
-        request.MaThanhToan,
-        request.MaHoaDon,
-        request.SoTienThanhToan,
+        MaThanhToan = maThanhToan,
+        MaHoaDon = request.MaHoaDon,
+        SoTienThanhToan = soTienKhachTra,
         NgayThanhToan = now,
-        request.PhuongThucThanhToan,
-        request.TinhTrangThanhToan
+        PhuongThucThanhToan = request.PhuongThucThanhToan,
+        TinhTrangThanhToan = 2 // 1: Đã thanh toán
     });
 
-    return Ok(new { Message = "Thanh toán thành công!", NgayThanhToan = now });
+    if (soTienKhachTra == soTienPhaiTra)
+    {
+        return Ok(new { Message = "Thanh toán thành công!", MaThanhToan = maThanhToan, NgayThanhToan = now });
+    }
+    else // Khách trả thừa
+    {
+        decimal tienThua = soTienKhachTra - soTienPhaiTra;
+        return Ok(new
+        {
+            Message = $"Thanh toán thành công! Bạn đã trả thừa {tienThua:N0} đồng, số tiền này sẽ được nhân viên hoàn lại.",
+            MaThanhToan = maThanhToan,
+            NgayThanhToan = now
+        });
+    }
 }
 
         /// <summary>
