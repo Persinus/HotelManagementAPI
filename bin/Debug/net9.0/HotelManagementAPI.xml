@@ -188,7 +188,7 @@
             </summary>
             <param name="maPhong">Mã phòng</param>
         </member>
-        <member name="M:HotelManagementAPI.Controllers.TatCaXemTatCaXem.TatCaTruyCapController.GetAllPhongRutGon">
+        <member name="M:HotelManagementAPI.Controllers.TatCaXemTatCaXem.TatCaTruyCapController.GetAllPhongRutGon(System.Int32,System.Int32)">
             <summary>
             Lấy danh sách phòng rút gọn (chỉ các trường cần thiết).
             </summary>
@@ -196,6 +196,11 @@
         <member name="M:HotelManagementAPI.Controllers.TatCaXemTatCaXem.TatCaTruyCapController.GetBaiVietDaDuyet">
             <summary>
             Lấy danh sách bài viết đã duyệt.
+            </summary>
+        </member>
+        <member name="M:HotelManagementAPI.Controllers.TatCaXemTatCaXem.TatCaTruyCapController.GetAllGiamGia">
+            <summary>
+            Lấy tất cả mã giảm giá.
             </summary>
         </member>
         <member name="M:HotelManagementAPI.Controllers.XacThucController.GetProfile">
