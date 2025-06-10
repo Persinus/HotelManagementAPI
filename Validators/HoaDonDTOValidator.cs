@@ -7,7 +7,7 @@ public class HoaDonDTOValidator : AbstractValidator<KhachHangHoaDonDTO>
     {
         RuleFor(x => x.MaHoaDon)
             .NotEmpty().WithMessage("Mã hóa đơn là bắt buộc.")
-            .Length(6).WithMessage("Mã hóa đơn phải đúng 6 ký tự.");
+            .Length(5).WithMessage("Mã hóa đơn phải đúng 5 ký tự.");
 
         RuleFor(x => x.MaNguoiDung)
             .NotEmpty().WithMessage("Mã người dùng là bắt buộc.")
