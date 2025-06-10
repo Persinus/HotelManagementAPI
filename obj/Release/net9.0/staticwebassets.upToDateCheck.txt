@@ -1,2 +1,0 @@
-C:\Users\admin\Documents\Back_end-Hotel\HotelManagementAPI\wwwroot\swagger-custom.css
-wwwroot\swagger-custom.css
