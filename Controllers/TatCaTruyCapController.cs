@@ -443,5 +443,108 @@ namespace HotelManagementAPI.Controllers.TatCaXemTatCaXem
             var nextId = await _db.ExecuteScalarAsync<int>(query);
             return $"ND{nextId:D3}";
         }
+
+        // Lấy chi tiết bài viết theo mã
+        [HttpGet("baiviet/{maBaiViet}")]
+        public async Task<IActionResult> GetBaiVietById([FromRoute] string maBaiViet)
+        {
+            const string query = "SELECT * FROM BaiViet WHERE MaBaiViet = @MaBaiViet";
+            var baiViet = await _db.QueryFirstOrDefaultAsync<TatCaBaiVietDTO>(query, new { MaBaiViet = maBaiViet });
+            if (baiViet == null)
+                return NotFound(new { Message = "❌ Không tìm thấy bài viết." });
+            return Ok(new { Message = "✅ Lấy chi tiết bài viết thành công.", Data = baiViet });
+        }
+
+        // Lấy chi tiết dịch vụ theo mã
+        [HttpGet("dichvu/{maDichVu}")]
+        public async Task<IActionResult> GetDichVuById([FromRoute] string maDichVu)
+        {
+            const string query = "SELECT * FROM DichVu WHERE MaDichVu = @MaDichVu";
+            var dichVu = await _db.QueryFirstOrDefaultAsync<DichVuDTO>(query, new { MaDichVu = maDichVu });
+            if (dichVu == null)
+                return NotFound(new { Message = "❌ Không tìm thấy dịch vụ." });
+            return Ok(new { Message = "✅ Lấy chi tiết dịch vụ thành công.", Data = dichVu });
+        }
+
+        // Lấy chi tiết phòng theo mã
+        [HttpGet("phong/{maPhong}")]
+        public async Task<IActionResult> GetPhongById([FromRoute] string maPhong)
+        {
+            const string roomQuery = @"
+        SELECT p.MaPhong, p.LoaiPhong, p.GiaPhong, p.TinhTrang, p.SoLuongPhong, p.Tang, 
+               p.KieuGiuong, p.MoTa, p.UrlAnhChinh, p.SucChua, p.SoGiuong, 
+               p.DonViTinh, p.SoSaoTrungBinh
+        FROM Phong p
+        WHERE p.MaPhong = @MaPhong";
+            var room = await _db.QueryFirstOrDefaultAsync<PhongDetailsDTO>(roomQuery, new { MaPhong = maPhong });
+            if (room == null)
+                return NotFound(new { Message = "❌ Không tìm thấy phòng." });
+
+            // Lấy các thông tin phụ như ảnh, tiện nghi, giảm giá, feedback như GetAllPhong
+            // Ảnh phụ
+            const string imagesQuery = "SELECT UrlAnh FROM PhongAnh WHERE MaPhong = @MaPhong";
+            var imageUrls = (await _db.QueryAsync<string>(imagesQuery, new { MaPhong = maPhong })).ToList();
+            room.UrlAnhPhu = imageUrls.Select(url => new PhongAnhDTO { UrlAnh = url }).ToList();
+            if (room.UrlAnhPhu == null || !room.UrlAnhPhu.Any())
+            {
+                room.UrlAnhPhu = new List<PhongAnhDTO>
+                {
+                    new PhongAnhDTO { UrlAnh = "Phòng này chưa có ảnh phụ nào." }
+                };
+            }
+
+            // Tiện nghi
+            const string amenitiesQuery = @"
+        SELECT tn.MaTienNghi, tn.TenTienNghi, tn.MoTa
+        FROM TienNghi tn
+        JOIN Phong_TienNghi ptn ON tn.MaTienNghi = ptn.MaTienNghi
+        WHERE ptn.MaPhong = @MaPhong";
+            room.TienNghi = (await _db.QueryAsync<TienNghiDTO>(amenitiesQuery, new { MaPhong = maPhong })).ToList();
+            if (room.TienNghi == null || !room.TienNghi.Any())
+            {
+                room.TienNghi = new List<TienNghiDTO>
+                {
+                    new TienNghiDTO { MaTienNghi = "", TenTienNghi = "Phòng này chưa có tiện nghi nào." }
+                };
+            }
+
+            // Giảm giá
+            const string discountsQuery = @"
+        SELECT gg.MaGiamGia, gg.TenGiamGia, gg.GiaTriGiam, gg.NgayBatDau, gg.NgayKetThuc, gg.MoTa
+        FROM GiamGia gg
+        JOIN Phong_GiamGia pg ON gg.MaGiamGia = pg.MaGiamGia
+        WHERE pg.MaPhong = @MaPhong";
+            room.GiamGia = (await _db.QueryAsync<GiamGiaDetailDTO>(discountsQuery, new { MaPhong = maPhong })).ToList();
+            if (room.GiamGia == null || !room.GiamGia.Any())
+            {
+                room.GiamGia = new List<GiamGiaDetailDTO>
+                {
+                    new GiamGiaDetailDTO { MaGiamGia = "", TenGiamGia = "Phòng này chưa có giảm giá nào." }
+                };
+            }
+
+            // Feedback
+            const string feedbackQuery = @"
+        SELECT SoSao, BinhLuan, PhanLoai
+        FROM Feedback
+        WHERE MaPhong = @MaPhong";
+            room.Feedbacks = (await _db.QueryAsync<FeedBackDTO>(feedbackQuery, new { MaPhong = maPhong })).ToList();
+            if (room.Feedbacks == null || !room.Feedbacks.Any())
+            {
+                room.Feedbacks = new List<FeedBackDTO>
+                {
+                    new FeedBackDTO { SoSao = 0, BinhLuan = "Phòng này chưa có feedback nào.", PhanLoai = "" }
+                };
+            }
+
+            // Tính giá phòng sau giảm giá (nếu có giảm giá)
+            if (room.GiamGia != null && room.GiamGia.Any())
+            {
+                var giamGia = room.GiamGia.First();
+                room.GiaPhong = room.GiaPhong - (room.GiaPhong * giamGia.GiaTriGiam / 100);
+            }
+
+            return Ok(new { Message = "✅ Lấy chi tiết phòng thành công.", Data = room });
+        }
     }
 }
