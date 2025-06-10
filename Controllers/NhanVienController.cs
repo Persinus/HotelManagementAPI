@@ -50,7 +50,7 @@ namespace HotelManagementAPI.Controllers.NhanVien
         {
             var maNguoiDung = User.FindFirstValue("sub") ?? User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(maNguoiDung))
-                return Unauthorized(new { Message = "Không xác định được nhân viên." });
+                return Unauthorized(new { Message = "❌ Không xác định được nhân viên. Vui lòng đăng nhập lại." });
 
             string? imageUrl = null;
             if (file != null && file.Length > 0)
@@ -66,7 +66,7 @@ namespace HotelManagementAPI.Controllers.NhanVien
                 if (uploadResult.StatusCode == System.Net.HttpStatusCode.OK)
                     imageUrl = uploadResult.SecureUrl.ToString();
                 else
-                    return StatusCode(500, $"Upload ảnh thất bại: {uploadResult.Error?.Message}");
+                    return StatusCode(500, new { Message = $"❌ Xin lỗi, upload ảnh thất bại: {uploadResult.Error?.Message}" });
             }
 
             // Sinh mã bài viết tự động dạng MB001, MB002, ...
@@ -86,7 +86,13 @@ namespace HotelManagementAPI.Controllers.NhanVien
                 HinhAnhUrl = imageUrl,
                 TrangThai = "Chờ Duyệt"
             });
-            return Ok(new { Message = "Thêm bài viết thành công.", MaBaiViet = maBaiViet, HinhAnhUrl = imageUrl });
+            // Thêm bài viết thành công
+            return Ok(new
+            {
+                Message = "🎉 Thêm bài viết thành công! Bài viết của bạn đang chờ duyệt.",
+                MaBaiViet = maBaiViet,
+                HinhAnhUrl = imageUrl
+            });
         }
 
       
@@ -105,17 +111,18 @@ namespace HotelManagementAPI.Controllers.NhanVien
         {
             var maNguoiDung = User.FindFirstValue("sub") ?? User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(maNguoiDung))
-                return Unauthorized(new { Message = "Không xác định được nhân viên." });
+                return Unauthorized(new { Message = "❌ Không xác định được nhân viên. Vui lòng đăng nhập lại." });
 
             // Chỉ cho phép xóa bài viết của chính mình
             const string checkQuery = "SELECT COUNT(1) FROM BaiViet WHERE MaBaiViet = @MaBaiViet AND MaNguoiDung = @MaNguoiDung";
             var isExists = await _db.ExecuteScalarAsync<int>(checkQuery, new { MaBaiViet = maBaiViet, MaNguoiDung = maNguoiDung });
             if (isExists == 0)
-                return NotFound(new { Message = "Không tìm thấy bài viết hoặc bạn không có quyền xóa." });
+                return NotFound(new { Message = "❌ Xin lỗi, không tìm thấy bài viết hoặc bạn không có quyền xóa." });
 
             const string sql = "DELETE FROM BaiViet WHERE MaBaiViet = @MaBaiViet";
             await _db.ExecuteAsync(sql, new { MaBaiViet = maBaiViet });
-            return Ok(new { Message = "Xóa bài viết thành công." });
+            // Xóa bài viết thành công
+            return Ok(new { Message = "✅ Xóa bài viết thành công! Bài viết đã được xóa khỏi hệ thống." });
         }
     }
 
