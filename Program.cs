@@ -87,14 +87,20 @@ builder.Services.AddSwaggerGen(options =>
 - Entity Framework/Dapper
 - JWT Authentication
 - Swagger UI
-- (Tuỳ chọn: React/Vue cho frontend, nếu có)
+- Nuxt 3
 
 🎯 **Chức năng chính:**
-- Đăng ký người dùng bao gồm admin, nhân viên, khách hàng
-+ admin*(quản trị viên) có quyền thêm sửa xóa phòng ,xem trạng thái phòng ,thêm tiện nghi 
-+ nhân viên có quyền sửa phòng 
-+ khách hàng có quyền đặt phòng
-
+- Đăng ký người dùng bao gồm Quản Trị Viên, nhân viên, khách hàng
++ Quản Trị Viên (admin) có quyền thêm sửa xóa phòng, xem trạng thái phòng, thêm tiện nghi
++ Nhân Viên có quyền sửa phòng
++ Khách Hàng có quyền đặt phòng
+- Quản lý phòng khách sạn (thêm, sửa, xoá, xem chi tiết)
+- Quản lý đặt phòng (thêm, sửa, xoá, xem chi tiết)
+- Quản lý khách hàng (thêm, sửa, xoá, xem chi tiết)
+- Quản lý nhân viên (thêm, sửa, xoá, xem chi tiết)
+- Quản lý dịch vụ (thêm, sửa, xoá, xem chi tiết)
+- Quản lý tiện nghi phòng (thêm, sửa, xoá, xem chi tiết)
+- Quản lý hoá đơn (thêm, sửa, xoá, xem chi tiết)
 - Đặt phòng, thanh toán, và xuất hoá đơn, và xem lịch sử giao dịch
 - Quản lý dịch vụ đi kèm
 - Xem phản hồi từ khách hàng (feedback)
