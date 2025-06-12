@@ -595,24 +595,34 @@ public async Task<IActionResult> HuyThanhToan([FromRoute] string maThanhToan)
     return Ok(new { Message = "✅ Hủy thanh toán thành công. Phòng đã được mở lại cho khách khác." });
 }
 
-        /// <summary>
-        /// Phân loại bình luận.
-        /// </summary>
-        /// <param name="binhLuan">Nội dung bình luận</param>
-        [HttpPost("phanloai-binhluan")]
-        [SwaggerOperation(Summary = "Phân loại bình luận", Description = "Nhập bình luận, trả về phân loại tích cực/tiêu cực.")]
+
+
+       /// <summary>
+/// Phân loại bình luận.
+/// </summary>
+/// <param name="binhLuan">Nội dung bình luận</param>
+[HttpPost("phanloai-binhluan")]
+[SwaggerOperation(Summary = "Phân loại bình luận", Description = "Nhập bình luận, trả về phân loại tích cực/tiêu cực.")]
 public IActionResult PhanLoaiBinhLuan([FromBody] string binhLuan, [FromServices] SentimentModelConfig sentimentConfig)
 {
+    // 1. Kiểm tra đầu vào
     if (string.IsNullOrWhiteSpace(binhLuan))
         return BadRequest(new { Message = "❌ Bình luận không được để trống." });
 
+    // 2. Khởi tạo context ML
     var mlContext = new MLContext();
+
+    // 3. Load mô hình từ file .zip đã huấn luyện
     var model = mlContext.Model.Load(sentimentConfig.ModelPath, out var schema);
+
+    // 4. Tạo PredictionEngine (engine để chạy 1 dự đoán)
     var predictionEngine = mlContext.Model.CreatePredictionEngine<SentimentData, SentimentPrediction>(model);
 
+    // 5. Thực hiện dự đoán trên chuỗi văn bản
     var result = predictionEngine.Predict(new SentimentData { SentimentText = binhLuan });
     var phanLoai = result.Prediction ? "Tích cực" : "Tiêu cực";
 
+    // 6. Trả về kết quả
     return Ok(new { Message = "✅ Phân loại bình luận thành công.", PhanLoai = phanLoai });
 }
     }
