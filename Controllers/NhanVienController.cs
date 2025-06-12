@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Threading.Tasks;
 using Dapper;
-
 using Microsoft.AspNetCore.Authorization;
 using HotelManagementAPI.DTOs.NhanVien;
 using System.Security.Claims;
