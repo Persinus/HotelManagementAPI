@@ -114,25 +114,6 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
             return Ok(new { Message = "✅ Lấy vai trò người dùng thành công.", MaNguoiDung = maNguoiDung, VaiTro = vaiTro });
         }
 
-        // Đổi vai trò người dùng (chỉ cho phép giữa Nhân viên và Quản trị viên)
-        [HttpPut("hethong/nguoidung/{maNguoiDung}/doivaitro")]
-        [SwaggerOperation(Summary = "Đổi vai trò người dùng", Description = "Chỉ đổi giữa Nhân viên và Quản trị viên")]
-        public async Task<IActionResult> DoiVaiTroNguoiDung(
-            [FromRoute] string maNguoiDung,
-            [FromBody] QuanTriVienSuaRoleDTO dto)
-        {
-            // Kiểm tra tồn tại
-            const string checkQuery = "SELECT COUNT(1) FROM NguoiDung WHERE MaNguoiDung = @MaNguoiDung";
-            var exists = await _db.ExecuteScalarAsync<int>(checkQuery, new { MaNguoiDung = maNguoiDung });
-            
-            // Đổi vai trò người dùng
-            if (exists == 0)
-                return NotFound(new { Message = "❌ Không tìm thấy người dùng." });
-            if (dto.VaiTroMoi != "NhanVien" && dto.VaiTroMoi != "QuanTriVien")
-                return BadRequest(new { Message = "❌ Chỉ được đổi sang 'NhanVien' hoặc 'QuanTriVien'." });
-            return Ok(new { Message = $"🎉 Đã đổi vai trò thành công cho người dùng {maNguoiDung} thành {dto.VaiTroMoi}." });
-        }
-
        
 
        
@@ -154,121 +135,7 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
         }
 
        
-        // Thêm nội quy mới
-        [HttpPost("noiquy/them")]
-        [SwaggerOperation(Summary = "Thêm nội quy", Description = "Thêm một nội quy mới cho hệ thống.")]
-        [SwaggerResponse(200, "Thêm nội quy thành công.")]
-        public async Task<IActionResult> ThemNoiQuy([FromBody] QuanTriVienThem1NoiQuyDTO dto)
-        {
-            var maNoiQuy = await GenerateMaNoiQuy();
-            const string insertQuery = @"
-                INSERT INTO NoiQuy (MaNoiQuy, TieuDe, NoiDung, NgayTao, NgayCapNhat)
-                VALUES (@MaNoiQuy, @TieuDe, @NoiDung, @NgayTao, @NgayCapNhat)";
-            await _db.ExecuteAsync(insertQuery, new
-            {
-                MaNoiQuy = maNoiQuy,
-                TieuDe = dto.TenNoiQuy,
-                NoiDung = dto.MoTa,
-                NgayTao = dto.NgayTao,
-                NgayCapNhat = dto.NgayCapNhat
-            });
-            return Ok(new { Message = "🎉 Thêm nội quy thành công.", MaNoiQuy = maNoiQuy });
-        }
-
-        // Sửa nội quy
-        [HttpPut("noiquy/sua/{id}")]
-        [SwaggerOperation(Summary = "Sửa nội quy", Description = "Sửa thông tin nội quy theo Id.")]
-        [SwaggerResponse(200, "Sửa nội quy thành công.")]
-        [SwaggerResponse(404, "Không tìm thấy nội quy.")]
-        public async Task<IActionResult> SuaNoiQuy(int id, [FromBody] QuanTriVienSuaNoiQuyDTO dto)
-        {
-            const string checkQuery = "SELECT COUNT(1) FROM NoiQuy WHERE Id = @Id";
-            var exists = await _db.ExecuteScalarAsync<int>(checkQuery, new { Id = id });
-            
-            // Sửa nội quy
-            if (exists == 0)
-                return NotFound(new { Message = "❌ Không tìm thấy nội quy." });
-            const string updateQuery = @"
-                UPDATE NoiQuy
-                SET TieuDe = @TenNoiQuy, NoiDung = @MoTa, NgayCapNhat = @NgayCapNhat
-                WHERE Id = @Id";
-            await _db.ExecuteAsync(updateQuery, new
-            {
-                Id = id,
-                TenNoiQuy = dto.TenNoiQuy,
-                MoTa = dto.MoTa,
-                NgayCapNhat = dto.NgayCapNhat
-            });
-            return Ok(new { Message = "✅ Sửa nội quy thành công." });
-        }
-
-        // Xóa nội quy theo ID
-        [HttpDelete("noiquy/xoa/{id}")]
-        [SwaggerOperation(Summary = "Xóa nội quy", Description = "Xóa nội quy theo Id.")]
-        [SwaggerResponse(200, "Xóa nội quy thành công.")]
-        [SwaggerResponse(404, "Không tìm thấy nội quy.")]
-        public async Task<IActionResult> XoaNoiQuy(int id)
-        {
-            const string checkQuery = "SELECT COUNT(1) FROM NoiQuy WHERE Id = @Id";
-            var exists = await _db.ExecuteScalarAsync<int>(checkQuery, new { Id = id });
-            
-            // Xóa nội quy
-            if (exists == 0)
-                return NotFound(new { Message = "❌ Không tìm thấy nội quy." });
-            const string deleteQuery = "DELETE FROM NoiQuy WHERE Id = @Id";
-            await _db.ExecuteAsync(deleteQuery, new { Id = id });
-            return Ok(new { Message = "✅ Xóa nội quy thành công." });
-        }
-
-        // Xóa nội quy theo Id (dùng DTO)
-        [HttpDelete("noiquy/xoa1")]
-        [SwaggerOperation(Summary = "Xóa 1 nội quy", Description = "Xóa 1 nội quy dựa theo Id.")]
-        [SwaggerResponse(200, "Xóa nội quy thành công.")]
-        [SwaggerResponse(404, "Không tìm thấy nội quy.")]
-        public async Task<IActionResult> Xoa1NoiQuy([FromBody] QuanTriVienXoaNoiQuyDTO dto)
-        {
-            const string checkQuery = "SELECT COUNT(1) FROM NoiQuy WHERE Id = @Id";
-            var exists = await _db.ExecuteScalarAsync<int>(checkQuery, new { dto.Id });
-            
-            // Xóa nội quy
-            if (exists == 0)
-                return NotFound(new { Message = "❌ Không tìm thấy nội quy." });
-            const string deleteQuery = "DELETE FROM NoiQuy WHERE Id = @Id";
-            await _db.ExecuteAsync(deleteQuery, new { dto.Id });
-            return Ok(new { Message = "✅ Xóa nội quy thành công." });
-        }
-
-        // Hàm sinh mã người dùng tự động
-        private async Task<string> GenerateUniqueMaNguoiDung()
-        {
-            const string query = @"
-                SELECT ISNULL(MAX(CAST(SUBSTRING(MaNguoiDung, 3, LEN(MaNguoiDung) - 2) AS INT)), 0) + 1
-                FROM NguoiDung";
-
-            var nextId = await _db.ExecuteScalarAsync<int>(query);
-            return $"ND{nextId:D3}";
-        }
-
-        // Hàm sinh mã phòng tự động
-        private async Task<string> GenerateMaPhong()
-        {
-            const string query = @"
-                SELECT ISNULL(MAX(CAST(SUBSTRING(MaPhong, 2, LEN(MaPhong)-1) AS INT)), 0) + 1
-                FROM Phong";
-            var nextId = await _db.ExecuteScalarAsync<int>(query);
-            return $"P{nextId:D3}";
-        }
-
-        // Hàm sinh mã nội quy tự động (NQ001, NQ002, ...)
-        private async Task<string> GenerateMaNoiQuy()
-        {
-            const string query = @"
-                SELECT ISNULL(MAX(CAST(SUBSTRING(MaNoiQuy, 3, LEN(MaNoiQuy) - 2) AS INT)), 0) + 1
-                FROM NoiQuy";
-            var nextId = await _db.ExecuteScalarAsync<int>(query);
-            return $"NQ{nextId:D3}";
-        }
-
+      
         /// <summary>
         /// Thêm 1 dịch vụ mới (có ảnh).
         /// </summary>
@@ -323,72 +190,7 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
             return Ok(new { Message = "🎉 Thêm dịch vụ thành công.", MaDichVu = maDichVu, HinhAnhUrl = imageUrl });
         }
 
-        /// <summary>
-        /// Thêm nhiều dịch vụ mới (có ảnh).
-        /// </summary>
-        [HttpPost("dichvu/themnhieuDichvu")]
-        [SwaggerOperation(
-            Summary = "Thêm nhiều dịch vụ mới",
-            Description = "Cho phép thêm nhiều dịch vụ cùng lúc với ảnh đi kèm cho mỗi dịch vụ."
-        )]
-        [SwaggerResponse(200, "Thêm nhiều dịch vụ thành công.")]
-        [SwaggerResponse(400, "Số lượng file ảnh phải bằng số lượng dịch vụ hoặc upload ảnh thất bại.")]
-      
-        public async Task<IActionResult> ThemNhieuDichVu([FromForm] QuanTriVienThemNhieuDichVuDTO dto, List<IFormFile> files)
-        {
-            if (dto.DanhSachDichVu.Count != files.Count)
-                return BadRequest("Số lượng file ảnh phải bằng số lượng dịch vụ.");
-
-            var results = new List<object>();
-
-            for (int i = 0; i < dto.DanhSachDichVu.Count; i++)
-            {
-                var dichVu = dto.DanhSachDichVu[i];
-                var file = files[i];
-                string? imageUrl = null;
-
-                if (file != null && file.Length > 0)
-                {
-                    await using var stream = file.OpenReadStream();
-                    var uploadParams = new ImageUploadParams
-                    {
-                        File = new FileDescription(file.FileName, stream),
-                        Transformation = new Transformation().Width(800).Height(800).Crop("limit"),
-                        Folder = "dichvu"
-                    };
-                    var uploadResult = await _cloudinary.UploadAsync(uploadParams);
-                    if (uploadResult.StatusCode == System.Net.HttpStatusCode.OK)
-                        imageUrl = uploadResult.SecureUrl.ToString();
-                    else
-                        return StatusCode(500, $"Upload ảnh thất bại cho dịch vụ thứ {i + 1}: {uploadResult.Error?.Message}");
-                }
-
-                // Sinh mã dịch vụ tự động
-                const string generateMaDichVuQuery = @"SELECT ISNULL(MAX(CAST(SUBSTRING(MaDichVu, 3, LEN(MaDichVu) - 2) AS INT)), 0) + 1 FROM DichVu";
-                var nextId = await _db.ExecuteScalarAsync<int>(generateMaDichVuQuery);
-                var maDichVu = $"DV{nextId:D3}";
-
-                const string insertQuery = @"
-                    INSERT INTO DichVu (MaDichVu, TenDichVu, DonGia, MoTaDichVu, HinhAnhDichVu, SoLuong, LoaiDichVu, DonViTinh)
-                    VALUES (@MaDichVu, @TenDichVu, @DonGia, @MoTaDichVu, @HinhAnhDichVu, @SoLuong, @LoaiDichVu, @DonViTinh)";
-                await _db.ExecuteAsync(insertQuery, new
-                {
-                    MaDichVu = maDichVu,
-                    dichVu.TenDichVu,
-                    dichVu.DonGia,
-                    dichVu.MoTaDichVu,
-                    HinhAnhDichVu = imageUrl,
-                    dichVu.SoLuong,
-                    dichVu.LoaiDichVu,
-                    dichVu.DonViTinh
-                });
-
-                results.Add(new { MaDichVu = maDichVu, HinhAnhUrl = imageUrl });
-            }
-
-            // Thêm nhiều dịch vụ thành công
-            return Ok(new { Message = "🎉 Thêm nhiều dịch vụ thành công.", DanhSach = results });
-        }
+       
 
         /// <summary>
         /// Thêm 1 tiện nghi mới (có ảnh).
@@ -440,69 +242,6 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
         }
 
         /// <summary>
-        /// Thêm nhiều tiện nghi mới (có ảnh).
-        /// </summary>
-        [HttpPost("tiennghi/themnhiutiennghi")]
-        [SwaggerOperation(
-            Summary = "Thêm nhiều tiện nghi mới",
-            Description = "Cho phép thêm nhiều tiện nghi cùng lúc với ảnh đi kèm cho mỗi tiện nghi."
-        )]
-        [SwaggerResponse(200, "Thêm nhiều tiện nghi thành công.")]
-        [SwaggerResponse(400, "Số lượng file ảnh phải bằng số lượng tiện nghi hoặc upload ảnh thất bại.")]
-
-        public async Task<IActionResult> ThemNhieuTienNghi([FromForm] QuanTriVienThemNhieuTienNghiDTO dto, List<IFormFile> files)
-        {
-            if (dto.DanhSachTienNghi.Count != files.Count)
-                return BadRequest("Số lượng file ảnh phải bằng số lượng tiện nghi.");
-
-            var results = new List<object>();
-
-            for (int i = 0; i < dto.DanhSachTienNghi.Count; i++)
-            {
-                var tienNghi = dto.DanhSachTienNghi[i];
-                var file = files[i];
-                string? imageUrl = null;
-
-                if (file != null && file.Length > 0)
-                {
-                    await using var stream = file.OpenReadStream();
-                    var uploadParams = new ImageUploadParams
-                    {
-                        File = new FileDescription(file.FileName, stream),
-                        Transformation = new Transformation().Width(800).Height(800).Crop("limit"),
-                        Folder = "tiennghi"
-                    };
-                    var uploadResult = await _cloudinary.UploadAsync(uploadParams);
-                    if (uploadResult.StatusCode == System.Net.HttpStatusCode.OK)
-                        imageUrl = uploadResult.SecureUrl.ToString();
-                    else
-                        return StatusCode(500, $"Upload ảnh thất bại cho tiện nghi thứ {i + 1}: {uploadResult.Error?.Message}");
-                }
-
-                // Sinh mã tiện nghi tự động
-                const string generateMaTienNghiQuery = @"SELECT ISNULL(MAX(CAST(SUBSTRING(MaTienNghi, 3, LEN(MaTienNghi) - 2) AS INT)), 0) + 1 FROM TienNghi";
-                var nextId = await _db.ExecuteScalarAsync<int>(generateMaTienNghiQuery);
-                var maTienNghi = $"TN{nextId:D3}";
-
-                const string insertQuery = @"
-                    INSERT INTO TienNghi (MaTienNghi, TenTienNghi, MoTa, HinhAnhTienNghi)
-                    VALUES (@MaTienNghi, @TenTienNghi, @MoTa, @HinhAnhTienNghi)";
-                await _db.ExecuteAsync(insertQuery, new
-                {
-                    MaTienNghi = maTienNghi,
-                    TenTienNghi = tienNghi.TenTienNghi,
-                    MoTa = tienNghi.MoTa,
-                    HinhAnhTienNghi = imageUrl
-                });
-
-                results.Add(new { MaTienNghi = maTienNghi, HinhAnhUrl = imageUrl });
-            }
-
-            // Thêm nhiều tiện nghi thành công
-            return Ok(new { Message = "🎉 Thêm nhiều tiện nghi thành công.", DanhSach = results });
-        }
-
-        /// <summary>
         /// Duyệt bài viết (chuyển trạng thái từ "Chờ Duyệt" sang "Đã Duyệt").
         /// </summary>
         [HttpPatch("baiviet/duyet/{maBaiViet}")]
@@ -544,20 +283,7 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
             return Ok(list);
         }
 
-        // Xóa nhiều tiện nghi
-        [HttpDelete("tiennghi/xoanhiu")]
-        [SwaggerOperation(Summary = "Xóa nhiều tiện nghi", Description = "Xóa nhiều tiện nghi dựa theo danh sách mã tiện nghi.")]
-        [SwaggerResponse(200, "Xóa nhiều tiện nghi thành công.")]
-        public async Task<IActionResult> XoaNhieuTienNghi([FromBody] QuanTriVienXoaNhieuTienNghiDTO dto)
-        {
-            const string deleteQuery = "DELETE FROM TienNghi WHERE MaTienNghi = @MaTienNghi";
-            foreach (var ma in dto.DanhSachMaTienNghi)
-            {
-                await _db.ExecuteAsync(deleteQuery, new { MaTienNghi = ma });
-            }
-            return Ok(new { Message = "✅ Xóa nhiều tiện nghi thành công." });
-        }
-
+     
         // Xóa 1 tiện nghi
         [HttpDelete("tiennghi/xoa1")]
         [SwaggerOperation(Summary = "Xóa 1 tiện nghi", Description = "Xóa 1 tiện nghi dựa theo mã tiện nghi.")]
@@ -781,6 +507,13 @@ namespace HotelManagementAPI.Controllers.QuanTriVien
             await _db.ExecuteAsync(updateQuery, new { TinhTrang = trangThai, MaPhong = maPhong });
 
             return Ok(new { Message = "✅ Cập nhật trạng thái phòng thành công.", MaPhong = maPhong, TrangThai = trangThai });
+        }
+
+        private async Task<string> GenerateMaPhong()
+        {
+            const string query = @"SELECT ISNULL(MAX(CAST(SUBSTRING(MaPhong, 2, LEN(MaPhong) - 1) AS INT)), 0) + 1 FROM Phong";
+            var nextId = await _db.ExecuteScalarAsync<int>(query);
+            return $"P{nextId:D3}";
         }
     }
 }

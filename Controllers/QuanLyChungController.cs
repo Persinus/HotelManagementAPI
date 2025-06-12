@@ -223,5 +223,45 @@ namespace HotelManagementAPI.Controllers
             });
             return Ok(new { Message = "✅ Sửa bài viết thành công!" });
         }
+
+        /// <summary>
+        /// Sửa thông tin phòng.
+        /// </summary>
+        [HttpPatch("phong/{maPhong}")]
+        [SwaggerOperation(Summary = "Sửa thông tin phòng", Description = "Cập nhật các trường phòng, chỉ truyền trường cần sửa (bao gồm cả UrlAnhChinh).")]
+        [SwaggerResponse(200, "Cập nhật phòng thành công.")]
+        [SwaggerResponse(404, "Không tìm thấy phòng.")]
+        public async Task<IActionResult> SuaPhong(string maPhong, [FromBody] QuanLyChungSuaPhongDTO dto)
+        {
+            // Kiểm tra phòng tồn tại
+            const string checkQuery = "SELECT COUNT(1) FROM Phong WHERE MaPhong = @MaPhong";
+            var exists = await _db.ExecuteScalarAsync<int>(checkQuery, new { MaPhong = maPhong });
+            if (exists == 0)
+                return NotFound(new { Message = "❌ Không tìm thấy phòng." });
+
+            // Xây dựng câu lệnh update động
+            var updates = new List<string>();
+            var parameters = new DynamicParameters();
+            parameters.Add("MaPhong", maPhong);
+
+            if (dto.LoaiPhong != null) { updates.Add("LoaiPhong = @LoaiPhong"); parameters.Add("LoaiPhong", dto.LoaiPhong); }
+            if (dto.GiaPhong != null) { updates.Add("GiaPhong = @GiaPhong"); parameters.Add("GiaPhong", dto.GiaPhong); }
+            if (dto.Tang != null) { updates.Add("Tang = @Tang"); parameters.Add("Tang", dto.Tang); }
+            if (dto.TinhTrang != null) { updates.Add("TinhTrang = @TinhTrang"); parameters.Add("TinhTrang", dto.TinhTrang); }
+            if (dto.DonViTinh != null) { updates.Add("DonViTinh = @DonViTinh"); parameters.Add("DonViTinh", dto.DonViTinh); }
+            if (dto.MoTa != null) { updates.Add("MoTa = @MoTa"); parameters.Add("MoTa", dto.MoTa); }
+            if (dto.KieuGiuong != null) { updates.Add("KieuGiuong = @KieuGiuong"); parameters.Add("KieuGiuong", dto.KieuGiuong); }
+            if (dto.SucChua != null) { updates.Add("SucChua = @SucChua"); parameters.Add("SucChua", dto.SucChua); }
+            if (dto.SoGiuong != null) { updates.Add("SoGiuong = @SoGiuong"); parameters.Add("SoGiuong", dto.SoGiuong); }
+            if (dto.UrlAnhChinh != null) { updates.Add("UrlAnhChinh = @UrlAnhChinh"); parameters.Add("UrlAnhChinh", dto.UrlAnhChinh); }
+
+            if (!updates.Any())
+                return BadRequest(new { Message = "Không có trường nào để cập nhật." });
+
+            var sql = $"UPDATE Phong SET {string.Join(", ", updates)} WHERE MaPhong = @MaPhong";
+            await _db.ExecuteAsync(sql, parameters);
+
+            return Ok(new { Message = "✅ Cập nhật phòng thành công!" });
+        }
     }
 }

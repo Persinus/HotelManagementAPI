@@ -63,9 +63,24 @@ public async Task<IActionResult> TaoDonDatPhong([FromBody] KhachHangDatPhongDTO 
     if (tinhTrang != 1)
         return BadRequest(new { Message = "Phòng này không còn trống để đặt." });
 
-    // Kiểm tra trạng thái đặt phòng FE gửi lên
-    if (datPhongDTO.TinhTrangDatPhong != 1)
-        return BadRequest(new { Message = "Phòng này bạn đã đặt sang hóa đơn để xem." });
+   
+
+    // Kiểm tra đã có đơn đặt phòng cho user này và phòng này chưa
+    const string getMaDatPhongQuery = @"
+        SELECT TOP 1 MaDatPhong 
+        FROM DatPhong 
+        WHERE MaNguoiDung = @MaNguoiDung AND MaPhong = @MaPhong
+        ORDER BY NgayDat DESC";
+    var maDatPhongDaDat = await _db.ExecuteScalarAsync<string>(getMaDatPhongQuery, new { datPhongDTO.MaNguoiDung, datPhongDTO.MaPhong });
+
+    if (!string.IsNullOrEmpty(maDatPhongDaDat))
+    {
+        return BadRequest(new
+        {
+            Message = "Bạn đã từng đặt phòng này. Vui lòng kiểm tra lại hóa đơn hoặc lịch sử đặt phòng.",
+            MaDatPhong = maDatPhongDaDat
+        });
+    }
 
     // Kiểm tra dịch vụ đi kèm (nếu có)
     if (datPhongDTO.DichVuDiKem != null && datPhongDTO.DichVuDiKem.Any())
